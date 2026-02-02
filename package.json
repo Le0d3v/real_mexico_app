@@ -1,0 +1,31 @@
+{
+    "name": "real_mexico",
+    "version": "1.0.0",
+    "description": "<p align=\"center\"><a href=\"https://laravel.com\" target=\"_blank\"><img src=\"https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg\" width=\"400\" alt=\"Laravel Logo\"></a></p>",
+    "main": "index.js",
+    "directories": {
+        "test": "tests"
+    },
+    "scripts": {
+        "dev": "vite",
+        "build": "vite build",
+        "preview": "vite preview"
+    },
+    "keywords": [],
+    "author": "",
+    "license": "ISC",
+    "type": "module",
+    "dependencies": {
+        "@tailwindcss/vite": "^4.1.18",
+        "axios": "^1.13.2",
+        "laravel-vite-plugin": "^2.1.0",
+        "react": "^19.2.3",
+        "react-dom": "^19.2.3",
+        "react-router-dom": "^7.12.0",
+        "tailwindcss": "^4.1.18",
+        "vite": "^7.3.1"
+    },
+    "devDependencies": {
+        "@vitejs/plugin-react": "^5.1.2"
+    }
+}
