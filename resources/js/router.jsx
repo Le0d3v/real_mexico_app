@@ -1,16 +1,21 @@
 import React from "react";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Home from "./views/public/Home";
 import Login from "./views/auth/Login";
+import PublicLayout from "./views/public/layouts/PublicLayout";
+import AdminLayout from "./views/admin/layouts/AdminLayout";
 
 const router = createBrowserRouter([
     {
         path: "/",
-        element: <Home />,
+        element: <PublicLayout />,
     },
     {
         path: "/auth",
         element: <Login />,
+    },
+    {
+        path: "/admin",
+        element: <AdminLayout />,
     },
 ]);
 
