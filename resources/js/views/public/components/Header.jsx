@@ -13,56 +13,60 @@ import {
 
 export default function Header({ setPage, page }) {
     return (
-        <>
-            <div className="p-10 bg-gray-100 flex justify-between w-full h-36 items-center">
-                <div className="text-2xl font-bold text-gray-700">
-                    Educación
-                </div>
+        <header className="sticky top-0 z-50 shadow">
+            <div className="p-10 bg-yellow-400 flex justify-between w-full h-36 items-center">
+                <div className="text-3xl font-bold text-black">Educación</div>
+
                 <div className="flex gap-3 items-center">
-                    <div className="p-3 rounded-full bg-gray-300">
-                        <School size={75} />
+                    <div className="p-3 rounded-full bg-black">
+                        <School size={75} color="white" />
                     </div>
                     <div>
-                        <h1 className="text-gray-800 font-bold text-4xl">
+                        <h1 className="text-black font-bold text-4xl">
                             Instuto Real de México
                         </h1>
-                        <p className="text-gray-500 text-sm font-bold">
-                            Escuela Primaria
+                        <p className="text-black text-sm font-bold">
+                            Escuela Primaria Particular Incorporada a la SEP
+                        </p>
+                        <p className="text-black text-sm font-bold">
+                            Clave: 21PPR0827N
                         </p>
                     </div>
                 </div>
+
                 <div>
                     <div className="flex gap-5 items-center">
                         <div className="flex gap-5">
                             <a href="/" about="blank">
                                 <Facebook
                                     size={25}
-                                    className="hover:text-amber-400 transition hover:-translate-y-1"
+                                    className="hover:text-white transition hover:-translate-y-1"
                                 />
                             </a>
                             <a href="/" about="blank">
                                 <Instagram
                                     size={25}
-                                    className="hover:text-amber-400 transition hover:-translate-y-1"
+                                    className="hover:text-white transition hover:-translate-y-1"
                                 />
                             </a>
                             <a href="/" about="blank">
                                 <Twitter
                                     size={25}
-                                    className="hover:text-amber-400 transition hover:-translate-y-1"
+                                    className="hover:text-white transition hover:-translate-y-1"
                                 />
                             </a>
                             <a href="/" about="blank">
                                 <Youtube
                                     size={25}
-                                    className="hover:text-amber-400 transition hover:-translate-y-1"
+                                    className="hover:text-white transition hover:-translate-y-1"
                                 />
                             </a>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className="w-full p-5 bg-black text-white">
+
+            <div className="w-full p-3 bg-black text-white">
                 <div className="flex justify-center">
                     <div className="flex gap-10">
                         <NavLink index={0} page={page} setPage={setPage}>
@@ -74,18 +78,18 @@ export default function Header({ setPage, page }) {
                         <NavLink index={2} page={page} setPage={setPage}>
                             Talleres
                         </NavLink>
-                        <NavLink index={2} page={page} setPage={setPage}>
+                        <NavLink index={3} page={page} setPage={setPage}>
                             Grados
                         </NavLink>
-                        <NavLink index={2} page={page} setPage={setPage}>
+                        <NavLink index={4} page={page} setPage={setPage}>
                             Blog
                         </NavLink>
-                        <NavLink index={2} page={page} setPage={setPage}>
+                        <NavLink index={5} page={page} setPage={setPage}>
                             Contácto
                         </NavLink>
                     </div>
                 </div>
             </div>
-        </>
+        </header>
     );
 }
