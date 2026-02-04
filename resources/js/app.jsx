@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-
+import "../css/app.css";
 import Router from "./router";
 
 const container = document.getElementById("app");

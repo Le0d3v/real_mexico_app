@@ -68,7 +68,7 @@ export default function Footer() {
                     </div>
                 </div>
             </div>
-            <div className="flex justify-center w-full mt-10">
+            <div className="flex justify-center w-full mt-5">
                 <div className="flex gap-10">
                     <p className="">Aviso de Privacidad</p>
                     <p className="">Terminos y Condiciones</p>

@@ -15,12 +15,14 @@ export default function Header({ setPage, page }) {
     return (
         <header className="sticky top-0 z-50 shadow">
             <div className="p-10 bg-yellow-400 flex justify-between w-full h-36 items-center">
-                <div className="text-3xl font-bold text-black">Educación</div>
+                <div className="text-4xl font-bold text-white">Educación</div>
 
                 <div className="flex gap-3 items-center">
-                    <div className="p-3 rounded-full bg-black">
-                        <School size={75} color="white" />
-                    </div>
+                    <img
+                        src="/img/logo.png"
+                        alt="imagen-logo"
+                        className="w-28"
+                    />
                     <div>
                         <h1 className="text-black font-bold text-4xl">
                             Instuto Real de México
@@ -76,13 +78,16 @@ export default function Header({ setPage, page }) {
                             Sobre Nosotros
                         </NavLink>
                         <NavLink index={2} page={page} setPage={setPage}>
-                            Talleres
+                            Inscripciones
+                        </NavLink>
+                        <NavLink index={2} page={page} setPage={setPage}>
+                            Estudiantes
                         </NavLink>
                         <NavLink index={3} page={page} setPage={setPage}>
-                            Grados
+                            Padres / Tutores
                         </NavLink>
-                        <NavLink index={4} page={page} setPage={setPage}>
-                            Blog
+                        <NavLink index={3} page={page} setPage={setPage}>
+                            Eventos / Noticias
                         </NavLink>
                         <NavLink index={5} page={page} setPage={setPage}>
                             Contácto
