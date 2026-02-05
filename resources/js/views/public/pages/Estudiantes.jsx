@@ -16,20 +16,19 @@ export default function Estudiantes() {
                             Formamos Alumnos preparados para El Futuro
                         </Tittle>
                         <p className="mt-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Ratione vero magni illo culpa at similique
-                            animi, dolorum consectetur impedit repudiandae,
-                            placeat labore sunt perferendis atque nesciunt
-                            voluptate architecto totam id! Lorem, ipsum dolor
-                            sit amet consectetur adipisicing elit. Illo nam sed
-                            repudiandae sapiente, nostrum cum mollitia amet
-                            officiis! Tempore omnis quam asperiores?
-                            Perspiciatis provident tempora error corporis
-                            doloremque architecto culpa. Lorem ipsum dolor sit
-                            amet consectetur adipisicing elit. Enim, veritatis
-                            vero! At quae beatae incidunt, mollitia, ipsam
-                            magnam voluptas dignissimos illum quaerat veritatis
-                            fuga repellat omnis rem praesentium quas officiis?
+                            Formamos estudiantes con pensamiento crítico,
+                            valores sólidos y competencias académicas alineadas
+                            a los desafíos del siglo XXI. Nuestro modelo
+                            educativo integra el desarrollo intelectual,
+                            emocional y social, fomentando la autonomía, la
+                            creatividad y la capacidad de resolver problemas
+                            reales. A través de metodologías activas, docentes
+                            certificados y el uso estratégico de la tecnología,
+                            impulsamos un aprendizaje significativo que prepara
+                            a nuestros alumnos para adaptarse, liderar y
+                            trascender en un entorno global en constante
+                            evolución. Aquí no solo educamos para el presente:
+                            construimos bases firmes para el futuro
                         </p>
                     </div>
                 </div>
@@ -46,21 +45,21 @@ export default function Estudiantes() {
                         <h1 className="text-center text-3xl font-bold">
                             Talleres Computación
                         </h1>
-                        <p className="mt-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Earum error, officia explicabo soluta eum
-                            recusandae ab! Atque nihil ratione cumque rerum,
-                            molestiae earum quas unde quaerat provident
-                            assumenda sit alias. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Quidem placeat,
-                            officia ut beatae ducimus architecto deserunt
-                            facilis qui molestias ea! Laudantium delectus, esse
-                            dolorum amet aut rem enim consectetur et. Lorem
-                            ipsum dolor sit, amet consectetur adipisicing elit.
-                            Eius voluptatum sed similique, unde velit sint,
-                            expedita repellendus enim quaerat excepturi dolore
-                            molestiae quo temporibus? Libero vitae fuga laborum
-                            officiis maxime!
+                        <p className="mt-3 text-justify">
+                            Nuestros talleres de computación brindan a los
+                            alumnos las competencias digitales fundamentales
+                            para desenvolverse con seguridad y criterio en
+                            entornos tecnológicos. Mediante un enfoque práctico
+                            y guiado, los estudiantes aprenden el uso
+                            responsable de la tecnología, el manejo básico de
+                            software educativo y la comprensión inicial de
+                            herramientas digitales. Estos talleres fortalecen el
+                            pensamiento lógico, la resolución de problemas y la
+                            alfabetización digital desde edades tempranas,
+                            preparando a los alumnos para interactuar de manera
+                            eficiente con la tecnología como un recurso de
+                            aprendizaje, creación y comunicación en su formación
+                            académica futura.
                         </p>
                     </div>
                 </div>
@@ -69,21 +68,20 @@ export default function Estudiantes() {
                         <h1 className="text-center text-3xl font-bold">
                             Clases de Inglés
                         </h1>
-                        <p className="mt-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Earum error, officia explicabo soluta eum
-                            recusandae ab! Atque nihil ratione cumque rerum,
-                            molestiae earum quas unde quaerat provident
-                            assumenda sit alias. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Quidem placeat,
-                            officia ut beatae ducimus architecto deserunt
-                            facilis qui molestias ea! Laudantium delectus, esse
-                            dolorum amet aut rem enim consectetur et. Lorem
-                            ipsum dolor sit, amet consectetur adipisicing elit.
-                            Eius voluptatum sed similique, unde velit sint,
-                            expedita repellendus enim quaerat excepturi dolore
-                            molestiae quo temporibus? Libero vitae fuga laborum
-                            officiis maxime!
+                        <p className="mt-3 text-justify">
+                            Nuestras clases de inglés en nivel primaria
+                            desarrollan habilidades comunicativas esenciales en
+                            un segundo idioma, mediante un enfoque dinámico y
+                            contextualizado. Los alumnos adquieren vocabulario,
+                            pronunciación y estructuras básicas que les permiten
+                            comprender y expresarse de forma progresiva y
+                            natural. La enseñanza del inglés fortalece la
+                            memoria, la atención y la confianza al comunicarse,
+                            al tiempo que amplía la visión cultural de los
+                            estudiantes. Este aprendizaje temprano sienta bases
+                            sólidas para un dominio futuro del idioma,
+                            preparándolos para interactuar con seguridad en un
+                            entorno académico y globalizado.
                         </p>
                     </div>
                     <img
@@ -102,21 +100,20 @@ export default function Estudiantes() {
                         <h1 className="text-center text-3xl font-bold">
                             Clases de Música
                         </h1>
-                        <p className="mt-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Earum error, officia explicabo soluta eum
-                            recusandae ab! Atque nihil ratione cumque rerum,
-                            molestiae earum quas unde quaerat provident
-                            assumenda sit alias. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Quidem placeat,
-                            officia ut beatae ducimus architecto deserunt
-                            facilis qui molestias ea! Laudantium delectus, esse
-                            dolorum amet aut rem enim consectetur et. Lorem
-                            ipsum dolor sit, amet consectetur adipisicing elit.
-                            Eius voluptatum sed similique, unde velit sint,
-                            expedita repellendus enim quaerat excepturi dolore
-                            molestiae quo temporibus? Libero vitae fuga laborum
-                            officiis maxime!
+                        <p className="mt-3 text-justify">
+                            Nuestras clases de música en nivel primaria
+                            promueven el desarrollo integral del alumno mediante
+                            la exploración del ritmo, la melodía y la expresión
+                            sonora. A través de actividades prácticas y
+                            dinámicas, los estudiantes fortalecen habilidades
+                            cognitivas, auditivas y motrices, esenciales para su
+                            formación académica y personal. La educación musical
+                            fomenta la creatividad, la sensibilidad artística y
+                            el trabajo colaborativo, al tiempo que refuerza la
+                            disciplina, la atención y la memoria. Este enfoque
+                            formativo permite que los alumnos descubran la
+                            música como un lenguaje universal que potencia su
+                            confianza y enriquece su proceso de aprendizaje.
                         </p>
                     </div>
                 </div>
@@ -125,21 +122,20 @@ export default function Estudiantes() {
                         <h1 className="text-center text-3xl font-bold">
                             Plataformas Digitales
                         </h1>
-                        <p className="mt-3">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Earum error, officia explicabo soluta eum
-                            recusandae ab! Atque nihil ratione cumque rerum,
-                            molestiae earum quas unde quaerat provident
-                            assumenda sit alias. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Quidem placeat,
-                            officia ut beatae ducimus architecto deserunt
-                            facilis qui molestias ea! Laudantium delectus, esse
-                            dolorum amet aut rem enim consectetur et. Lorem
-                            ipsum dolor sit, amet consectetur adipisicing elit.
-                            Eius voluptatum sed similique, unde velit sint,
-                            expedita repellendus enim quaerat excepturi dolore
-                            molestiae quo temporibus? Libero vitae fuga laborum
-                            officiis maxime!
+                        <p className="mt-3 text-justify">
+                            El uso de plataformas digitales en nuestra
+                            institución fortalece los procesos de enseñanza y
+                            aprendizaje mediante entornos seguros, estructurados
+                            y pedagógicamente diseñados. Estas herramientas
+                            permiten dar seguimiento académico, acceder a
+                            contenidos interactivos y reforzar el aprendizaje
+                            tanto en el aula como fuera de ella. La integración
+                            de plataformas digitales promueve la autonomía, la
+                            responsabilidad y la comunicación efectiva entre
+                            alumnos, docentes y familias. Asimismo, impulsa el
+                            desarrollo de competencias digitales clave,
+                            garantizando un uso ético, responsable y orientado
+                            al logro de objetivos académicos
                         </p>
                     </div>
                     <img
