@@ -4,11 +4,21 @@ import Home from "../pages/Home";
 import About from "../pages/About";
 import { useState } from "react";
 import Blog from "../pages/Blog";
+import Inscripciones from "../pages/Inscripciones";
+import Estudiantes from "../pages/Estudiantes";
+import Tutores from "../pages/Tutores";
 
 export default function PublicLayout() {
     const [page, setPage] = useState(0);
 
-    const pages = [<Home />, <About />, <Blog />];
+    const pages = [
+        <Home />,
+        <Inscripciones />,
+        <About />,
+        <Estudiantes />,
+        <Tutores />,
+        <Blog />,
+    ];
 
     return (
         <>

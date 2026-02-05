@@ -25,11 +25,16 @@ export default function Header({ index }) {
                     <div className="flex items-center justify-between md:w-auto w-full">
                         <div className="flex gap-2 items-center">
                             <div className="block md:hidden">
-                                <img
-                                    src="/img/logo.png"
-                                    alt="imagen-logo"
-                                    className="w-12"
-                                />
+                                <div className="flex gap-2 items-center">
+                                    <img
+                                        src="/img/logo.png"
+                                        alt="imagen-logo"
+                                        className="w-12"
+                                    />
+                                    <h1 className="text-black text-3xl font-black">
+                                        IRM
+                                    </h1>
+                                </div>
                             </div>
                             <h1 className="text-md md:text-4xl hidden md:block text-black font-black">
                                 Instituto Real de México A.C.
@@ -37,7 +42,7 @@ export default function Header({ index }) {
                         </div>
                         <div>
                             <button
-                                className="md:hidden text-gray-500 hover:text-gray-700 mr-4 hover:cursor-pointer"
+                                className="md:hidden text-black mr-4 hover:cursor-pointer"
                                 onClick={toggleMenu}
                             >
                                 <Menu className="w-10 h-10" />

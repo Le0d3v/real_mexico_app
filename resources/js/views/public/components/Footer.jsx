@@ -3,16 +3,27 @@ import React from "react";
 
 export default function Footer() {
     return (
-        <div className="bg-red-600 w-full p-5 text-white">
+        <footer className="bg-red-600 w-full p-5 text-white">
             <div className="flex gap-15 w-full">
                 <div className="w-2/4">
-                    <h1 className="text-yellow-400 text-3xl font-bold">
-                        Instituto Real de México
-                    </h1>
-                    <p className="text-sm text-white">
-                        Escuela Primaria Paritucla Incorporada a la SEP
-                    </p>
-                    <p className="text-sm text-white">Clave: 21PPR0827N</p>
+                    <div className="flex gap-2 items-center">
+                        <img
+                            src="/img/logo.png"
+                            alt="imagen-logo"
+                            className="w-36"
+                        />
+                        <div>
+                            <h1 className="text-yellow-400 text-3xl font-bold">
+                                Instituto Real de México
+                            </h1>
+                            <p className="text-sm text-white">
+                                Escuela Primaria Paritucla Incorporada a la SEP
+                            </p>
+                            <p className="text-sm text-white">
+                                Clave: 21PPR0827N
+                            </p>
+                        </div>
+                    </div>
                 </div>
                 <div className="w-1/4">
                     <h1 className="text-2xl font-bold">Conéctate</h1>
@@ -77,6 +88,6 @@ export default function Footer() {
             <p className="text-sm mt-5 text-center">
                 Instituto Real de México 2025. Todos los Derechos Reservados
             </p>
-        </div>
+        </footer>
     );
 }

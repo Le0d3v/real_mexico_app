@@ -5,3 +5,9 @@
     background-image: url("/img/fondo.webp");
     background-size: cover;
 }
+
+.programa-fondo {
+    width: 100%;
+    background-image: url("/img/plan-estudios.jpg");
+    background-size: cover;
+}

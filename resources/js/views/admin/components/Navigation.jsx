@@ -11,7 +11,7 @@ import NavItem from "./NavItem";
 
 export default function Navigation({ index, closeMenu, setPage, page }) {
     return (
-        <nav className="mt-15 px-2" id="navegacion">
+        <nav className="md:mt-15 px-2" id="navegacion">
             <div className="hidden lg:block mt-5">
                 <p className="text-sm text-white dark:text-gray-400 text-center transition-colors mt-7">
                     Navegación

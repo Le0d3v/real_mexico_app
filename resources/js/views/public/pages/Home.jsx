@@ -104,6 +104,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            <div className="my-5 w-full p-5 bg-amber-400"></div>
             <div>
                 <Tittle>¡Visita nuestras Instalaciones!</Tittle>
                 <div className="w-full h-96 my-5">
@@ -117,7 +118,6 @@ export default function Home() {
                     />
                 </div>
             </div>
-            <div className="my-5 w-full p-5 bg-amber-400"></div>
         </div>
     );
 }

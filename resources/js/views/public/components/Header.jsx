@@ -15,7 +15,7 @@ export default function Header({ setPage, page }) {
     return (
         <header className="sticky top-0 z-50 shadow">
             <div className="p-10 bg-yellow-400 flex justify-between w-full h-36 items-center">
-                <div className="text-4xl font-bold text-white">Educación</div>
+                <div className="text-5xl font-bold text-white">Educación</div>
 
                 <div className="flex gap-3 items-center">
                     <img
@@ -25,7 +25,7 @@ export default function Header({ setPage, page }) {
                     />
                     <div>
                         <h1 className="text-black font-bold text-4xl">
-                            Instuto Real de México
+                            Instuto Real de México A.C.
                         </h1>
                         <p className="text-black text-sm font-bold">
                             Escuela Primaria Particular Incorporada a la SEP
@@ -75,21 +75,21 @@ export default function Header({ setPage, page }) {
                             Inicio
                         </NavLink>
                         <NavLink index={1} page={page} setPage={setPage}>
-                            Sobre Nosotros
-                        </NavLink>
-                        <NavLink index={2} page={page} setPage={setPage}>
                             Inscripciones
                         </NavLink>
                         <NavLink index={2} page={page} setPage={setPage}>
-                            Estudiantes
+                            Acerca de
                         </NavLink>
                         <NavLink index={3} page={page} setPage={setPage}>
-                            Padres / Tutores
+                            Alumnos
                         </NavLink>
-                        <NavLink index={3} page={page} setPage={setPage}>
-                            Eventos / Noticias
+                        <NavLink index={4} page={page} setPage={setPage}>
+                            Padres y Tutores
                         </NavLink>
                         <NavLink index={5} page={page} setPage={setPage}>
+                            Eventos y Noticias
+                        </NavLink>
+                        <NavLink index={6} page={page} setPage={setPage}>
                             Contácto
                         </NavLink>
                     </div>
