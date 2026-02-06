@@ -2,8 +2,9 @@
 
 .fondo {
     width: 100%;
-    background-image: url("/img/fondo.webp");
+    background-image: url("/img/fondo.jpg");
     background-size: cover;
+    background-position: center;
 }
 
 .programa-fondo {

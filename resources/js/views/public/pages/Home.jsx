@@ -1,27 +1,38 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Tittle from "./../components/Tittle";
-import { BookOpenText, Computer, ShieldCheck, UserCheck } from "lucide-react";
+import {
+    BookOpenText,
+    Computer,
+    MapPin,
+    ShieldCheck,
+    UserCheck,
+} from "lucide-react";
 
 export default function Home() {
     return (
         <div className="h-full">
-            <div className="fondo h-96 p-5">
+            <div className="fondo h-screen p-5">
                 <div>
                     <h1 className="h-full text-6xl font-black text-white w-2/3 mb-5">
                         Formamos niños seguros, curiosos y preparados para el
                         futuro
                     </h1>
-                    <p className="text-white mb-5 text-sm w-1/2">
-                        En nuestra escuela impulsamos el desarrollo académico,
-                        emocional y social de cada uno de nuestros alumnos
-                    </p>
-                    <a
-                        href="#"
-                        className="p-2 rounded bg-blue-400 text-white cursor-pointer hover:bg-blue-500 hover:-translate-y-1 transition font-bold text-lg"
-                    >
-                        Solicitar Informes
-                    </a>
+                    <div className="flex gap-2 items-center">
+                        <MapPin className="text-white" />
+                        <p className="text-white text-sm w-1/2">
+                            Calle Industria #4. Santa Ana Xalmimilulco,
+                            Huejotzingo, Puebla, México.
+                        </p>
+                    </div>
+                    <div className="mt-15">
+                        <a
+                            href="#"
+                            className="p-2 rounded bg-blue-400 text-white cursor-pointer hover:bg-blue-500 hover:-translate-y-1 transition font-bold text-lg"
+                        >
+                            Solicitar Informes
+                        </a>
+                    </div>
                 </div>
             </div>
             <div className="p-5">

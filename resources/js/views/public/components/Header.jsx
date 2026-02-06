@@ -14,7 +14,7 @@ import {
 export default function Header({ setPage, page }) {
     return (
         <header className="sticky top-0 z-50 shadow">
-            <div className="p-10 bg-yellow-400 flex justify-between w-full h-36 items-center">
+            <div className="p-10 bg-yellow-400 flex justify-between w-full h-32 items-center">
                 <div className="text-5xl font-bold text-white">Educación</div>
 
                 <div className="flex gap-3 items-center">
