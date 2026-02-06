@@ -43,7 +43,7 @@ export default function Estudiantes() {
                     />
                     <div className="w-1/2 p-5">
                         <h1 className="text-center text-3xl font-bold">
-                            Talleres Computación
+                            Talleres de Computación
                         </h1>
                         <p className="mt-3 text-justify">
                             Nuestros talleres de computación brindan a los
@@ -117,7 +117,7 @@ export default function Estudiantes() {
                         </p>
                     </div>
                 </div>
-                <div className="w-full bg-gray100 text-black flex gap-5">
+                <div className="w-full bg-indigo-400 text-white flex gap-5">
                     <div className="w-1/2 p-5">
                         <h1 className="text-center text-3xl font-bold">
                             Plataformas Digitales

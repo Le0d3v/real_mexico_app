@@ -1,14 +1,14 @@
 import React from "react";
 import Tittle from "../components/Tittle";
-import { Lightbulb, Gem, Target } from "lucide-react";
+import { Lightbulb, Medal, Target } from "lucide-react";
 import FilosofiaCard from "../components/FilosofiaCard";
 import PersonalCard from "../components/PersonalCard";
 
 export default function About() {
     return (
-        <div>
+        <div className="">
             <Tittle>¿Quiénes Somos?</Tittle>
-            <div className="flex w-full gap-10 mt-5 p-5">
+            <div className="flex w-full gap-10 mt-5 p-5 bg-yellow-400">
                 <div className="w-1/2">
                     <h1 className="font-bold text-2xl">
                         Instituto Real de México A.C.
@@ -62,7 +62,7 @@ export default function About() {
                             de líderes con valores.
                         </p>
                     </FilosofiaCard>
-                    <FilosofiaCard label={"Valores"} icon={Gem}>
+                    <FilosofiaCard label={"Valores"} icon={Medal}>
                         <div className="flex justify-center">
                             <ul className="list-disc">
                                 <li>Respeto</li>

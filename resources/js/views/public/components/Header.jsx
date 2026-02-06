@@ -1,23 +1,12 @@
 import { Link } from "react-router-dom";
 import NavLink from "./NavLink";
-import {
-    ExternalLink,
-    Facebook,
-    Instagram,
-    School,
-    Send,
-    Twitter,
-    User,
-    Youtube,
-} from "lucide-react";
+import { Facebook, Instagram, Twitter, MapPin, Youtube } from "lucide-react";
 
 export default function Header({ setPage, page }) {
     return (
-        <header className="sticky top-0 z-50 shadow">
-            <div className="p-10 bg-yellow-400 flex justify-between w-full h-32 items-center">
-                <div className="text-5xl font-bold text-white">Educación</div>
-
-                <div className="flex gap-3 items-center">
+        <header className="sticky top-0 z-50 shadow ">
+            <div className="p-5 bg-white flex justify-between items-center w-full h-32 border-b-4 border-yellow-400">
+                <div className="flex gap-4 items-center">
                     <img
                         src="/img/logo.png"
                         alt="imagen-logo"
@@ -27,40 +16,40 @@ export default function Header({ setPage, page }) {
                         <h1 className="text-black font-bold text-4xl">
                             Instuto Real de México A.C.
                         </h1>
-                        <p className="text-black text-sm font-bold">
+                        <p className="text-black text-sm ">
                             Escuela Primaria Particular Incorporada a la SEP
                         </p>
-                        <p className="text-black text-sm font-bold">
-                            Clave: 21PPR0827N
+                        <p className="text-black text-sm ">
+                            Clave: <span className="font-bold">21PPR0827N</span>
                         </p>
                     </div>
                 </div>
 
-                <div>
+                <div className="">
                     <div className="flex gap-5 items-center">
                         <div className="flex gap-5">
                             <a href="/" about="blank">
                                 <Facebook
-                                    size={25}
-                                    className="hover:text-white transition hover:-translate-y-1"
+                                    size={22}
+                                    className="hover:text-yellow-400 transition hover:-translate-y-1"
                                 />
                             </a>
                             <a href="/" about="blank">
                                 <Instagram
-                                    size={25}
-                                    className="hover:text-white transition hover:-translate-y-1"
+                                    size={22}
+                                    className="hover:text-yellow-400 transition hover:-translate-y-1"
                                 />
                             </a>
                             <a href="/" about="blank">
                                 <Twitter
-                                    size={25}
-                                    className="hover:text-white transition hover:-translate-y-1"
+                                    size={22}
+                                    className="hover:text-yellow-400 transition hover:-translate-y-1"
                                 />
                             </a>
                             <a href="/" about="blank">
                                 <Youtube
-                                    size={25}
-                                    className="hover:text-white transition hover:-translate-y-1"
+                                    size={22}
+                                    className="hover:text-yellow-400 transition hover:-translate-y-1"
                                 />
                             </a>
                         </div>

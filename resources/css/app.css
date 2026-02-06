@@ -2,13 +2,18 @@
 
 .fondo {
     width: 100%;
-    background-image: url("/img/fondo.jpg");
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        url("/img/fondo.jpg");
     background-size: cover;
     background-position: center;
+    background-repeat: no-repeat;
 }
 
 .programa-fondo {
     width: 100%;
-    background-image: url("/img/plan-estudios.jpg");
+    background-image:
+        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        url("/img/plan-estudios.jpg");
     background-size: cover;
 }

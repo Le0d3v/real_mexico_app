@@ -14,7 +14,7 @@ export default function Home() {
         <div className="h-full">
             <div className="fondo h-screen p-5">
                 <div>
-                    <h1 className="h-full text-6xl font-black text-white w-2/3 mb-5">
+                    <h1 className="h-full text-6xl font-black w-2/3 mb-5 text-white">
                         Formamos niños seguros, curiosos y preparados para el
                         futuro
                     </h1>
@@ -42,7 +42,7 @@ export default function Home() {
                         <div className="w-full">
                             <div>
                                 <ShieldCheck
-                                    className="mx-auto text-blue-400"
+                                    className="mx-auto text-green-400"
                                     size={90}
                                 />
                             </div>
@@ -60,7 +60,7 @@ export default function Home() {
                         <div className="w-full">
                             <div>
                                 <UserCheck
-                                    className="mx-auto text-blue-400"
+                                    className="mx-auto text-green-400"
                                     size={90}
                                 />
                             </div>
@@ -78,7 +78,7 @@ export default function Home() {
                         <div className="w-full">
                             <div>
                                 <BookOpenText
-                                    className="mx-auto text-blue-400"
+                                    className="mx-auto text-green-400"
                                     size={90}
                                 />
                             </div>
@@ -96,7 +96,7 @@ export default function Home() {
                         <div className="w-full">
                             <div>
                                 <Computer
-                                    className="mx-auto text-blue-400"
+                                    className="mx-auto text-green-400"
                                     size={90}
                                 />
                             </div>
