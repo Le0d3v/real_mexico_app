@@ -5,7 +5,7 @@ import { Facebook, Instagram, Twitter, MapPin, Youtube } from "lucide-react";
 export default function Header({ setPage, page }) {
     return (
         <header className="sticky top-0 z-50 shadow ">
-            <div className="p-5 bg-white flex justify-between items-center w-full h-32 border-b-4 border-yellow-400">
+            <div className="p-5 bg-gray-100 flex justify-between items-center w-full h-32 border-b-4 border-yellow-400">
                 <div className="flex gap-4 items-center">
                     <img
                         src="/img/logo.png"
