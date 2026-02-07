@@ -8,8 +8,8 @@ export default function About() {
     return (
         <div className="">
             <Tittle>¿Quiénes Somos?</Tittle>
-            <div className="flex w-full gap-10 mt-5 p-5 bg-yellow-400">
-                <div className="w-1/2">
+            <div className="flex w-full gap-10 mt-5 p-5 bg-yellow-400 flex-col md:flex-row">
+                <div className="w-full md:w-1/2">
                     <h1 className="font-bold text-2xl">
                         Instituto Real de México A.C.
                     </h1>
@@ -38,7 +38,7 @@ export default function About() {
                         dieron origen.
                     </p>
                 </div>
-                <div className="w-1/2">
+                <div className="w-full md:w-1/2">
                     <img
                         src="https://imgs.search.brave.com/L-UEh3wkR_qZTra-a9v0O4tzcqxPLVSJVXscAU3MdOE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTE5/MTUwODM3Ni9lcy92/JUMzJUFEZGVvL3By/b2Zlc29yLWRlLWVz/Y3VlbGEtcHJpbWFy/aWEtcXVlLXRyYWJh/amEtY29uLWxvcy1l/c3R1ZGlhbnRlcy1l/bi1lbC1hdWxhLmpw/Zz9zPTY0MHg2NDAm/az0yMCZjPVlkWTRX/eVJES3FyRm1Ec2c0/dUtyNU82X0pmeXdV/YmkycF9jbm90Y3Fu/aHc9"
                         alt=""
@@ -47,7 +47,7 @@ export default function About() {
             </div>
             <div className="p-5">
                 <Tittle>Conoce Nuestra Filosofía empresarial</Tittle>
-                <div className="w-full flex gap-5 mt-5">
+                <div className="w-full flex gap-5 mt-5 flex-col md:flex-row">
                     <FilosofiaCard label={"Misión"} icon={Target}>
                         <p className="text-center">
                             Ofrecer educación de calidad en un ambiente seguro,
@@ -75,7 +75,7 @@ export default function About() {
             </div>
             <div className="p-5">
                 <Tittle>Nuestro Directorio</Tittle>
-                <div className="grid grid-cols-3 gap-5">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5">
                     <PersonalCard
                         nombre={"Juan Torres"}
                         puesto={"Director"}

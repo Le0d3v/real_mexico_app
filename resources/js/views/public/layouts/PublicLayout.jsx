@@ -23,9 +23,7 @@ export default function PublicLayout() {
     return (
         <>
             <Header setPage={setPage} page={page} />
-
             <main>{pages[page]}</main>
-
             <Footer />
         </>
     );

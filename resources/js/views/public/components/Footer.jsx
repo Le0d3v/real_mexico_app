@@ -70,7 +70,7 @@ export default function Footer() {
                         </div>
                     </div>
                     <div className="flex gap-3 items-center my-5 flex-col md:flex-row">
-                        <Phone className="w-10 h-10 md:w-5 md:h-5" />
+                        <Phone className="w-10 h-10 md:w-5 md:h-5" />   
                         <div>
                             <p className="text-sm text-center md:text-start">
                                 2212228893

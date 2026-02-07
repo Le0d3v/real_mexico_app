@@ -6,7 +6,7 @@ export default function NavItem({
     children,
     page,
     setPage,
-    activeClass = "bg-amber-400 dark:bg-emerald-500/30 border-l-4 border-black font-black text-black text-lg",
+    activeClass = "bg-amber-400 border-l-4 border-black font-black text-black text-lg",
 }) {
     const isActive = page === index;
     return (

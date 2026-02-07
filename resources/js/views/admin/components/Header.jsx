@@ -18,7 +18,7 @@ export default function Header({ index }) {
     return (
         <>
             <header
-                className="bg-yellow-400 text-white border-b border-gray-100"
+                className="bg-black/80 text-white border-b-2 border-yellow-400"
                 id="header"
             >
                 <div className="flex items-center justify-between h-16 px-6 flex-1">
@@ -31,12 +31,10 @@ export default function Header({ index }) {
                                         alt="imagen-logo"
                                         className="w-12"
                                     />
-                                    <h1 className="text-black text-3xl font-black">
-                                        IRM
-                                    </h1>
+                                    <h1 className="text-3xl font-black">IRM</h1>
                                 </div>
                             </div>
-                            <h1 className="text-md md:text-4xl hidden md:block text-black font-black">
+                            <h1 className="text-md md:text-2xl hidden md:block font-black">
                                 Instituto Real de México A.C.
                             </h1>
                         </div>
@@ -53,7 +51,7 @@ export default function Header({ index }) {
                         <div className="flex gap-5 items-center"></div>
                         <div className="flex items-center">
                             <button
-                                className="flex items-center justify-center gap-1 text-sm bg-red-500 rounded-lg text-white font-bold hover:bg-red-600 p-2 transition hover:-translate-y-1 cursor-pointer w-36"
+                                className="flex items-center justify-center gap-1 text-sm bg-yellow-500 rounded-lg text-white font-bold hover:bg-yellow-600 p-2 transition hover:-translate-y-1 cursor-pointer w-36"
                                 disabled={cargando}
                                 id="boton-cerrar-sesion"
                             >

@@ -4,7 +4,7 @@ export default function Estudiantes() {
     return (
         <>
             <Tittle>Nuestros Alumnos</Tittle>
-            <div className="flex justify-center px-22 my-3">
+            <div className="flex justify-center px-5 md:px-22 my-3">
                 <div className="w-auto bg-gray-100 shadow-3xl rounded">
                     <img
                         src="/img/alumnos.png"
@@ -26,7 +26,7 @@ export default function Estudiantes() {
                             certificados y el uso estratégico de la tecnología,
                             impulsamos un aprendizaje significativo que prepara
                             a nuestros alumnos para adaptarse, liderar y
-                            trascender en un entorno global en constante
+                            trascender en un entorno global en constanteT
                             evolución. Aquí no solo educamos para el presente:
                             construimos bases firmes para el futuro
                         </p>
@@ -35,13 +35,13 @@ export default function Estudiantes() {
             </div>
             <div className="mt-5">
                 <Tittle>Adicionales</Tittle>
-                <div className="w-full bg-black flex gap-5 text-white">
+                <div className="w-full bg-black flex gap-5 text-white flex-col md:flex-row">
                     <img
                         src="/img/computacion.jpg"
                         alt="imagen-adicional"
-                        className="w-1/2"
+                        className="w-full md:w-1/2"
                     />
-                    <div className="w-1/2 p-5">
+                    <div className="w-full md:w-1/2 p-5">
                         <h1 className="text-center text-3xl font-bold">
                             Talleres de Computación
                         </h1>
@@ -63,8 +63,8 @@ export default function Estudiantes() {
                         </p>
                     </div>
                 </div>
-                <div className="w-full bg-red-600 text-white flex gap-5">
-                    <div className="w-1/2 p-5">
+                <div className="w-full bg-red-600 text-white flex gap-5 flex-col md:flex-row">
+                    <div className="w-full md:w-1/2 p-5">
                         <h1 className="text-center text-3xl font-bold">
                             Clases de Inglés
                         </h1>
@@ -87,16 +87,16 @@ export default function Estudiantes() {
                     <img
                         src="/img/ingles.jpg"
                         alt="imagen-adicional"
-                        className="w-1/2"
+                        className="w-full md:w-1/2"
                     />
                 </div>
-                <div className="w-full bg-yellow-500 text-white flex gap-5">
+                <div className="w-full bg-yellow-500 text-white flex gap-5 flex-col md:flex-row">
                     <img
                         src="/img/musica.jpg"
                         alt="imagen-adicional"
-                        className="w-1/2"
+                        className="w-full md:w-1/2"
                     />
-                    <div className="w-1/2 p-5">
+                    <div className="w-full md:w-1/2 p-5">
                         <h1 className="text-center text-3xl font-bold">
                             Clases de Música
                         </h1>
@@ -117,8 +117,8 @@ export default function Estudiantes() {
                         </p>
                     </div>
                 </div>
-                <div className="w-full bg-indigo-400 text-white flex gap-5">
-                    <div className="w-1/2 p-5">
+                <div className="w-full bg-indigo-400 text-white flex gap-5 flex-col md:flex-row">
+                    <div className="w-full md:w-1/2 p-5">
                         <h1 className="text-center text-3xl font-bold">
                             Plataformas Digitales
                         </h1>
@@ -141,7 +141,7 @@ export default function Estudiantes() {
                     <img
                         src="/img/plataformas.png"
                         alt="imagen-adicional"
-                        className="w-1/2"
+                        className="w-full md:w-1/2"
                     />
                 </div>
                 <div className="my-3 programa-fondo h-96 flex justify-center items-center">

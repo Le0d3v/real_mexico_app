@@ -1,89 +1,81 @@
-import { Link } from "react-router-dom";
+import { useState } from "react";
 import NavLink from "./NavLink";
-import { Facebook, Instagram, Twitter, MapPin, Youtube } from "lucide-react";
+import MobileMenu from "./MobileMenu";
+import { Facebook, Instagram, Twitter, Youtube, Menu } from "lucide-react";
 
 export default function Header({ setPage, page }) {
+    const [open, setOpen] = useState(false);
+
     return (
-        <header className="sticky top-0 z-50 shadow ">
-            <div className="p-5 bg-gray-100 flex justify-between items-center w-full h-32 border-b-4 border-yellow-400">
-                <div className="flex gap-4 items-center">
+        <header className="sticky top-0 z-50 shadow">
+            <div className="bg-gray-100 border-b-4 border-yellow-400 px-4 md:px-5 py-2 flex justify-between items-center">
+                <div className="flex items-center gap-3 md:gap-4">
                     <img
                         src="/img/logo.png"
-                        alt="imagen-logo"
-                        className="w-28"
+                        alt="Logo Instituto Real de México"
+                        className="w-16 md:w-28"
                     />
-                    <div>
-                        <h1 className="text-black font-bold text-4xl">
-                            Instuto Real de México A.C.
+
+                    <div className="hidden sm:block">
+                        <h1 className="text-black font-bold text-xl md:text-4xl leading-tight">
+                            Instituto Real de México A.C.
                         </h1>
-                        <p className="text-black text-sm ">
+                        <p className="text-black text-xs md:text-sm">
                             Escuela Primaria Particular Incorporada a la SEP
                         </p>
-                        <p className="text-black text-sm ">
+                        <p className="text-black text-xs md:text-sm">
                             Clave: <span className="font-bold">21PPR0827N</span>
                         </p>
                     </div>
                 </div>
-
-                <div className="">
-                    <div className="flex gap-5 items-center">
-                        <div className="flex gap-5">
-                            <a href="/" about="blank">
-                                <Facebook
-                                    size={22}
-                                    className="hover:text-yellow-400 transition hover:-translate-y-1"
-                                />
-                            </a>
-                            <a href="/" about="blank">
-                                <Instagram
-                                    size={22}
-                                    className="hover:text-yellow-400 transition hover:-translate-y-1"
-                                />
-                            </a>
-                            <a href="/" about="blank">
-                                <Twitter
-                                    size={22}
-                                    className="hover:text-yellow-400 transition hover:-translate-y-1"
-                                />
-                            </a>
-                            <a href="/" about="blank">
-                                <Youtube
-                                    size={22}
-                                    className="hover:text-yellow-400 transition hover:-translate-y-1"
-                                />
-                            </a>
-                        </div>
-                    </div>
+                <div className="hidden md:flex gap-5">
+                    <Facebook className="hover:text-yellow-400 transition hover:-translate-y-1" />
+                    <Instagram className="hover:text-yellow-400 transition hover:-translate-y-1" />
+                    <Twitter className="hover:text-yellow-400 transition hover:-translate-y-1" />
+                    <Youtube className="hover:text-yellow-400 transition hover:-translate-y-1" />
                 </div>
+
+                <button
+                    onClick={() => setOpen(true)}
+                    className="md:hidden text-black"
+                    aria-label="Abrir menú"
+                >
+                    <Menu size={28} />
+                </button>
             </div>
 
-            <div className="w-full p-3 bg-black text-white">
-                <div className="flex justify-center">
-                    <div className="flex gap-10">
-                        <NavLink index={0} page={page} setPage={setPage}>
-                            Inicio
-                        </NavLink>
-                        <NavLink index={1} page={page} setPage={setPage}>
-                            Inscripciones
-                        </NavLink>
-                        <NavLink index={2} page={page} setPage={setPage}>
-                            Acerca de
-                        </NavLink>
-                        <NavLink index={3} page={page} setPage={setPage}>
-                            Alumnos
-                        </NavLink>
-                        <NavLink index={4} page={page} setPage={setPage}>
-                            Padres y Tutores
-                        </NavLink>
-                        <NavLink index={5} page={page} setPage={setPage}>
-                            Eventos y Noticias
-                        </NavLink>
-                        <NavLink index={6} page={page} setPage={setPage}>
-                            Contácto
-                        </NavLink>
-                    </div>
+            <nav className="hidden md:flex justify-center bg-black text-white py-3">
+                <div className="flex gap-10">
+                    <NavLink index={0} page={page} setPage={setPage}>
+                        Inicio
+                    </NavLink>
+                    <NavLink index={1} page={page} setPage={setPage}>
+                        Inscripciones
+                    </NavLink>
+                    <NavLink index={2} page={page} setPage={setPage}>
+                        Acerca de
+                    </NavLink>
+                    <NavLink index={3} page={page} setPage={setPage}>
+                        Alumnos
+                    </NavLink>
+                    <NavLink index={4} page={page} setPage={setPage}>
+                        Padres y Tutores
+                    </NavLink>
+                    <NavLink index={5} page={page} setPage={setPage}>
+                        Eventos y Noticias
+                    </NavLink>
+                    <NavLink index={6} page={page} setPage={setPage}>
+                        Contacto
+                    </NavLink>
                 </div>
-            </div>
+            </nav>
+
+            <MobileMenu
+                open={open}
+                setOpen={setOpen}
+                page={page}
+                setPage={setPage}
+            />
         </header>
     );
 }
