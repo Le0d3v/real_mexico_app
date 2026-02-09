@@ -7,13 +7,14 @@ export default function Header({ setPage, page }) {
     const [open, setOpen] = useState(false);
 
     return (
-        <header className="sticky top-0 z-50 shadow">
+        <header className="sticky top-0 z-50 group">
+            {/* Header institucional */}
             <div className="bg-gray-100 border-b-4 border-yellow-400 px-4 md:px-5 py-2 flex justify-between items-center">
                 <div className="flex items-center gap-3 md:gap-4">
                     <img
                         src="/img/logo.png"
                         alt="Logo Instituto Real de México"
-                        className="w-16 md:w-28"
+                        className="w-16 md:w-24"
                     />
 
                     <div className="hidden sm:block">
@@ -29,12 +30,11 @@ export default function Header({ setPage, page }) {
                     </div>
                 </div>
                 <div className="hidden md:flex gap-5">
-                    <Facebook className="hover:text-yellow-400 transition hover:-translate-y-1" />
-                    <Instagram className="hover:text-yellow-400 transition hover:-translate-y-1" />
-                    <Twitter className="hover:text-yellow-400 transition hover:-translate-y-1" />
-                    <Youtube className="hover:text-yellow-400 transition hover:-translate-y-1" />
+                    <Facebook className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer" />
+                    <Instagram className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer" />
+                    <Twitter className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer" />
+                    <Youtube className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer" />
                 </div>
-
                 <button
                     onClick={() => setOpen(true)}
                     className="md:hidden text-black"
@@ -44,8 +44,18 @@ export default function Header({ setPage, page }) {
                 </button>
             </div>
 
-            <nav className="hidden md:flex justify-center bg-black text-white py-3">
-                <div className="flex gap-10">
+            <nav
+                className="
+                    hidden md:flex justify-center
+                    bg-black text-white
+                    overflow-hidden
+                    max-h-0 opacity-0
+                    group-hover:max-h-36
+                    group-hover:opacity-100
+                    transition-all duration-500 ease-out
+                "
+            >
+                <div className="flex gap-10 py-3">
                     <NavLink index={0} page={page} setPage={setPage}>
                         Inicio
                     </NavLink>
@@ -70,6 +80,7 @@ export default function Header({ setPage, page }) {
                 </div>
             </nav>
 
+            {/* Menú móvil */}
             <MobileMenu
                 open={open}
                 setOpen={setOpen}

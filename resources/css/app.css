@@ -1,19 +1,30 @@
 @import "tailwindcss";
 
-.fondo {
-    width: 100%;
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-        url("/img/fondo.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-}
-
 .programa-fondo {
     width: 100%;
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
         url("/img/plan-estudios.jpg");
     background-size: cover;
+}
+
+@layer utilities {
+    @keyframes float {
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .animate-float {
+        animation: float 3s ease-in-out infinite;
+        will-change: transform;
+    }
+
+    .pause-on-hover:hover {
+        animation-play-state: paused;
+    }
 }

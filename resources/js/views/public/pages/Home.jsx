@@ -13,31 +13,53 @@ import IconContainer from "../components/IconContainer";
 export default function Home() {
     return (
         <div className="h-full">
-            <div className="fondo h-screen p-5">
-                <div className="">
-                    <h1 className="h-full w-full text-5xl text-center md:text-start md:text-6xl font-black md:w-2/3 mb-5 text-white">
-                        Formamos niños seguros, curiosos y preparados para el
-                        futuro
-                    </h1>
-                    <div className="w-full flex justify-center md:justify-start mt-10 md:mt-0">
-                        <div className="flex gap-2 items-center flex-col md:flex-row">
-                            <MapPin className="text-white w-20 h-20  md:w-10 md:h-10" />
-                            <p className="text-white text-sm w-full text-center md:text-start">
-                                Calle Industria #4. Santa Ana Xalmimilulco,
-                                Huejotzingo, Puebla, México.
-                            </p>
+            <div className="relative h-screen w-full overflow-hidden">
+                <video
+                    autoPlay
+                    muted
+                    loop
+                    playsInline
+                    className="absolute top-1/2 left-1/2 min-w-full min-h-full -translate-x-1/2 -translate-y-1/2 object-cover"
+                >
+                    <source src="/video/fondo2.mp4" type="video/mp4" />
+                </video>
+                <div className="absolute inset-0 bg-black/45"></div>
+                <div className="relative z-10 h-full p-5 flex flex-col">
+                    <div className="flex justify-center items-center md:py-15 md:px-36">
+                        <div>
+                            <h1 className="text-5xl md:text-7xl font-black md:w-full mb-5 text-white text-center ">
+                                Formamos niños seguros, curiosos y preparados
+                                para el futuro
+                            </h1>
+                            <div className="w-full flex justify-center mt-10 md:mt-0">
+                                <div className="flex gap-2 items-center flex-col md:flex-row">
+                                    <MapPin className="text-white w-10 h-10 md:w-6 md:h-6" />
+                                    <p className="text-white text-sm text-center md:text-start">
+                                        Calle Industria #4. Santa Ana
+                                        Xalmimilulco, Huejotzingo, Puebla,
+                                        México.
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div className="mt-10 flex justify-center">
+                                <a
+                                    href="#"
+                                    className="
+                                        px-4 py-2 rounded bg-blue-500 text-white font-bold text-2xl
+                                        transition-all duration-300 ease-out
+                                        hover:bg-blue-600
+                                        hover:-translate-y-2 hover:shadow-xl
+                                        animate-float pause-on-hover"
+                                >
+                                    Solicitar Informes
+                                </a>
+                            </div>
                         </div>
-                    </div>
-                    <div className="mt-15 flex justify-center md:justify-start w-full">
-                        <a
-                            href="#"
-                            className="p-2 rounded bg-blue-400 text-white cursor-pointer hover:bg-blue-500 hover:-translate-y-1 transition font-bold text-lg"
-                        >
-                            Solicitar Informes
-                        </a>
                     </div>
                 </div>
             </div>
+
             <div className="p-5">
                 <Tittle>¿Por Qué Elegirnos?</Tittle>
                 <div className="mt-5 p-5">

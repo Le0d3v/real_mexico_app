@@ -6,7 +6,7 @@ export default function Blog() {
     return (
         <div>
             <Tittle>¡Conoce Nuestras Últimas Novedades!</Tittle>
-            <div className="px-44 py-5">
+            <div className="p-3 md:px-44 md:py-5">
                 <Post
                     imagen={"/img/musica.jpg"}
                     titulo={"Inicia Taller de Guitarra"}
