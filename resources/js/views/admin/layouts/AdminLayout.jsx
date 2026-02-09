@@ -10,8 +10,12 @@ import News from "../pages/News";
 import Students from "../pages/Students";
 import Colegiaturas from "../pages/Colegiaturas";
 import Tutores from "../pages/Tutores";
+import useAuth from "../../../hooks/useAuth";
+import Loader from "../components/Loader";
 
 export default function AdminLayout() {
+    const { loading, user } = useAuth({ middleware: "auth" });
+
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     const [page, setPage] = useState(0);
 
@@ -49,7 +53,7 @@ export default function AdminLayout() {
                             </div>
                             <div className="ml-3 hidden lg:block">
                                 <p className="text-sm text-white dark:text-gray-300">
-                                    Carlos Juarez
+                                    {user.name}
                                 </p>
                             </div>
                         </div>
@@ -65,7 +69,7 @@ export default function AdminLayout() {
                             className="bg-white text-black  h-full rounded p-1 md:p-5 max-w-auto md:ml-16 lg:ml-0 overflow-y-scroll shadow-lg"
                             id="admin-outlet"
                         >
-                            {pages[page]}
+                            {loading ? <Loader /> : pages[page]}
                         </div>
                     </main>
                 </div>

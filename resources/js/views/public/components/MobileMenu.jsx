@@ -15,9 +15,9 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
                 transform transition-transform duration-300 ease-in-out
                 ${open ? "translate-x-0" : "translate-x-full"}`}
             >
-                <div className="flex justify-between items-center p-5 border-b border-gray-700">
-                    <span className="text-lg font-bold tracking-wide">
-                        Menú
+                <div className="flex justify-between items-center p-5 border-b-4 border-yellow-400 bg-gray-100 text-black">
+                    <span className="text-3xl font-bold tracking-wide">
+                        Navegación
                     </span>
                     <button
                         onClick={() => setOpen(false)}

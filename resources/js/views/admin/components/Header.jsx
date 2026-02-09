@@ -2,8 +2,10 @@ import { School, Menu, Bell, LogOut, Video } from "lucide-react";
 import { useState } from "react";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { ClipLoader } from "react-spinners";
+import useAuth from "../../../hooks/useAuth";
 
 export default function Header({ index }) {
+    const { logout } = useAuth({ middleware: "auth" });
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [cargando, setCargando] = useState(false);
 
@@ -54,6 +56,7 @@ export default function Header({ index }) {
                                 className="flex items-center justify-center gap-1 text-sm bg-yellow-500 rounded-lg text-white font-bold hover:bg-yellow-600 p-2 transition hover:-translate-y-1 cursor-pointer w-36"
                                 disabled={cargando}
                                 id="boton-cerrar-sesion"
+                                onClick={logout}
                             >
                                 {cargando ? (
                                     <ClipLoader

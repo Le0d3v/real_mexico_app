@@ -5,6 +5,7 @@ import {
     BookOpenText,
     Computer,
     MapPin,
+    Phone,
     ShieldCheck,
     UserCheck,
 } from "lucide-react";
@@ -38,6 +39,14 @@ export default function Home() {
                                         Calle Industria #4. Santa Ana
                                         Xalmimilulco, Huejotzingo, Puebla,
                                         México.
+                                    </p>
+                                </div>
+                            </div>
+                            <div className="w-full flex justify-center mt-5">
+                                <div className="flex gap-2 items-center flex-col md:flex-row">
+                                    <Phone className="text-white w-8 h-8 md:w-6 md:h-6" />
+                                    <p className="text-white text-sm text-center md:text-start">
+                                        221-222-8893
                                     </p>
                                 </div>
                             </div>

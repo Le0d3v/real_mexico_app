@@ -8,6 +8,7 @@ import {
     CircleDollarSign,
 } from "lucide-react";
 import NavItem from "./NavItem";
+import useAuth from "../../../hooks/useAuth";
 
 export default function Navigation({ index, closeMenu, setPage, page }) {
     return (
