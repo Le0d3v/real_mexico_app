@@ -28,6 +28,8 @@ export default function AdminLayout() {
         <Settings />,
     ];
 
+    if (loading) return <Loader />;
+
     return (
         <>
             <div className="h-screen flex">

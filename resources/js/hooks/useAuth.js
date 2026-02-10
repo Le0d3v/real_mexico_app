@@ -51,7 +51,7 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
     useEffect(() => {
         if (!loading) {
             if (middleware === "guest" && user) {
-                navigate(redirectIfAuthenticated || "/dashboard");
+                navigate(redirectIfAuthenticated || "/admin");
             }
 
             if (middleware === "auth" && !user) {

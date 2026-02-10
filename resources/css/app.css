@@ -1,11 +1,12 @@
 @import "tailwindcss";
 
-.programa-fondo {
+.login-fondo {
     width: 100%;
     background-image:
         linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
-        url("/img/plan-estudios.jpg");
+        url("/img/login_fondo.jpg");
     background-size: cover;
+    background-position: center;
 }
 
 @layer utilities {

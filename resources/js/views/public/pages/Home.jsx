@@ -26,7 +26,7 @@ export default function Home() {
                 </video>
                 <div className="absolute inset-0 bg-black/45"></div>
                 <div className="relative z-10 h-full p-5 flex flex-col">
-                    <div className="flex justify-center items-center md:py-15 md:px-36">
+                    <div className="flex justify-center items-center md:py-10 md:px-36">
                         <div>
                             <h1 className="text-5xl md:text-7xl font-black md:w-full mb-5 text-white text-center ">
                                 Formamos niños seguros, curiosos y preparados

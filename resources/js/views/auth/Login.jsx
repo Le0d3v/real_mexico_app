@@ -1,11 +1,20 @@
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { useState } from "react";
+import Header from "../public/components/Header";
+import {
+    Facebook,
+    Instagram,
+    Mail,
+    Twitter,
+    Youtube,
+    Lock,
+} from "lucide-react";
 
 export default function Login() {
     const { login, errors } = useAuth({
         middleware: "guest",
-        redirectIfAuthenticated: "/dashboard",
+        redirectIfAuthenticated: "/admin",
     });
 
     const [email, setEmail] = useState("");
@@ -17,24 +26,138 @@ export default function Login() {
     };
 
     return (
-        <form onSubmit={submit} className="max-w-md mx-auto mt-20 space-y-4">
-            <input
-                className="w-full border p-2"
-                placeholder="Email"
-                onChange={(e) => setEmail(e.target.value)}
-            />
-            <input
-                className="w-full border p-2"
-                type="password"
-                placeholder="Password"
-                onChange={(e) => setPassword(e.target.value)}
-            />
+        <>
+            <div className="w-full h-screen login-fondo p-5">
+                <div className="w-full flex justify-between items-center">
+                    <Link to={"/"}>
+                        <img
+                            src="/img/logo.png"
+                            alt="imagen-logo"
+                            className="w-20"
+                        />
+                    </Link>
+                    <h1 className="text-xl font-bold text-white">
+                        Instituto Real de México A.C.
+                    </h1>
+                </div>
+                <div className="mt-7 flex gap-15 items-center">
+                    <div className="w-1/2 text-white">
+                        <h1 className="text-7xl font-bold">
+                            Bienvenido de Vuelta
+                        </h1>
+                        <p className="mt-5">
+                            Lorem ipsum dolor sit amet consectetur, adipisicing
+                            elit. Labore consectetur nobis veniam beatae?
+                            Corrupti veritatis, soluta eveniet commodi maxime
+                            voluptatum, libero sed fugit velit nihil suscipit
+                            magnam ipsam neque amet.
+                        </p>
+                        <div className="hidden md:flex gap-5 mt-5">
+                            <Facebook className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer text-white" />
+                            <Instagram className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer text-white" />
+                            <Twitter className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer text-white" />
+                            <Youtube className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer text-white" />
+                        </div>
+                        <div className="flex justify-center mt-8">
+                            <div className="flex gap-5">
+                                <a className="text-white text-sm hover:text-blue-400 cursor-pointer hover:-translate-y-1 transition">
+                                    Aviso de Privacidad
+                                </a>
+                                <a className="text-white text-sm hover:text-blue-400 cursor-pointer hover:-translate-y-1 transition">
+                                    Politicas de uso
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                    <div className="w-1/2">
+                        <form
+                            onSubmit={submit}
+                            className="bg-gray-100/20 rounded-lg shadow-xl p-5 text-white"
+                            autoComplete="off"
+                        >
+                            <div>
+                                <legend className="text-center font-bold text-4xl my-2">
+                                    Iniciar Sesión
+                                </legend>
+                                <p className="text-center text-sm">
+                                    Inicia Sesión con tu correo electrónico y
+                                    contraseña
+                                </p>
+                            </div>
+                            <div className="mt-5">
+                                <div className="my-3">
+                                    <div>
+                                        <label htmlFor="email">
+                                            Correo Electrónico
+                                        </label>
+                                        <div className="relative mt-1">
+                                            <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black pointer-events-none" />
+                                            <input
+                                                id="email"
+                                                type="email"
+                                                placeholder="correo@dominio.com"
+                                                onChange={(e) =>
+                                                    setEmail(e.target.value)
+                                                }
+                                                className="w-full pl-10 pr-3 py-2 bg-white text-black rounded-lg 
+                                                focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                                <div className="my-3">
+                                    <div>
+                                        <label htmlFor="password">
+                                            Contraseña
+                                        </label>
+                                        <div className="relative mt-1">
+                                            <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black pointer-events-none" />
+                                            <input
+                                                id="password"
+                                                type="password"
+                                                placeholder="correo@dominio.com"
+                                                onChange={(e) =>
+                                                    setPassword(e.target.value)
+                                                }
+                                                className="w-full pl-10 pr-3 py-2 bg-white text-black rounded-lg 
+                                                focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                            />
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-1 mt-3">
+                                <input
+                                    id="remember"
+                                    type="checkbox"
+                                    className="w-4 h-4 accent-blue-600 focus:ring-2 focus:ring-blue-500"
+                                />
+                                <label
+                                    htmlFor="remember"
+                                    className="text-white cursor-pointer select-none"
+                                >
+                                    Mantener mi sesión abierta
+                                </label>
+                            </div>
+                            <button
+                                className="bg-blue-600 text-white p-2 mt-5 rounded font-bold hover:bg-blue-700 cursor-pointer 
+                                hover:-translate-y-1 transition text-lg"
+                            >
+                                Iniciar sesión
+                            </button>
 
-            <button className="w-full bg-blue-600 text-white py-2">
-                Iniciar sesión
-            </button>
-
-            {errors.email && <p className="text-red-500">{errors.email[0]}</p>}
-        </form>
+                            {errors.email && (
+                                <p className="text-red-500">
+                                    {errors.email[0]}
+                                </p>
+                            )}
+                        </form>
+                    </div>
+                </div>
+                <p className="text-sm text-center text-white mt-15">
+                    Instituto Real de México 2025. Todos los Derechos Reservados
+                </p>
+            </div>
+        </>
     );
 }
