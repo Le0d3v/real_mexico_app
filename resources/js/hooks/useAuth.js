@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import api from "@/lib/axios";
+import api from "@/config/axios";
 import { useNavigate } from "react-router-dom";
 
 export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
