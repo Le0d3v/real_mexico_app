@@ -28,7 +28,7 @@ export default function Login() {
     return (
         <>
             <div className="w-full h-screen login-fondo p-5">
-                <div className="w-full flex justify-between items-center">
+                <div className="w-full flex justify-center md:justify-between md:items-center">
                     <Link to={"/"}>
                         <img
                             src="/img/logo.png"
@@ -36,12 +36,12 @@ export default function Login() {
                             className="w-20"
                         />
                     </Link>
-                    <h1 className="text-xl font-bold text-white">
+                    <h1 className="hidden md:block text-xl font-bold text-white">
                         Instituto Real de México A.C.
                     </h1>
                 </div>
-                <div className="mt-7 flex gap-15 items-center">
-                    <div className="w-1/2 text-white">
+                <div className="mt-7 flex justify-center md:justify-start md:gap-15 md:items-center">
+                    <div className="hidden md:block w-1/2 text-white">
                         <h1 className="text-7xl font-bold">
                             Bienvenido de Vuelta
                         </h1>
@@ -69,7 +69,7 @@ export default function Login() {
                             </div>
                         </div>
                     </div>
-                    <div className="w-1/2">
+                    <div className="w-full md:w-1/2">
                         <form
                             onSubmit={submit}
                             className="bg-gray-100/20 rounded-lg shadow-xl p-5 text-white"
@@ -126,7 +126,7 @@ export default function Login() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-1 mt-3">
+                            <div className="flex items-center gap-1 mt-7 md:mt-5">
                                 <input
                                     id="remember"
                                     type="checkbox"
@@ -141,7 +141,7 @@ export default function Login() {
                             </div>
                             <button
                                 className="bg-blue-600 text-white p-2 mt-5 rounded font-bold hover:bg-blue-700 cursor-pointer 
-                                hover:-translate-y-1 transition text-lg"
+                                hover:-translate-y-1 transition text-lg w-full md:w-auto"
                             >
                                 Iniciar sesión
                             </button>
@@ -154,7 +154,7 @@ export default function Login() {
                         </form>
                     </div>
                 </div>
-                <p className="text-sm text-center text-white mt-15">
+                <p className="text-sm text-center text-white md:mt-15 mt-5">
                     Instituto Real de México 2025. Todos los Derechos Reservados
                 </p>
             </div>
