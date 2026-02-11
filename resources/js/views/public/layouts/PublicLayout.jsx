@@ -1,6 +1,7 @@
 import Header from "../components/Header";
 import Footer from "../components/Footer";
 import Home from "../pages/Home";
+import Contacto from "../pages/Contacto";
 import About from "../pages/About";
 import { useState } from "react";
 import Blog from "../pages/Blog";
@@ -18,6 +19,7 @@ export default function PublicLayout() {
         <Estudiantes />,
         <Tutores />,
         <Blog />,
+        <Contacto />,
     ];
 
     return (

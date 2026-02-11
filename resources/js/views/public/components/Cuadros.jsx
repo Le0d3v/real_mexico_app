@@ -19,7 +19,7 @@ export default function Cuadros() {
                             Alumnos Activos
                         </p>
                     </div>
-                    <div className="py-5 px-10 bg-black font-bold text-white">
+                    <div className="py-5 px-5 bg-black font-bold text-white">
                         <h1 className="text-7xl font-black text-center">45</h1>
                         <p className="text-xl uppercase mt-3 text-center">
                             Docentes Certificados
