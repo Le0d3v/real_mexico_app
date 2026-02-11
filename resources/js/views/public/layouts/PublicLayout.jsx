@@ -23,7 +23,7 @@ export default function PublicLayout() {
     return (
         <>
             <Header setPage={setPage} page={page} />
-            <main>{pages[page]}</main>
+            <main className="bg-gray-100">{pages[page]}</main>
             <Footer />
         </>
     );

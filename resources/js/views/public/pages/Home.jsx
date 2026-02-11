@@ -10,6 +10,7 @@ import {
     UserCheck,
 } from "lucide-react";
 import IconContainer from "../components/IconContainer";
+import Cuadros from "../components/Cuadros";
 
 export default function Home() {
     return (
@@ -69,7 +70,7 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="p-5">
+            <div className="p-5 bg-white">
                 <Tittle>¿Por Qué Elegirnos?</Tittle>
                 <div className="mt-5 p-5">
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
@@ -115,7 +116,7 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <div className="my-5 w-full p-5 bg-amber-400"></div>
+            <Cuadros />
             <div className="">
                 <Tittle>¡Visita nuestras Instalaciones!</Tittle>
                 <div className="w-full h-96 my-5">
