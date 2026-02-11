@@ -19,8 +19,16 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'apellido_paterno',
+        'apellido_materno',
+        'fecha_nacimiento',
+        'curp',
+        'genero',
+        'telefono',
+        'rol',
         'email',
         'password',
+        'domicilio_id',
     ];
 
     /**
@@ -45,4 +53,24 @@ class User extends Authenticatable
             'password' => 'hashed',
         ];
     }
+
+    // Relaciones 
+    
+    public function domicilio() // ⚠️ FALTA
+    {
+        return $this->belongsTo(Domicilio::class);
+    }
+
+
+    public function tutor()
+    {
+        return $this->hasOne(Tutor::class, 'id');
+    }
+
+    public function esTutor(): bool
+    {
+        return $this->rol === 'tutor';
+    }
+
+    
 }

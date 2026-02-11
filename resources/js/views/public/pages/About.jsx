@@ -10,6 +10,12 @@ export default function About() {
             <Tittle>¿Quiénes Somos?</Tittle>
             <div className="flex w-full gap-10 mt-5 p-5 bg-yellow-400 flex-col md:flex-row">
                 <div className="w-full md:w-1/2">
+                    <img
+                        src="https://imgs.search.brave.com/L-UEh3wkR_qZTra-a9v0O4tzcqxPLVSJVXscAU3MdOE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTE5/MTUwODM3Ni9lcy92/JUMzJUFEZGVvL3By/b2Zlc29yLWRlLWVz/Y3VlbGEtcHJpbWFy/aWEtcXVlLXRyYWJh/amEtY29uLWxvcy1l/c3R1ZGlhbnRlcy1l/bi1lbC1hdWxhLmpw/Zz9zPTY0MHg2NDAm/az0yMCZjPVlkWTRX/eVJES3FyRm1Ec2c0/dUtyNU82X0pmeXdV/YmkycF9jbm90Y3Fu/aHc9"
+                        alt=""
+                    />
+                </div>
+                <div className="w-full md:w-1/2">
                     <h1 className="font-bold text-2xl">
                         Instituto Real de México A.C.
                     </h1>
@@ -37,12 +43,6 @@ export default function About() {
                         educativos, manteniendo los principios y valores que le
                         dieron origen.
                     </p>
-                </div>
-                <div className="w-full md:w-1/2">
-                    <img
-                        src="https://imgs.search.brave.com/L-UEh3wkR_qZTra-a9v0O4tzcqxPLVSJVXscAU3MdOE/rs:fit:860:0:0:0/g:ce/aHR0cHM6Ly9tZWRp/YS5nZXR0eWltYWdl/cy5jb20vaWQvMTE5/MTUwODM3Ni9lcy92/JUMzJUFEZGVvL3By/b2Zlc29yLWRlLWVz/Y3VlbGEtcHJpbWFy/aWEtcXVlLXRyYWJh/amEtY29uLWxvcy1l/c3R1ZGlhbnRlcy1l/bi1lbC1hdWxhLmpw/Zz9zPTY0MHg2NDAm/az0yMCZjPVlkWTRX/eVJES3FyRm1Ec2c0/dUtyNU82X0pmeXdV/YmkycF9jbm90Y3Fu/aHc9"
-                        alt=""
-                    />
                 </div>
             </div>
             <div className="p-5">

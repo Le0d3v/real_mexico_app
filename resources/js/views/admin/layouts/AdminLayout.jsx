@@ -33,7 +33,7 @@ export default function AdminLayout() {
     return (
         <>
             <div className="h-screen flex">
-                <div className="fixed bg-red-500 inset-y-0 left-0 z-50 w-16 lg:w-44 transform transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 text-white hidden md:block">
+                <div className="fixed bg-red-700 inset-y-0 left-0 z-50 w-16 lg:w-44 transform transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 text-white hidden md:block">
                     <div className="flex items-center justify-center lg:justify-start h-16 px-4 bg-red-500 w-full">
                         <div className="w-40 h-40 mx-auto my-auto mt-1">
                             <img
