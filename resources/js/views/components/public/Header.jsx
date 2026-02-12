@@ -2,6 +2,7 @@ import { useState } from "react";
 import NavLink from "./NavLink";
 import MobileMenu from "./MobileMenu";
 import { Facebook, Instagram, Twitter, Youtube, Menu } from "lucide-react";
+import { Link } from "react-router-dom";
 
 export default function Header({ setPage, page }) {
     const [open, setOpen] = useState(false);
@@ -77,6 +78,7 @@ export default function Header({ setPage, page }) {
                     <NavLink index={6} page={page} setPage={setPage}>
                         Contacto
                     </NavLink>
+                    <Link to={"/login"}>Iniciar Sesión</Link>
                 </div>
             </nav>
 

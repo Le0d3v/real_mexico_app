@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Tittle from "../components/public/Tittle";
+import Tittle from "../components/Tittle";
 import {
     BookOpenText,
     Computer,

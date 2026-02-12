@@ -1,5 +1,5 @@
 import React from "react";
-import Tittle from "../components/public/Tittle";
+import Tittle from "../components/Tittle";
 import { Lightbulb, Medal, Target } from "lucide-react";
 import FilosofiaCard from "../components/public/FilosofiaCard";
 import PersonalCard from "../components/public/PersonalCard";

@@ -1,5 +1,5 @@
 import React from "react";
-import Tittle from "../components/public/Tittle";
+import Tittle from "../components/Tittle";
 import { Phone } from "lucide-react";
 
 export default function Tutores() {

@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import api from "@/config/axios";
 import { useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
     const navigate = useNavigate();
@@ -22,9 +23,8 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
 
     const csrf = () => api.get("/sanctum/csrf-cookie");
 
-    const login = async ({ email, password }) => {
+    const login = async ({ email, password, setCargando }) => {
         setErrors([]);
-
         await csrf();
 
         try {
@@ -33,8 +33,22 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
             navigate("/admin");
         } catch (error) {
             if (error.response?.status === 422) {
-                setErrors(error.response.data.errors);
+                const validationErrors = error.response.data.errors;
+
+                setErrors(validationErrors);
+
+                Object.keys(validationErrors).forEach((field) => {
+                    validationErrors[field].forEach((message) => {
+                        toast.error(message);
+                    });
+                });
+            } else if (error.response?.status === 401) {
+                toast.error("Credenciales incorrectas.");
+            } else {
+                toast.error("Ocurrió un error inesperado.");
             }
+
+            setCargando(false);
         }
     };
 

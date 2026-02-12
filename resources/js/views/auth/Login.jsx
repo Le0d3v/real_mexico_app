@@ -1,5 +1,8 @@
 import useAuth from "../../hooks/useAuth";
+import SubmitButton from "../components/SubmitButton";
 import { Link } from "react-router-dom";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/ReactToastify.css";
 import { useState } from "react";
 import {
     Facebook,
@@ -11,6 +14,8 @@ import {
 } from "lucide-react";
 
 export default function Login() {
+    const [cargando, setCargando] = useState(false);
+
     const { login, errors } = useAuth({
         middleware: "guest",
         redirectIfAuthenticated: "/admin",
@@ -21,7 +26,8 @@ export default function Login() {
 
     const submit = (e) => {
         e.preventDefault();
-        login({ email, password });
+        setCargando(true);
+        login({ email, password, setCargando });
     };
 
     return (
@@ -93,7 +99,7 @@ export default function Login() {
                                             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black pointer-events-none" />
                                             <input
                                                 id="email"
-                                                type="email"
+                                                type="tel"
                                                 placeholder="correo@dominio.com"
                                                 onChange={(e) =>
                                                     setEmail(e.target.value)
@@ -138,25 +144,17 @@ export default function Login() {
                                     Mantener mi sesión abierta
                                 </label>
                             </div>
-                            <button
-                                className="bg-blue-600 text-white p-2 mt-5 rounded font-bold hover:bg-blue-700 cursor-pointer 
-                                hover:-translate-y-1 transition text-lg w-full md:w-auto"
-                            >
-                                Iniciar sesión
-                            </button>
-
-                            {errors.email && (
-                                <p className="text-red-500">
-                                    {errors.email[0]}
-                                </p>
-                            )}
+                            <SubmitButton cargando={cargando} color="blue">
+                                Iniciar Sesión
+                            </SubmitButton>
                         </form>
                     </div>
                 </div>
-                <p className="text-sm text-center text-white md:mt-15 mt-5">
+                <p className="text-sm text-center text-white mt-5">
                     Instituto Real de México 2025. Todos los Derechos Reservados
                 </p>
             </div>
+            <ToastContainer />
         </>
     );
 }

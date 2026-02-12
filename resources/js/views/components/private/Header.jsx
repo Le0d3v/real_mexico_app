@@ -9,6 +9,11 @@ export default function Header({ index }) {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [cargando, setCargando] = useState(false);
 
+    const hanldeClicLogout = () => {
+        setCargando(true);
+        logout();
+    };
+
     const toggleMenu = () => {
         setIsMenuOpen((prevState) => !prevState);
     };
@@ -56,7 +61,7 @@ export default function Header({ index }) {
                                 className="flex items-center justify-center gap-1 text-sm bg-yellow-500 rounded-lg text-white font-bold hover:bg-yellow-600 p-2 transition hover:-translate-y-1 cursor-pointer w-36"
                                 disabled={cargando}
                                 id="boton-cerrar-sesion"
-                                onClick={logout}
+                                onClick={hanldeClicLogout}
                             >
                                 {cargando ? (
                                     <ClipLoader
