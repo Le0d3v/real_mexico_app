@@ -1,6 +1,6 @@
 import React from "react";
-import Tittle from "../components/Tittle";
-import Post from "../components/Post";
+import Tittle from "../components/public/Tittle";
+import Post from "../components/public/Post";
 
 export default function Blog() {
     return (

@@ -1,35 +1,38 @@
 import React from "react";
-import Tittle from "./../components/Tittle";
+import Tittle from "../components/public/Tittle";
 export default function Estudiantes() {
     return (
         <>
-            <Tittle>Nuestros Alumnos</Tittle>
-            <div className="flex justify-center px-5 md:px-22 my-3">
-                <div className="w-auto bg-gray-100 shadow-3xl rounded">
-                    <img
-                        src="/img/alumnos.png"
-                        alt="imagen-Alumnos className="
-                        className="w-full"
-                    />
-                    <div className="p-3">
-                        <Tittle>
-                            Formamos Alumnos preparados para El Futuro
-                        </Tittle>
-                        <p className="mt-3">
-                            Formamos estudiantes con pensamiento crítico,
-                            valores sólidos y competencias académicas alineadas
-                            a los desafíos del siglo XXI. Nuestro modelo
-                            educativo integra el desarrollo intelectual,
-                            emocional y social, fomentando la autonomía, la
-                            creatividad y la capacidad de resolver problemas
-                            reales. A través de metodologías activas, docentes
-                            certificados y el uso estratégico de la tecnología,
-                            impulsamos un aprendizaje significativo que prepara
-                            a nuestros alumnos para adaptarse, liderar y
-                            trascender en un entorno global en constanteT
-                            evolución. Aquí no solo educamos para el presente:
-                            construimos bases firmes para el futuro
-                        </p>
+            <div>
+                <Tittle>Nuestros Alumnos</Tittle>
+                <div className="flex justify-center px-5 md:px-22 my-3">
+                    <div className="w-auto bg-gray-100 shadow-3xl rounded">
+                        <img
+                            src="/img/alumnos.png"
+                            alt="imagen-Alumnos className="
+                            className="w-full"
+                        />
+                        <div className="p-3">
+                            <Tittle>
+                                Formamos Alumnos preparados para El Futuro
+                            </Tittle>
+                            <p className="mt-3">
+                                Formamos estudiantes con pensamiento crítico,
+                                valores sólidos y competencias académicas
+                                alineadas a los desafíos del siglo XXI. Nuestro
+                                modelo educativo integra el desarrollo
+                                intelectual, emocional y social, fomentando la
+                                autonomía, la creatividad y la capacidad de
+                                resolver problemas reales. A través de
+                                metodologías activas, docentes certificados y el
+                                uso estratégico de la tecnología, impulsamos un
+                                aprendizaje significativo que prepara a nuestros
+                                alumnos para adaptarse, liderar y trascender en
+                                un entorno global en constanteT evolución. Aquí
+                                no solo educamos para el presente: construimos
+                                bases firmes para el futuro
+                            </p>
+                        </div>
                     </div>
                 </div>
             </div>

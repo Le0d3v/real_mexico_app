@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import Tittle from "./../components/Tittle";
+import Tittle from "../components/public/Tittle";
 import {
     BookOpenText,
     Computer,
@@ -9,8 +9,8 @@ import {
     ShieldCheck,
     UserCheck,
 } from "lucide-react";
-import IconContainer from "../components/IconContainer";
-import Cuadros from "../components/Cuadros";
+import IconContainer from "../components/public/IconContainer";
+import Cuadros from "../components/public/Cuadros";
 
 export default function Home() {
     return (

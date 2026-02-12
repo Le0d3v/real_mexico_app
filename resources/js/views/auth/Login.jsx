@@ -1,7 +1,6 @@
 import useAuth from "../../hooks/useAuth";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import Header from "../public/components/Header";
 import {
     Facebook,
     Instagram,

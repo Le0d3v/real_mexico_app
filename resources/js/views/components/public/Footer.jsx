@@ -17,7 +17,7 @@ export default function Footer() {
                                 Instituto Real de México
                             </h1>
                             <p className="text-sm text-white text-center md:text-start mt-1 md:mt-0">
-                                Escuela Primaria Paritucla Incorporada a la SEP
+                                Escuela Primaria Particular Incorporada a la SEP
                             </p>
                             <p className="text-sm text-white text-center md:text-start mt-1 md:mt-0">
                                 Clave: 21PPR0827N
@@ -70,7 +70,7 @@ export default function Footer() {
                         </div>
                     </div>
                     <div className="flex gap-3 items-center my-5 flex-col md:flex-row">
-                        <Phone className="w-10 h-10 md:w-5 md:h-5" />   
+                        <Phone className="w-10 h-10 md:w-5 md:h-5" />
                         <div>
                             <p className="text-sm text-center md:text-start">
                                 2212228893

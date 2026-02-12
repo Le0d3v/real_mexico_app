@@ -1,17 +1,17 @@
-import Header from "../components/Header";
+import Header from "../components/private/Header";
 import { User } from "lucide-react";
-import Navigation from "../components/Navigation";
+import Navigation from "../components/private/Navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { useEffect, useState } from "react";
-import Dashboard from "../pages/Dashboard";
-import Settings from "../pages/Settings";
-import News from "../pages/News";
-import Students from "../pages/Students";
-import Colegiaturas from "../pages/Colegiaturas";
-import Tutores from "../pages/Tutores";
-import useAuth from "../../../hooks/useAuth";
-import Loader from "../components/Loader";
+import Dashboard from "../admin/pages/Dashboard";
+import Settings from "../admin/pages/Settings";
+import News from "../admin/pages/News";
+import Students from "../admin/pages/Students";
+import Colegiaturas from "../admin/pages/Colegiaturas";
+import Tutores from "../admin/pages/Tutores";
+import useAuth from "../../hooks/useAuth";
+import Loader from "../components/private/Loader";
 
 export default function AdminLayout() {
     const { loading, user } = useAuth({ middleware: "auth" });

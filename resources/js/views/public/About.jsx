@@ -1,8 +1,8 @@
 import React from "react";
-import Tittle from "../components/Tittle";
+import Tittle from "../components/public/Tittle";
 import { Lightbulb, Medal, Target } from "lucide-react";
-import FilosofiaCard from "../components/FilosofiaCard";
-import PersonalCard from "../components/PersonalCard";
+import FilosofiaCard from "../components/public/FilosofiaCard";
+import PersonalCard from "../components/public/PersonalCard";
 
 export default function About() {
     return (
