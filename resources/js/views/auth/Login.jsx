@@ -11,9 +11,12 @@ import {
     Twitter,
     Youtube,
     Lock,
+    Eye,
+    EyeOff,
 } from "lucide-react";
 
 export default function Login() {
+    const [showPassword, setShowPassword] = useState(false);
     const [cargando, setCargando] = useState(false);
 
     const { login, errors } = useAuth({
@@ -117,16 +120,37 @@ export default function Login() {
                                         </label>
                                         <div className="relative mt-1">
                                             <Lock className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black pointer-events-none" />
+
                                             <input
                                                 id="password"
-                                                type="password"
-                                                placeholder="correo@dominio.com"
+                                                type={
+                                                    showPassword
+                                                        ? "text"
+                                                        : "password"
+                                                }
+                                                placeholder="********"
                                                 onChange={(e) =>
                                                     setPassword(e.target.value)
                                                 }
-                                                className="w-full pl-10 pr-3 py-2 bg-white text-black rounded-lg 
-                                                focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                className="w-full pl-10 pr-10 py-2 bg-white text-black rounded-lg 
+                focus:outline-none focus:ring-2 focus:ring-blue-500"
                                             />
+
+                                            <button
+                                                type="button"
+                                                onClick={() =>
+                                                    setShowPassword(
+                                                        !showPassword,
+                                                    )
+                                                }
+                                                className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-600 hover:text-black transition cursor-pointer"
+                                            >
+                                                {showPassword ? (
+                                                    <EyeOff className="w-5 h-5" />
+                                                ) : (
+                                                    <Eye className="w-5 h-5" />
+                                                )}
+                                            </button>
                                         </div>
                                     </div>
                                 </div>

@@ -68,7 +68,7 @@ export default function AdminLayout() {
                         p-2 md:p-3 max-w-auto bg-gray-200"
                     >
                         <div
-                            className="bg-white text-black  h-full rounded p-1 md:p-5 max-w-auto md:ml-16 lg:ml-0 overflow-y-scroll shadow-lg"
+                            className="bg-white text-black  h-full rounded p-1 md:p-3 max-w-auto md:ml-16 lg:ml-0 overflow-y-scroll shadow-lg"
                             id="admin-outlet"
                         >
                             {loading ? <Loader /> : pages[page]}
