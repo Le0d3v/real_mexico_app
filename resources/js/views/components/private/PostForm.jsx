@@ -1,9 +1,12 @@
 import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import SubmitButton from "../SubmitButton";
+import usePosts from "../../../hooks/usePost";
 import api from "../../../config/axios";
 
 export default function PostForm({ post, onSuccess }) {
+    const { createPost, updatePost } = usePosts();
+
     const [cargando, setCargando] = useState(false);
     const [titulo, setTitulo] = useState("");
     const [descripcion, setDescripcion] = useState("");
@@ -46,18 +49,17 @@ export default function PostForm({ post, onSuccess }) {
             let response;
 
             if (post) {
-                formData.append("_method", "PUT");
-                response = await api.post(`/api/posts/${post.id}`, formData);
+                response = await updatePost(post.id, formData);
             } else {
-                response = await api.post("/api/posts", formData);
+                response = await createPost(formData);
             }
 
-            toast.success(response.data.message);
+            toast.success(response.message);
 
             if (onSuccess) onSuccess();
         } catch (error) {
-            if (error.response?.status === 422) {
-                Object.values(error.response.data.errors).forEach((messages) =>
+            if (error?.status === 422) {
+                Object.values(error.data.errors).forEach((messages) =>
                     messages.forEach((message) => toast.error(message)),
                 );
             } else {
@@ -103,7 +105,6 @@ export default function PostForm({ post, onSuccess }) {
 
                 <div className="my-5">
                     <label className="block font-semibold">Título</label>
-
                     <input
                         type="text"
                         value={titulo}
@@ -115,7 +116,6 @@ export default function PostForm({ post, onSuccess }) {
 
                 <div className="my-5">
                     <label className="block font-semibold">Descripción</label>
-
                     <textarea
                         value={descripcion}
                         onChange={(e) => setDescripcion(e.target.value)}

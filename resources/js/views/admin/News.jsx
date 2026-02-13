@@ -1,12 +1,12 @@
 import React, { useState, useMemo } from "react";
-import { Search, CirclePlus, Eye, Pen, Trash } from "lucide-react";
+import { Search, CirclePlus, Pen, Trash } from "lucide-react";
 import Tittle from "../components/Tittle";
-import api from "../../config/axios";
-import useSWR from "swr";
 import Loader from "../components/private/Loader";
 import Modal from "../components/private/Modal";
 import PostForm from "../components/private/PostForm";
 import Swal from "sweetalert2";
+import usePosts from "../hooks/usePosts";
+import api from "../../config/axios";
 
 export default function News() {
     const [open, setOpen] = useState(false);
@@ -14,13 +14,7 @@ export default function News() {
     const [filter, setFilter] = useState("all");
     const [editingPost, setEditingPost] = useState(null);
 
-    const fetcher = () => api("/api/posts").then((res) => res.data);
-
-    const { data, error, isLoading, mutate } = useSWR("/api/posts", fetcher, {
-        refreshInterval: 1000,
-    });
-
-    const posts = data?.data ?? [];
+    const { posts, isLoading, error, deletePost } = usePosts();
 
     const filteredPosts = useMemo(() => {
         let result = [...posts];
@@ -65,7 +59,7 @@ export default function News() {
 
         if (result.isConfirmed) {
             try {
-                const { data } = await api.delete(`/api/posts/${id}`);
+                const data = await deletePost(id);
 
                 await Swal.fire({
                     title: "Eliminado",
@@ -73,8 +67,6 @@ export default function News() {
                     icon: "success",
                 });
             } catch (error) {
-                console.log(error.response.data);
-
                 Swal.fire({
                     title: "Error",
                     text: "No se pudo eliminar.",
@@ -93,7 +85,6 @@ export default function News() {
 
             <div className="bg-white shadow-sm rounded-xl p-5 border border-gray-200">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                    {/* Totales */}
                     <div>
                         <p className="text-gray-600 text-sm">
                             Publicaciones Totales
@@ -180,6 +171,7 @@ export default function News() {
                                         <Pen />
                                         <p>Editar</p>
                                     </button>
+
                                     <button
                                         onClick={() => handleDelete(post.id)}
                                         className="bg-red-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded"
@@ -213,7 +205,6 @@ export default function News() {
                     onSuccess={() => {
                         setOpen(false);
                         setEditingPost(null);
-                        mutate("/api/posts");
                     }}
                 />
             </Modal>
