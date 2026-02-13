@@ -2,28 +2,49 @@ import React from "react";
 
 export default function Post({ children, titulo, imagen, fecha }) {
     return (
-        <div className="w-full p-3 md:p-5 bg-white border-2 border-yellow-500 rounded-lg shadow-xl my-3">
-            <div className="flex gap-5 flex-col lg:flex-row">
-                <div className="w-full lg:w-1/2">
-                    <img src={imagen} alt="imagen-post" />
-                </div>
-                <div className="w-full lg:w-1/2">
-                    <div className="flex justify-between items-center">
-                        <p className="text-sm text-gray-400">
-                            Redactado por:
-                            <span className="font-bold text-gray-700">
-                                {" "}
-                                Admin
-                            </span>
-                        </p>
-                        <p className="text-sm text-gray-400">{fecha}</p>
+        <article className="group relative w-full my-10">
+            <div className="overflow-hidden rounded-2xl bg-white shadow-[0_15px_50px_-15px_rgba(0,0,0,0.25)] transition-all duration-500 hover:shadow-[0_25px_70px_-15px_rgba(0,0,0,0.35)]">
+                {/* Imagen */}
+                <div className="relative h-[260px] md:h-[550px] lg:h-[620px] overflow-hidden">
+                    <img
+                        src={imagen}
+                        alt="imagen-post"
+                        className="w-full h-full object-center transition-transform duration-700 group-hover:scale-105"
+                    />
+
+                    {/* Overlay elegante */}
+                    <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+
+                    {/* Fecha flotante */}
+                    <div className="absolute bottom-5 right-5 bg-white/90 backdrop-blur px-4 py-1 rounded-full text-xs font-medium text-gray-700 shadow">
+                        {fecha}
                     </div>
-                    <div className="mt-3">
-                        <h1 className="text-4xl font-bold ">{titulo}</h1>
-                        <p className="text-sm mt-1">{children}</p>
+                </div>
+
+                {/* Contenido */}
+                <div className="p-6 md:p-10">
+                    {/* Autor */}
+                    <p className="text-xs uppercase tracking-widest text-gray-400">
+                        Redactado por{" "}
+                        <span className="text-yellow-600 font-semibold">
+                            Admin
+                        </span>
+                    </p>
+
+                    {/* Título */}
+                    <h1 className="mt-3 text-3xl md:text-4xl lg:text-5xl font-extrabold leading-tight text-gray-900 group-hover:text-yellow-600 transition-colors duration-300">
+                        {titulo}
+                    </h1>
+
+                    {/* Línea decorativa */}
+                    <div className="w-16 h-1 bg-yellow-500 mt-5 mb-6 rounded-full transition-all duration-300 group-hover:w-24" />
+
+                    {/* Texto */}
+                    <div className="prose prose-gray max-w-none text-gray-600 leading-relaxed text-base md:text-lg">
+                        {children}
                     </div>
                 </div>
             </div>
-        </div>
+        </article>
     );
 }

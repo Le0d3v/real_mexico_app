@@ -3,7 +3,7 @@ import { toast } from "react-toastify";
 import SubmitButton from "../SubmitButton";
 import api from "../../../config/axios";
 
-export default function PostForm() {
+export default function PostForm({ onSuccess }) {
     const [cargando, setCargando] = useState(false);
 
     const imagenRef = useRef();
@@ -21,10 +21,9 @@ export default function PostForm() {
 
         try {
             const { data } = await api.post("/api/posts", formData);
-
             toast.success(data.message);
-
             e.target.reset();
+            if (onSuccess) onSuccess();
         } catch (error) {
             console.log(error.response.data);
             if (error.response?.status === 422) {
