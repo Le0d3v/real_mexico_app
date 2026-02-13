@@ -7,6 +7,7 @@ use App\Http\Resources\PostCollection;
 use App\Models\Post;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class PostController extends Controller
@@ -88,8 +89,28 @@ class PostController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $post = Post::find($id);
+
+        try {
+
+            if ($post->contenido_multimedia && Storage::disk('public')->exists($post->contenido_multimedia)) {
+                Storage::disk('public')->delete($post->contenido_multimedia);
+            }
+
+            $post->delete();
+
+            return response()->json([
+                'message' => 'Publicación eliminada correctamente.'
+            ]);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'message' => 'Error al eliminar la publicación.',
+                "error" => $e->getMessage()
+            ], 500);
+        }
     }
 }

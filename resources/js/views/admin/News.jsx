@@ -6,6 +6,7 @@ import useSWR from "swr";
 import Loader from "../components/private/Loader";
 import Modal from "../components/private/Modal";
 import PostForm from "../components/private/PostForm";
+import Swal from "sweetalert2";
 
 export default function News() {
     const [open, setOpen] = useState(false);
@@ -14,15 +15,15 @@ export default function News() {
 
     const fetcher = () => api("/api/posts").then((res) => res.data);
 
-    const { data, error, isLoading, mutate } = useSWR("/api/posts", fetcher);
+    const { data, error, isLoading, mutate } = useSWR("/api/posts", fetcher, {
+        refreshInterval: 1000,
+    });
 
     const posts = data?.data ?? [];
 
-    // 🔥 Lógica centralizada de búsqueda + filtros
     const filteredPosts = useMemo(() => {
         let result = [...posts];
 
-        // 1️⃣ Búsqueda
         if (search.trim() !== "") {
             result = result.filter(
                 (post) =>
@@ -33,7 +34,6 @@ export default function News() {
             );
         }
 
-        // 2️⃣ Ordenamiento
         if (filter === "recent") {
             result.sort(
                 (a, b) => new Date(b.created_at) - new Date(a.created_at),
@@ -48,6 +48,40 @@ export default function News() {
 
         return result;
     }, [posts, search, filter]);
+
+    const handleDelete = async (id) => {
+        const result = await Swal.fire({
+            title: "¿Estás seguro?",
+            text: "Esta acción no se puede deshacer.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Sí, eliminar",
+            reverseButtons: true,
+        });
+
+        if (result.isConfirmed) {
+            try {
+                const { data } = await api.delete(`/api/posts/${id}`);
+
+                await Swal.fire({
+                    title: "Eliminado",
+                    text: data.message,
+                    icon: "success",
+                });
+            } catch (error) {
+                console.log(error.response.data);
+
+                Swal.fire({
+                    title: "Error",
+                    text: "No se pudo eliminar.",
+                    icon: "error",
+                });
+            }
+        }
+    };
 
     if (isLoading) return <Loader />;
     if (error) return <p>Error al cargar publicaciones</p>;
@@ -68,7 +102,6 @@ export default function News() {
                         </p>
                     </div>
 
-                    {/* Buscador */}
                     <div className="relative w-full md:w-96">
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                         <input
@@ -82,7 +115,6 @@ export default function News() {
                         />
                     </div>
 
-                    {/* Filtro */}
                     <div className="flex flex-col">
                         <label className="text-sm text-gray-600 mb-1">
                             Ordenar por
@@ -101,7 +133,6 @@ export default function News() {
                 </div>
             </div>
 
-            {/* Botón Crear */}
             <button
                 onClick={() => setOpen(true)}
                 className="p-3 rounded bg-blue-500 flex gap-1 items-center text-white font-bold
@@ -111,7 +142,6 @@ export default function News() {
                 <p>Nueva Publicación</p>
             </button>
 
-            {/* Grid */}
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6 gap-6">
                 {filteredPosts.map((post) => (
                     <div
@@ -138,15 +168,17 @@ export default function News() {
                             </p>
 
                             <div className="flex justify-center w-full">
-                                <div className="flex gap-5 mt-5">
-                                    <button className="text-emerald-600 hover:scale-110 transition">
-                                        <Eye />
-                                    </button>
-                                    <button className="text-blue-600 hover:scale-110 transition">
+                                <div className="flex gap-3 mt-5">
+                                    <button className="bg-blue-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded">
                                         <Pen />
+                                        <p>Editar</p>
                                     </button>
-                                    <button className="text-red-600 hover:scale-110 transition">
+                                    <button
+                                        onClick={() => handleDelete(post.id)}
+                                        className="bg-red-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded"
+                                    >
                                         <Trash />
+                                        <p>Eliminar</p>
                                     </button>
                                 </div>
                             </div>
@@ -157,7 +189,7 @@ export default function News() {
 
             <Modal
                 isOpen={open}
-                icon={<CirclePlus className="w-11 h-11" />}
+                icon={<CirclePlus className="w-12 h-12" />}
                 onClose={() => setOpen(false)}
                 size="lg"
                 title="Crear Nueva Publicación"
@@ -165,7 +197,6 @@ export default function News() {
                 <PostForm
                     onSuccess={() => {
                         setOpen(false);
-                        mutate("/api/posts"); // 🔥 revalida datos
                     }}
                 />
             </Modal>
