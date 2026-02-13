@@ -168,13 +168,13 @@ export default function Login() {
                                     Mantener mi sesión abierta
                                 </label>
                             </div>
-                            <SubmitButton cargando={cargando} color="blue">
+                            <SubmitButton cargando={cargando}>
                                 Iniciar Sesión
                             </SubmitButton>
                         </form>
                     </div>
                 </div>
-                <p className="text-sm text-center text-white mt-5">
+                <p className="text-sm text-center text-white mt-10">
                     Instituto Real de México 2025. Todos los Derechos Reservados
                 </p>
             </div>

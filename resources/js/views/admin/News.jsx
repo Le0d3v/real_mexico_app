@@ -4,9 +4,12 @@ import Tittle from "../components/Tittle";
 import api from "../../config/axios";
 import useSWR from "swr";
 import Loader from "../components/private/Loader";
+import Modal from "../components/private/Modal";
+import PostForm from "../components/private/PostForm";
 
 export default function News() {
     const [searchPosts, setSearchPosts] = useState([]);
+    const [open, setOpen] = useState(false);
 
     const fetcher = () => api("/api/posts").then((res) => res.data);
 
@@ -97,6 +100,7 @@ export default function News() {
                 </div>
                 <div className="flex justify-center">
                     <button
+                        onClick={() => setOpen(true)}
                         className="p-3 rounded bg-blue-400 flex gap-1 items-center text-white font-bold
                                 cursor-pointer hover:bg-blue-500 hover:-translate-y-1 transition mt-1"
                     >
@@ -105,14 +109,20 @@ export default function News() {
                     </button>
                 </div>
             </div>
-            <div className="gtid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5">
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-5 gap-5">
                 {searchPosts.map((post) => (
-                    <div className="p-3 bg-gray-100 shadow rounded border-t-4 border-red-500 w-full md:w-1/3">
-                        <img src={`/img/${post.multimeia}`} alt="imagen-post" />
+                    <div className="p-3 bg-gray-100 shadow rounded border-t-4 border-red-500 w-full">
+                        <div className="flex justify-center">
+                            <img
+                                src={`${api.defaults.baseURL}/storage/${post.multimedia}`}
+                                alt="imagen-post"
+                                className="w-32"
+                            />
+                        </div>
                         <h1 className="text-center font-bold text-red-400 text-4xl">
                             {post.titulo}
                         </h1>
-                        <div className="p-3 rounded bg-white mt-3">
+                        <div className="p-3 rounded bg-white/80 mt-3">
                             <p className="text-sm">{post.descripcion}</p>
                         </div>
                         <p className="text-center text-gray-700 mt-5">
@@ -146,6 +156,15 @@ export default function News() {
                     </div>
                 ))}
             </div>
+            <Modal
+                isOpen={open}
+                icon={<CirclePlus className="w-11 h-11" />}
+                onClose={() => setOpen(false)}
+                size="lg"
+                title="Crear Nueva Publicación"
+            >
+                <PostForm />
+            </Modal>
         </>
     );
 }

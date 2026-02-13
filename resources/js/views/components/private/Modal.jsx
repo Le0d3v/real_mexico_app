@@ -1,0 +1,83 @@
+import { useEffect } from "react";
+import { X } from "lucide-react";
+
+export default function Modal({
+    isOpen = false,
+    onClose,
+    title,
+    children,
+    icon: Icon,
+    size = "xl",
+    closeOnOverlay = true,
+    closeOnEsc = true,
+}) {
+    useEffect(() => {
+        if (!isOpen) return;
+
+        const handleEsc = (e) => {
+            if (e.key === "Escape" && closeOnEsc) {
+                onClose?.();
+            }
+        };
+
+        document.addEventListener("keydown", handleEsc);
+        document.body.style.overflow = "hidden";
+
+        return () => {
+            document.removeEventListener("keydown", handleEsc);
+            document.body.style.overflow = "auto";
+        };
+    }, [isOpen, closeOnEsc, onClose]);
+
+    if (!isOpen) return null;
+
+    const sizeClasses = {
+        sm: "max-w-md",
+        md: "max-w-xl",
+        lg: "max-w-3xl",
+        xl: "max-w-5xl",
+        full: "max-w-[95vw]",
+    };
+
+    return (
+        <div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            onClick={() => closeOnOverlay && onClose?.()}
+        >
+            <div
+                className={`
+                    relative w-full ${sizeClasses[size]}
+                    max-h-[90vh] overflow-y-auto
+                    bg-white rounded-2xl shadow-2xl
+                    border border-gray-200
+                    animate-in fade-in zoom-in duration-200
+                `}
+                onClick={(e) => e.stopPropagation()}
+            >
+                {/* Header */}
+                {(title || onClose) && (
+                    <div className="flex items-center justify-between px-6 py-4 border-b border-b-gray-400">
+                        <div className="flex gap-3 items-center">
+                            <div className="flex justify-center items-center p-2 rounded-full bg-blue-500/70 text-white w-12 h-12">
+                                {Icon}
+                            </div>
+                            <h2 className="text-3xl font-semibold">{title}</h2>
+                        </div>
+
+                        {onClose && (
+                            <button
+                                onClick={onClose}
+                                className="p-2 rounded-full hover:bg-gray-100 transition cursor-pointer"
+                            >
+                                <X className="w-7 h-7 text-gray-600" />
+                            </button>
+                        )}
+                    </div>
+                )}
+
+                {/* Body */}
+                <div className="py-3 px-6">{children}</div>
+            </div>
+        </div>
+    );
+}

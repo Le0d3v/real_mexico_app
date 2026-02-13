@@ -22,14 +22,21 @@ class PostRequest extends FormRequest
     public function rules(): array
     {
         return [
-            //
+            "titulo" => ["required", "string"],
+            "descripcion" => ["required", "string"],
+            "contenido_multimedia" => ["required", "image"],
         ];
     }
 
     public function messages()
     {
         return [
-
+            "titulo.required" => "El titulo es requerido",
+            "titulo.string" => "Titulo no valido",
+            "descripcion.required" => "La descripcion es requerida",
+            "descripcion.string" => "Descripción no valida",
+            "contenido_multimedia.required" => "Debes seleccionar una Imágen",
+            "contenido_multimedia.image" => "La imágen no es válida",
         ];
     }
 }
