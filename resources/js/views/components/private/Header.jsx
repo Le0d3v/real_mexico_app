@@ -3,11 +3,13 @@ import { useState } from "react";
 import ResponsiveMenu from "./ResponsiveMenu";
 import { ClipLoader } from "react-spinners";
 import useAuth from "../../../hooks/useAuth";
+import useIRM from "../../../hooks/useIRM";
 
 export default function Header({ index }) {
     const { logout } = useAuth({ middleware: "auth" });
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [cargando, setCargando] = useState(false);
+    const { titulo } = useIRM();
 
     const hanldeClicLogout = () => {
         setCargando(true);
@@ -41,8 +43,8 @@ export default function Header({ index }) {
                                     <h1 className="text-3xl font-black">IRM</h1>
                                 </div>
                             </div>
-                            <h1 className="text-md md:text-2xl hidden md:block font-black">
-                                Instituto Real de México A.C.
+                            <h1 className="text-md md:text-[45px] hidden md:block font-black">
+                                {titulo}
                             </h1>
                         </div>
                         <div>

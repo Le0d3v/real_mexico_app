@@ -5,7 +5,7 @@ import Loader from "../components/private/Loader";
 import Modal from "../components/private/Modal";
 import PostForm from "../components/private/PostForm";
 import Swal from "sweetalert2";
-import usePosts from "../hooks/usePosts";
+import usePosts from "../../hooks/usePost";
 import api from "../../config/axios";
 
 export default function News() {
@@ -81,8 +81,6 @@ export default function News() {
 
     return (
         <>
-            <Tittle>Noticias</Tittle>
-
             <div className="bg-white shadow-sm rounded-xl p-5 border border-gray-200">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
                     <div>

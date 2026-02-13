@@ -7,11 +7,15 @@ export default function NavItem({
     page,
     setPage,
     activeClass = "bg-white/40 border-l-4 border-red-500 font-black text-black text-lg",
+    fn,
 }) {
     const isActive = page === index;
     return (
         <button
-            onClick={() => setPage(index)}
+            onClick={() => {
+                setPage(index);
+                fn();
+            }}
             className={`flex items-center p-3 md:p-2 my-2 rounded-lg gap-1 transition-all duration-200 group 
                 text-white dark:text-white text-sm cursor-pointer hover:bg-white/40
                 ${isActive ? activeClass : "hover:-translate-y-1 text-black"}`}
