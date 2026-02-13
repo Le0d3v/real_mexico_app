@@ -12,6 +12,7 @@ export default function News() {
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState("");
     const [filter, setFilter] = useState("all");
+    const [editingPost, setEditingPost] = useState(null);
 
     const fetcher = () => api("/api/posts").then((res) => res.data);
 
@@ -169,7 +170,13 @@ export default function News() {
 
                             <div className="flex justify-center w-full">
                                 <div className="flex gap-3 mt-5">
-                                    <button className="bg-blue-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded">
+                                    <button
+                                        onClick={() => {
+                                            setEditingPost(post);
+                                            setOpen(true);
+                                        }}
+                                        className="bg-blue-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded"
+                                    >
                                         <Pen />
                                         <p>Editar</p>
                                     </button>
@@ -190,13 +197,23 @@ export default function News() {
             <Modal
                 isOpen={open}
                 icon={<CirclePlus className="w-12 h-12" />}
-                onClose={() => setOpen(false)}
+                onClose={() => {
+                    setOpen(false);
+                    setEditingPost(null);
+                }}
                 size="lg"
-                title="Crear Nueva Publicación"
+                title={
+                    editingPost
+                        ? "Editar Publicación"
+                        : "Crear Nueva Publicación"
+                }
             >
                 <PostForm
+                    post={editingPost}
                     onSuccess={() => {
                         setOpen(false);
+                        setEditingPost(null);
+                        mutate("/api/posts");
                     }}
                 />
             </Modal>

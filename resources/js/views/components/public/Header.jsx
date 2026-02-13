@@ -78,7 +78,13 @@ export default function Header({ setPage, page }) {
                     <NavLink index={6} page={page} setPage={setPage}>
                         Contacto
                     </NavLink>
-                    <Link to={"/login"}>Iniciar Sesión</Link>
+                    <Link
+                        to={"/login"}
+                        className="transition hover:cursor-pointer hover:-translate-y-1
+                        hover:text-amber-400 hover:font-bold"
+                    >
+                        Iniciar Sesión
+                    </Link>
                 </div>
             </nav>
 

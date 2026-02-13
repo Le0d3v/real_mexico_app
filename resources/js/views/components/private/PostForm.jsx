@@ -1,39 +1,65 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
 import SubmitButton from "../SubmitButton";
 import api from "../../../config/axios";
 
-export default function PostForm({ onSuccess }) {
+export default function PostForm({ post, onSuccess }) {
     const [cargando, setCargando] = useState(false);
+    const [titulo, setTitulo] = useState("");
+    const [descripcion, setDescripcion] = useState("");
+    const [preview, setPreview] = useState(null);
 
     const imagenRef = useRef();
-    const tituloRef = useRef();
-    const descripcionRef = useRef();
+
+    useEffect(() => {
+        if (post) {
+            setTitulo(post.titulo);
+            setDescripcion(post.descripcion);
+            setPreview(`${api.defaults.baseURL}/storage/${post.multimedia}`);
+        } else {
+            setTitulo("");
+            setDescripcion("");
+            setPreview(null);
+        }
+    }, [post]);
+
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setPreview(URL.createObjectURL(file));
+        }
+    };
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setCargando(true);
 
         const formData = new FormData();
-        formData.append("contenido_multimedia", imagenRef.current.files[0]);
-        formData.append("titulo", tituloRef.current.value);
-        formData.append("descripcion", descripcionRef.current.value);
+        formData.append("titulo", titulo);
+        formData.append("descripcion", descripcion);
+
+        if (imagenRef.current.files[0]) {
+            formData.append("contenido_multimedia", imagenRef.current.files[0]);
+        }
 
         try {
-            const { data } = await api.post("/api/posts", formData);
-            toast.success(data.message);
-            e.target.reset();
+            let response;
+
+            if (post) {
+                formData.append("_method", "PUT");
+                response = await api.post(`/api/posts/${post.id}`, formData);
+            } else {
+                response = await api.post("/api/posts", formData);
+            }
+
+            toast.success(response.data.message);
+
             if (onSuccess) onSuccess();
         } catch (error) {
-            console.log(error.response.data);
             if (error.response?.status === 422) {
-                const validationErrors = error.response.data.errors;
-
-                Object.values(validationErrors).forEach((messages) => {
-                    messages.forEach((message) => {
-                        toast.error(message);
-                    });
-                });
+                Object.values(error.response.data.errors).forEach((messages) =>
+                    messages.forEach((message) => toast.error(message)),
+                );
             } else {
                 toast.error("Error inesperado.");
             }
@@ -44,56 +70,62 @@ export default function PostForm({ onSuccess }) {
 
     return (
         <>
-            <h1 className="text-center font-semibold text-xl">
-                Completa el formulario para registrar una nueva publicación
+            <h1 className="text-center font-semibold text-xl mb-4">
+                {post ? "Editar publicación" : "Registrar nueva publicación"}
             </h1>
 
             <form onSubmit={handleSubmitForm}>
                 <div className="my-5">
-                    <label className="block text-gray-700 font-semibold">
+                    <label className="block font-semibold">
                         Imagen (.jpg / .png)
                     </label>
 
                     <input
                         type="file"
-                        name="contenido_multimedia"
                         accept="image/jpeg,image/png"
                         ref={imagenRef}
-                        required
+                        onChange={handleImageChange}
                         className="block w-full text-sm text-gray-700 file:mr-4 file:py-2 file:px-4
                         file:rounded-lg file:border-0 file:text-sm file:font-semibold
                         file:bg-blue-600 file:text-white hover:file:bg-blue-700
                         cursor-pointer bg-gray-50 border border-gray-300 rounded-lg p-2"
+                        required={!post}
+                    />
+
+                    {preview && (
+                        <img
+                            src={preview}
+                            alt="preview"
+                            className="mt-4 h-40 object-cover rounded-lg border"
+                        />
+                    )}
+                </div>
+
+                <div className="my-5">
+                    <label className="block font-semibold">Título</label>
+
+                    <input
+                        type="text"
+                        value={titulo}
+                        onChange={(e) => setTitulo(e.target.value)}
+                        required
+                        className="w-full p-2 border rounded border-gray-300"
                     />
                 </div>
 
                 <div className="my-5">
-                    <label className="block text-gray-700 font-semibold mb-1">
-                        Título / Encabezado
-                    </label>
-
-                    <input
-                        type="text"
-                        required
-                        ref={tituloRef}
-                        className="w-full p-2 bg-gray-50 border border-gray-300 rounded-lg"
-                    />
-                </div>
-
-                <div className="mt-5">
-                    <label className="block text-gray-700 font-semibold mb-1">
-                        Descripción
-                    </label>
+                    <label className="block font-semibold">Descripción</label>
 
                     <textarea
-                        ref={descripcionRef}
-                        className="w-full p-2 bg-gray-50 border border-gray-300 rounded-lg h-36"
+                        value={descripcion}
+                        onChange={(e) => setDescripcion(e.target.value)}
+                        className="w-full p-2 border rounded h-32 border-gray-300"
                     />
                 </div>
 
                 <div className="flex justify-end mt-4">
                     <SubmitButton cargando={cargando}>
-                        Crear Publicación
+                        {post ? "Actualizar" : "Crear Publicación"}
                     </SubmitButton>
                 </div>
             </form>

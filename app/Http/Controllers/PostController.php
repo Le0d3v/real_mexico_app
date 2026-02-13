@@ -81,10 +81,30 @@ class PostController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(PostRequest $request, Post $post)
     {
-        //
+        $post->titulo = $request->titulo;
+        $post->descripcion = $request->descripcion;
+
+        if ($request->hasFile('contenido_multimedia')) {
+
+            if ($post->contenido_multimedia) {
+                Storage::disk('public')->delete($post->contenido_multimedia);
+            }
+
+            $path = $request->file('contenido_multimedia')
+                ->store('posts', 'public');
+
+            $post->contenido_multimedia = $path;
+        }
+
+        $post->save();
+
+        return response()->json([
+            'message' => 'Publicación actualizada correctamente.'
+        ]);
     }
+
 
     /**
      * Remove the specified resource from storage.
