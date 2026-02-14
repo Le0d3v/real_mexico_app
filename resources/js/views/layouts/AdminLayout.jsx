@@ -12,6 +12,7 @@ import Colegiaturas from "../admin/Colegiaturas";
 import Tutores from "../admin/Tutores";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../components/private/Loader";
+import { ClipLoader } from "react-spinners";
 
 export default function AdminLayout() {
     const { loading, user } = useAuth({ middleware: "auth" });
@@ -29,8 +30,6 @@ export default function AdminLayout() {
         <News />,
         <Settings />,
     ];
-
-    if (loading) return <Loader />;
 
     return (
         <>
@@ -56,9 +55,13 @@ export default function AdminLayout() {
                                 <User className="w-5 h-5 text-black" />
                             </div>
                             <div className="ml-3 hidden lg:block">
-                                <p className="text-sm text-white dark:text-gray-300">
-                                    {user.name}
-                                </p>
+                                {loading ? (
+                                    <ClipLoader color="white" size={20} />
+                                ) : (
+                                    <p className="text-sm text-white dark:text-gray-300">
+                                        {user.name}
+                                    </p>
+                                )}
                             </div>
                         </div>
                     </div>

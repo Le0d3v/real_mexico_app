@@ -151,7 +151,7 @@ export default function DomicilioForm({ user }) {
                     </div>
 
                     <div className="flex justify-end md:col-span-2">
-                        <SubmitButton>Guardar Cambios</SubmitButton>
+                        <SubmitButton>Actualizar Domicilio</SubmitButton>
                     </div>
                 </form>
             </div>

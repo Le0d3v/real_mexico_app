@@ -25,7 +25,7 @@ export default function Settings() {
             </div>
             <div className="my-7">
                 <div className="flex gap-2">
-                    <div className="p-1 rounded-full h-10 w-10 bg-emerald-500/50 text-white flex justify-center items-center">
+                    <div className="p-1 rounded-full h-10 w-10 bg-emerald-500/70 text-white flex justify-center items-center">
                         <Home size={25} />
                     </div>
                     <h1 className="text-4xl font-bold text-gray-800 mb-6">
@@ -43,7 +43,7 @@ export default function Settings() {
                         Cambiar Contraseña
                     </h1>
                 </div>
-                <PasswordForm />
+                <PasswordForm user={user} />
             </div>
         </div>
     );
