@@ -73,7 +73,9 @@ export default function PostForm({ post, onSuccess }) {
     return (
         <>
             <h1 className="text-center font-semibold text-xl mb-4">
-                {post ? "Editar publicación" : "Registrar nueva publicación"}
+                {post
+                    ? "Modifica la publicación llenando el formulario"
+                    : "Registra una nueva publicación llenando el formulario"}
             </h1>
 
             <form onSubmit={handleSubmitForm}>
@@ -123,7 +125,7 @@ export default function PostForm({ post, onSuccess }) {
                     />
                 </div>
 
-                <div className="flex justify-end mt-4">
+                <div className="flex justify-end">
                     <SubmitButton cargando={cargando}>
                         {post ? "Actualizar" : "Crear Publicación"}
                     </SubmitButton>

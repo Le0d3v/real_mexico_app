@@ -2,57 +2,51 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Carbon\Carbon;
 
 class ColegiaturasSeeder extends Seeder
 {
     public function run(): void
     {
+        $estudiantes = DB::table('estudiantes')->pluck('id');
+
         $meses = [
-            'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-            'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'
+            1 => 'enero',
+            2 => 'febrero',
+            3 => 'marzo',
+            4 => 'abril',
+            5 => 'mayo',
+            6 => 'junio',
+            7 => 'julio',
+            8 => 'agosto',
+            9 => 'septiembre',
+            10 => 'octubre',
+            11 => 'noviembre',
+            12 => 'diciembre',
         ];
 
-        // 🔹 CICLO INACTIVO 2025–2026
-        for ($estudiante = 1; $estudiante <= 63; $estudiante++) {
-            foreach ($meses as $mes) {
-                DB::table('colegiaturas')->insert([
-                    'estudiante_id' => $estudiante,
-                    'ciclo_escolar_id' => 1,
-                    'mes' => $mes,
-                    'anio' => 2026,
-                    'monto' => 1500,
-                    'estado' => 'pagado',
-                    'fecha_limite_pago' => now()->startOfMonth(),
-                    'created_at' => now(),
-                    'updated_at' => now()
-                ]);
-            }
-        }
+        $anio = 2027;
 
-        // 🔹 CICLO ACTUAL 2026–2027
-        for ($estudiante = 1; $estudiante <= 67; $estudiante++) {
-            foreach ($meses as $index => $mes) {
+        foreach ($estudiantes as $estudianteId) {
 
-                $estado = ($index === 0 && !in_array($estudiante, [1,2,3]))
-                    ? 'pagado'
-                    : 'pendiente';
+            foreach ($meses as $numeroMes => $nombreMes) {
+
+                $fechaLimite = Carbon::create($anio, $numeroMes, 10); // Día 10 como fecha límite
 
                 DB::table('colegiaturas')->insert([
-                    'estudiante_id' => $estudiante,
+                    'estudiante_id' => $estudianteId,
                     'ciclo_escolar_id' => 2,
-                    'mes' => $mes,
-                    'anio' => 2027,
+                    'mes' => $nombreMes,
+                    'anio' => $anio,
                     'monto' => 1500,
-                    'estado' => $estado,
-                    'fecha_limite_pago' => now()->startOfMonth(),
+                    'estado' => 'pendiente',
+                    'fecha_limite_pago' => $fechaLimite,
                     'created_at' => now(),
-                    'updated_at' => now()
+                    'updated_at' => now(),
                 ]);
             }
         }
     }
 }
-

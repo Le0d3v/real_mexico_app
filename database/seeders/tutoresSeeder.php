@@ -2,23 +2,25 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class tutoresSeeder extends Seeder
+class TutoresSeeder extends Seeder
 {
-    /**
-     * Run the database seeds.
-     */
     public function run(): void
     {
-        DB::table('tutores')->insert([
-            'id' => 2, // user tutor
-            'ocupacion' => 'Empleado',
-            'nivel_estudios' => 'licenciatura',
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $tutores = DB::table('users')
+            ->where('rol', 'tutor')
+            ->pluck('id');
+
+        foreach ($tutores as $userId) {
+            DB::table('tutores')->insert([
+                'id' => $userId,
+                'ocupacion' => 'Empleado',
+                'nivel_estudios' => 'Licenciatura',
+                'created_at' => now(),
+                'updated_at' => now(),
+            ]);
+        }
     }
 }

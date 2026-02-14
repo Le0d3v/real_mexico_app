@@ -41,8 +41,9 @@ class Estudiante extends Model
     {
         return $this->belongsToMany(
             Tutor::class,
-            'estudiante_tutor'
+            'estudiantes_tutores',
+            'estudiante_id',
+            'tutor_id'
         )->withTimestamps();
-
     }
 }

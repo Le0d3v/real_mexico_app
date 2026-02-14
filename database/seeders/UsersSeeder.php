@@ -10,38 +10,40 @@ class UsersSeeder extends Seeder
 {
     public function run(): void
     {
+        // Administrador único
         DB::table('users')->insert([
-            [
-                'name' => 'Administrador',
-                'apellido_paterno' => 'Sistema',
-                'apellido_materno' => 'Escolar',
-                'email' => 'admin@escuela.com',
+            'name' => 'Administrador',
+            'apellido_paterno' => 'Sistema',
+            'apellido_materno' => 'Escolar',
+            'email' => 'admin@escuela.com',
+            'password' => Hash::make('password'),
+            'curp' => 'ADMS900101HDFXXX01',
+            'genero' => 'M',
+            'rol' => 'admin',
+            'telefono' => '2221110000',
+            'fecha_nacimiento' => '1990-01-01',
+            'domicilio_id' => 1,
+            'created_at' => now(),
+            'updated_at' => now(),
+        ]);
+
+        // 64 tutores
+        for ($i = 1; $i <= 64; $i++) {
+            DB::table('users')->insert([
+                'name' => "Tutor$i",
+                'apellido_paterno' => "Apellido$i",
+                'apellido_materno' => "Familia$i",
+                'email' => "tutor$i@escuela.com",
                 'password' => Hash::make('password'),
-                'curp' => 'ADMS900101HDFXXX01',
-                'genero' => 'M',
-                'rol' => 'admin',
-                'telefono' => '2221110000',
-                'fecha_nacimiento' => '1990-01-01',
-                'domicilio_id' => 1,
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
-            [
-                'name' => 'Tutor Plataforma',
-                'apellido_paterno' => 'Padre',
-                'apellido_materno' => 'Familia',
-                'email' => 'tutor@escuela.com',
-                'password' => Hash::make('password'),
-                'curp' => 'TUTR850505HDFXXX02',
-                'genero' => 'F',
-                'rol' => 'personal',
-                'telefono' => '2222220000',
+                'curp' => "TUTR850505HDFX" . str_pad($i, 2, '0', STR_PAD_LEFT),
+                'genero' => $i % 2 === 0 ? 'M' : 'F',
+                'rol' => 'tutor',
+                'telefono' => "222" . str_pad($i, 7, '0', STR_PAD_LEFT),
                 'fecha_nacimiento' => '1985-05-05',
                 'domicilio_id' => 2,
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-        ]);
+            ]);
+        }
     }
 }
-

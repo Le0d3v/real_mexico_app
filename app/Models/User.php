@@ -59,15 +59,14 @@ class User extends Authenticatable
 
     // Relaciones 
     
-    public function domicilio() // ⚠️ FALTA
+    public function domicilio()
     {
         return $this->belongsTo(Domicilio::class);
     }
 
-
     public function tutor()
     {
-        return $this->hasOne(Tutor::class, 'id');
+        return $this->hasOne(Tutor::class, 'id', 'id');
     }
 
     public function esTutor(): bool

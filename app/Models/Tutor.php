@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Tutor extends Model
 {
+    protected $table = 'tutores';
     protected $primaryKey = 'id';
     public $incrementing = false;
 
@@ -15,19 +16,19 @@ class Tutor extends Model
     ];
 
     
-    public function usuario()
+    public function user()
     {
-        return $this->belongsTo(User::class, 'id');
+        return $this->belongsTo(User::class, 'id', 'id');
     }
 
     public function estudiantes()
     {
         return $this->belongsToMany(
-            Estudiante::class,
-            'estudiante_tutor',
-            'tutor_id',
-            'estudiante_id'
-        );
+            Estudiante::class,   // ✅ Correcto
+            'estudiantes_tutores',
+            'tutor_id',          // FK del tutor en la pivote
+            'estudiante_id'      // FK del estudiante en la pivote
+        )->withTimestamps();
     }
 
     public function pagos()

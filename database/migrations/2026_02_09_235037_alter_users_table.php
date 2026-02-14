@@ -18,7 +18,7 @@ return new class extends Migration
             $table->char('curp', 18)->unique();
             $table->enum('genero', ['M', 'F']);
             $table->string('telefono', 15)->nullable();
-            $table->enum('rol', ['admin', 'personal'])->default('personal');
+            $table->enum('rol', ['admin', 'tutor'])->default('tutor');
             $table->foreignId('domicilio_id')->nullable()
                   ->constrained('domicilios')
                   ->nullOnDelete();
