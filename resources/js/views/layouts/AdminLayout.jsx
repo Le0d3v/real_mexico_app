@@ -16,6 +16,8 @@ import Loader from "../components/private/Loader";
 export default function AdminLayout() {
     const { loading, user } = useAuth({ middleware: "auth" });
 
+    console.log(user);
+
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     const [page, setPage] = useState(0);
 

@@ -1,5 +1,188 @@
-import React from "react";
+import SubmitButton from "../SubmitButton";
+import { Info } from "lucide-react";
 
-export default function DomicilioForm() {
-    return <div>DomicilioForm</div>;
+export default function DomicilioForm({ user }) {
+    return (
+        <>
+            <div
+                className="bg-gradient-to-br from-gray-50 to-gray-100 
+                rounded-3xl shadow-xl border border-gray-100 
+                p-10 backdrop-blur-sm"
+            >
+                <div className="flex items-start gap-2 mb-10">
+                    <div className="mt-1 text-violet-500">
+                        <Info />
+                    </div>
+                    <p className="text-gray-500 text-sm leading-relaxed max-w-xl">
+                        Modifique cualquier dato incorrecto utilizando el
+                        siguiente formulario.
+                    </p>
+                </div>
+
+                <form className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                    {/* Input base style reutilizable visualmente */}
+
+                    <div className="flex flex-col">
+                        <label
+                            className="text-xs uppercase tracking-widest 
+                              text-gray-500 font-bold mb-2"
+                        >
+                            Calle
+                        </label>
+                        <input
+                            type="text"
+                            className="h-12 px-4 rounded-lg border border-gray-200 
+                           bg-white text-gray-800 font-medium
+                           shadow-sm
+                           focus:outline-none focus:ring-2 
+                           focus:ring-violet-400 focus:border-violet-500
+                           transition-all duration-200"
+                            value={user.domicilio.calle}
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label
+                            className="text-xs uppercase tracking-widest 
+                              text-gray-500 font-bold mb-2"
+                        >
+                            Número Exterior
+                        </label>
+                        <input
+                            type="text"
+                            className="h-12 px-4 rounded-lg border border-gray-200 
+                           bg-white text-gray-800 font-medium
+                           shadow-sm
+                           focus:outline-none focus:ring-2 
+                           focus:ring-violet-400 focus:border-violet-500
+                           transition-all duration-200"
+                            value={user.domicilio.numero_exterior}
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label
+                            className="text-xs uppercase tracking-widest 
+                              text-gray-500 font-bold mb-2"
+                        >
+                            Número Interior
+                        </label>
+                        <input
+                            type="text"
+                            className="h-12 px-4 rounded-lg border border-gray-200 
+                           bg-white text-gray-800 font-medium
+                           shadow-sm
+                           focus:outline-none focus:ring-2 
+                           focus:ring-violet-400 focus:border-violet-500
+                           transition-all duration-200"
+                            value={user.apellido_materno}
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label
+                            className="text-xs uppercase tracking-widest 
+                              text-gray-500 font-bold mb-2"
+                        >
+                            Colonia
+                        </label>
+                        <input
+                            type="text"
+                            className="h-12 px-4 rounded-lg border border-gray-200 
+                           bg-white text-gray-800 font-medium
+                           shadow-sm
+                           focus:outline-none focus:ring-2 
+                           focus:ring-violet-400 focus:border-violet-500
+                           transition-all duration-200"
+                            value={user.fecha_nacimiento}
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label
+                            className="text-xs uppercase tracking-widest 
+                              text-gray-500 font-bold mb-2"
+                        >
+                            Localidad
+                        </label>
+                        <input
+                            type="text"
+                            className="h-12 px-4 rounded-lg border border-gray-200 
+                           bg-white text-gray-800 font-medium uppercase
+                           shadow-sm
+                           focus:outline-none focus:ring-2 
+                           focus:ring-violet-400 focus:border-violet-500
+                           transition-all duration-200"
+                            value={user.curp}
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label
+                            className="text-xs uppercase tracking-widest 
+                              text-gray-500 font-bold mb-2"
+                        >
+                            Municipio
+                        </label>
+                        <select
+                            className="h-12 px-4 rounded-lg border border-gray-200 
+                           bg-white text-gray-800 font-medium
+                           shadow-sm
+                           focus:outline-none focus:ring-2 
+                           focus:ring-violet-400 focus:border-violet-500
+                           transition-all duration-200"
+                            value={user.genero}
+                        >
+                            <option value="">Seleccione una opción</option>
+                            <option value="M">Masculino</option>
+                            <option value="F">Femenino</option>
+                            <option value="O">Otro</option>
+                        </select>
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label
+                            className="text-xs uppercase tracking-widest 
+                              text-gray-500 font-bold mb-2"
+                        >
+                            Entidad Federativa
+                        </label>
+                        <input
+                            type="text"
+                            className="h-12 px-4 rounded-lg border border-gray-200 
+                           bg-white text-gray-800 font-medium uppercase
+                           shadow-sm
+                           focus:outline-none focus:ring-2 
+                           focus:ring-violet-400 focus:border-violet-500
+                           transition-all duration-200"
+                            value={user.telefono}
+                        />
+                    </div>
+
+                    <div className="flex flex-col">
+                        <label
+                            className="text-xs uppercase tracking-widest 
+                              text-gray-500 font-bold mb-2"
+                        >
+                            Código Postal
+                        </label>
+                        <input
+                            type="text"
+                            className="h-12 px-4 rounded-lg border border-gray-200 
+                           bg-white text-gray-800 font-medium
+                           shadow-sm
+                           focus:outline-none focus:ring-2 
+                           focus:ring-violet-400 focus:border-violet-500
+                           transition-all duration-200"
+                            value={user.email}
+                        />
+                    </div>
+
+                    <div className="flex justify-end md:col-span-2 pt-4">
+                        <SubmitButton>Guardar Cambios</SubmitButton>
+                    </div>
+                </form>
+            </div>
+        </>
+    );
 }

@@ -1,5 +1,6 @@
 import { Home, Lock, User } from "lucide-react";
 import DatosPersonalesForm from "../components/private/DatosPersonalesForm";
+import DomicilioForm from "../components/private/DomicilioForm";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../components/private/Loader";
 
@@ -30,7 +31,7 @@ export default function Settings() {
                         Datos de Domicilio
                     </h1>
                 </div>
-                <DatosPersonalesForm user={user} />
+                <DomicilioForm user={user} />
             </div>
             <div className="my-7">
                 <div className="flex gap-2">

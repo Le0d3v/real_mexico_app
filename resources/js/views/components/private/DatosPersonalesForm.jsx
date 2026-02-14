@@ -36,6 +36,7 @@ export default function DatosPersonalesForm({ user }) {
                                        focus:outline-none focus:ring-3 
                                        focus:ring-blue-300 focus:border-blue-500
                                        text-lg transition bg-gray-600 text-white font-semibold"
+                        value={user.apellido_paterno}
                     />
                 </div>
                 <div className="flex flex-col">
@@ -124,7 +125,7 @@ export default function DatosPersonalesForm({ user }) {
                 </div>
 
                 {/* Botón */}
-                <div className="flex justify-end">
+                <div className="w-full md:col-span-2">
                     <SubmitButton>Guardar Cambios</SubmitButton>
                 </div>
             </form>

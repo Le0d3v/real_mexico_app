@@ -12,7 +12,7 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
 
     const fetchUser = async () => {
         try {
-            const { data } = await api.get("/api/user");
+            const { data } = await api.get("/api/me");
             setUser(data);
         } catch {
             setUser(null);
@@ -21,31 +21,35 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
         }
     };
 
-    const csrf = () => api.get("/sanctum/csrf-cookie");
-
     const login = async ({ email, password, setCargando }) => {
         setErrors([]);
-        await csrf();
 
         try {
-            await api.post("/login", { email, password });
-            await fetchUser();
+            const { data } = await api.post("/api/login", {
+                email,
+                password,
+            });
+
+            // Guardar token
+            localStorage.setItem("token", data.token);
+
+            setUser(data.user);
+
             navigate("/admin");
         } catch (error) {
             if (error.response?.status === 422) {
                 const validationErrors = error.response.data.errors;
-
                 setErrors(validationErrors);
 
-                Object.keys(validationErrors).forEach((field) => {
-                    validationErrors[field].forEach((message) => {
+                Object.values(validationErrors)
+                    .flat()
+                    .forEach((message) => {
                         toast.error(message);
                     });
-                });
             } else if (error.response?.status === 401) {
                 toast.error("Credenciales incorrectas.");
             } else {
-                toast.error("Ocurrió un error inesperado.");
+                toast.error("Error inesperado.");
             }
 
             setCargando(false);
@@ -53,13 +57,25 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
     };
 
     const logout = async () => {
-        await api.post("/logout");
+        try {
+            await api.post("/api/logout");
+        } catch (error) {
+            console.warn("Error al cerrar sesión");
+        }
+
+        localStorage.removeItem("token");
         setUser(null);
         navigate("/login");
     };
 
     useEffect(() => {
-        fetchUser();
+        const token = localStorage.getItem("token");
+
+        if (token) {
+            fetchUser();
+        } else {
+            setLoading(false);
+        }
     }, []);
 
     useEffect(() => {
