@@ -4,15 +4,15 @@ import { Info } from "lucide-react";
 export default function DatosPersonalesForm({ user }) {
     return (
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
-            <div className="flex gap-1">
-                <Info />
-                <p className="text-gray-600 mb-8">
+            <div className="flex gap-1 items-center">
+                <Info className="text-violet-500" />
+                <p className="text-gray-600 text-sm">
                     Modifique cualquier dato incorrecto utilizando el siguiente
                     formulario.
                 </p>
             </div>
 
-            <form className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3">
+            <form className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 mt-5">
                 <div className="flex flex-col">
                     <label className="text-gray-700 font-semibold text-lg mb-2">
                         Nombre
@@ -21,7 +21,7 @@ export default function DatosPersonalesForm({ user }) {
                         type="text"
                         className="h-12 px-4 rounded-xl border border-gray-300 
                                        focus:outline-none focus:ring-3 
-                                       focus:ring-blue-300 focus:border-blue-500
+                                       focus:ring-gray-500 focus:border-gray-300
                                        text-lg transition bg-gray-600 text-white font-semibold"
                         value={user.name}
                     />
@@ -34,7 +34,7 @@ export default function DatosPersonalesForm({ user }) {
                         type="text"
                         className="h-12 px-4 rounded-xl border border-gray-300 
                                        focus:outline-none focus:ring-3 
-                                       focus:ring-blue-300 focus:border-blue-500
+                                       focus:ring-gray-500 focus:border-gray-300
                                        text-lg transition bg-gray-600 text-white font-semibold"
                         value={user.apellido_paterno}
                     />
@@ -47,7 +47,7 @@ export default function DatosPersonalesForm({ user }) {
                         type="text"
                         className="h-12 px-4 rounded-xl border border-gray-300 
                                        focus:outline-none focus:ring-3 
-                                       focus:ring-blue-300 focus:border-blue-500
+                                       focus:ring-gray-500 focus:border-gray-300
                                        text-lg transition bg-gray-600 text-white font-semibold"
                         value={user.apellido_materno}
                     />
@@ -60,7 +60,7 @@ export default function DatosPersonalesForm({ user }) {
                         type="date"
                         className="h-12 px-4 rounded-xl border border-gray-300 
                                        focus:outline-none focus:ring-3 
-                                       focus:ring-blue-300 focus:border-blue-500
+                                       focus:ring-gray-500 focus:border-gray-300
                                        text-lg transition bg-gray-600 text-white font-semibold"
                         value={user.fecha_nacimiento}
                     />
@@ -73,7 +73,7 @@ export default function DatosPersonalesForm({ user }) {
                         type="text"
                         className="h-12 px-4 rounded-xl border border-gray-300 
                                        focus:outline-none focus:ring-3 
-                                       focus:ring-blue-300 focus:border-blue-500
+                                       focus:ring-gray-500 focus:border-gray-300
                                        text-lg tracking-widest uppercase transition bg-gray-600 text-white font-semibold"
                         value={user.curp}
                     />
@@ -85,7 +85,7 @@ export default function DatosPersonalesForm({ user }) {
                     <select
                         className="h-12 px-4 rounded-xl border border-gray-300 
                                        focus:outline-none focus:ring-3 
-                                       focus:ring-blue-300 focus:border-blue-500
+                                       focus:ring-gray-500 focus:border-gray-300
                                        text-lg transition bg-gray-600 text-white font-semibold"
                         value={user.genero}
                     >
@@ -104,7 +104,7 @@ export default function DatosPersonalesForm({ user }) {
                         type="text"
                         className="h-12 px-4 rounded-xl border border-gray-300 
                                        focus:outline-none focus:ring-3 
-                                       focus:ring-blue-300 focus:border-blue-500
+                                       focus:ring-gray-500 focus:border-gray-300
                                        text-lg tracking-widest uppercase transition bg-gray-600 text-white font-semibold"
                         value={user.telefono}
                     />
@@ -118,7 +118,7 @@ export default function DatosPersonalesForm({ user }) {
                         type="text"
                         className="h-12 px-4 rounded-xl border border-gray-300 
                                        focus:outline-none focus:ring-3 
-                                       focus:ring-blue-300 focus:border-blue-500
+                                       focus:ring-gray-500 focus:border-gray-300
                                        text-lg tracking-widest transition bg-gray-600 text-white font-semibold"
                         value={user.email}
                     />

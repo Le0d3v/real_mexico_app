@@ -3,6 +3,7 @@ import DatosPersonalesForm from "../components/private/DatosPersonalesForm";
 import DomicilioForm from "../components/private/DomicilioForm";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../components/private/Loader";
+import PasswordForm from "../components/private/PasswordForm";
 
 export default function Settings() {
     const { user } = useAuth({ middleware: "auth" });
@@ -42,7 +43,7 @@ export default function Settings() {
                         Cambiar Contraseña
                     </h1>
                 </div>
-                <DatosPersonalesForm user={user} />
+                <PasswordForm />
             </div>
         </div>
     );

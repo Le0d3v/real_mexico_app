@@ -9,8 +9,8 @@ export default function DomicilioForm({ user }) {
                 rounded-3xl shadow-xl border border-gray-100 
                 p-10 backdrop-blur-sm"
             >
-                <div className="flex items-start gap-2 mb-10">
-                    <div className="mt-1 text-violet-500">
+                <div className="flex items-center gap-2 mb-5">
+                    <div className=" text-violet-500">
                         <Info />
                     </div>
                     <p className="text-gray-500 text-sm leading-relaxed max-w-xl">
@@ -19,14 +19,11 @@ export default function DomicilioForm({ user }) {
                     </p>
                 </div>
 
-                <form className="grid grid-cols-1 md:grid-cols-2 gap-x-8 gap-y-6">
+                <form className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6">
                     {/* Input base style reutilizable visualmente */}
 
                     <div className="flex flex-col">
-                        <label
-                            className="text-xs uppercase tracking-widest 
-                              text-gray-500 font-bold mb-2"
-                        >
+                        <label className="text-md text-gray-500 font-semibold mb-2">
                             Calle
                         </label>
                         <input
@@ -42,10 +39,7 @@ export default function DomicilioForm({ user }) {
                     </div>
 
                     <div className="flex flex-col">
-                        <label
-                            className="text-xs uppercase tracking-widest 
-                              text-gray-500 font-bold mb-2"
-                        >
+                        <label className="text-md text-gray-500 font-semibold mb-2">
                             Número Exterior
                         </label>
                         <input
@@ -61,10 +55,7 @@ export default function DomicilioForm({ user }) {
                     </div>
 
                     <div className="flex flex-col">
-                        <label
-                            className="text-xs uppercase tracking-widest 
-                              text-gray-500 font-bold mb-2"
-                        >
+                        <label className="text-md text-gray-500 font-semibold mb-2">
                             Número Interior
                         </label>
                         <input
@@ -75,15 +66,12 @@ export default function DomicilioForm({ user }) {
                            focus:outline-none focus:ring-2 
                            focus:ring-violet-400 focus:border-violet-500
                            transition-all duration-200"
-                            value={user.apellido_materno}
+                            value={user.domicilio.numero_interior}
                         />
                     </div>
 
                     <div className="flex flex-col">
-                        <label
-                            className="text-xs uppercase tracking-widest 
-                              text-gray-500 font-bold mb-2"
-                        >
+                        <label className="text-md text-gray-500 font-semibold mb-2">
                             Colonia
                         </label>
                         <input
@@ -94,76 +82,60 @@ export default function DomicilioForm({ user }) {
                            focus:outline-none focus:ring-2 
                            focus:ring-violet-400 focus:border-violet-500
                            transition-all duration-200"
-                            value={user.fecha_nacimiento}
+                            value={user.domicilio.colonia}
                         />
                     </div>
 
                     <div className="flex flex-col">
-                        <label
-                            className="text-xs uppercase tracking-widest 
-                              text-gray-500 font-bold mb-2"
-                        >
+                        <label className="text-md text-gray-500 font-semibold mb-2">
                             Localidad
                         </label>
                         <input
                             type="text"
                             className="h-12 px-4 rounded-lg border border-gray-200 
-                           bg-white text-gray-800 font-medium uppercase
+                           bg-white text-gray-800 font-medimd
                            shadow-sm
-                           focus:outline-none focus:ring-2 
+  semi                         focus:outline-none focus:ring-2 
                            focus:ring-violet-400 focus:border-violet-500
                            transition-all duration-200"
-                            value={user.curp}
+                            value={user.domicilio.localidad}
                         />
                     </div>
 
                     <div className="flex flex-col">
-                        <label
-                            className="text-xs uppercase tracking-widest 
-                              text-gray-500 font-bold mb-2"
-                        >
+                        <label className="text-md text-gray-500 font-semibold mb-2">
                             Municipio
                         </label>
-                        <select
+                        <input
+                            type="text"
                             className="h-12 px-4 rounded-lg border border-gray-200 
-                           bg-white text-gray-800 font-medium
+                           bg-white text-gray-800 font-medimd
                            shadow-sm
-                           focus:outline-none focus:ring-2 
+  semi                         focus:outline-none focus:ring-2 
                            focus:ring-violet-400 focus:border-violet-500
                            transition-all duration-200"
-                            value={user.genero}
-                        >
-                            <option value="">Seleccione una opción</option>
-                            <option value="M">Masculino</option>
-                            <option value="F">Femenino</option>
-                            <option value="O">Otro</option>
-                        </select>
+                            value={user.domicilio.municipio}
+                        />
                     </div>
 
                     <div className="flex flex-col">
-                        <label
-                            className="text-xs uppercase tracking-widest 
-                              text-gray-500 font-bold mb-2"
-                        >
+                        <label className="text-md text-gray-500 font-semibold mb-2">
                             Entidad Federativa
                         </label>
                         <input
                             type="text"
                             className="h-12 px-4 rounded-lg border border-gray-200 
-                           bg-white text-gray-800 font-medium uppercase
+                           bg-white text-gray-800 font-medimd
                            shadow-sm
-                           focus:outline-none focus:ring-2 
+  semi                         focus:outline-none focus:ring-2 
                            focus:ring-violet-400 focus:border-violet-500
                            transition-all duration-200"
-                            value={user.telefono}
+                            value={user.domicilio.entidad}
                         />
                     </div>
 
                     <div className="flex flex-col">
-                        <label
-                            className="text-xs uppercase tracking-widest 
-                              text-gray-500 font-bold mb-2"
-                        >
+                        <label className="text-md text-gray-500 font-semibold mb-2">
                             Código Postal
                         </label>
                         <input
@@ -174,11 +146,11 @@ export default function DomicilioForm({ user }) {
                            focus:outline-none focus:ring-2 
                            focus:ring-violet-400 focus:border-violet-500
                            transition-all duration-200"
-                            value={user.email}
+                            value={user.domicilio.cp}
                         />
                     </div>
 
-                    <div className="flex justify-end md:col-span-2 pt-4">
+                    <div className="flex justify-end md:col-span-2">
                         <SubmitButton>Guardar Cambios</SubmitButton>
                     </div>
                 </form>
