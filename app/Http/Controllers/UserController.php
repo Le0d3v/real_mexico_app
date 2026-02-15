@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\UserRequest;
 use App\Http\Resources\UserCollection;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -16,5 +17,9 @@ class UserController extends Controller
                 'tutor.estudiantes'
             ])->get()
         );
+    }
+
+    public function update(UserRequest $request, $id) {
+    
     }
 }
