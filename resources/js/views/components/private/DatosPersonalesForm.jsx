@@ -130,7 +130,7 @@ export default function DatosPersonalesForm({ user }) {
                 <div className="w-full md:col-span-2">
                     <SubmitButton>
                         {loading ? (
-                            <ClipLoader size={20} />
+                            <ClipLoader size={20} color="white" />
                         ) : (
                             <p>Guardar Cambios</p>
                         )}
