@@ -24,7 +24,7 @@ export default function Footer() {
                             />
                             <div>
                                 <h2 className="text-2xl font-extrabold text-yellow-400">
-                                    Instituto Real de México
+                                    Instituto Real de México A.C.
                                 </h2>
                                 <p className="text-sm text-red-100 mt-1">
                                     Escuela Primaria Particular Incorporada a la

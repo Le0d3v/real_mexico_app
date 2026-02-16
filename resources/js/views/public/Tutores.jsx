@@ -1,107 +1,128 @@
 import React from "react";
 import Tittle from "../components/Tittle";
-import { Phone } from "lucide-react";
+import { Phone, Download, Smartphone } from "lucide-react";
 
 export default function Tutores() {
     return (
-        <>
-            <Tittle>Para los Padres y Tutores</Tittle>
-            <div className="mt-5 w-full bg-indigo-500 text-white my-3">
-                <div className="flex gap-5 p-5">
-                    <div className="w-1/2">
-                        <img src="/img/director.jpg" alt="imagen-director" />
+        <section className="w-full bg-gray-50 py-10 px-6 md:px-20">
+            <div className="max-w-7xl mx-auto">
+                <Tittle>Para los Padres y Tutores</Tittle>
+
+                {/* MENSAJE DEL DIRECTOR */}
+                <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mt-12 grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img
+                            src="/img/director.jpg"
+                            alt="Director"
+                            className="rounded-2xl shadow-lg w-full object-cover"
+                        />
                     </div>
-                    <div className="w-1/2">
-                        <h1 className="text-3xl font-bold">
+
+                    <div>
+                        <h2 className="text-3xl font-bold text-gray-900">
                             Mensaje del Director
-                        </h1>
-                        <p className="mt-5 text-justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Perspiciatis at soluta doloribus dolor animi
-                            dolores perferendis maiores ea! Obcaecati
-                            repellendus doloremque magni. Tempora rem aliquid
-                            perspiciatis culpa voluptas sequi voluptatibus.
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Omnis nesciunt qui aspernatur deserunt
-                            mollitia deleniti quae placeat soluta inventore vero
-                            libero ipsam dolore nemo, esse iusto odit laborum
-                            necessitatibus expedita. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Quibusdam explicabo
-                            esse non sit ipsum omnis commodi, maiores sapiente,
-                            dolor, ipsam vel molestias dolorum quidem et
-                            doloribus dignissimos! Ipsam, laudantium quae? Lorem
-                            ipsum dolor sit amet consectetur adipisicing elit.
-                            Culpa eos nesciunt id ad autem ut commodi nulla
-                            veniam saepe? Reprehenderit expedita deserunt
-                            incidunt pariatur numquam adipisci dolorem
-                            voluptatem quibusdam et.
+                        </h2>
+
+                        <div className="w-16 h-1 bg-red-600 mt-3 mb-6 rounded-full"></div>
+
+                        <p className="text-gray-600 leading-relaxed text-justify">
+                            En nuestro instituto, cada alumno es acompañado con
+                            atención, compromiso y profesionalismo. Creemos
+                            firmemente que la educación es un trabajo conjunto
+                            entre escuela y familia, fortaleciendo valores y
+                            excelencia académica.
                         </p>
+
+                        <p className="text-gray-600 leading-relaxed text-justify mt-4">
+                            Nuestra prioridad es brindar un entorno seguro,
+                            estructurado y humano donde cada estudiante pueda
+                            desarrollarse plenamente.
+                        </p>
+
+                        <div className="flex items-center gap-3 mt-6 text-red-600 font-semibold">
+                            <Phone size={18} />
+                            Agenda una cita informativa
+                        </div>
                     </div>
                 </div>
-                <hr />
-                <div className="flex justify-between gap-5 p-5">
-                    <img
-                        src="/img/fondo.webp"
-                        alt="imagen-logo"
-                        className="w-1/2"
-                    />
-                    <div className="w-1/2">
-                        <h1 className="text-3xl font-bold">Aplicación Móvil</h1>
-                        <p className="mt-5 text-justify">
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Perspiciatis at soluta doloribus dolor animi
-                            dolores perferendis maiores ea! Obcaecati
-                            repellendus doloremque magni. Tempora rem aliquid
-                            perspiciatis culpa voluptas sequi voluptatibus.
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Omnis nesciunt qui aspernatur deserunt
-                            mollitia deleniti quae placeat soluta inventore vero
-                            libero ipsam dolore nemo, esse iusto odit laborum
-                            necessitatibus expedita. Lorem ipsum dolor sit amet
-                            consectetur adipisicing elit. Quibusdam explicabo
-                            esse non sit ipsum omnis commodi, maiores sapiente,
-                            dolor, ipsam vel molestias dolorum quidem et
-                            doloribus dignissimos! Ipsam, laudantium quae? Lorem
-                            ipsum dolor sit amet consectetur adipisicing elit.
-                            Culpa eos nesciunt id ad autem ut commodi nulla
-                            veniam saepe? Reprehenderit expedita deserunt
-                            incidunt pariatur numquam adipisci dolorem
-                            voluptatem quibusdam et.
+
+                {/* APP MOVIL */}
+                <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mt-16 grid md:grid-cols-2 gap-12 items-center">
+                    <div className="order-2 md:order-1">
+                        <h2 className="text-3xl font-bold text-gray-900">
+                            Aplicación Móvil Institucional
+                        </h2>
+
+                        <div className="w-16 h-1 bg-red-600 mt-3 mb-6 rounded-full"></div>
+
+                        <p className="text-gray-600 leading-relaxed text-justify">
+                            Manténgase informado en todo momento a través de
+                            nuestra aplicación oficial. Consulte avisos,
+                            calificaciones, comunicados y eventos desde su
+                            dispositivo móvil.
                         </p>
+
+                        <div className="mt-6 flex gap-4">
+                            <button className="flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition shadow-md cursor-pointer">
+                                <Smartphone size={18} />
+                                Descargar App
+                            </button>
+                        </div>
+                    </div>
+
+                    <div className="order-1 md:order-2">
+                        <img
+                            src="/img/fondo.webp"
+                            alt="Aplicación móvil"
+                            className="rounded-2xl shadow-lg w-full object-cover"
+                        />
                     </div>
                 </div>
-                <hr />
-                <div className="flex justify-between gap-5 p-5">
-                    <img
-                        src="/img/fondo.webp"
-                        alt="imagen-logo"
-                        className="w-1/2"
-                    />
-                    <div className="w-1/2">
-                        <h1 className="text-3xl font-bold">Lista de útiles</h1>
-                        <p>
-                            Lorem ipsum dolor sit amet consectetur adipisicing
-                            elit. Dolor eligendi eaque ab animi neque placeat
-                            laborum dignissimos a doloremque accusamus dolorum
-                            aliquid, culpa debitis nihil quaerat quam autem
-                            velit sunt!
+
+                {/* LISTA DE UTILES */}
+                <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mt-16 grid md:grid-cols-2 gap-12 items-center">
+                    <div>
+                        <img
+                            src="/img/fondo.webp"
+                            alt="Lista de útiles"
+                            className="rounded-2xl shadow-lg w-full object-cover"
+                        />
+                    </div>
+
+                    <div>
+                        <h2 className="text-3xl font-bold text-gray-900">
+                            Lista de Útiles Escolares
+                        </h2>
+
+                        <div className="w-16 h-1 bg-red-600 mt-3 mb-6 rounded-full"></div>
+
+                        <p className="text-gray-600 mb-6">
+                            Consulte y descargue la lista oficial de materiales
+                            escolares correspondiente al ciclo actual.
                         </p>
-                        <ul className="list-disc p-5">
-                            <li>Lorem ipsum dolor sit amet,</li>
-                            <li>Lorem ipsum dolor sit amet,</li>
-                            <li>Lorem ipsum dolor sit amet,</li>
-                            <li>Lorem ipsum dolor sit amet,</li>
-                            <li>Lorem ipsum dolor sit amet,</li>
-                            <li>Lorem ipsum dolor sit amet,</li>
-                            <li>Lorem ipsum dolor sit amet,</li>
-                            <li>Lorem ipsum dolor sit amet,</li>
+
+                        <ul className="space-y-2 text-gray-600">
+                            <li className="flex items-center gap-2">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                                Cuadernos profesionales
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                                Lápices y colores
+                            </li>
+                            <li className="flex items-center gap-2">
+                                <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                                Material de trabajo específico por grado
+                            </li>
                         </ul>
-                        <button className="p-2 bg-yellow-500 rounded text-white cursor-pointer hover:bg-yellow-600 hover:-translate-y-1 transition font-bold">
-                            Descargar Lista de Útiles
+
+                        <button className="mt-8 flex items-center gap-2 bg-yellow-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-yellow-600 transition shadow-md cursor-pointer">
+                            <Download size={18} />
+                            Descargar Lista Completa
                         </button>
                     </div>
                 </div>
             </div>
-        </>
+        </section>
     );
 }
