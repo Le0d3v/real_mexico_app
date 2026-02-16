@@ -36,14 +36,20 @@ export default function PasswordForm({ user }) {
         };
 
         try {
-            const { data } = await api.put(
+            const response = await api.put(
                 `/api/update-password/${user.id}`,
                 datos,
             );
 
-            toast.success(data.message);
+            if (response.status >= 200 && response.status < 300) {
+                toast.success(
+                    response.data?.message ||
+                        "Contraseña actualizada correctamente",
+                );
+                return;
+            }
 
-            e.currentTarget.reset();
+            toast.error("Error inesperado.");
         } catch (error) {
             const { response } = error;
 
@@ -51,6 +57,8 @@ export default function PasswordForm({ user }) {
                 Object.values(response.data?.errors || {})
                     .flat()
                     .forEach((message) => toast.error(message));
+            } else if (response?.status === 401) {
+                toast.error("La contraseña actual es incorrecta.");
             } else {
                 toast.error("Error inesperado.");
             }

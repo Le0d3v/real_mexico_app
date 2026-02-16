@@ -15,9 +15,11 @@ import Loader from "../components/private/Loader";
 import { ClipLoader } from "react-spinners";
 
 export default function AdminLayout() {
-    const { loading, user } = useAuth({ middleware: "auth" });
+    const { loading, user, setUser } = useAuth({ middleware: "auth" });
 
     console.log(user);
+
+    const initial = user?.name ? user.name.trim().charAt(0).toUpperCase() : "";
 
     const mediaQuery = window.matchMedia("(max-width: 768px)");
     const [page, setPage] = useState(0);
@@ -52,7 +54,13 @@ export default function AdminLayout() {
                             id="layout-user"
                         >
                             <div className="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center">
-                                <User className="w-5 h-5 text-black" />
+                                {loading ? (
+                                    <ClipLoader size={15} color="black" />
+                                ) : (
+                                    <span className="text-black font-bold text-lg">
+                                        {initial}
+                                    </span>
+                                )}
                             </div>
                             <div className="ml-3 hidden lg:block">
                                 {loading ? (
