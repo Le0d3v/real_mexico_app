@@ -10,22 +10,19 @@ import {
 } from "lucide-react";
 import FilosofiaCard from "../components/public/FilosofiaCard";
 import PersonalCard from "../components/public/PersonalCard";
+import TituloDark from "./TituloDark";
 
 export default function About() {
     return (
         <div className="">
             <section className="w-full bg-gray-900 text-white py-16 px-6 md:px-20">
                 <div className="max-w-7xl mx-auto">
-                    <div className="text-center mb-14">
-                        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-                            ¿Quiénes Somos?
-                        </h2>
-                        <div className="w-24 h-1 bg-red-600 mx-auto mt-4 rounded-full"></div>
-                        <p className="text-gray-300 mt-6 max-w-2xl mx-auto text-lg">
-                            Formando generaciones con excelencia académica y
-                            valores sólidos.
-                        </p>
-                    </div>
+                    <TituloDark
+                        titulo={"¿Quiénes Somos"}
+                        subtitulo={
+                            "Formando generaciones con excelencia académica y valores sólidos."
+                        }
+                    />
                     <div className="flex flex-col md:flex-row items-center gap-12">
                         <div className="relative w-full md:w-1/2 group">
                             <img
@@ -116,21 +113,14 @@ export default function About() {
             </section>
             <section className="w-full bg-gradient-to-b from-black via-zinc-900 to-black text-white py-20 px-6 md:px-20">
                 <div className="max-w-7xl mx-auto">
-                    {/* Título */}
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-                            Misión, Visión y Valores
-                        </h2>
-                        <div className="w-24 h-1 bg-red-600 mx-auto mt-4 rounded-full"></div>
-                        <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">
-                            Principios que fundamentan nuestro compromiso
-                            educativo.
-                        </p>
-                    </div>
+                    <TituloDark
+                        titulo={"Misión, Visión y Valores"}
+                        subtitulo={
+                            "Principios que fundamentan nuestro compromiso educativo."
+                        }
+                    />
 
-                    {/* Cards */}
                     <div className="grid md:grid-cols-3 gap-10">
-                        {/* MISIÓN */}
                         <div className="bg-zinc-900/80 backdrop-blur-sm p-10 rounded-3xl border border-zinc-800 shadow-xl hover:shadow-red-600/30 transition duration-500 hover:-translate-y-2">
                             <div className="flex justify-center mb-6">
                                 <Target size={50} className="text-yellow-400" />
@@ -150,7 +140,6 @@ export default function About() {
                             <div className="w-full h-1 bg-red-600 mt-8 rounded-full"></div>
                         </div>
 
-                        {/* VISIÓN */}
                         <div className="bg-zinc-900/80 backdrop-blur-sm p-10 rounded-3xl border border-zinc-800 shadow-xl hover:shadow-red-600/30 transition duration-500 hover:-translate-y-2">
                             <div className="flex justify-center mb-6">
                                 <Lightbulb
@@ -172,7 +161,6 @@ export default function About() {
                             <div className="w-full h-1 bg-red-600 mt-8 rounded-full"></div>
                         </div>
 
-                        {/* VALORES */}
                         <div className="bg-zinc-900/80 backdrop-blur-sm p-10 rounded-3xl border border-zinc-800 shadow-xl hover:shadow-red-600/30 transition duration-500 hover:-translate-y-2">
                             <div className="flex justify-center mb-6">
                                 <Medal size={50} className="text-yellow-400" />
@@ -204,19 +192,13 @@ export default function About() {
             </section>
             <section className="w-full bg-black text-white py-20 px-6 md:px-20">
                 <div className="max-w-7xl mx-auto">
-                    {/* Título */}
-                    <div className="text-center mb-16">
-                        <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
-                            Nuestro Directorio
-                        </h2>
-                        <div className="w-24 h-1 bg-red-600 mx-auto mt-4 rounded-full"></div>
-                        <p className="text-gray-400 mt-6 max-w-2xl mx-auto text-lg">
-                            Equipo directivo comprometido con la excelencia
-                            educativa.
-                        </p>
-                    </div>
+                    <TituloDark
+                        titulo={"Nuestro Directorio"}
+                        subtitulo={
+                            "Equipo directivo comprometido con la excelencia educativa."
+                        }
+                    />
 
-                    {/* Grid */}
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                         <PersonalCard
                             nombre="Juan Torres"
