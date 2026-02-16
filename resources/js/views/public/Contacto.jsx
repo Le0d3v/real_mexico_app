@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import TituloDark from "./TituloDark";
 import {
     Clock,
     Facebook,
@@ -47,20 +48,19 @@ export default function Contacto() {
     return (
         <>
             {/* HERO OSCURO */}
-            <section className="bg-slate-900 text-white py-20 px-6 md:px-20">
+            <section className="bg-slate-900 text-white py-10 px-6 md:px-20">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
                     className="max-w-4xl mx-auto text-center"
                 >
-                    <h1 className="text-5xl font-extrabold tracking-tight">
-                        Contáctanos
-                    </h1>
-                    <p className="text-slate-300 mt-5 text-lg">
-                        Estamos listos para acompañarte en cada etapa del
-                        proceso académico.
-                    </p>
+                    <TituloDark
+                        titulo={"Contáctanos"}
+                        subtitulo={
+                            "Estamos listos para acompañarte en cada etapa del proceso académico."
+                        }
+                    />
                 </motion.div>
             </section>
 
@@ -85,7 +85,7 @@ export default function Contacto() {
                             />
                             <input
                                 className="w-full bg-gray-100 p-3 rounded-xl border border-gray-300 focus:border-red-500 focus:ring-1 focus:ring-red-400 outline-none transition"
-                                placeholder="Correo Electrónico"
+                                placeholder="Número de Teléfono"
                             />
                             <textarea
                                 rows="4"

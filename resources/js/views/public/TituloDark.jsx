@@ -2,7 +2,7 @@ import React from "react";
 
 export default function TituloDark({ titulo, subtitulo }) {
     return (
-        <div className="text-center mb-14">
+        <div className="text-center mb-10">
             <h2 className="text-4xl md:text-5xl font-extrabold tracking-tight">
                 {titulo}
             </h2>

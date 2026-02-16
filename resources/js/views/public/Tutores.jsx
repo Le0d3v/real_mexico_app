@@ -1,15 +1,22 @@
 import React from "react";
+import { motion } from "framer-motion";
 import Tittle from "../components/Tittle";
 import { Phone, Download, Smartphone } from "lucide-react";
 
 export default function Tutores() {
     return (
-        <section className="w-full bg-gray-50 py-10 px-6 md:px-20">
+        <section className="w-full bg-gray-100 py-16 px-6 md:px-20">
             <div className="max-w-7xl mx-auto">
                 <Tittle>Para los Padres y Tutores</Tittle>
 
                 {/* MENSAJE DEL DIRECTOR */}
-                <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mt-12 grid md:grid-cols-2 gap-12 items-center">
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="bg-white rounded-3xl shadow-xl p-10 md:p-14 mt-16 grid md:grid-cols-2 gap-12 items-center border border-gray-200"
+                >
                     <div>
                         <img
                             src="/img/director.jpg"
@@ -19,55 +26,58 @@ export default function Tutores() {
                     </div>
 
                     <div>
-                        <h2 className="text-3xl font-bold text-gray-900">
+                        <h2 className="text-3xl font-bold text-slate-800">
                             Mensaje del Director
                         </h2>
 
-                        <div className="w-16 h-1 bg-red-600 mt-3 mb-6 rounded-full"></div>
+                        <div className="w-16 h-1 bg-red-500 mt-3 mb-6 rounded-full"></div>
 
                         <p className="text-gray-600 leading-relaxed text-justify">
-                            En nuestro instituto, cada alumno es acompañado con
-                            atención, compromiso y profesionalismo. Creemos
-                            firmemente que la educación es un trabajo conjunto
-                            entre escuela y familia, fortaleciendo valores y
-                            excelencia académica.
+                            La formación integral de nuestros estudiantes es
+                            resultado del trabajo coordinado entre institución y
+                            familia. Fomentamos disciplina, valores y excelencia
+                            académica.
                         </p>
 
                         <p className="text-gray-600 leading-relaxed text-justify mt-4">
-                            Nuestra prioridad es brindar un entorno seguro,
-                            estructurado y humano donde cada estudiante pueda
-                            desarrollarse plenamente.
+                            Nuestro compromiso es ofrecer un entorno seguro,
+                            estructurado y humano que impulse el desarrollo
+                            pleno de cada alumno.
                         </p>
 
-                        <div className="flex items-center gap-3 mt-6 text-red-600 font-semibold">
+                        <button className="mt-6 flex items-center gap-2 text-red-500 font-semibold hover:text-red-600 transition">
                             <Phone size={18} />
                             Agenda una cita informativa
-                        </div>
+                        </button>
                     </div>
-                </div>
+                </motion.div>
 
-                {/* APP MOVIL */}
-                <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mt-16 grid md:grid-cols-2 gap-12 items-center">
+                {/* APP MOVIL — BLOQUE OSCURO PARA CONTRASTE */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="bg-slate-900 text-white rounded-3xl shadow-2xl p-10 md:p-14 mt-20 grid md:grid-cols-2 gap-12 items-center"
+                >
                     <div className="order-2 md:order-1">
-                        <h2 className="text-3xl font-bold text-gray-900">
+                        <h2 className="text-3xl font-bold">
                             Aplicación Móvil Institucional
                         </h2>
 
-                        <div className="w-16 h-1 bg-red-600 mt-3 mb-6 rounded-full"></div>
+                        <div className="w-16 h-1 bg-red-500 mt-3 mb-6 rounded-full"></div>
 
-                        <p className="text-gray-600 leading-relaxed text-justify">
-                            Manténgase informado en todo momento a través de
-                            nuestra aplicación oficial. Consulte avisos,
-                            calificaciones, comunicados y eventos desde su
-                            dispositivo móvil.
+                        <p className="text-slate-300 leading-relaxed text-justify">
+                            Consulte calificaciones, avisos y comunicados en
+                            tiempo real desde su dispositivo móvil. La
+                            comunicación directa fortalece el seguimiento
+                            académico.
                         </p>
 
-                        <div className="mt-6 flex gap-4">
-                            <button className="flex items-center gap-2 bg-red-600 text-white px-6 py-3 rounded-xl hover:bg-red-700 transition shadow-md cursor-pointer">
-                                <Smartphone size={18} />
-                                Descargar App
-                            </button>
-                        </div>
+                        <button className="mt-8 flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl transition shadow-lg">
+                            <Smartphone size={18} />
+                            Descargar App
+                        </button>
                     </div>
 
                     <div className="order-1 md:order-2">
@@ -77,10 +87,16 @@ export default function Tutores() {
                             className="rounded-2xl shadow-lg w-full object-cover"
                         />
                     </div>
-                </div>
+                </motion.div>
 
-                {/* LISTA DE UTILES */}
-                <div className="bg-white rounded-3xl shadow-xl p-8 md:p-12 mt-16 grid md:grid-cols-2 gap-12 items-center">
+                {/* LISTA DE ÚTILES — CLARO ELEGANTE */}
+                <motion.div
+                    initial={{ opacity: 0, y: 40 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6 }}
+                    viewport={{ once: true }}
+                    className="bg-white rounded-3xl shadow-xl p-10 md:p-14 mt-20 grid md:grid-cols-2 gap-12 items-center border border-gray-200"
+                >
                     <div>
                         <img
                             src="/img/fondo.webp"
@@ -90,38 +106,39 @@ export default function Tutores() {
                     </div>
 
                     <div>
-                        <h2 className="text-3xl font-bold text-gray-900">
+                        <h2 className="text-3xl font-bold text-slate-800">
                             Lista de Útiles Escolares
                         </h2>
 
-                        <div className="w-16 h-1 bg-red-600 mt-3 mb-6 rounded-full"></div>
+                        <div className="w-16 h-1 bg-yellow-500 mt-3 mb-6 rounded-full"></div>
 
                         <p className="text-gray-600 mb-6">
-                            Consulte y descargue la lista oficial de materiales
-                            escolares correspondiente al ciclo actual.
+                            Descargue la lista oficial correspondiente al ciclo
+                            escolar vigente.
                         </p>
 
-                        <ul className="space-y-2 text-gray-600">
-                            <li className="flex items-center gap-2">
-                                <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                                Cuadernos profesionales
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                                Lápices y colores
-                            </li>
-                            <li className="flex items-center gap-2">
-                                <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
-                                Material de trabajo específico por grado
-                            </li>
+                        <ul className="space-y-3 text-gray-600">
+                            {[
+                                "Cuadernos profesionales",
+                                "Lápices y colores",
+                                "Material específico por grado",
+                            ].map((item, index) => (
+                                <li
+                                    key={index}
+                                    className="flex items-center gap-3"
+                                >
+                                    <span className="w-2 h-2 bg-yellow-500 rounded-full"></span>
+                                    {item}
+                                </li>
+                            ))}
                         </ul>
 
-                        <button className="mt-8 flex items-center gap-2 bg-yellow-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-yellow-600 transition shadow-md cursor-pointer">
+                        <button className="mt-8 flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 text-white px-6 py-3 rounded-xl font-semibold transition shadow-md">
                             <Download size={18} />
                             Descargar Lista Completa
                         </button>
                     </div>
-                </div>
+                </motion.div>
             </div>
         </section>
     );
