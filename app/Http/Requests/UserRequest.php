@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class UserRequest extends FormRequest
 {
@@ -22,15 +23,23 @@ class UserRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "name" => "required|string",
-            "apellido_paterno" => "required|string",
-            "apellido_materno" => "required|string",
-            "fecha_nacimiento" => "required|date",
-            "curp" => "required|string|min:18|max:18",
-            "genero" => "required|string",
-            "email" => "required|email|unique:users,email",
-            "telefono" => "required|numeric|unique:users,telefono",
-        ];
+        "name" => "required|string",
+        "apellido_paterno" => "required|string",
+        "apellido_materno" => "required|string",
+        "fecha_nacimiento" => "required|date",
+        "curp" => "required|string|min:18|max:18",
+        "genero" => "required|string",
+        "email" => [
+            "required",
+            "email",
+            Rule::unique("users", "email")->ignore($this->route("id"))
+        ],
+        "telefono" => [
+            "required",
+            "numeric",
+            Rule::unique("users", "telefono")->ignore($this->route("id"))
+        ],
+    ];
     }
 
     public function messages()

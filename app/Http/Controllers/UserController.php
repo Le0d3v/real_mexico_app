@@ -20,6 +20,13 @@ class UserController extends Controller
     }
 
     public function update(UserRequest $request, $id) {
-    
+        $user = User::findOrFail($id);
+
+        $user->update($request->validated());
+
+        return response()->json([
+            "message" => "Usuario actualizado correctamente",
+            "user" => $user
+        ], 200);
     }
 }

@@ -17,20 +17,51 @@ export default function DatosPersonalesForm({ user }) {
     const [telefono, setTelefono] = useState("");
     const [email, setEmail] = useState("");
 
-    useEffect(() => {}, []);
+    useEffect(() => {
+        if (user) {
+            setName(user.name || "");
+            setApellidoPaterno(user.apellido_paterno || "");
+            setApellidoMaterno(user.apellido_materno || "");
+            setFechaNacimiento(user.fecha_nacimiento || "");
+            setCurp(user.curp || "");
+            setGenero(user.genero || "");
+            setTelefono(user.telefono || "");
+            setEmail(user.email || "");
+        }
+    }, [user]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setLoading(true);
 
-        const datos = {};
+        const datos = {
+            name,
+            apellido_paterno,
+            apellido_materno,
+            fecha_nacimiento,
+            curp: curp.toUpperCase(),
+            genero,
+            telefono,
+            email,
+        };
 
         try {
             const { data } = await api.put(
                 `/api/update-user/${user.id}`,
                 datos,
             );
+
+            toast.success("Datos actualizados correctamente ✅");
         } catch (error) {
+            if (error.response?.status === 422) {
+                const errors = error.response.data.errors;
+
+                Object.values(errors).forEach((msgArray) => {
+                    toast.error(msgArray[0]);
+                });
+            } else {
+                toast.error("Ocurrió un error inesperado.");
+            }
         } finally {
             setLoading(false);
         }
@@ -50,86 +81,32 @@ export default function DatosPersonalesForm({ user }) {
                 className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 mt-5"
                 onSubmit={handleSubmit}
             >
-                <div className="flex flex-col">
-                    <label className="text-gray-700 font-semibold text-lg mb-2">
-                        Nombre
-                    </label>
-                    <input
-                        type="text"
-                        className="h-12 px-4 rounded-xl border border-gray-300 
-                                       focus:outline-none focus:ring-3 
-                                       focus:ring-gray-500 focus:border-gray-300
-                                       text-lg transition bg-gray-600 text-white font-semibold"
-                        value={user.name}
-                        onChange={(e) => setName(e.target.value)}
-                    />
-                </div>
-                <div className="flex flex-col">
-                    <label className="text-gray-700 font-semibold text-lg mb-2">
-                        Apellido Paterno
-                    </label>
-                    <input
-                        type="text"
-                        className="h-12 px-4 rounded-xl border border-gray-300 
-                                       focus:outline-none focus:ring-3 
-                                       focus:ring-gray-500 focus:border-gray-300
-                                       text-lg transition bg-gray-600 text-white font-semibold"
-                        value={user.apellido_paterno}
-                        onChange={(e) => setApellidoPaterno(e.target.value)}
-                    />
-                </div>
-                <div className="flex flex-col">
-                    <label className="text-gray-700 font-semibold text-lg mb-2">
-                        Apellido Materno
-                    </label>
-                    <input
-                        type="text"
-                        className="h-12 px-4 rounded-xl border border-gray-300 
-                                       focus:outline-none focus:ring-3 
-                                       focus:ring-gray-500 focus:border-gray-300
-                                       text-lg transition bg-gray-600 text-white font-semibold"
-                        value={user.apellido_materno}
-                        onChange={(e) => setApellidoMaterno(e.target.value)}
-                    />
-                </div>
-                <div className="flex flex-col">
-                    <label className="text-gray-700 font-semibold text-lg mb-2">
-                        Fecha de Nacimiento
-                    </label>
-                    <input
-                        type="date"
-                        className="h-12 px-4 rounded-xl border border-gray-300 
-                                       focus:outline-none focus:ring-3 
-                                       focus:ring-gray-500 focus:border-gray-300
-                                       text-lg transition bg-gray-600 text-white font-semibold"
-                        value={user.fecha_nacimiento}
-                        onChange={(e) => setFechaNacimiento(e.target.value)}
-                    />
-                </div>
-                <div className="flex flex-col ">
-                    <label className="text-gray-700 font-semibold text-lg mb-2">
-                        CURP
-                    </label>
-                    <input
-                        type="text"
-                        className="h-12 px-4 rounded-xl border border-gray-300 
-                                       focus:outline-none focus:ring-3 
-                                       focus:ring-gray-500 focus:border-gray-300
-                                       text-lg tracking-widest uppercase transition bg-gray-600 text-white font-semibold"
-                        value={user.curp}
-                        onChange={(e) => setCurp(e.target.value)}
-                    />
-                </div>
+                <Input label="Nombre" value={name} onChange={setName} />
+                <Input
+                    label="Apellido Paterno"
+                    value={apellido_paterno}
+                    onChange={setApellidoPaterno}
+                />
+                <Input
+                    label="Apellido Materno"
+                    value={apellido_materno}
+                    onChange={setApellidoMaterno}
+                />
+                <Input
+                    type="date"
+                    label="Fecha de Nacimiento"
+                    value={fecha_nacimiento}
+                    onChange={setFechaNacimiento}
+                />
+                <Input label="CURP" value={curp} onChange={setCurp} />
+
                 <div className="flex flex-col">
                     <label className="text-gray-700 font-semibold text-lg mb-2">
                         Género
                     </label>
                     <select
-                        className="h-12 px-4 rounded-xl border border-gray-300 
-                                       focus:outline-none focus:ring-3 
-                                       focus:ring-gray-500 focus:border-gray-300
-                                       text-lg transition bg-gray-600 text-white font-semibold"
-                        value={user.genero}
+                        className="h-12 px-4 rounded-xl border border-gray-300 bg-gray-600 text-white font-semibold"
+                        value={genero}
                         onChange={(e) => setGenero(e.target.value)}
                     >
                         <option value="">Seleccione una opción</option>
@@ -139,43 +116,44 @@ export default function DatosPersonalesForm({ user }) {
                     </select>
                 </div>
 
-                <div className="flex flex-col">
-                    <label className="text-gray-700 font-semibold text-lg mb-2">
-                        Número de Teléfono
-                    </label>
-                    <input
-                        type="text"
-                        className="h-12 px-4 rounded-xl border border-gray-300 
-                                       focus:outline-none focus:ring-3 
-                                       focus:ring-gray-500 focus:border-gray-300
-                                       text-lg tracking-widest uppercase transition bg-gray-600 text-white font-semibold"
-                        value={user.telefono}
-                        onChange={(e) => setTelefono(e.target.value)}
-                    />
-                </div>
+                <Input
+                    label="Teléfono"
+                    value={telefono}
+                    onChange={setTelefono}
+                />
+                <Input
+                    label="Correo Electrónico"
+                    value={email}
+                    onChange={setEmail}
+                />
 
-                <div className="flex flex-col">
-                    <label className="text-gray-700 font-semibold text-lg mb-2">
-                        Correo Electrónico
-                    </label>
-                    <input
-                        type="text"
-                        className="h-12 px-4 rounded-xl border border-gray-300 
-                                       focus:outline-none focus:ring-3 
-                                       focus:ring-gray-500 focus:border-gray-300
-                                       text-lg tracking-widest transition bg-gray-600 text-white font-semibold"
-                        value={user.email}
-                        onChange={(e) => setEmail(e.target.value)}
-                    />
-                </div>
-
-                {/* Botón */}
                 <div className="w-full md:col-span-2">
                     <SubmitButton>
-                        {loading ? <ClipLoader /> : <p>Guardar Cambios</p>}
+                        {loading ? (
+                            <ClipLoader size={20} />
+                        ) : (
+                            <p>Guardar Cambios</p>
+                        )}
                     </SubmitButton>
                 </div>
             </form>
+        </div>
+    );
+}
+
+// Componente auxiliar
+function Input({ label, value, onChange, type = "text" }) {
+    return (
+        <div className="flex flex-col">
+            <label className="text-gray-700 font-semibold text-lg mb-2">
+                {label}
+            </label>
+            <input
+                type={type}
+                value={value}
+                onChange={(e) => onChange(e.target.value)}
+                className="h-12 px-4 rounded-xl border border-gray-300 bg-gray-600 text-white font-semibold"
+            />
         </div>
     );
 }
