@@ -25,18 +25,7 @@ class UserResource extends JsonResource
             "telefono" => $this->telefono,
             "rol" => $this->rol,
 
-            "domicilio" => $this->whenLoaded('domicilio', function () {
-                return [
-                    "calle" => $this->domicilio->calle,
-                    "numero_interior" => $this->domicilio->numero_interior,
-                    "numero_exterior" => $this->domicilio->numero_exterior,
-                    "colonia" => $this->domicilio->colonia,
-                    "localidad" => $this->domicilio->localidad,
-                    "municipio" => $this->domicilio->municipio,
-                    "entidad" => $this->domicilio->entidad,
-                    "cp" => $this->domicilio->cp,
-                ];
-            }),
+            "domicilio" => new DomicilioResource($this->domicilio),
 
             "tutor" => $this->when(
                 $this->esTutor() && $this->relationLoaded('tutor') && $this->tutor,

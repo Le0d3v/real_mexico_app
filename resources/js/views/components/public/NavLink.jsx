@@ -1,5 +1,14 @@
+import { useEffect } from "react";
+
 export default function NavLink({ children, index, page, setPage }) {
     const isActive = page === index;
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }, [page]);
 
     return (
         <div>

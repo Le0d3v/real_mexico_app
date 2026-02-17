@@ -20,7 +20,15 @@ class EstudianteResource extends JsonResource
             "apellido_paterno" => $this->apellido_paterno,
             "apellido_materno" => $this->apellido_materno,
             "fecha_nacimiento" => $this->fecha_nacimiento,
+            "curp" => $this->curp,
             "genero" => $this->genero,
+            "tipo_sangre" => $this->tipo_sangre,
+            "entidad_nacimiento" => $this->entidad_nacimiento,
+            "tipo_sangre" => $this->tipo_sangre,
+            "grado" => $this->grado->grado,
+            "grupo" => $this->grupo->grupo,
+            
+            "domicilio" => new DomicilioResource($this->domicilio)
         ];
     }
 }

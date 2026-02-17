@@ -1,4 +1,4 @@
-import React from "react";
+import { useEffect } from "react";
 
 export default function MobileNavLink({
     children,
@@ -13,6 +13,13 @@ export default function MobileNavLink({
         setPage(index);
         if (onClick) onClick();
     };
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth", // opcional: "auto" si no quieres animación
+        });
+    }, [page]);
 
     return (
         <button

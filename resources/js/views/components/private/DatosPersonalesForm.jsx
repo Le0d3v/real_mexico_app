@@ -5,7 +5,7 @@ import { toast } from "react-toastify";
 import api from "../../../config/axios";
 import { useEffect, useState } from "react";
 
-export default function DatosPersonalesForm({ user }) {
+export default function DatosPersonalesForm({ user, mutate }) {
     const [loading, setLoading] = useState(false);
 
     const [name, setName] = useState("");
@@ -47,11 +47,11 @@ export default function DatosPersonalesForm({ user }) {
 
         try {
             const { data } = await api.put(
-                `/api/update-user/${user.id}`,
+                `/api/user/update/${user.id}`,
                 datos,
             );
 
-            toast.success("Datos actualizados correctamente ✅");
+            toast.success("Datos actualizados correctamente");
         } catch (error) {
             if (error.response?.status === 422) {
                 const errors = error.response.data.errors;

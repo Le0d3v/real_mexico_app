@@ -6,7 +6,7 @@ import Loader from "../components/private/Loader";
 import PasswordForm from "../components/private/PasswordForm";
 
 export default function Settings() {
-    const { user } = useAuth({ middleware: "auth" });
+    const { user, mutate } = useAuth({ middleware: "auth" });
     if (!user) {
         return <Loader />;
     }

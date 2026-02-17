@@ -67,7 +67,9 @@ export default function AdminLayout() {
                                     <ClipLoader color="white" size={20} />
                                 ) : (
                                     <p className="text-sm text-white dark:text-gray-300">
-                                        {user.name}
+                                        {user.name +
+                                            " " +
+                                            user.apellido_paterno}
                                     </p>
                                 )}
                             </div>
