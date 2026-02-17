@@ -1,38 +1,49 @@
 import React from "react";
 
 export default function Cuadros() {
+    const stats = [
+        { value: "30+", label: "Años de Experiencia" },
+        { value: "850+", label: "Alumnos Activos" },
+        { value: "45", label: "Docentes Certificados" },
+        { value: "99%", label: "Satisfacción" },
+    ];
+
     return (
-        <div className="w-full md:p-5 p-3">
-            <div className="flex justify-start md:justify-center w-full">
-                <div className="w-full grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-5 ">
-                    <div className="py-5 px-10 bg-black font-bold text-white">
-                        <h1 className="text-7xl font-black text-center">30+</h1>
-                        <p className="text-xl uppercase mt-3 text-center">
-                            Años de Experiencia
-                        </p>
-                    </div>
-                    <div className="py-5 px-10 bg-black font-bold text-white">
-                        <h1 className="text-7xl font-black text-center">
-                            850+
-                        </h1>
-                        <p className="text-xl uppercase mt-3 text-center">
-                            Alumnos Activos
-                        </p>
-                    </div>
-                    <div className="py-5 px-5 bg-black font-bold text-white">
-                        <h1 className="text-7xl font-black text-center">45</h1>
-                        <p className="text-xl uppercase mt-3 text-center">
-                            Docentes Certificados
-                        </p>
-                    </div>
-                    <div className="py-5 px-10 bg-black font-bold text-white">
-                        <h1 className="text-7xl font-black text-center">99%</h1>
-                        <p className="text-xl uppercase mt-3 text-center">
-                            Satisfacción
-                        </p>
-                    </div>
+        <section className="relative py-24 bg-gradient-to-b from-black to-[#111111]">
+            <div className="max-w-7xl mx-auto px-6">
+                {/* Grid */}
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    {stats.map((stat, index) => (
+                        <div
+                            key={index}
+                            className="group relative bg-[#161616] border border-yellow-400/10 
+                            rounded-2xl p-10 text-center
+                            transition-all duration-300
+                            hover:border-yellow-400/40 hover:shadow-[0_0_25px_rgba(250,204,21,0.15)]
+                            hover:-translate-y-2"
+                        >
+                            {/* Número */}
+                            <h2
+                                className="text-6xl md:text-7xl font-extrabold 
+                                           text-yellow-400 tracking-tight"
+                            >
+                                {stat.value}
+                            </h2>
+
+                            {/* Línea decorativa */}
+                            <div className="w-12 h-1 bg-yellow-400 mx-auto my-4 rounded-full"></div>
+
+                            {/* Texto */}
+                            <p
+                                className="text-sm md:text-base uppercase tracking-widest 
+                                          text-gray-300 font-semibold"
+                            >
+                                {stat.label}
+                            </p>
+                        </div>
+                    ))}
                 </div>
             </div>
-        </div>
+        </section>
     );
 }

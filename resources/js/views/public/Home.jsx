@@ -11,6 +11,7 @@ import {
 } from "lucide-react";
 import IconContainer from "../components/public/IconContainer";
 import Cuadros from "../components/public/Cuadros";
+import { motion } from "framer-motion";
 
 export default function Home() {
     return (
@@ -70,53 +71,73 @@ export default function Home() {
                 </div>
             </div>
 
-            <div className="p-5 bg-white">
-                <Tittle>¿Por Qué Elegirnos?</Tittle>
-                <div className="mt-5 p-5">
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10">
-                        <IconContainer
-                            icon={ShieldCheck}
-                            tittle={"Instalaciones Seguras"}
-                        >
-                            Contamos con espacios diseñados bajo criterios de
-                            seguridad y supervisión constante, garantizando
-                            entornos limpios, controlados y adecuados para el
-                            desarrollo físico y emocional de nuestros alumnos.
-                        </IconContainer>
-                        <IconContainer
-                            icon={UserCheck}
-                            tittle={"Personal Certificado"}
-                        >
-                            Nuestro equipo docente y administrativo cuenta con
-                            la formación académica y certificaciones necesarias,
-                            asegurando una educación de calidad basada en
-                            profesionalismo, vocación y compromiso con cada
-                            alumno.
-                        </IconContainer>
-                        <IconContainer
-                            icon={BookOpenText}
-                            tittle={"Métodos Constructivistas"}
-                        >
-                            Aplicamos metodologías constructivistas que
-                            promueven el aprendizaje activo, fomentando el
-                            pensamiento crítico, la participación y el
-                            desarrollo integral de cada alumno a partir de su
-                            experiencia y entorno.
-                        </IconContainer>
-                        <IconContainer
-                            icon={Computer}
-                            tittle={"Uso de Tecnología"}
-                        >
-                            Integramos la tecnología como una herramienta
-                            educativa que fortalece el aprendizaje, promoviendo
-                            el uso responsable, guiado y adecuado a la edad para
-                            potenciar las habilidades académicas y digitales de
-                            nuestros alumnos.
-                        </IconContainer>
+            <div className="relative py-20 bg-gradient-to-b from-white to-gray-50">
+                <div className="max-w-7xl mx-auto px-6">
+                    <div className="text-center max-w-3xl mx-auto">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                            ¿Por Qué{" "}
+                            <span className="text-yellow-500">Elegirnos?</span>
+                        </h2>
+                        <p className="mt-4 text-gray-600 text-lg">
+                            Formamos alumnos con valores, conocimiento y
+                            herramientas para un futuro sólido, en un entorno
+                            seguro y profesional.
+                        </p>
                     </div>
+                    <motion.div
+                        initial={{ opacity: 0, y: 30 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.6 }}
+                    >
+                        <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                            <IconContainer
+                                icon={ShieldCheck}
+                                title="Instalaciones Seguras"
+                            >
+                                Contamos con espacios diseñados bajo criterios
+                                de seguridad y supervisión constante,
+                                garantizando entornos adecuados para el
+                                desarrollo integral.
+                            </IconContainer>
+
+                            <IconContainer
+                                icon={UserCheck}
+                                title="Personal Certificado"
+                            >
+                                Nuestro equipo cuenta con formación académica y
+                                certificaciones que respaldan una educación
+                                profesional y comprometida.
+                            </IconContainer>
+
+                            <IconContainer
+                                icon={BookOpenText}
+                                title="Métodos Constructivistas"
+                            >
+                                Aplicamos metodologías activas que promueven
+                                pensamiento crítico y aprendizaje significativo.
+                            </IconContainer>
+
+                            <IconContainer
+                                icon={Computer}
+                                title="Uso de Tecnología"
+                            >
+                                Integramos herramientas digitales como apoyo
+                                pedagógico, fomentando habilidades académicas y
+                                tecnológicas.
+                            </IconContainer>
+                        </div>
+                    </motion.div>
                 </div>
             </div>
-            <Cuadros />
+
+            <motion.div
+                initial={{ opacity: 0, y: 40 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+                viewport={{ once: true }}
+            >
+                <Cuadros />
+            </motion.div>
             <div className="">
                 <Tittle>¡Visita nuestras Instalaciones!</Tittle>
                 <div className="w-full h-96 my-5">

@@ -25,7 +25,7 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
         setErrors([]);
 
         try {
-            const { data } = await api.post("/api/login", {
+            const { data } = await api.post("/api/auth-login", {
                 email,
                 password,
             });

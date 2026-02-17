@@ -20,17 +20,23 @@ export default function Blog() {
     return (
         <div>
             <Tittle>¡Conoce Nuestras Últimas Novedades!</Tittle>
-            <div className="p-3 md:px-44">
-                {posts.map((post) => (
-                    <Post
-                        imagen={`${api.defaults.baseURL}/storage/${post.multimedia}`}
-                        titulo={post.titulo}
-                        fecha={post.fecha}
-                    >
-                        {post.descripcion}
-                    </Post>
-                ))}
-            </div>
+            {posts.length == 0 ? (
+                <p className="text-center font-semibold my-5 uppercase text-3xl">
+                    Sin Noticias
+                </p>
+            ) : (
+                <div className="p-3 md:px-44">
+                    {posts.map((post) => (
+                        <Post
+                            imagen={`${api.defaults.baseURL}/storage/${post.multimedia}`}
+                            titulo={post.titulo}
+                            fecha={post.fecha}
+                        >
+                            {post.descripcion}
+                        </Post>
+                    ))}
+                </div>
+            )}
         </div>
     );
 }
