@@ -99,8 +99,8 @@ export default function News() {
                             placeholder="Buscar publicación..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
-                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-emerald-300 bg-gray-50
-                            focus:bg-white focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500
+                            className="w-full pl-12 pr-4 py-3 rounded-xl border border-red-300 bg-gray-50
+                            focus:bg-white focus:ring-2 focus:ring-red-400 focus:border-red-400
                             outline-none transition text-gray-700"
                         />
                     </div>
@@ -112,7 +112,7 @@ export default function News() {
                         <select
                             value={filter}
                             onChange={(e) => setFilter(e.target.value)}
-                            className="px-4 py-3 rounded-xl border border-blue-500 bg-blue-400 text-white
+                            className="px-4 py-3 rounded-xl border border-yellow-500 bg-yellow-400 text-black
                             focus:ring-2 focus:ring-white focus:border-white outline-none transition"
                         >
                             <option value="all">Sin Orden</option>

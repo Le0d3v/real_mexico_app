@@ -251,16 +251,6 @@ export default function Contacto() {
                     </div>
                 </div>
             </section>
-
-            {/* BOTÓN FLOTANTE WHATSAPP */}
-            <a
-                href="https://wa.me/522212228893"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="fixed bottom-6 right-6 bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-xl transition animate-pulse"
-            >
-                <PhoneCall size={24} />
-            </a>
         </>
     );
 }

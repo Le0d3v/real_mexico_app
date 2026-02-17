@@ -46,4 +46,9 @@ class Estudiante extends Model
             'tutor_id'
         )->withTimestamps();
     }
+
+    public function colegiaturas()
+    {
+        return $this->hasMany(Colegiatura::class);
+    }
 }

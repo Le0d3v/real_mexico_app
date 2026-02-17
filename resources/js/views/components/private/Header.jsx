@@ -25,69 +25,36 @@ export default function Header({ index }) {
     };
 
     return (
-        <>
-            <header
-                className="bg-black/80 text-white border-b-2 border-yellow-400"
-                id="header"
-            >
-                <div className="flex items-center justify-between h-16 px-6 flex-1">
-                    <div className="flex items-center justify-between md:w-auto w-full">
-                        <div className="flex gap-2 items-center">
-                            <div className="block md:hidden">
-                                <div className="flex gap-2 items-center">
-                                    <img
-                                        src="/img/logo.png"
-                                        alt="imagen-logo"
-                                        className="w-12"
-                                    />
-                                    <h1 className="text-3xl font-black">IRM</h1>
-                                </div>
-                            </div>
-                            <h1 className="text-md md:text-[45px] hidden md:block font-black">
-                                {titulo}
-                            </h1>
-                        </div>
-                        <div>
-                            <button
-                                className="md:hidden text-black mr-4 hover:cursor-pointer"
-                                onClick={toggleMenu}
-                            >
-                                <Menu className="w-10 h-10" />
-                            </button>
-                        </div>
-                    </div>
-                    <div className="md:flex items-center space-x-8 hidden">
-                        <div className="flex gap-5 items-center"></div>
-                        <div className="flex items-center">
-                            <button
-                                className="flex items-center justify-center gap-1 text-sm bg-yellow-500 rounded-lg text-white font-bold hover:bg-yellow-600 p-2 transition hover:-translate-y-1 cursor-pointer w-36"
-                                disabled={cargando}
-                                id="boton-cerrar-sesion"
-                                onClick={hanldeClicLogout}
-                            >
-                                {cargando ? (
-                                    <ClipLoader
-                                        color="#ffffff"
-                                        size={20}
-                                        className="m-0"
-                                    />
-                                ) : (
-                                    <>
-                                        <p>Cerrar Sesión</p>
-                                        <LogOut className="w-5" />
-                                    </>
-                                )}
-                            </button>
-                        </div>
-                    </div>
+        <header className="bg-black text-white shadow-md border-b border-yellow-500/40">
+            <div className="flex items-center justify-between h-18 px-8">
+                <div className="flex items-center gap-4">
+                    <button
+                        className="md:hidden text-white hover:text-yellow-400 transition"
+                        onClick={toggleMenu}
+                    >
+                        <Menu className="w-8 h-8" />
+                    </button>
+
+                    <h1 className="text-lg md:text-3xl font-bold tracking-wide text-yellow-400">
+                        {titulo}
+                    </h1>
                 </div>
-            </header>
-            {/* Renderiza ResponsiveMenu fuera del botón */}
-            <ResponsiveMenu
-                isOpen={isMenuOpen}
-                closeMenu={closeMenu}
-                index={index}
-            />
-        </>
+
+                <button
+                    className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 px-5 py-2 rounded-lg font-semibold transition duration-200 disabled:opacity-70 cursor-pointer"
+                    disabled={cargando}
+                    onClick={hanldeClicLogout}
+                >
+                    {cargando ? (
+                        <ClipLoader size={18} color="white" />
+                    ) : (
+                        <>
+                            <span>Cerrar sesión</span>
+                            <LogOut className="w-4 h-4" />
+                        </>
+                    )}
+                </button>
+            </div>
+        </header>
     );
 }

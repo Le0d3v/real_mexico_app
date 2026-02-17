@@ -15,14 +15,10 @@ import Loader from "../components/private/Loader";
 import { ClipLoader } from "react-spinners";
 
 export default function AdminLayout() {
-    const { loading, user, setUser } = useAuth({ middleware: "auth" });
-
-    console.log(user);
+    const { loading, user } = useAuth({ middleware: "auth" });
+    const [page, setPage] = useState(0);
 
     const initial = user?.name ? user.name.trim().charAt(0).toUpperCase() : "";
-
-    const mediaQuery = window.matchMedia("(max-width: 768px)");
-    const [page, setPage] = useState(0);
 
     const pages = [
         <Dashboard />,
@@ -35,62 +31,56 @@ export default function AdminLayout() {
 
     return (
         <>
-            <div className="h-screen flex">
-                <div className="fixed bg-red-700 inset-y-0 left-0 z-50 w-16 lg:w-44 transform transition-all duration-300 ease-in-out lg:translate-x-0 lg:static lg:inset-0 text-white hidden md:block">
-                    <div className="flex items-center justify-center lg:justify-start h-16 px-4 bg-red-700 w-full">
-                        <div className="w-40 h-40 mx-auto my-auto mt-1">
-                            <img
-                                src={"/img/logo.png"}
-                                className="w-28 mx-auto"
-                                alt="imagen-logo"
-                            />
-                        </div>
+            <div className="h-screen flex bg-gray-100">
+                {/* SIDEBAR */}
+                <aside className="hidden md:flex flex-col w-20 lg:w-52 bg-red-800 text-white shadow-xl">
+                    {/* Logo */}
+                    <div className="h-20 flex items-center justify-center border-b border-yellow-500/30">
+                        <img
+                            src="/img/logo.png"
+                            className="w-14 lg:w-20 transition-all"
+                            alt="logo"
+                        />
                     </div>
 
-                    <Navigation index="1" setPage={setPage} page={page} />
-                    <div className="absolute bottom-5 left-2 right-2">
-                        <div
-                            className="flex items-center justify-center lg:justify-start p-3 rounded-lg"
-                            id="layout-user"
-                        >
-                            <div className="w-8 h-8 bg-amber-400 rounded-full flex items-center justify-center">
+                    {/* Navigation */}
+                    <div className="flex-1 px-3 py-3">
+                        <Navigation index="1" setPage={setPage} page={page} />
+                    </div>
+
+                    {/* User */}
+                    <div className="p-4 border-t border-yellow-500/20">
+                        <div className="flex items-center gap-3 bg-red-700/60 p-3 rounded-lg hover:bg-red-700 transition">
+                            <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center font-bold text-black">
                                 {loading ? (
-                                    <ClipLoader size={15} color="black" />
+                                    <ClipLoader size={16} color="black" />
                                 ) : (
-                                    <span className="text-black font-bold text-lg">
-                                        {initial}
-                                    </span>
+                                    initial
                                 )}
                             </div>
-                            <div className="ml-3 hidden lg:block">
+                            <div className="hidden lg:block text-sm font-medium">
                                 {loading ? (
-                                    <ClipLoader color="white" size={20} />
+                                    <ClipLoader size={15} color="white" />
                                 ) : (
-                                    <p className="text-sm text-white dark:text-gray-300">
-                                        {user.name +
-                                            " " +
-                                            user.apellido_paterno}
-                                    </p>
+                                    `${user.name} ${user.apellido_paterno}`
                                 )}
                             </div>
                         </div>
                     </div>
-                </div>
-                <div className="flex-1 flex flex-col overflow-hidden">
+                </aside>
+
+                {/* CONTENT */}
+                <div className="flex-1 flex flex-col">
                     <Header index="1" />
-                    <main
-                        className=" text-black flex-1 overflow-auto  
-                        p-2 md:p-3 max-w-auto bg-gray-200"
-                    >
-                        <div
-                            className="bg-white text-black  h-full rounded p-1 md:p-3 max-w-auto md:ml-16 lg:ml-0 overflow-y-scroll shadow-lg"
-                            id="admin-outlet"
-                        >
+
+                    <main className="flex-1 p-3 overflow-auto bg-gray-100">
+                        <div className="bg-white rounded-2xl shadow-md p-6 min-h-full">
                             {loading ? <Loader /> : pages[page]}
                         </div>
                     </main>
                 </div>
             </div>
+
             <ToastContainer />
         </>
     );

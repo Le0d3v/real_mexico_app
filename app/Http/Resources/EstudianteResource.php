@@ -28,7 +28,11 @@ class EstudianteResource extends JsonResource
             "grado" => $this->grado->grado,
             "grupo" => $this->grupo->grupo,
             
-            "domicilio" => new DomicilioResource($this->domicilio)
+            "domicilio" => new DomicilioResource($this->domicilio),
+
+            "colegiaturas" => ColegiaturaResource::collection(
+                $this->whenLoaded('colegiaturas')
+            ),
         ];
     }
 }

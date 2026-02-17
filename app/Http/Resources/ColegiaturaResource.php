@@ -4,10 +4,8 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
-use App\Http\Resources\EstudianteResource;
 
-
-class TutorResource extends JsonResource
+class ColegiaturaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -17,12 +15,12 @@ class TutorResource extends JsonResource
     public function toArray(Request $request): array
     {
         return [
-            "ocupacion" => $this->ocupacion,
-            "nivel_estudios" => $this->nivel_estudios,
-
-            "estudiantes" => EstudianteResource::collection(
-                $this->whenLoaded('estudiantes')
-            ),
+            "id" => $this->id,
+            "mes" => $this->mes,
+            "anio" => $this->anio,
+            "monto" => $this->monto,
+            "estado" => $this->estado,
+            "fecha_limite_pago" => $this->fecha_limite_pago,
         ];
     }
 }

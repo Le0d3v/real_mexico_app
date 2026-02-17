@@ -1,4 +1,3 @@
-import { NavLink } from "react-router-dom";
 import {
     Home,
     Globe,
@@ -8,15 +7,14 @@ import {
     CircleDollarSign,
 } from "lucide-react";
 import NavItem from "./NavItem";
-import useAuth from "../../../hooks/useAuth";
 import useIRM from "../../../hooks/useIRM";
 
 export default function Navigation({ index, closeMenu, setPage, page }) {
     const { setTitulo } = useIRM();
     return (
-        <nav className="md:mt-15 px-2" id="navegacion">
-            <div className="hidden lg:block mt-5">
-                <p className="text-sm text-white text-center transition-colors mt-7">
+        <nav className="md:mt-12 px-2" id="navegacion">
+            <div className="hidden lg:block mt-1 mb-3">
+                <p className="text-sm text-white text-center transition-colors mt-3">
                     Navegación
                 </p>
             </div>

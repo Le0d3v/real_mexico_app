@@ -2,18 +2,21 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Estudiante;
+use App\Http\Resources\UserCollection;
+use App\Models\User;
 use Illuminate\Http\Request;
 
-class EstudianteController extends Controller
+class TutorController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        $estudiantes = Estudiante::with('colegiaturas')->get();
-        return $estudiantes;
+       return new UserCollection( User::where("rol", "tutor")->with([
+            "domicilio", 
+            'tutor.estudiantes'
+        ])->get());
     }
 
     /**
