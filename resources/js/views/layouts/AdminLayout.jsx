@@ -29,6 +29,10 @@ export default function AdminLayout() {
         <Settings />,
     ];
 
+    if (!user) {
+        return null;
+    }
+
     return (
         <>
             <div className="h-screen flex bg-gray-100">
@@ -42,13 +46,9 @@ export default function AdminLayout() {
                             alt="logo"
                         />
                     </div>
-
-                    {/* Navigation */}
                     <div className="flex-1 px-3 py-3">
                         <Navigation index="1" setPage={setPage} page={page} />
                     </div>
-
-                    {/* User */}
                     <div className="p-4 border-t border-yellow-500/20">
                         <div className="flex items-center gap-3 bg-red-700/60 p-3 rounded-lg hover:bg-red-700 transition">
                             <div className="w-10 h-10 bg-yellow-400 rounded-full flex items-center justify-center font-bold text-black">
@@ -68,13 +68,11 @@ export default function AdminLayout() {
                         </div>
                     </div>
                 </aside>
-
-                {/* CONTENT */}
                 <div className="flex-1 flex flex-col">
                     <Header index="1" />
 
-                    <main className="flex-1 p-3 overflow-auto bg-gray-100">
-                        <div className="bg-white rounded-2xl shadow-md p-6 min-h-full">
+                    <main className="flex-1 p-3 overflow-auto bg-white">
+                        <div className="bg-gray-100 rounded-2xl shadow-md p-6 min-h-full">
                             {loading ? <Loader /> : pages[page]}
                         </div>
                     </main>
