@@ -1,10 +1,16 @@
 import { useState, useMemo, useEffect } from "react";
 import useTutor from "../../hooks/useTutor";
 import Loader from "../components/private/Loader";
+import Modal from "../components/private/Modal";
+import { Eye } from "lucide-react";
+import ShowTutor from "../components/private/ShowTutor";
 
 export default function Tutores() {
+    const [open, setOpen] = useState(false);
     const [search, setSearch] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
+    const [selectedTutor, setSelectedTutor] = useState(null);
+
     const itemsPerPage = 10;
 
     const { tutores = [], isLoading, error } = useTutor();
@@ -54,162 +60,177 @@ export default function Tutores() {
     if (error) return <p>Error al cargar tutores</p>;
 
     return (
-        <div className="p-3 min-h-screen">
-            <div className="flex justify-between items-center mb-6">
-                <div>
-                    <h1 className="text-3xl font-bold text-gray-800">
-                        Administración de Tutores
-                    </h1>
-                    <p className="text-gray-500">
-                        Gestión de responsables legales de los alumnos
-                    </p>
-                </div>
+        <>
+            <div className="p-3 min-h-screen">
+                <div className="flex justify-between items-center mb-6">
+                    <div>
+                        <h1 className="text-3xl font-bold text-gray-800">
+                            Administración de Tutores
+                        </h1>
+                        <p className="text-gray-500">
+                            Gestión de responsables legales de los alumnos
+                        </p>
+                    </div>
 
-                <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow transition cursor-pointer">
-                    + Nuevo Tutor
-                </button>
-            </div>
-            <div className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200">
-                <div className="flex gap-4 flex-wrap">
-                    <input
-                        type="text"
-                        placeholder="Buscar por nombre, teléfono o correo..."
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                    />
+                    <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow transition cursor-pointer">
+                        + Nuevo Tutor
+                    </button>
                 </div>
-            </div>
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                <table className="w-full text-left">
-                    <thead className="bg-black text-yellow-400">
-                        <tr>
-                            <th className="px-6 py-3">Nombre</th>
-                            <th className="px-6 py-3">Teléfono</th>
-                            <th className="px-6 py-3">Correo</th>
-                            <th className="px-6 py-3 text-center">Alumnos</th>
-                            <th className="px-6 py-3 text-center">Estado</th>
-                            <th className="px-6 py-3 text-center">Acciones</th>
-                        </tr>
-                    </thead>
-
-                    <tbody>
-                        {paginatedTutores.length === 0 ? (
+                <div className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200">
+                    <div className="flex gap-4 flex-wrap">
+                        <input
+                            type="text"
+                            placeholder="Buscar por nombre, teléfono o correo..."
+                            value={search}
+                            onChange={(e) => setSearch(e.target.value)}
+                            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        />
+                    </div>
+                </div>
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                    <table className="w-full text-left">
+                        <thead className="bg-black text-yellow-400">
                             <tr>
-                                <td
-                                    colSpan="6"
-                                    className="text-center py-6 text-gray-500"
-                                >
-                                    No se encontraron registros
-                                </td>
+                                <th className="px-6 py-3">Nombre</th>
+                                <th className="px-6 py-3">Teléfono</th>
+                                <th className="px-6 py-3">Correo</th>
+                                <th className="px-6 py-3 text-center">
+                                    Alumnos
+                                </th>
+                                <th className="px-6 py-3 text-center">
+                                    Acciones
+                                </th>
                             </tr>
-                        ) : (
-                            paginatedTutores.map((tutor) => (
-                                <tr
-                                    key={tutor.id}
-                                    className="border-t border-t-gray-200 hover:bg-gray-200 transition"
-                                >
-                                    <td className="px-6 py-4 font-medium text-gray-800">
-                                        {tutor.name} {tutor.apellido_paterno}
-                                    </td>
+                        </thead>
 
-                                    <td className="px-6 py-4 text-gray-600">
-                                        {tutor.telefono}
-                                    </td>
-
-                                    <td className="px-6 py-4 text-gray-600">
-                                        {tutor.email}
-                                    </td>
-
-                                    <td className="px-6 py-4 text-center font-semibold">
-                                        {tutor?.tutor?.estudiantes?.length || 0}
-                                    </td>
-
-                                    <td className="px-6 py-4 text-center">
-                                        <span
-                                            className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                                                tutor.estado === "Activo"
-                                                    ? "bg-green-100 text-green-700"
-                                                    : "bg-red-100 text-red-700"
-                                            }`}
-                                        >
-                                            {tutor.estado}
-                                        </span>
-                                    </td>
-
-                                    <td className="px-6 py-4 text-center">
-                                        <div className="flex justify-center gap-2">
-                                            <button className="px-3 py-1 text-sm rounded-md bg-gray-200 hover:bg-gray-300 transition">
-                                                Ver
-                                            </button>
-                                            <button className="px-3 py-1 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 transition">
-                                                Editar
-                                            </button>
-                                        </div>
+                        <tbody>
+                            {paginatedTutores.length === 0 ? (
+                                <tr>
+                                    <td
+                                        colSpan="6"
+                                        className="text-center py-6 text-gray-500"
+                                    >
+                                        No se encontraron registros
                                     </td>
                                 </tr>
-                            ))
-                        )}
-                    </tbody>
-                </table>
-                <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-6 py-4 border-t bg-gray-50 rounded-b-2xl">
-                    <p className="text-sm text-gray-500 font-medium">
-                        Página{" "}
-                        <span className="font-semibold text-gray-800">
-                            {currentPage}
-                        </span>{" "}
-                        de{" "}
-                        <span className="font-semibold text-gray-800">
-                            {totalPages}
-                        </span>
-                    </p>
+                            ) : (
+                                paginatedTutores.map((tutor) => (
+                                    <tr
+                                        key={tutor.id}
+                                        className="border-t border-t-gray-200 hover:bg-gray-200 transition"
+                                    >
+                                        <td className="px-6 py-4 font-medium text-gray-800">
+                                            {tutor.name}{" "}
+                                            {tutor.apellido_paterno}
+                                        </td>
 
-                    <div className="flex items-center gap-2">
-                        {/* Botón Anterior */}
-                        <button
-                            disabled={currentPage === 1}
-                            onClick={() => setCurrentPage((prev) => prev - 1)}
-                            className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 shadow-sm 
-                       hover:bg-gray-100 hover:shadow transition-all duration-200
-                       disabled:opacity-40 disabled:cursor-not-allowed"
-                        >
-                            ←
-                        </button>
+                                        <td className="px-6 py-4 text-gray-600">
+                                            {tutor.telefono}
+                                        </td>
 
-                        {/* Números dinámicos */}
-                        {Array.from({ length: totalPages }, (_, i) => {
-                            const pageNumber = i + 1;
-                            const isActive = currentPage === pageNumber;
+                                        <td className="px-6 py-4 text-gray-600">
+                                            {tutor.email}
+                                        </td>
 
-                            return (
-                                <button
-                                    key={pageNumber}
-                                    onClick={() => setCurrentPage(pageNumber)}
-                                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm
-                        ${
-                            isActive
-                                ? "bg-yellow-400 text-black shadow-md scale-105"
-                                : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
-                        }`}
-                                >
-                                    {pageNumber}
-                                </button>
-                            );
-                        })}
+                                        <td className="px-6 py-4 text-center font-semibold">
+                                            {tutor?.tutor?.estudiantes
+                                                ?.length || 0}
+                                        </td>
 
-                        {/* Botón Siguiente */}
-                        <button
-                            disabled={currentPage === totalPages}
-                            onClick={() => setCurrentPage((prev) => prev + 1)}
-                            className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 shadow-sm 
-                       hover:bg-gray-100 hover:shadow transition-all duration-200
-                       disabled:opacity-40 disabled:cursor-not-allowed"
-                        >
-                            →
-                        </button>
+                                        <td className="px-6 py-4 text-center">
+                                            <div className="flex justify-center gap-2">
+                                                <button
+                                                    className="px-3 py-1 text-sm rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black cursor-pointer font-semibold"
+                                                    onClick={() => {
+                                                        setSelectedTutor(tutor);
+                                                        setOpen(true);
+                                                    }}
+                                                >
+                                                    Ver Más
+                                                </button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                ))
+                            )}
+                        </tbody>
+                    </table>
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-6 py-4 border-t bg-gray-50 rounded-b-2xl">
+                        <p className="text-sm text-gray-500 font-medium">
+                            Página{" "}
+                            <span className="font-semibold text-gray-800">
+                                {currentPage}
+                            </span>{" "}
+                            de{" "}
+                            <span className="font-semibold text-gray-800">
+                                {totalPages}
+                            </span>
+                        </p>
+
+                        <div className="flex items-center gap-2">
+                            {/* Botón Anterior */}
+                            <button
+                                disabled={currentPage === 1}
+                                onClick={() =>
+                                    setCurrentPage((prev) => prev - 1)
+                                }
+                                className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 shadow-sm 
+                           hover:bg-gray-100 hover:shadow transition-all duration-200
+                           disabled:opacity-40 disabled:cursor-not-allowed"
+                            >
+                                ←
+                            </button>
+
+                            {/* Números dinámicos */}
+                            {Array.from({ length: totalPages }, (_, i) => {
+                                const pageNumber = i + 1;
+                                const isActive = currentPage === pageNumber;
+
+                                return (
+                                    <button
+                                        key={pageNumber}
+                                        onClick={() =>
+                                            setCurrentPage(pageNumber)
+                                        }
+                                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm cursor-pointer
+                            ${
+                                isActive
+                                    ? "bg-yellow-400 text-black shadow-md scale-105"
+                                    : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
+                            }`}
+                                    >
+                                        {pageNumber}
+                                    </button>
+                                );
+                            })}
+
+                            {/* Botón Siguiente */}
+                            <button
+                                disabled={currentPage === totalPages}
+                                onClick={() =>
+                                    setCurrentPage((prev) => prev + 1)
+                                }
+                                className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 shadow-sm 
+                                hover:bg-gray-100 hover:shadow transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
+                            >
+                                →
+                            </button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
+            <Modal
+                isOpen={open}
+                icon={<Eye className="w-12 h-12" />}
+                onClose={() => {
+                    setOpen(false);
+                    setSelectedTutor(null);
+                }}
+                size="full"
+                title="Ver Información del Tutor"
+            >
+                {selectedTutor && <ShowTutor tutor={selectedTutor} />}
+            </Modal>
+        </>
     );
 }
