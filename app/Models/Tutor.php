@@ -28,7 +28,12 @@ class Tutor extends Model
             'estudiantes_tutores',
             'tutor_id',          // FK del tutor en la pivote
             'estudiante_id'      // FK del estudiante en la pivote
-        )->withTimestamps();
+        )
+        ->withPivot([
+            'parentesco',
+            'responsable_pagos',
+            'contacto_principal'
+        ]);
     }
 
     public function pagos()

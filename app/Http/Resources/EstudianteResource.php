@@ -30,6 +30,14 @@ class EstudianteResource extends JsonResource
             
             "domicilio" => new DomicilioResource($this->domicilio),
 
+            "relacion" => $this->whenPivotLoaded('estudiantes_tutores', function () {
+                return [
+                    "parentesco" => $this->pivot->parentesco,
+                    "responsable_pagos" => (bool) $this->pivot->responsable_pagos,
+                    "contacto_principal" => (bool) $this->pivot->contacto_principal,
+                ];
+            }),
+
             "colegiaturas" => ColegiaturaResource::collection(
                 $this->whenLoaded('colegiaturas')
             ),

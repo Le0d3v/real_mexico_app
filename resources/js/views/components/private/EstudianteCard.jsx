@@ -48,6 +48,60 @@ export default function EstudianteCard({ estudiante }) {
                     </span>
                 </div>
             </div>
+            {/* Información de Relación */}
+            <div className="border-t border-indigo-100 pt-5 space-y-4">
+                <h3 className="text-sm font-semibold text-gray-600 tracking-wide text-center">
+                    Información de Relación
+                </h3>
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    {/* Parentesco */}
+                    <div className="bg-indigo-50 border border-indigo-100 rounded-xl p-4 text-center">
+                        <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                            Parentesco
+                        </p>
+                        <p className="font-semibold text-indigo-700">
+                            {estudiante.relacion?.parentesco || "—"}
+                        </p>
+                    </div>
+
+                    {/* Responsable de Pagos */}
+                    <div className="bg-emerald-50 border border-emerald-100 rounded-xl p-4 text-center">
+                        <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                            Responsable de Pagos
+                        </p>
+                        <span
+                            className={`px-3 py-1 rounded-full text-sm font-semibold mt-1${
+                                estudiante.relacion?.responsable_pagos
+                                    ? "bg-emerald-200 text-emerald-700"
+                                    : "bg-gray-200 text-gray-600"
+                            }`}
+                        >
+                            {estudiante.relacion?.responsable_pagos
+                                ? "Sí"
+                                : "No"}
+                        </span>
+                    </div>
+
+                    {/* Contacto Principal */}
+                    <div className="bg-sky-50 border border-sky-100 rounded-xl p-4 text-center">
+                        <p className="text-xs uppercase tracking-wide text-gray-500 mb-1">
+                            Contacto Principal
+                        </p>
+                        <span
+                            className={`px-3 py-1 rounded-full text-sm font-semibold $ mt-1 {
+                                estudiante.relacion?.contacto_principal
+                                    ? "bg-sky-200 text-sky-700"
+                                    : "bg-gray-200 text-gray-600"
+                            }`}
+                        >
+                            {estudiante.relacion?.contacto_principal
+                                ? "Sí"
+                                : "No"}
+                        </span>
+                    </div>
+                </div>
+            </div>
         </div>
     );
 }
