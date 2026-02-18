@@ -7,7 +7,9 @@ import {
     Home,
     Hash,
     Users,
+    VenusAndMars,
 } from "lucide-react";
+import EstudianteCard from "./EstudianteCard";
 
 export default function ShowTutor({ tutor }) {
     if (!tutor) return null;
@@ -17,7 +19,7 @@ export default function ShowTutor({ tutor }) {
     return (
         <div className="space-y-8">
             <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
-                <div className="flex items-center gap-3 border-b pb-4">
+                <div className="flex items-center gap-3 border-b border-b-gray-300 pb-4">
                     <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
                         <User className="w-8 h-8 text-red-600" />
                     </div>
@@ -46,7 +48,7 @@ export default function ShowTutor({ tutor }) {
                     />
 
                     <InfoItem
-                        icon={<Hash size={18} />}
+                        icon={<VenusAndMars size={18} />}
                         label="Genero"
                         value={tutor.genero}
                     />
@@ -76,7 +78,7 @@ export default function ShowTutor({ tutor }) {
                 </div>
             </section>
             <section className="bg-gray-50 rounded-2xl shadow-sm border border-gray-200 p-6 space-y-6">
-                <div className="flex items-center gap-3 border-b pb-4">
+                <div className="flex items-center gap-3 border-b border-b-gray-300 pb-4">
                     <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
                         <Home className="w-8 h-8 text-red-600" />
                     </div>
@@ -136,7 +138,7 @@ export default function ShowTutor({ tutor }) {
                 </div>
             </section>
             <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
-                <div className="flex items-center gap-3 border-b pb-4">
+                <div className="flex items-center gap-3 border-b border-b-gray-300 pb-4">
                     <Users className="w-6 h-6 text-red-600" />
                     <h2 className="text-xl font-semibold text-gray-800">
                         Estudiantes Asociados
@@ -144,18 +146,9 @@ export default function ShowTutor({ tutor }) {
                 </div>
 
                 {tutor?.tutor?.estudiantes?.length > 0 ? (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                         {tutor.tutor.estudiantes.map((estudiante) => (
-                            <div
-                                key={estudiante.id}
-                                className="bg-gray-50 border border-gray-200 rounded-xl p-4 hover:shadow-sm transition"
-                            >
-                                <p className="font-semibold text-gray-800">
-                                    {estudiante.nombre}{" "}
-                                    {estudiante.apellido_paterno}{" "}
-                                    {estudiante.apellido_materno}
-                                </p>
-                            </div>
+                            <EstudianteCard estudiante={estudiante} />
                         ))}
                     </div>
                 ) : (
