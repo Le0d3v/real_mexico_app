@@ -11,11 +11,9 @@ export default function useTutor() {
 
     const tutores = data?.data ?? [];
 
-    const createTutor = async (formData) => {
+    const createTutor = async (datos) => {
         try {
-            const response = await api.post("/api/tutores", formData, {
-                headers: { "Content-Type": "multipart/form-data" },
-            });
+            const response = await api.post("/api/tutores", datos);
 
             await mutate();
             return response.data;

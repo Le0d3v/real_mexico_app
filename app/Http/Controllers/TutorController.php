@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\TutorRequest;
 use App\Http\Resources\UserCollection;
+use App\Models\Domicilio;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Hash;
 
 class TutorController extends Controller
 {
@@ -22,9 +26,64 @@ class TutorController extends Controller
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(TutorRequest $request)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+
+            $domicilioData = $request->only([
+                'calle',
+                'numero_exterior',
+                'numero_interior',
+                'colonia',
+                'localidad',
+                'municipio',
+                'entidad',
+                'cp'
+            ]);
+
+            $domicilio = Domicilio::create($domicilioData);
+
+            // ===============================
+            // 2️⃣ CREAR USUARIO
+            // ===============================
+            $user = User::create([
+                'name' => $request->name,
+                'apellido_paterno' => $request->apellido_paterno,
+                'apellido_materno' => $request->apellido_materno,
+                'fecha_nacimiento' => $request->fecha_nacimiento,
+                'curp' => $request->curp,
+                'genero' => $request->genero,
+                'email' => $request->email,
+                'password' => Hash::make("password"),
+                'telefono' => $request->telefono,
+                'domicilio_id' => $domicilio->id, // FK
+            ]);
+
+            
+           $tutor = $user->tutor()->create([
+                'ocupacion' => $request->ocupacion,
+                'nivel_estudios' => $request->nivel_estudios,
+            ]);
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Tutor creado correctamente.',
+                'tutor' => $tutor->load('user.domicilio')
+            ], 201);
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Error al crear el tutor.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+
     }
 
     /**

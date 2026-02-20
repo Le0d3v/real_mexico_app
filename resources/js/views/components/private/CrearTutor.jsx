@@ -14,13 +14,14 @@ import { toast } from "react-toastify";
 import SubmitButton from "../SubmitButton";
 import estados from "../../../helpers/estados";
 import { useState } from "react";
+import { ClipLoader } from "react-spinners";
 
 export default function CrearTutor({ onClose }) {
-    const { crearTutor } = useTutor();
+    const { createTutor } = useTutor();
 
     const [cargando, setCargando] = useState(false);
 
-    const [nombre, setNombre] = useState("");
+    const [name, setName] = useState("");
     const [apellidoPaterno, setApellidoPaterno] = useState("");
     const [apellidoMaterno, setApellidoMaterno] = useState("");
     const [fechaNacimiento, setFechaNacimiento] = useState("");
@@ -37,39 +38,39 @@ export default function CrearTutor({ onClose }) {
     const [colonia, setColonia] = useState("");
     const [localidad, setLocalidad] = useState("");
     const [municipio, setMunicipio] = useState("");
-    const [estado, setEstado] = useState("");
+    const [entidad, setEntidad] = useState("");
     const [cp, setCp] = useState("");
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
         setCargando(true);
 
-        const formData = new FormData();
+        const datos = {
+            name,
+            apellido_paterno: apellidoPaterno,
+            apellido_materno: apellidoMaterno,
+            fecha_nacimiento: fechaNacimiento,
+            curp,
+            genero,
+            ocupacion,
+            nivel_estudios: nivelEstudios,
+            telefono,
+            email,
+            calle,
+            numero_exterior: numeroExterior,
+            numero_interior: numeroInterior,
+            colonia,
+            localidad,
+            municipio,
+            entidad,
+            cp,
+        };
 
-        formData.append("name", nombre);
-        formData.append("apellido_paterno", apellidoPaterno);
-        formData.append("apellido_materno", apellidoMaterno);
-        formData.append("fecha_nacimiento", fechaNacimiento);
-        formData.append("curp", curp);
-        formData.append("genero", genero);
-        formData.append("telefono", telefono);
-        formData.append("email", email);
-
-        formData.append("ocupacion", ocupacion);
-        formData.append("nivel_estudios", nivelEstudios);
-
-        formData.append("calle", calle);
-        formData.append("numero_exterior", numeroExterior);
-        formData.append("numero_interior", numeroInterior);
-        formData.append("colonia", colonia);
-        formData.append("localidad", localidad);
-        formData.append("municipio", municipio);
-        formData.append("entidad", estado);
-        formData.append("cp", cp);
-
+        console.log(datos);
         try {
-            const response = await createTutor(formData);
+            const response = await createTutor(datos);
             toast.success(response.message);
+            onClose(false);
         } catch (error) {
             if (error?.status === 422) {
                 Object.values(error.data.errors).forEach((messages) =>
@@ -78,6 +79,7 @@ export default function CrearTutor({ onClose }) {
             } else {
                 toast.error("Error inesperado al registrar el tutor.");
             }
+            console.log(error);
         } finally {
             setCargando(false);
         }
@@ -99,8 +101,8 @@ export default function CrearTutor({ onClose }) {
                     <InputField
                         icon={<User size={18} />}
                         label="Nombre(s)"
-                        value={nombre}
-                        onChange={(e) => setNombre(e.target.value)}
+                        value={name}
+                        onChange={(e) => setName(e.target.value)}
                     />
                     <InputField
                         icon={<User size={18} />}
@@ -131,7 +133,7 @@ export default function CrearTutor({ onClose }) {
                     <SelectField
                         icon={<VenusAndMars size={18} />}
                         label="Género"
-                        options={["Masculino", "Femenino"]}
+                        options={["M", "F"]}
                         value={genero}
                         onChange={(e) => setGenero(e.target.value)}
                     />
@@ -151,7 +153,7 @@ export default function CrearTutor({ onClose }) {
                             "Primaria",
                             "Secundaria",
                             "Bachillerato",
-                            "Ingenieria / Licenciatura",
+                            "Licenciatura",
                             "Postgrado",
                         ]}
                     />
@@ -223,8 +225,8 @@ export default function CrearTutor({ onClose }) {
                         icon={<MapPin size={18} />}
                         label="Estado"
                         options={estados}
-                        value={estado}
-                        onChange={(e) => setEstado(e.target.value)}
+                        value={entidad}
+                        onChange={(e) => setEntidad(e.target.value)}
                     />
                     <InputField
                         icon={<Hash size={18} />}
@@ -252,7 +254,11 @@ export default function CrearTutor({ onClose }) {
                         type="submit"
                         className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm cursor-pointer"
                     >
-                        Guardar Tutor
+                        {cargando ? (
+                            <ClipLoader size={20} color="white" />
+                        ) : (
+                            <p>Guardar Cambios</p>
+                        )}
                     </button>
                 </div>
             </section>
@@ -260,7 +266,7 @@ export default function CrearTutor({ onClose }) {
     );
 }
 
-function InputField({ icon, label, type = "text" }) {
+function InputField({ icon, label, type = "text", value, onChange }) {
     return (
         <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-200 focus-within:ring-2 focus-within:ring-red-500 transition">
             <div className="text-red-600 mt-1">{icon}</div>
@@ -272,13 +278,15 @@ function InputField({ icon, label, type = "text" }) {
                     type={type}
                     className="w-full bg-transparent outline-none text-gray-800 font-medium"
                     placeholder={`Ingrese ${label.toLowerCase()}`}
+                    value={value}
+                    onChange={onChange}
                 />
             </div>
         </div>
     );
 }
 
-function SelectField({ icon, label, options }) {
+function SelectField({ icon, label, options, value, onChange }) {
     return (
         <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-200 focus-within:ring-2 focus-within:ring-red-500 transition">
             <div className="text-red-600 mt-1">{icon}</div>
@@ -286,7 +294,11 @@ function SelectField({ icon, label, options }) {
                 <label className="text-sm text-gray-500 block mb-1">
                     {label}
                 </label>
-                <select className="w-full bg-transparent outline-none text-gray-800 font-medium rounded">
+                <select
+                    className="w-full bg-transparent outline-none text-gray-800 font-medium rounded"
+                    value={value}
+                    onChange={onChange}
+                >
                     <option value="">Seleccione una opción</option>
                     {options.map((opt, index) => (
                         <option key={index} value={opt} className="p-1 rounded">
