@@ -31,9 +31,60 @@ export default function CrearTutor({ onClose }) {
     const [telefono, setTelefono] = useState("");
     const [email, setEmail] = useState("");
 
+    const [calle, setCalle] = useState("");
+    const [numeroExterior, setNumeroExterior] = useState("");
+    const [numeroInterior, setNumeroInterior] = useState("");
+    const [colonia, setColonia] = useState("");
+    const [localidad, setLocalidad] = useState("");
+    const [municipio, setMunicipio] = useState("");
+    const [estado, setEstado] = useState("");
+    const [cp, setCp] = useState("");
+
+    const handleSubmitForm = async (e) => {
+        e.preventDefault();
+        setCargando(true);
+
+        const formData = new FormData();
+
+        formData.append("name", nombre);
+        formData.append("apellido_paterno", apellidoPaterno);
+        formData.append("apellido_materno", apellidoMaterno);
+        formData.append("fecha_nacimiento", fechaNacimiento);
+        formData.append("curp", curp);
+        formData.append("genero", genero);
+        formData.append("telefono", telefono);
+        formData.append("email", email);
+
+        formData.append("ocupacion", ocupacion);
+        formData.append("nivel_estudios", nivelEstudios);
+
+        formData.append("calle", calle);
+        formData.append("numero_exterior", numeroExterior);
+        formData.append("numero_interior", numeroInterior);
+        formData.append("colonia", colonia);
+        formData.append("localidad", localidad);
+        formData.append("municipio", municipio);
+        formData.append("entidad", estado);
+        formData.append("cp", cp);
+
+        try {
+            const response = await createTutor(formData);
+            toast.success(response.message);
+        } catch (error) {
+            if (error?.status === 422) {
+                Object.values(error.data.errors).forEach((messages) =>
+                    messages.forEach((message) => toast.error(message)),
+                );
+            } else {
+                toast.error("Error inesperado al registrar el tutor.");
+            }
+        } finally {
+            setCargando(false);
+        }
+    };
+
     return (
-        <form className="space-y-8">
-            {/* ================= DATOS PERSONALES ================= */}
+        <form className="space-y-8" onSubmit={handleSubmitForm}>
             <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
                 <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
                     <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
@@ -45,32 +96,57 @@ export default function CrearTutor({ onClose }) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <InputField icon={<User size={18} />} label="Nombre(s)" />
+                    <InputField
+                        icon={<User size={18} />}
+                        label="Nombre(s)"
+                        value={nombre}
+                        onChange={(e) => setNombre(e.target.value)}
+                    />
                     <InputField
                         icon={<User size={18} />}
                         label="Apellido Paterno"
+                        value={apellidoPaterno}
+                        onChange={(e) => setApellidoPaterno(e.target.value)}
                     />
                     <InputField
                         icon={<User size={18} />}
                         label="Apellido Materno"
+                        value={apellidoMaterno}
+                        onChange={(e) => setApellidoMaterno(e.target.value)}
                     />
                     <InputField
                         icon={<Calendar size={18} />}
                         label="Fecha de Nacimiento"
                         type="date"
+                        value={fechaNacimiento}
+                        onChange={(e) => setFechaNacimiento(e.target.value)}
                     />
-                    <InputField icon={<Hash size={18} />} label="CURP" />
+                    <InputField
+                        icon={<Hash size={18} />}
+                        label="CURP"
+                        value={curp}
+                        onChange={(e) => setCurp(e.target.value)}
+                    />
 
                     <SelectField
                         icon={<VenusAndMars size={18} />}
                         label="Género"
                         options={["Masculino", "Femenino"]}
+                        value={genero}
+                        onChange={(e) => setGenero(e.target.value)}
                     />
 
-                    <InputField icon={<Hash size={18} />} label="Ocupación" />
+                    <InputField
+                        icon={<Hash size={18} />}
+                        label="Ocupación"
+                        value={ocupacion}
+                        onChange={(e) => setOcupacion(e.target.value)}
+                    />
                     <SelectField
                         icon={<Hash size={18} />}
                         label="Nivel de Estudios"
+                        value={nivelEstudios}
+                        onChange={(e) => setNivelEstudios(e.target.value)}
                         options={[
                             "Primaria",
                             "Secundaria",
@@ -83,16 +159,19 @@ export default function CrearTutor({ onClose }) {
                         icon={<Phone size={18} />}
                         label="Teléfono"
                         type="tel"
+                        value={telefono}
+                        onChange={(e) => setTelefono(e.target.value)}
                     />
                     <InputField
                         icon={<Mail size={18} />}
                         label="Correo Electrónico"
                         type="email"
+                        value={email}
+                        onChange={(e) => setEmail(e.target.value)}
                     />
                 </div>
             </section>
 
-            {/* ================= DOMICILIO ================= */}
             <section className="bg-gray-50 rounded-2xl shadow-sm border border-gray-200 p-6 space-y-6">
                 <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
                     <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
@@ -104,46 +183,78 @@ export default function CrearTutor({ onClose }) {
                 </div>
 
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <InputField icon={<MapPin size={18} />} label="Calle" />
+                    <InputField
+                        icon={<MapPin size={18} />}
+                        label="Calle"
+                        value={calle}
+                        onChange={(e) => setCalle(e.target.value)}
+                    />
                     <InputField
                         icon={<Hash size={18} />}
                         label="Número Exterior"
+                        value={numeroExterior}
+                        onChange={(e) => setNumeroExterior(e.target.value)}
                     />
                     <InputField
                         icon={<Hash size={18} />}
                         label="Número Interior"
+                        value={numeroInterior}
+                        onChange={(e) => setNumeroInterior(e.target.value)}
                     />
-                    <InputField icon={<MapPin size={18} />} label="Colonia" />
-                    <InputField icon={<MapPin size={18} />} label="Localidad" />
-                    <InputField icon={<MapPin size={18} />} label="Municipio" />
+                    <InputField
+                        icon={<MapPin size={18} />}
+                        label="Colonia"
+                        value={colonia}
+                        onChange={(e) => setColonia(e.target.value)}
+                    />
+                    <InputField
+                        icon={<MapPin size={18} />}
+                        label="Localidad"
+                        value={localidad}
+                        onChange={(e) => setLocalidad(e.target.value)}
+                    />
+                    <InputField
+                        icon={<MapPin size={18} />}
+                        label="Municipio"
+                        value={municipio}
+                        onChange={(e) => setMunicipio(e.target.value)}
+                    />
                     <SelectField
                         icon={<MapPin size={18} />}
                         label="Estado"
                         options={estados}
+                        value={estado}
+                        onChange={(e) => setEstado(e.target.value)}
                     />
                     <InputField
                         icon={<Hash size={18} />}
                         label="Código Postal"
+                        value={cp}
+                        onChange={(e) => setCp(e.target.value)}
                     />
                 </div>
             </section>
 
-            {/* ================= BOTONES ================= */}
-            <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-end gap-4">
-                <button
-                    type="button"
-                    className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer"
-                    onClick={() => onClose(false)}
-                >
-                    Cerrar
-                </button>
+            <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-between gap-4 items-center">
+                <h1 className="text-3xl font-semibold text-red-400">
+                    Acciones
+                </h1>
+                <div className="flex gap-5">
+                    <button
+                        type="button"
+                        className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer"
+                        onClick={() => onClose(false)}
+                    >
+                        Cerrar
+                    </button>
 
-                <button
-                    type="submit"
-                    className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm cursor-pointer"
-                >
-                    Guardar Tutor
-                </button>
+                    <button
+                        type="submit"
+                        className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm cursor-pointer"
+                    >
+                        Guardar Tutor
+                    </button>
+                </div>
             </section>
         </form>
     );
