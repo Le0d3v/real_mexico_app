@@ -2,14 +2,16 @@ import { useState, useMemo, useEffect } from "react";
 import useTutor from "../../hooks/useTutor";
 import Loader from "../components/private/Loader";
 import Modal from "../components/private/Modal";
-import { Eye } from "lucide-react";
+import { CirclePlus, Eye } from "lucide-react";
 import ShowTutor from "../components/private/ShowTutor";
+import CrearTutor from "../components/private/CrearTutor";
 
 export default function Tutores() {
     const [open, setOpen] = useState(false);
     const [search, setSearch] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedTutor, setSelectedTutor] = useState(null);
+    const [createTutorModal, setCreateTutorModal] = useState(false);
 
     const itemsPerPage = 10;
 
@@ -72,7 +74,10 @@ export default function Tutores() {
                         </p>
                     </div>
 
-                    <button className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow transition cursor-pointer">
+                    <button
+                        className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow transition cursor-pointer"
+                        onClick={() => setCreateTutorModal(true)}
+                    >
                         + Nuevo Tutor
                     </button>
                 </div>
@@ -230,6 +235,18 @@ export default function Tutores() {
                 title="Ver Información del Tutor"
             >
                 {selectedTutor && <ShowTutor tutor={selectedTutor} />}
+            </Modal>
+
+            <Modal
+                isOpen={createTutorModal}
+                icon={<CirclePlus className="w-12 h-12" />}
+                onClose={() => {
+                    setCreateTutorModal(false);
+                }}
+                size="xl"
+                title="Registrar un Nuevo Tutor"
+            >
+                <CrearTutor onClose={setCreateTutorModal} />
             </Modal>
         </>
     );

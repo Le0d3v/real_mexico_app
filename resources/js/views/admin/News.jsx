@@ -206,6 +206,10 @@ export default function News() {
                     }}
                 />
             </Modal>
+
+            <Modal>
+                
+            </Modal>
         </>
     );
 }
