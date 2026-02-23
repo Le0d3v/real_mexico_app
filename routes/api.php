@@ -18,8 +18,8 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put("/user/update/{id}", [UserController::class, "update"]);
     Route::apiResource("/domicilio", DomicilioController::class);
     Route::apiResource("/tutores", TutorController::class);
+    Route::apiResource("/estudiantes", EstudianteController::class);
 });
     
-Route::apiResource("/estudiantes", EstudianteController::class);
 Route::apiResource('/posts', PostController::class);
 Route::get('/users', [UserController::class, 'index']);

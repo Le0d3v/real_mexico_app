@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\EstudianteCollection;
 use App\Models\Estudiante;
 use Illuminate\Http\Request;
 
@@ -12,8 +13,13 @@ class EstudianteController extends Controller
      */
     public function index()
     {
-        $estudiantes = Estudiante::with('colegiaturas')->get();
-        return $estudiantes;
+        return new EstudianteCollection(
+            Estudiante::with([
+                "tutores.user",
+                'domicilio',
+                'colegiaturas'
+            ])->get()
+        );
     }
 
     /**

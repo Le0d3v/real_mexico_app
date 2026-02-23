@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { X } from "lucide-react";
 
 export default function Modal({
@@ -11,8 +11,25 @@ export default function Modal({
     closeOnOverlay = true,
     closeOnEsc = true,
 }) {
+    const [isVisible, setIsVisible] = useState(isOpen);
+    const [isAnimatingOut, setIsAnimatingOut] = useState(false);
+
     useEffect(() => {
-        if (!isOpen) return;
+        if (isOpen) {
+            setIsVisible(true);
+            setIsAnimatingOut(false);
+        } else if (isVisible) {
+            setIsAnimatingOut(true);
+            const timeout = setTimeout(() => {
+                setIsVisible(false);
+            }, 250); // duración de salida
+
+            return () => clearTimeout(timeout);
+        }
+    }, [isOpen]);
+
+    useEffect(() => {
+        if (!isVisible) return;
 
         const handleEsc = (e) => {
             if (e.key === "Escape" && closeOnEsc) {
@@ -27,9 +44,9 @@ export default function Modal({
             document.removeEventListener("keydown", handleEsc);
             document.body.style.overflow = "auto";
         };
-    }, [isOpen, closeOnEsc, onClose]);
+    }, [isVisible, closeOnEsc, onClose]);
 
-    if (!isOpen) return null;
+    if (!isVisible) return null;
 
     const sizeClasses = {
         sm: "max-w-md",
@@ -41,7 +58,8 @@ export default function Modal({
 
     return (
         <div
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-sm"
+            className={`fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm
+                        ${isAnimatingOut ? "animate-fadeOut" : "animate-fadeIn"}`}
             onClick={() => closeOnOverlay && onClose?.()}
         >
             <div
@@ -50,11 +68,10 @@ export default function Modal({
                     max-h-[90vh] overflow-y-auto
                     bg-white rounded-2xl shadow-2xl
                     border border-gray-200
-                    animate-in fade-in zoom-in duration-200
+                    ${isAnimatingOut ? "animate-modalOut" : "animate-modalIn"}
                 `}
                 onClick={(e) => e.stopPropagation()}
             >
-                {/* Header */}
                 {(title || onClose) && (
                     <div className="flex items-center justify-between px-6 py-4 border-b border-b-gray-400">
                         <div className="flex gap-3 items-center">
@@ -75,7 +92,6 @@ export default function Modal({
                     </div>
                 )}
 
-                {/* Body */}
                 <div className="py-3 px-6">{children}</div>
             </div>
         </div>

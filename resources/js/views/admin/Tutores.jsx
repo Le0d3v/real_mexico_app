@@ -12,6 +12,7 @@ export default function Tutores() {
     const [currentPage, setCurrentPage] = useState(1);
     const [selectedTutor, setSelectedTutor] = useState(null);
     const [createTutorModal, setCreateTutorModal] = useState(false);
+    const [sortOrder, setSortOrder] = useState("desc");
 
     const itemsPerPage = 10;
 
@@ -22,24 +23,39 @@ export default function Tutores() {
     }, [search]);
 
     const filteredTutores = useMemo(() => {
-        if (!search.trim()) return tutores;
+        let data = [...tutores];
 
-        const term = search.toLowerCase();
+        // 🔎 Filtro por búsqueda
+        if (search.trim()) {
+            const term = search.toLowerCase();
 
-        return tutores.filter((tutor) => {
-            const nombreCompleto =
-                `${tutor.name ?? ""} ${tutor.apellido_paterno ?? ""}`.toLowerCase();
+            data = data.filter((tutor) => {
+                const nombreCompleto =
+                    `${tutor.name ?? ""} ${tutor.apellido_paterno ?? ""}`.toLowerCase();
 
-            const telefono = tutor.telefono?.toLowerCase() || "";
-            const email = tutor.email?.toLowerCase() || "";
+                const telefono = tutor.telefono?.toLowerCase() || "";
+                const email = tutor.email?.toLowerCase() || "";
 
-            return (
-                nombreCompleto.includes(term) ||
-                telefono.includes(term) ||
-                email.includes(term)
-            );
+                return (
+                    nombreCompleto.includes(term) ||
+                    telefono.includes(term) ||
+                    email.includes(term)
+                );
+            });
+        }
+
+        // 📅 Ordenamiento por fecha
+        data.sort((a, b) => {
+            const dateA = new Date(a.created_at);
+            const dateB = new Date(b.created_at);
+
+            return sortOrder === "desc"
+                ? dateB - dateA // más recientes primero
+                : dateA - dateB; // más antiguos primero
         });
-    }, [search, tutores]);
+
+        return data;
+    }, [search, tutores, sortOrder]);
 
     const totalPages = Math.max(
         1,
@@ -81,8 +97,8 @@ export default function Tutores() {
                         + Nuevo Tutor
                     </button>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200">
-                    <div className="flex gap-4 flex-wrap">
+                <div className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200 flex gap-5">
+                    <div className="flex gap-4 flex-wrap w-full">
                         <input
                             type="text"
                             placeholder="Buscar por nombre, teléfono o correo..."
@@ -90,6 +106,16 @@ export default function Tutores() {
                             onChange={(e) => setSearch(e.target.value)}
                             className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                         />
+                    </div>
+                    <div>
+                        <select
+                            value={sortOrder}
+                            onChange={(e) => setSortOrder(e.target.value)}
+                            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                        >
+                            <option value="desc">Más recientes</option>
+                            <option value="asc">Más antiguos</option>
+                        </select>
                     </div>
                 </div>
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">

@@ -81,7 +81,6 @@ export default function Login() {
                         <form
                             onSubmit={submit}
                             className="bg-gray-100/20 rounded-lg shadow-xl p-5 text-white"
-                            autoComplete="off"
                         >
                             <div>
                                 <legend className="text-center font-bold text-4xl my-2">
@@ -109,6 +108,7 @@ export default function Login() {
                                                 }
                                                 className="w-full pl-10 pr-3 py-2 bg-white text-black rounded-lg 
                                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                required
                                             />
                                         </div>
                                     </div>
@@ -133,7 +133,8 @@ export default function Login() {
                                                     setPassword(e.target.value)
                                                 }
                                                 className="w-full pl-10 pr-10 py-2 bg-white text-black rounded-lg 
-                focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                    focus:outline-none focus:ring-2 focus:ring-blue-500"
+                                                required
                                             />
 
                                             <button

@@ -37,10 +37,28 @@ class EstudianteResource extends JsonResource
                     "contacto_principal" => (bool) $this->pivot->contacto_principal,
                 ];
             }),
+            
+            "tutores" => $this->whenLoaded('tutores', function () {
+                return $this->tutores->map(function ($tutor) {
 
-            "colegiaturas" => ColegiaturaResource::collection(
-                $this->whenLoaded('colegiaturas')
-            ),
+                    return [
+                        // Datos del usuario
+                        "usuario" => new UserResource($tutor->user),
+
+                        // Datos propios de tutor
+                        "ocupacion" => $tutor->ocupacion,
+                        "nivel_estudios" => $tutor->nivel_estudios,
+
+                        // Datos pivot
+                        "relacion" => [
+                            "parentesco" => $tutor->pivot->parentesco,
+                            "responsable_pagos" => (bool) $tutor->pivot->responsable_pagos,
+                            "contacto_principal" => (bool) $tutor->pivot->contacto_principal,
+                        ],
+                    ];
+                });
+
+            }),
         ];
     }
 }

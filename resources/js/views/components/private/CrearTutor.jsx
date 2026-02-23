@@ -11,7 +11,6 @@ import {
 } from "lucide-react";
 import useTutor from "../../../hooks/useTutor";
 import { toast } from "react-toastify";
-import SubmitButton from "../SubmitButton";
 import estados from "../../../helpers/estados";
 import { useState } from "react";
 import { ClipLoader } from "react-spinners";
@@ -152,7 +151,7 @@ export default function CrearTutor({ onClose }) {
                         options={[
                             "Primaria",
                             "Secundaria",
-                            "Bachillerato",
+                            "Preparatoria",
                             "Licenciatura",
                             "Postgrado",
                         ]}
@@ -257,7 +256,7 @@ export default function CrearTutor({ onClose }) {
                         {cargando ? (
                             <ClipLoader size={20} color="white" />
                         ) : (
-                            <p>Guardar Cambios</p>
+                            <p>Guardar Tutor</p>
                         )}
                     </button>
                 </div>

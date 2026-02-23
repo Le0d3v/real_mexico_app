@@ -45,9 +45,6 @@ class TutorController extends Controller
 
             $domicilio = Domicilio::create($domicilioData);
 
-            // ===============================
-            // 2️⃣ CREAR USUARIO
-            // ===============================
             $user = User::create([
                 'name' => $request->name,
                 'apellido_paterno' => $request->apellido_paterno,
@@ -56,7 +53,7 @@ class TutorController extends Controller
                 'curp' => $request->curp,
                 'genero' => $request->genero,
                 'email' => $request->email,
-                'password' => Hash::make("password"),
+                'password' => Hash::make($request->curp),
                 'telefono' => $request->telefono,
                 'domicilio_id' => $domicilio->id, // FK
             ]);

@@ -44,7 +44,13 @@ class Estudiante extends Model
             'estudiantes_tutores',
             'estudiante_id',
             'tutor_id'
-        )->withTimestamps();
+        )
+        ->withPivot([
+            'parentesco',
+            'responsable_pagos',
+            'contacto_principal'
+        ])
+        ->withTimestamps();
     }
 
     public function colegiaturas()

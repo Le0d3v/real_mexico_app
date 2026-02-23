@@ -24,10 +24,10 @@ class Tutor extends Model
     public function estudiantes()
     {
         return $this->belongsToMany(
-            Estudiante::class,   // ✅ Correcto
+            Estudiante::class,   
             'estudiantes_tutores',
-            'tutor_id',          // FK del tutor en la pivote
-            'estudiante_id'      // FK del estudiante en la pivote
+            'tutor_id',          
+            'estudiante_id'      
         )
         ->withPivot([
             'parentesco',

@@ -1,36 +1,12 @@
 import React from "react";
-import Tittle from "../components/Tittle";
+import useStudent from "../../hooks/useStudent";
+import Loader from "../components/private/Loader";
 
 export default function Students() {
-    const estudiantes = [
-        {
-            id: 1,
-            nombre: "Juan Pérez",
-            grado: "3°",
-            grupo: "A",
-            tutor: "María González",
-            matricula: "PRIM-0012",
-            estado: "Activo",
-        },
-        {
-            id: 2,
-            nombre: "Sofía Ramírez",
-            grado: "5°",
-            grupo: "B",
-            tutor: "Carlos Ramírez",
-            matricula: "PRIM-0045",
-            estado: "Activo",
-        },
-        {
-            id: 3,
-            nombre: "Luis Hernández",
-            grado: "2°",
-            grupo: "C",
-            tutor: "Ana López",
-            matricula: "PRIM-0023",
-            estado: "Baja temporal",
-        },
-    ];
+    const { estudiantes, isLoading, error } = useStudent();
+
+    if (isLoading) return <Loader />;
+    if (error) return <p>Error al cargar tutores</p>;
 
     return (
         <div className="p-8 bg-gray-100 min-h-screen">
@@ -100,18 +76,16 @@ export default function Students() {
                             >
                                 <td className="px-6 py-4">
                                     <div className="flex items-center gap-3">
-                                        <div className="w-10 h-10 bg-yellow-400 text-black rounded-full flex items-center justify-center font-bold">
-                                            {alumno.nombre.charAt(0)}
-                                        </div>
+                                        {/* <div className="w-10 h-10 bg-yellow-400 text-black rounded-full flex items-center justify-center font-bold">
+                                            {alumno.name}
+                                        </div> */}
                                         <span className="font-medium text-gray-800">
                                             {alumno.nombre}
                                         </span>
                                     </div>
                                 </td>
 
-                                <td className="px-6 py-4 text-gray-600 font-mono">
-                                    {alumno.matricula}
-                                </td>
+                                <td className="px-6 py-4 text-gray-600 font-mono"></td>
 
                                 <td className="px-6 py-4">
                                     <span className="px-3 py-1 bg-gray-200 rounded-full text-sm font-semibold">
@@ -120,7 +94,7 @@ export default function Students() {
                                 </td>
 
                                 <td className="px-6 py-4 text-gray-600">
-                                    {alumno.tutor}
+                                    {alumno.tutores[0].name}
                                 </td>
 
                                 <td className="px-6 py-4 text-center">
