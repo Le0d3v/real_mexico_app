@@ -8,17 +8,36 @@ import {
     Hash,
     Users,
     VenusAndMars,
+    GraduationCap,
 } from "lucide-react";
 import useTutor from "../../../hooks/useTutor";
 import { toast } from "react-toastify";
 import estados from "../../../helpers/estados";
-import { useState } from "react";
+import { useState, useEffect, useMemo } from "react";
 import { ClipLoader } from "react-spinners";
+import useStudent from "../../../hooks/useStudent";
+import Loader from "../private/Loader";
 
 export default function CrearTutor({ onClose }) {
     const { createTutor } = useTutor();
+    const { estudiantes, isLoading, error } = useStudent();
 
+    const [selectedStudents, setSelectedStudents] = useState([]);
+    const [search, setSearch] = useState("");
     const [cargando, setCargando] = useState(false);
+
+    const filteredStudents = useMemo(() => {
+        if (!search.trim()) return []; // 👈 vacío al inicio
+
+        const term = search.toLowerCase();
+
+        return estudiantes.filter((estudiante) => {
+            const nombreCompleto =
+                `${estudiante.nombre ?? ""} ${estudiante.apellido_paterno ?? ""} ${estudiante.apellido_materno ?? ""}`.toLowerCase();
+
+            return nombreCompleto.includes(term);
+        });
+    }, [search, estudiantes]);
 
     const [name, setName] = useState("");
     const [apellidoPaterno, setApellidoPaterno] = useState("");
@@ -233,6 +252,114 @@ export default function CrearTutor({ onClose }) {
                         value={cp}
                         onChange={(e) => setCp(e.target.value)}
                     />
+                </div>
+            </section>
+
+            <section className="bg-gray-50 rounded-2xl shadow-sm border border-gray-200 p-6 space-y-6">
+                <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
+                    <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
+                        <GraduationCap className="w-8 h-8 text-red-600" />
+                    </div>
+                    <h2 className="text-2xl font-semibold text-gray-800">
+                        Asignar Estudiantes
+                    </h2>
+                </div>
+
+                <div className="flex gap-5 w-full">
+                    <div className="rounded-xl border border-gray-200 p-3 w-full ">
+                        <h1 className="text-center mb-3 text-xl font-semibold text-red-500">
+                            Buscar Estudiantes
+                        </h1>
+                        <div className="flex gap-4 flex-wrap w-full">
+                            <input
+                                type="text"
+                                placeholder="Buscar por Nombre, Apellidos o Matricula"
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                            />
+                        </div>
+                        <div className="mt-5">
+                            {search.trim() !== "" &&
+                                filteredStudents.length === 0 && (
+                                    <p className="text-gray-400 text-sm">
+                                        No se encontraron coincidencias
+                                    </p>
+                                )}
+
+                            {filteredStudents.map((student) => (
+                                <div
+                                    key={student.id}
+                                    className="p-5 rounded-lg bg-white cursor-pointer transition shadow my-3 flex items-center justify-between hover:bg-gray-100"
+                                >
+                                    <div>
+                                        <p className="font-semibold text-xl text-gray-700">
+                                            {student.nombre}{" "}
+                                            {student.apellido_paterno}
+                                        </p>
+                                        <div className="flex justify-center gap-10 mt-5">
+                                            {/* Grado */}
+                                            <div className="flex flex-col items-center">
+                                                <div className="flex items-center gap-2 text-indigo-600 mb-2">
+                                                    <GraduationCap size={18} />
+                                                    <span className="text-sm font-medium text-gray-600">
+                                                        Grado
+                                                    </span>
+                                                </div>
+
+                                                <span className="px-4 py-2 rounded-xl bg-indigo-100 text-indigo-700 font-semibold text-lg shadow-sm">
+                                                    {student.grado}
+                                                </span>
+                                            </div>
+
+                                            {/* Grupo */}
+                                            <div className="flex flex-col items-center">
+                                                <div className="flex items-center gap-2 text-violet-600 mb-2">
+                                                    <Users size={18} />
+                                                    <span className="text-sm font-medium text-gray-600">
+                                                        Grupo
+                                                    </span>
+                                                </div>
+
+                                                <span className="px-4 py-2 rounded-xl bg-violet-100 text-violet-700 font-semibold text-lg shadow-sm">
+                                                    {student.grupo}
+                                                </span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <button className="p-2 bg-blue-400 text-white rounded cursor-pointer hover:bg-blue-500 transition text-xl">
+                                            Asignar
+                                        </button>
+                                    </div>
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                    <div className=" rounded-xl border border-gray-200 p-3 w-full ">
+                        <h1 className="text-center mb-3 text-xl font-semibold text-red-500">
+                            Estudiantes Asignados
+                        </h1>
+                        {isLoading ? (
+                            <Loader />
+                        ) : (
+                            <div>
+                                {selectedStudents.length === 0 ? (
+                                    <p className="text-gray-500 mt-3">
+                                        Sin Estudiantes Seleccionados
+                                    </p>
+                                ) : (
+                                    <div>
+                                        {selectedStudents.map((student) => (
+                                            <div className="p-3 rounded-lg hover:cursor-pointer bg-gray-100 hover:bg-gray-200 transition shadow">
+                                                <p>{student.nombre}</p>
+                                            </div>
+                                        ))}
+                                    </div>
+                                )}
+                            </div>
+                        )}
+                    </div>
                 </div>
             </section>
 
