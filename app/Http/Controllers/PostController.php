@@ -122,7 +122,7 @@ class PostController extends Controller
             $post->delete();
 
             return response()->json([
-                'message' => 'Publicación eliminada correctamente.'
+                'message' => 'Publicación eliminada exitosamente.'
             ]);
 
         } catch (\Exception $e) {

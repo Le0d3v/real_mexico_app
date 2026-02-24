@@ -46,7 +46,7 @@ export default function News() {
     const handleDelete = async (id) => {
         const result = await Swal.fire({
             title: "¿Estás seguro?",
-            text: "Esta acción no se puede deshacer.",
+            text: "Las publicaciones eliminadas desaparecerán también de la sección Eventos y Noticias en la sección pública del sitio web. Esta Acción no se puede deshacer.",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",
@@ -124,8 +124,8 @@ export default function News() {
 
             <button
                 onClick={() => setOpen(true)}
-                className="p-3 rounded bg-blue-500 flex gap-1 items-center text-white font-bold
-                cursor-pointer hover:bg-blue-600 hover:-translate-y-1 transition mt-4"
+                className="p-3 rounded bg-red-500 flex gap-1 items-center text-white font-bold
+                cursor-pointer hover:bg-red-600 hover:-translate-y-1 transition mt-4"
             >
                 <CirclePlus />
                 <p>Nueva Publicación</p>
@@ -205,8 +205,6 @@ export default function News() {
                     }}
                 />
             </Modal>
-
-            <Modal></Modal>
         </>
     );
 }

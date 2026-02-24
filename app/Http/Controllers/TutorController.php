@@ -123,7 +123,7 @@ class TutorController extends Controller
         try {
             $tutor->delete();
             return response()->json([
-                'message' => 'Publicación eliminada correctamente.'
+                'message' => 'Tutor eliminado exitosamente.'
             ]);
 
         } catch (\Exception $e) {

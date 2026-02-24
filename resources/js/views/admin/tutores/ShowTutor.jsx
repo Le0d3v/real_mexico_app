@@ -23,7 +23,7 @@ export default function ShowTutor({ tutor, onClose }) {
     const handleDelete = async (id) => {
         const result = await Swal.fire({
             title: "¿Estás seguro?",
-            text: "Al eliminar el tutor, se perderán las relaciones con estudiantes asociados a ese tutor. Esta acción no se puede deshacer.",
+            text: "Al eliminar el tutor, se perderán las relaciones con estudiantes asociados al tutor. Esta acción no se puede deshacer.",
             icon: "warning",
             showCancelButton: true,
             confirmButtonColor: "#d33",

@@ -1,9 +1,12 @@
 import SubmitButton from "../../components/SubmitButton";
-import { Info } from "lucide-react";
+import { Hash, Info, MapPin, Home } from "lucide-react";
 import { useState, useEffect } from "react";
 import api from "../../../config/axios";
 import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
+import InputField from "../components/InputField";
+import SelectField from "../components/SelectField";
+import estados from "../../../helpers/estados";
 
 export default function DomicilioForm({ user }) {
     const [loading, setLoading] = useState(false);
@@ -64,13 +67,21 @@ export default function DomicilioForm({ user }) {
     };
 
     return (
-        <div className="bg-gradient-to-br from-gray-50 to-gray-100 rounded-3xl shadow-xl border border-gray-100 p-10">
+        <div className="bg-white rounded-3xl shadow-xl border border-gray-100 p-10">
+            <div className="flex gap-2">
+                <div className="p-1 rounded-full h-10 w-10 bg-red-500/20 text-red-500 flex justify-center items-center">
+                    <Home size={25} />
+                </div>
+                <h1 className="text-4xl font-bold text-gray-800 mb-6">
+                    Datos de Domicilio
+                </h1>
+            </div>
             <div className="flex items-center gap-2 mb-5">
-                <div className="text-violet-500">
+                <div className="text-red-500">
                     <Info />
                 </div>
                 <p className="text-gray-500 text-sm">
-                    Modifique cualquier dato incorrecto utilizando el siguiente
+                    Modifique cualquier dato erróneo utilizando el siguiente
                     formulario.
                 </p>
             </div>
@@ -79,34 +90,55 @@ export default function DomicilioForm({ user }) {
                 className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-6"
                 onSubmit={handleSubmit}
             >
-                <Input label="Calle" value={calle} onChange={setCalle} />
-                <Input
+                <InputField
+                    label="Calle"
+                    value={calle}
+                    onChange={(e) => setCalle(e.target.value)}
+                    icon={<MapPin size={18} />}
+                />
+                <InputField
+                    icon={<Hash size={18} />}
                     label="Número Exterior"
                     value={numero_exterior}
-                    onChange={setNumeroExterior}
+                    onChange={(e) => setNumeroExterior(e.target.value)}
                 />
-                <Input
+                <InputField
+                    icon={<Hash size={18} />}
                     label="Número Interior"
                     value={numero_interior}
-                    onChange={setNumeroInterior}
+                    onChange={(e) => setNumeroInterior(e.target.value)}
                 />
-                <Input label="Colonia" value={colonia} onChange={setColonia} />
-                <Input
+                <InputField
+                    icon={<MapPin size={18} />}
+                    label="Colonia"
+                    value={colonia}
+                    onChange={(e) => setColonia(e.target.value)}
+                />
+                <InputField
+                    icon={<MapPin size={18} />}
                     label="Localidad"
                     value={localidad}
-                    onChange={setLocalidad}
+                    onChange={(e) => setLocalidad(e.target.value)}
                 />
-                <Input
+                <InputField
+                    icon={<MapPin size={18} />}
                     label="Municipio"
                     value={municipio}
-                    onChange={setMunicipio}
+                    onChange={(e) => setMunicipio(e.target.value)}
                 />
-                <Input
-                    label="Entidad Federativa"
+                <SelectField
+                    icon={<MapPin size={18} />}
+                    label="Estado"
+                    options={estados}
                     value={entidad}
-                    onChange={setEntidad}
+                    onChange={(e) => setEntidad(e.target.value)}
                 />
-                <Input label="Código Postal" value={cp} onChange={setCp} />
+                <InputField
+                    label="Código Postal"
+                    value={cp}
+                    onChange={(e) => setCp(e.target.value)}
+                    icon={<Hash size={18} />}
+                />
 
                 <div className="flex justify-end md:col-span-2">
                     <SubmitButton>
@@ -118,22 +150,6 @@ export default function DomicilioForm({ user }) {
                     </SubmitButton>
                 </div>
             </form>
-        </div>
-    );
-}
-
-function Input({ label, value, onChange }) {
-    return (
-        <div className="flex flex-col">
-            <label className="text-md text-gray-500 font-semibold mb-2">
-                {label}
-            </label>
-            <input
-                type="text"
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                className="h-12 px-4 rounded-lg border border-gray-200 bg-white text-gray-800 font-medium shadow-sm focus:outline-none focus:ring-2 focus:ring-violet-400 focus:border-violet-500 transition-all duration-200"
-            />
         </div>
     );
 }

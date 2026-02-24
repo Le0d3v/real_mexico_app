@@ -81,6 +81,7 @@ export default function Login() {
                         <form
                             onSubmit={submit}
                             className="bg-gray-100/20 rounded-lg shadow-xl p-5 text-white"
+                            autoComplete="off"
                         >
                             <div>
                                 <legend className="text-center font-bold text-4xl my-2">

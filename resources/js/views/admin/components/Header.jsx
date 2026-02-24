@@ -40,12 +40,12 @@ export default function Header({ index }) {
                 </div>
 
                 <button
-                    className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 px-5 py-2 rounded-lg font-semibold transition duration-200 disabled:opacity-70 cursor-pointer"
+                    className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 px-5 py-2 rounded-lg font-semibold transition duration-200 disabled:opacity-70 cursor-pointer w-40 justify-center"
                     disabled={cargando}
                     onClick={hanldeClicLogout}
                 >
                     {cargando ? (
-                        <ClipLoader size={18} color="white" />
+                        <ClipLoader size={19} color="white" />
                     ) : (
                         <>
                             <span>Cerrar sesión</span>

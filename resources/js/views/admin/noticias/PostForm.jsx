@@ -72,14 +72,14 @@ export default function PostForm({ post, onSuccess }) {
 
     return (
         <>
-            <h1 className="text-center font-semibold text-xl mb-4">
+            <h1 className="text-center font-semibold text-xl">
                 {post
                     ? "Modifica la publicación llenando el formulario"
                     : "Registra una nueva publicación llenando el formulario"}
             </h1>
 
             <form onSubmit={handleSubmitForm}>
-                <div className="my-5">
+                <div className="my-3">
                     <label className="block font-semibold">
                         Imagen (.jpg / .png)
                     </label>
@@ -105,8 +105,10 @@ export default function PostForm({ post, onSuccess }) {
                     )}
                 </div>
 
-                <div className="my-5">
-                    <label className="block font-semibold">Título</label>
+                <div className="my-3">
+                    <label className="block font-semibold">
+                        Título / Encabezado
+                    </label>
                     <input
                         type="text"
                         value={titulo}
@@ -116,7 +118,7 @@ export default function PostForm({ post, onSuccess }) {
                     />
                 </div>
 
-                <div className="my-5">
+                <div className="mt-3">
                     <label className="block font-semibold">Descripción</label>
                     <textarea
                         value={descripcion}

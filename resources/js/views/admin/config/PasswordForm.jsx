@@ -68,90 +68,142 @@ export default function PasswordForm({ user }) {
     };
 
     return (
-        <div className="bg-gray-800/80 rounded-3xl shadow-xl border border-gray-100 p-10 backdrop-blur-sm">
+        <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+            <div className="flex gap-2">
+                <div className="p-1 rounded-full h-10 w-10 bg-red-500/20 text-red-500 flex justify-center items-center">
+                    <Lock size={25} />
+                </div>
+                <h1 className="text-4xl font-bold text-gray-800 mb-6">
+                    Cambiar Contraseña
+                </h1>
+            </div>
             <div className="flex items-start gap-2 mb-5">
-                <Info className="text-violet-200" />
-                <p className="text-white text-sm">
+                <Info className="text-red-500" />
+                <p className="text-black text-sm">
                     Actualice su contraseña llenando el formulario
                 </p>
             </div>
 
-            <form onSubmit={handleSubmit}>
+            <form
+                className="grid grid-cols-1 gap-y-6 mt-5"
+                onSubmit={handleSubmit}
+            >
                 {/* CONTRASEÑA ACTUAL */}
-                <div className="flex flex-col my-5">
-                    <label className="text-white font-semibold mb-2">
-                        Contraseña Actual
-                    </label>
+                <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-200 focus-within:ring-2 focus-within:ring-red-500 transition">
+                    <div className="text-red-600 mt-1">
+                        <Lock size={18} />
+                    </div>
 
-                    <div className="relative">
-                        <input
-                            type={showPassword.current ? "text" : "password"}
-                            ref={currentPasswordRef}
-                            className="h-12 w-full px-4 rounded-lg border-2 border-gray-200 text-white bg-transparent"
-                        />
+                    <div className="w-full">
+                        <label className="text-sm text-gray-500 block mb-1">
+                            Contraseña Actual
+                        </label>
 
-                        <button
-                            type="button"
-                            onClick={() => toggleVisibility("current")}
-                            className="absolute right-3 top-3 text-white"
-                        >
-                            {showPassword.current ? <EyeOff /> : <Eye />}
-                        </button>
+                        <div className="relative">
+                            <input
+                                type={
+                                    showPassword.current ? "text" : "password"
+                                }
+                                ref={currentPasswordRef}
+                                className="w-full bg-transparent outline-none text-gray-800 font-medium pr-10"
+                                placeholder="Ingrese su contraseña actual"
+                                required
+                            />
+
+                            <button
+                                type="button"
+                                onClick={() => toggleVisibility("current")}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-600 transition"
+                            >
+                                {showPassword.current ? (
+                                    <EyeOff size={18} />
+                                ) : (
+                                    <Eye size={18} />
+                                )}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
                 {/* NUEVA CONTRASEÑA */}
-                <div className="flex flex-col my-5">
-                    <label className="text-white font-semibold mb-2">
-                        Nueva Contraseña
-                    </label>
+                <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-200 focus-within:ring-2 focus-within:ring-red-500 transition">
+                    <div className="text-red-600 mt-1">
+                        <Lock size={18} />
+                    </div>
 
-                    <div className="relative">
-                        <input
-                            type={showPassword.new ? "text" : "password"}
-                            ref={newPasswordRef}
-                            className="h-12 w-full px-4 rounded-lg border-2 border-gray-200 text-white bg-transparent"
-                        />
+                    <div className="w-full">
+                        <label className="text-sm text-gray-500 block mb-1">
+                            Nueva Contraseña
+                        </label>
 
-                        <button
-                            type="button"
-                            onClick={() => toggleVisibility("new")}
-                            className="absolute right-3 top-3 text-white"
-                        >
-                            {showPassword.new ? <EyeOff /> : <Eye />}
-                        </button>
+                        <div className="relative">
+                            <input
+                                type={showPassword.new ? "text" : "password"}
+                                ref={newPasswordRef}
+                                className="w-full bg-transparent outline-none text-gray-800 font-medium pr-10"
+                                placeholder="Ingrese la nueva contraseña"
+                                required
+                            />
+
+                            <button
+                                type="button"
+                                onClick={() => toggleVisibility("new")}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-600 transition"
+                            >
+                                {showPassword.new ? (
+                                    <EyeOff size={18} />
+                                ) : (
+                                    <Eye size={18} />
+                                )}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                {/* CONFIRMAR */}
-                <div className="flex flex-col my-5">
-                    <label className="text-white font-semibold mb-2">
-                        Confirmar Nueva Contraseña
-                    </label>
+                {/* CONFIRMAR CONTRASEÑA */}
+                <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-200 focus-within:ring-2 focus-within:ring-red-500 transition">
+                    <div className="text-red-600 mt-1">
+                        <Lock size={18} />
+                    </div>
 
-                    <div className="relative">
-                        <input
-                            type={showPassword.confirm ? "text" : "password"}
-                            ref={passwordConfirmationRef}
-                            className="h-12 w-full px-4 rounded-lg border-2 border-gray-200 text-white bg-transparent"
-                        />
+                    <div className="w-full">
+                        <label className="text-sm text-gray-500 block mb-1">
+                            Confirmar Nueva Contraseña
+                        </label>
 
-                        <button
-                            type="button"
-                            onClick={() => toggleVisibility("confirm")}
-                            className="absolute right-3 top-3 text-white"
-                        >
-                            {showPassword.confirm ? <EyeOff /> : <Eye />}
-                        </button>
+                        <div className="relative">
+                            <input
+                                type={
+                                    showPassword.confirm ? "text" : "password"
+                                }
+                                ref={passwordConfirmationRef}
+                                className="w-full bg-transparent outline-none text-gray-800 font-medium pr-10"
+                                placeholder="Confirme la nueva contraseña"
+                                required
+                            />
+
+                            <button
+                                type="button"
+                                onClick={() => toggleVisibility("confirm")}
+                                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-600 transition"
+                            >
+                                {showPassword.confirm ? (
+                                    <EyeOff size={18} />
+                                ) : (
+                                    <Eye size={18} />
+                                )}
+                            </button>
+                        </div>
                     </div>
                 </div>
 
-                <div className="flex justify-end">
+                {/* BOTÓN */}
+                <div className="w-full">
                     <SubmitButton>
                         {loading ? (
-                            <ClipLoader color="white" size={23} />
+                            <ClipLoader size={20} color="white" />
                         ) : (
-                            "Actualizar Contraseña"
+                            <span>Actualizar Contraseña</span>
                         )}
                     </SubmitButton>
                 </div>

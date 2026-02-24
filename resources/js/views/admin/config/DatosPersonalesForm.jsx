@@ -1,9 +1,20 @@
 import SubmitButton from "../../components/SubmitButton";
-import { Info } from "lucide-react";
+import {
+    Calendar,
+    Hash,
+    Info,
+    Mail,
+    MapPin,
+    Phone,
+    User,
+    VenusAndMars,
+} from "lucide-react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import api from "../../../config/axios";
 import { useEffect, useState } from "react";
+import InputField from "../components/InputField";
+import SelectField from "../components/SelectField";
 
 export default function DatosPersonalesForm({ user, mutate }) {
     const [loading, setLoading] = useState(false);
@@ -69,8 +80,16 @@ export default function DatosPersonalesForm({ user, mutate }) {
 
     return (
         <div className="bg-white rounded-2xl shadow-lg border border-gray-200 p-8">
+            <div className="flex gap-2">
+                <div className="p-1 rounded-full h-10 w-10 bg-red-500/20 text-red-500 flex justify-center items-center">
+                    <User size={30} />
+                </div>
+                <h1 className="text-4xl font-bold text-gray-800 mb-6">
+                    Datos Personales
+                </h1>
+            </div>
             <div className="flex gap-1 items-center">
-                <Info className="text-violet-500" />
+                <Info className="text-red-500" />
                 <p className="text-gray-600 text-sm">
                     Modifique cualquier dato incorrecto utilizando el siguiente
                     formulario.
@@ -81,50 +100,57 @@ export default function DatosPersonalesForm({ user, mutate }) {
                 className="grid grid-cols-1 md:grid-cols-2 gap-x-6 gap-y-3 mt-5"
                 onSubmit={handleSubmit}
             >
-                <Input label="Nombre" value={name} onChange={setName} />
-                <Input
+                <InputField
+                    icon={<User size={18} />}
+                    label="Nombre (s)"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                />
+                <InputField
+                    icon={<User size={18} />}
                     label="Apellido Paterno"
                     value={apellido_paterno}
-                    onChange={setApellidoPaterno}
+                    onChange={(e) => setApellidoPaterno(e.target.value)}
                 />
-                <Input
+                <InputField
+                    icon={<User size={18} />}
                     label="Apellido Materno"
                     value={apellido_materno}
-                    onChange={setApellidoMaterno}
+                    onChange={(e) => setApellidoMaterno(e.target.value)}
                 />
-                <Input
+                <InputField
+                    icon={<Calendar size={18} />}
                     type="date"
                     label="Fecha de Nacimiento"
                     value={fecha_nacimiento}
-                    onChange={setFechaNacimiento}
+                    onChange={(e) => setFechaNacimiento(e.target.value)}
                 />
-                <Input label="CURP" value={curp} onChange={setCurp} />
+                <InputField
+                    label="CURP"
+                    value={curp}
+                    onChange={(e) => setCurp(e.target.value)}
+                    icon={<Hash size={18} />}
+                />
 
-                <div className="flex flex-col">
-                    <label className="text-gray-700 font-semibold text-lg mb-2">
-                        Género
-                    </label>
-                    <select
-                        className="h-12 px-4 rounded-xl border border-gray-300 bg-gray-600 text-white font-semibold"
-                        value={genero}
-                        onChange={(e) => setGenero(e.target.value)}
-                    >
-                        <option value="">Seleccione una opción</option>
-                        <option value="M">Masculino</option>
-                        <option value="F">Femenino</option>
-                        <option value="O">Otro</option>
-                    </select>
-                </div>
+                <SelectField
+                    icon={<VenusAndMars size={18} />}
+                    label="Género"
+                    options={["M", "F"]}
+                    value={genero}
+                    onChange={(e) => setGenero(e.target.value)}
+                />
 
-                <Input
+                <InputField
+                    icon={<Phone size={18} />}
                     label="Teléfono"
                     value={telefono}
-                    onChange={setTelefono}
+                    onChange={(e) => setTelefono(e.target.value)}
                 />
-                <Input
+                <InputField
+                    icon={<Mail size={18} />}
                     label="Correo Electrónico"
                     value={email}
-                    onChange={setEmail}
+                    onChange={(e) => setEmail(e.target.value)}
                 />
 
                 <div className="w-full md:col-span-2">
@@ -137,23 +163,6 @@ export default function DatosPersonalesForm({ user, mutate }) {
                     </SubmitButton>
                 </div>
             </form>
-        </div>
-    );
-}
-
-// Componente auxiliar
-function Input({ label, value, onChange, type = "text" }) {
-    return (
-        <div className="flex flex-col">
-            <label className="text-gray-700 font-semibold text-lg mb-2">
-                {label}
-            </label>
-            <input
-                type={type}
-                value={value}
-                onChange={(e) => onChange(e.target.value)}
-                className="h-12 px-4 rounded-xl border border-gray-300 bg-gray-600 text-white font-semibold"
-            />
         </div>
     );
 }

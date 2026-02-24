@@ -86,7 +86,10 @@ export default function Tutores() {
                             Administración de Tutores
                         </h1>
                         <p className="text-gray-500">
-                            Gestión de responsables legales de los alumnos
+                            Tutores totales:{" "}
+                            <span className="text-gray-700 font-bold">
+                                {tutores.length}
+                            </span>
                         </p>
                     </div>
 
