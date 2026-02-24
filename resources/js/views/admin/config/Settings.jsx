@@ -1,9 +1,9 @@
 import { Home, Lock, User } from "lucide-react";
-import DatosPersonalesForm from "../components/private/DatosPersonalesForm";
-import DomicilioForm from "../components/private/DomicilioForm";
-import useAuth from "../../hooks/useAuth";
-import Loader from "../components/private/Loader";
-import PasswordForm from "../components/private/PasswordForm";
+import DatosPersonalesForm from "./DatosPersonalesForm";
+import DomicilioForm from "./DomicilioForm";
+import useAuth from "../../../hooks/useAuth";
+import Loader from "../../components/Loader";
+import PasswordForm from "./PasswordForm";
 
 export default function Settings() {
     const { user, mutate } = useAuth({ middleware: "auth" });

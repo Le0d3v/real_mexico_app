@@ -1,4 +1,4 @@
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../../components/SubmitButton";
 import { Info } from "lucide-react";
 import { useState, useEffect } from "react";
 import api from "../../../config/axios";

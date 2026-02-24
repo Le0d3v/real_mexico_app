@@ -1,5 +1,5 @@
 import React from "react";
-import Tittle from "../components/Tittle";
+import Tittle from "../../components/Tittle";
 
 export default function Colegiaturas() {
     const registros = [

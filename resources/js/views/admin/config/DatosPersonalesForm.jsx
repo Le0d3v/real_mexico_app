@@ -1,4 +1,4 @@
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../../components/SubmitButton";
 import { Info } from "lucide-react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";

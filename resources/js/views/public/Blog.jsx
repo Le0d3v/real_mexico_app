@@ -1,9 +1,9 @@
 import React from "react";
 import Tittle from "../components/Tittle";
-import Post from "../components/public/Post";
+import Post from "./Post";
 import api from "../../config/axios";
 import useSWR from "swr";
-import Loader from "../components/private/Loader";
+import Loader from "../components/Loader";
 
 export default function Blog() {
     const fetcher = () => api("/api/posts").then((res) => res.data);

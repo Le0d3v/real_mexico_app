@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { toast } from "react-toastify";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../../components/SubmitButton";
 import usePosts from "../../../hooks/usePost";
 import api from "../../../config/axios";
 

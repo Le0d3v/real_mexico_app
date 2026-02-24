@@ -1,4 +1,4 @@
-import Navigation from "./Navigation";
+import Navigation from "../../admin/components/Navigation";
 import { Bell, User, LogOut, Moon, X } from "lucide-react";
 import { NavLink } from "react-router-dom";
 import { ClipLoader } from "react-spinners";

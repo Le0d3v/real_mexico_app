@@ -9,8 +9,8 @@ import {
     ShieldCheck,
     UserCheck,
 } from "lucide-react";
-import IconContainer from "../components/public/IconContainer";
-import Cuadros from "../components/public/Cuadros";
+import IconContainer from "./IconContainer";
+import Cuadros from "./Cuadros";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -145,7 +145,7 @@ export default function Home() {
                     initial={{ opacity: 0, y: 40 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}   
+                    viewport={{ once: true }}
                 >
                     <div className="w-full h-96 my-5">
                         <iframe

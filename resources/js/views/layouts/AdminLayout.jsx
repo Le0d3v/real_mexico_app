@@ -1,17 +1,17 @@
-import Header from "../components/private/Header";
+import Header from "../admin/components/Header";
 import { User } from "lucide-react";
-import Navigation from "../components/private/Navigation";
+import Navigation from "../admin/components/Navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { useEffect, useState } from "react";
 import Dashboard from "../admin/Dashboard";
-import Settings from "../admin/Settings";
-import News from "../admin/News";
-import Students from "../admin/Students";
-import Colegiaturas from "../admin/Colegiaturas";
-import Tutores from "../admin/Tutores";
+import Settings from "../admin/config/Settings";
+import News from "../admin/noticias/News";
+import Students from "../admin/estudiantes/Students";
+import Colegiaturas from "../admin/colegiaturas/Colegiaturas";
+import Tutores from "../admin/tutores/Tutores";
 import useAuth from "../../hooks/useAuth";
-import Loader from "../components/private/Loader";
+import Loader from "../components/Loader";
 import { ClipLoader } from "react-spinners";
 
 export default function AdminLayout() {

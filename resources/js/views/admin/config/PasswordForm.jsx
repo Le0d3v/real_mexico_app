@@ -1,5 +1,5 @@
 import { Info, Lock, Eye, EyeOff } from "lucide-react";
-import SubmitButton from "../SubmitButton";
+import SubmitButton from "../../components/SubmitButton";
 import api from "../../../config/axios";
 import { useState, useRef } from "react";
 import { ClipLoader } from "react-spinners";

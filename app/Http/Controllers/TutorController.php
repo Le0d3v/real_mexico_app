@@ -55,20 +55,35 @@ class TutorController extends Controller
                 'email' => $request->email,
                 'password' => Hash::make($request->curp),
                 'telefono' => $request->telefono,
-                'domicilio_id' => $domicilio->id, // FK
+                'domicilio_id' => $domicilio->id,
             ]);
 
-            
-           $tutor = $user->tutor()->create([
+            $tutor = $user->tutor()->create([
                 'ocupacion' => $request->ocupacion,
                 'nivel_estudios' => $request->nivel_estudios,
             ]);
+
+            if ($request->filled('estudiantes')) {
+
+                $syncData = [];
+
+                foreach ($request->estudiantes as $estudiante) {
+
+                    $syncData[$estudiante['id']] = [
+                        'parentesco' => $estudiante['parentesco'],
+                        'responsable_pagos' => $estudiante['responsable_pagos'],
+                        'contacto_principal' => $estudiante['contacto_principal'],
+                    ];
+                }
+
+                $tutor->estudiantes()->sync($syncData);
+            }
 
             DB::commit();
 
             return response()->json([
                 'message' => 'Tutor creado correctamente.',
-                'tutor' => $tutor->load('user.domicilio')
+                'tutor' => $tutor->load('user.domicilio', 'estudiantes')
             ], 201);
 
         } catch (\Exception $e) {
@@ -80,7 +95,6 @@ class TutorController extends Controller
                 'error' => $e->getMessage()
             ], 500);
         }
-
     }
 
     /**

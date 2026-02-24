@@ -1,10 +1,10 @@
 import { useState, useMemo, useEffect } from "react";
-import useTutor from "../../hooks/useTutor";
-import Loader from "../components/private/Loader";
-import Modal from "../components/private/Modal";
+import useTutor from "../../../hooks/useTutor";
+import Loader from "../../components/Loader";
+import Modal from "../components/Modal";
 import { CirclePlus, Eye } from "lucide-react";
-import ShowTutor from "../components/private/ShowTutor";
-import CrearTutor from "../components/private/CrearTutor";
+import ShowTutor from "./ShowTutor";
+import CrearTutor from "./CrearTutor";
 
 export default function Tutores() {
     const [open, setOpen] = useState(false);
@@ -269,7 +269,7 @@ export default function Tutores() {
                 onClose={() => {
                     setCreateTutorModal(false);
                 }}
-                size="xl"
+                size="full"
                 title="Registrar un Nuevo Tutor"
             >
                 <CrearTutor onClose={setCreateTutorModal} />

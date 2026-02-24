@@ -1,6 +1,6 @@
 import React from "react";
-import useStudent from "../../hooks/useStudent";
-import Loader from "../components/private/Loader";
+import useStudent from "../../../hooks/useStudent";
+import Loader from "../../components/Loader";
 
 export default function Students() {
     const { estudiantes, isLoading, error } = useStudent();

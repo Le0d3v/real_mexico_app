@@ -1,5 +1,5 @@
-import Header from "../components/public/Header";
-import Footer from "../components/public/Footer";
+import Header from "../public/Header";
+import Footer from "../public/Footer";
 import Home from "../public/Home";
 import Contacto from "../public/Contacto";
 import About from "../public/About";

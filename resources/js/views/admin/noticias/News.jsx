@@ -1,12 +1,11 @@
 import React, { useState, useMemo } from "react";
 import { Search, CirclePlus, Pen, Trash } from "lucide-react";
-import Tittle from "../components/Tittle";
-import Loader from "../components/private/Loader";
-import Modal from "../components/private/Modal";
-import PostForm from "../components/private/PostForm";
+import Loader from "../../components/Loader";
+import Modal from "../components//Modal";
+import PostForm from "./PostForm";
 import Swal from "sweetalert2";
-import usePosts from "../../hooks/usePost";
-import api from "../../config/axios";
+import usePosts from "../../../hooks/usePost";
+import api from "../../../config/axios";
 
 export default function News() {
     const [open, setOpen] = useState(false);
@@ -207,9 +206,7 @@ export default function News() {
                 />
             </Modal>
 
-            <Modal>
-                
-            </Modal>
+            <Modal></Modal>
         </>
     );
 }

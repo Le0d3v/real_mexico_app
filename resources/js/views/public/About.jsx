@@ -9,8 +9,8 @@ import {
     HeartHandshake,
     ShieldCheck,
 } from "lucide-react";
-import FilosofiaCard from "../components/public/FilosofiaCard";
-import PersonalCard from "../components/public/PersonalCard";
+import FilosofiaCard from "./FilosofiaCard";
+import PersonalCard from "./PersonalCard";
 import TituloDark from "./TituloDark";
 
 export default function About() {

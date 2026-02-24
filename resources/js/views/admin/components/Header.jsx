@@ -1,6 +1,5 @@
 import { School, Menu, Bell, LogOut, Video } from "lucide-react";
 import { useState } from "react";
-import ResponsiveMenu from "./ResponsiveMenu";
 import { ClipLoader } from "react-spinners";
 import useAuth from "../../../hooks/useAuth";
 import useIRM from "../../../hooks/useIRM";
