@@ -16,7 +16,10 @@ import estados from "../../../helpers/estados";
 import { useState, useEffect, useMemo } from "react";
 import { ClipLoader } from "react-spinners";
 import useStudent from "../../../hooks/useStudent";
-import Loader from "../../components/Loader";
+import FindStudent from "./FindStudent";
+import AssignedStudentCard from "./AssignedStudentCard";
+import InputField from "../components/InputField";
+import SelectField from "../components/SelectField";
 
 export default function CrearTutor({ onClose }) {
     const { createTutor } = useTutor();
@@ -72,17 +75,24 @@ export default function CrearTutor({ onClose }) {
 
     const handleRelationChange = (id, field, value) => {
         setSelectedStudents((prev) =>
-            prev.map((student) =>
-                student.id === id
-                    ? {
-                          ...student,
-                          relacion: {
-                              ...student.relacion,
-                              [field]: value,
-                          },
-                      }
-                    : student,
-            ),
+            prev.map((student) => {
+                if (student.id !== id) return student;
+
+                const updatedRelacion = {
+                    ...student.relacion,
+                    [field]: value,
+                };
+
+                // 🔥 Si cambia parentesco y NO es "Otro", limpiar parentesco_otro
+                if (field === "parentesco" && value !== "Otro") {
+                    updatedRelacion.parentesco_otro = "";
+                }
+
+                return {
+                    ...student,
+                    relacion: updatedRelacion,
+                };
+            }),
         );
     };
 
@@ -340,72 +350,14 @@ export default function CrearTutor({ onClose }) {
                                     )}
 
                                 {filteredStudents.map((student) => (
-                                    <div
-                                        key={student.id}
-                                        className="
-                                group p-6 rounded-2xl bg-white
-                                border border-gray-200
-                                hover:border-red-400
-                                hover:shadow-lg
-                                transition-all duration-300
-                                flex items-center justify-between
-                                mb-4
-                            "
-                                    >
-                                        <div>
-                                            <p className="font-semibold text-xl text-gray-700">
-                                                {student.nombre}{" "}
-                                                {student.apellido_paterno}{" "}
-                                                {student.apellido_materno}
-                                            </p>
-
-                                            <div className="flex gap-10 mt-5">
-                                                <div className="flex flex-col items-center">
-                                                    <div className="flex items-center gap-2 text-indigo-600 mb-2">
-                                                        <GraduationCap
-                                                            size={18}
-                                                        />
-                                                        <span className="text-sm font-medium text-gray-600">
-                                                            Grado
-                                                        </span>
-                                                    </div>
-
-                                                    <span className="px-4 py-2 rounded-xl bg-indigo-100 text-indigo-700 font-semibold text-lg shadow-sm">
-                                                        {student.grado}
-                                                    </span>
-                                                </div>
-
-                                                <div className="flex flex-col items-center">
-                                                    <div className="flex items-center gap-2 text-violet-600 mb-2">
-                                                        <Users size={18} />
-                                                        <span className="text-sm font-medium text-gray-600">
-                                                            Grupo
-                                                        </span>
-                                                    </div>
-
-                                                    <span className="px-4 py-2 rounded-xl bg-violet-100 text-violet-700 font-semibold text-lg shadow-sm">
-                                                        {student.grupo}
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                        <button
-                                            type="button"
-                                            onClick={() =>
-                                                handleAddStudent(student)
-                                            }
-                                            className="px-5 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 transition shadow-sm cursor-pointer"
-                                        >
-                                            Asignar
-                                        </button>
-                                    </div>
+                                    <FindStudent
+                                        student={student}
+                                        handleAddStudent={handleAddStudent}
+                                    />
                                 ))}
                             </div>
                         </div>
                     </div>
-
-                    {/* ESTUDIANTES ASIGNADOS */}
                     <div className="w-full flex flex-col">
                         <h1 className="text-center mb-3 text-xl font-semibold text-red-500">
                             Estudiantes Asignados
@@ -419,192 +371,16 @@ export default function CrearTutor({ onClose }) {
                                     </p>
                                 ) : (
                                     selectedStudents.map((student) => (
-                                        <div
+                                        <AssignedStudentCard
                                             key={student.id}
-                                            className="
-                                    p-6 rounded-2xl
-                                    bg-gradient-to-br from-white to-gray-50
-                                    border border-gray-200
-                                    shadow-md
-                                    hover:shadow-lg
-                                    transition-all duration-300
-                                    mb-5
-                                "
-                                        >
-                                            <div className="flex justify-between items-start border-b border-gray-100 pb-4">
-                                                <div>
-                                                    <p className="font-semibold text-lg text-gray-800">
-                                                        {student.nombre}{" "}
-                                                        {
-                                                            student.apellido_paterno
-                                                        }
-                                                    </p>
-                                                    <p className="text-sm text-gray-500">
-                                                        {student.grado} -{" "}
-                                                        {student.grupo}
-                                                    </p>
-                                                </div>
-
-                                                <button
-                                                    type="button"
-                                                    onClick={() =>
-                                                        handleRemoveStudent(
-                                                            student.id,
-                                                        )
-                                                    }
-                                                    className="px-4 py-2 rounded-xl bg-red-500 text-white hover:bg-red-600 transition shadow-sm cursor-pointer"
-                                                >
-                                                    Eliminar
-                                                </button>
-                                            </div>
-
-                                            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-5">
-                                                {/* Parentesco */}
-                                                <div>
-                                                    <label className="text-sm text-gray-600">
-                                                        Parentesco
-                                                    </label>
-                                                    <select
-                                                        value={
-                                                            student.relacion
-                                                                .parentesco
-                                                        }
-                                                        onChange={(e) =>
-                                                            handleRelationChange(
-                                                                student.id,
-                                                                "parentesco",
-                                                                e.target.value,
-                                                            )
-                                                        }
-                                                        className="
-                                                w-full border border-gray-300
-                                                rounded-xl px-4 py-2 mt-2
-                                                focus:outline-none
-                                                focus:ring-2
-                                                focus:ring-red-500
-                                                transition
-                                            "
-                                                    >
-                                                        <option value="">
-                                                            Seleccione
-                                                        </option>
-                                                        {[
-                                                            "Padre",
-                                                            "Madre",
-                                                            "Abuelo",
-                                                            "Abuela",
-                                                            "Tío",
-                                                            "Tía",
-                                                            "Hermano",
-                                                            "Hermana",
-                                                            "Otro",
-                                                        ].map((opt) => (
-                                                            <option
-                                                                key={opt}
-                                                                value={opt}
-                                                            >
-                                                                {opt}
-                                                            </option>
-                                                        ))}
-                                                    </select>
-                                                </div>
-
-                                                {/* Radios */}
-                                                <div className="space-y-4">
-                                                    <div>
-                                                        <label className="text-sm text-gray-600">
-                                                            Responsable de Pagos
-                                                        </label>
-                                                        <div className="flex gap-6 mt-2 text-gray-700">
-                                                            <label>
-                                                                <input
-                                                                    type="radio"
-                                                                    checked={
-                                                                        student
-                                                                            .relacion
-                                                                            .responsable_pagos ===
-                                                                        true
-                                                                    }
-                                                                    onChange={() =>
-                                                                        handleRelationChange(
-                                                                            student.id,
-                                                                            "responsable_pagos",
-                                                                            true,
-                                                                        )
-                                                                    }
-                                                                />{" "}
-                                                                Sí
-                                                            </label>
-                                                            <label>
-                                                                <input
-                                                                    type="radio"
-                                                                    checked={
-                                                                        student
-                                                                            .relacion
-                                                                            .responsable_pagos ===
-                                                                        false
-                                                                    }
-                                                                    onChange={() =>
-                                                                        handleRelationChange(
-                                                                            student.id,
-                                                                            "responsable_pagos",
-                                                                            false,
-                                                                        )
-                                                                    }
-                                                                />{" "}
-                                                                No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-
-                                                    <div>
-                                                        <label className="text-sm text-gray-600">
-                                                            Contacto Principal
-                                                        </label>
-                                                        <div className="flex gap-6 mt-2 text-gray-700">
-                                                            <label>
-                                                                <input
-                                                                    type="radio"
-                                                                    checked={
-                                                                        student
-                                                                            .relacion
-                                                                            .contacto_principal ===
-                                                                        true
-                                                                    }
-                                                                    onChange={() =>
-                                                                        handleRelationChange(
-                                                                            student.id,
-                                                                            "contacto_principal",
-                                                                            true,
-                                                                        )
-                                                                    }
-                                                                />{" "}
-                                                                Sí
-                                                            </label>
-                                                            <label>
-                                                                <input
-                                                                    type="radio"
-                                                                    checked={
-                                                                        student
-                                                                            .relacion
-                                                                            .contacto_principal ===
-                                                                        false
-                                                                    }
-                                                                    onChange={() =>
-                                                                        handleRelationChange(
-                                                                            student.id,
-                                                                            "contacto_principal",
-                                                                            false,
-                                                                        )
-                                                                    }
-                                                                />{" "}
-                                                                No
-                                                            </label>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
+                                            student={student}
+                                            handleRemoveStudent={
+                                                handleRemoveStudent
+                                            }
+                                            handleRelationChange={
+                                                handleRelationChange
+                                            }
+                                        />
                                     ))
                                 )}
                             </div>
@@ -612,7 +388,6 @@ export default function CrearTutor({ onClose }) {
                     </div>
                 </div>
             </section>
-
             <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-between gap-4 items-center">
                 <h1 className="text-3xl font-semibold text-red-400">
                     Acciones
@@ -639,52 +414,5 @@ export default function CrearTutor({ onClose }) {
                 </div>
             </section>
         </form>
-    );
-}
-
-function InputField({ icon, label, type = "text", value, onChange }) {
-    return (
-        <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-200 focus-within:ring-2 focus-within:ring-red-500 transition">
-            <div className="text-red-600 mt-1">{icon}</div>
-            <div className="w-full">
-                <label className="text-sm text-gray-500 block mb-1">
-                    {label}
-                </label>
-                <input
-                    type={type}
-                    className="w-full bg-transparent outline-none text-gray-800 font-medium"
-                    placeholder={`Ingrese ${label.toLowerCase()}`}
-                    value={value}
-                    onChange={onChange}
-                    required
-                />
-            </div>
-        </div>
-    );
-}
-
-function SelectField({ icon, label, options, value, onChange }) {
-    return (
-        <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-200 focus-within:ring-2 focus-within:ring-red-500 transition">
-            <div className="text-red-600 mt-1">{icon}</div>
-            <div className="w-full">
-                <label className="text-sm text-gray-500 block mb-1">
-                    {label}
-                </label>
-                <select
-                    className="w-full bg-transparent outline-none text-gray-800 font-medium rounded"
-                    value={value}
-                    onChange={onChange}
-                    required
-                >
-                    <option value="">Seleccione una opción</option>
-                    {options.map((opt, index) => (
-                        <option key={index} value={opt} className="p-1 rounded">
-                            {opt}
-                        </option>
-                    ))}
-                </select>
-            </div>
-        </div>
     );
 }
