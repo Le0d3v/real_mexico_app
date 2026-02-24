@@ -118,6 +118,20 @@ class TutorController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+        $tutor = User::find($id);
+
+        try {
+            $tutor->delete();
+            return response()->json([
+                'message' => 'Publicación eliminada correctamente.'
+            ]);
+
+        } catch (\Exception $e) {
+
+            return response()->json([
+                'message' => 'Error al eliminar la publicación.',
+                "error" => $e->getMessage()
+            ], 500);
+        }
     }
 }

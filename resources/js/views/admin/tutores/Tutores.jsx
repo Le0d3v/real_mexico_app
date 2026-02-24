@@ -79,7 +79,7 @@ export default function Tutores() {
 
     return (
         <>
-            <div className="p-3 min-h-screen">
+            <div className="p-1 min-h-screen">
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h1 className="text-3xl font-bold text-gray-800">
@@ -101,7 +101,7 @@ export default function Tutores() {
                     <div className="flex gap-4 flex-wrap w-full">
                         <input
                             type="text"
-                            placeholder="Buscar por nombre, teléfono o correo..."
+                            placeholder="Buscar por nombre, teléfono o correo electrónico..."
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
@@ -124,7 +124,9 @@ export default function Tutores() {
                             <tr>
                                 <th className="px-6 py-3">Nombre</th>
                                 <th className="px-6 py-3">Teléfono</th>
-                                <th className="px-6 py-3">Correo</th>
+                                <th className="px-6 py-3">
+                                    Correo Electrónico
+                                </th>
                                 <th className="px-6 py-3 text-center">
                                     Alumnos
                                 </th>
@@ -260,7 +262,9 @@ export default function Tutores() {
                 size="full"
                 title="Ver Información del Tutor"
             >
-                {selectedTutor && <ShowTutor tutor={selectedTutor} />}
+                {selectedTutor && (
+                    <ShowTutor tutor={selectedTutor} onClose={setOpen} />
+                )}
             </Modal>
 
             <Modal

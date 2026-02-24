@@ -10,11 +10,49 @@ import {
     VenusAndMars,
 } from "lucide-react";
 import EstudianteCard from "./EstudianteCard";
+import Swal from "sweetalert2";
+import useTutor from "../../../hooks/useTutor";
 
-export default function ShowTutor({ tutor }) {
+export default function ShowTutor({ tutor, onClose }) {
     if (!tutor) return null;
 
     const domicilio = tutor.domicilio || {};
+
+    const { deleteTutor } = useTutor();
+
+    const handleDelete = async (id) => {
+        const result = await Swal.fire({
+            title: "¿Estás seguro?",
+            text: "Al eliminar el tutor, se perderán las relaciones con estudiantes asociados a ese tutor. Esta acción no se puede deshacer.",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#d33",
+            cancelButtonColor: "#3085d6",
+            cancelButtonText: "Cancelar",
+            confirmButtonText: "Sí, eliminar",
+            reverseButtons: true,
+        });
+
+        if (!result.isConfirmed) return;
+
+        try {
+            const data = await deleteTutor(id);
+
+            await Swal.fire({
+                title: "Eliminado",
+                text: data.message,
+                icon: "success",
+            });
+
+            onClose(false);
+        } catch (error) {
+            await Swal.fire({
+                title: "Error",
+                text: "No se pudo eliminar.",
+                icon: "error",
+            });
+        }
+    };
 
     return (
         <div className="space-y-8">
@@ -139,7 +177,9 @@ export default function ShowTutor({ tutor }) {
             </section>
             <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
                 <div className="flex items-center gap-3 border-b border-b-gray-300 pb-4">
-                    <Users className="w-6 h-6 text-red-600" />
+                    <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
+                        <Users className="w-6 h-6 text-red-600" />
+                    </div>
                     <h2 className="text-xl font-semibold text-gray-800">
                         Estudiantes Asociados
                     </h2>
@@ -156,6 +196,27 @@ export default function ShowTutor({ tutor }) {
                         No hay estudiantes asociados a este tutor.
                     </div>
                 )}
+            </section>
+            <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-between gap-4 items-center">
+                <h1 className="text-3xl font-semibold text-red-400">
+                    Acciones
+                </h1>
+                <div className="flex gap-5">
+                    <button
+                        type="button"
+                        className="px-6 py-2 rounded-xl border bg-red-500 text-white hover:bg-red-600 transition cursor-pointer font-semibold"
+                        onClick={() => handleDelete(tutor.id)}
+                    >
+                        Eliminar Tutor
+                    </button>
+                    <button
+                        type="button"
+                        className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer"
+                        onClick={() => onClose(false)}
+                    >
+                        Cerrar
+                    </button>
+                </div>
             </section>
         </div>
     );

@@ -134,7 +134,7 @@ export default function Dashboard() {
                     </button>
 
                     <button className="bg-gray-200 text-gray-800 py-4 rounded-xl shadow hover:bg-gray-300 transition font-semibold">
-                        Ver Reportes
+                        Nueva Noticia
                     </button>
                 </div>
             </div>

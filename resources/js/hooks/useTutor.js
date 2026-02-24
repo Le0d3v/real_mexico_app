@@ -22,10 +22,21 @@ export default function useTutor() {
         }
     };
 
+    const deleteTutor = async (id) => {
+        try {
+            const response = await api.delete(`/api/tutores/${id}`);
+            await mutate();
+            return response.data;
+        } catch (error) {
+            throw error.response || error;
+        }
+    };
+
     return {
         tutores,
         isLoading,
         error,
         createTutor,
+        deleteTutor,
     };
 }
