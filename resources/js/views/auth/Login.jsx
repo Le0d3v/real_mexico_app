@@ -54,7 +54,7 @@ export default function Login() {
                         </p>
                         <div className="hidden md:flex gap-5 mt-5">
                             {socialLinks.map((link, i) => (
-                                <a href={link.url} id={i}>
+                                <a href={link.url} key={i}>
                                     {link.icon}
                                 </a>
                             ))}

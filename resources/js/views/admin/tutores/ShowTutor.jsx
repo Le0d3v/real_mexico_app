@@ -12,6 +12,7 @@ import {
 import EstudianteCard from "./EstudianteCard";
 import Swal from "sweetalert2";
 import useTutor from "../../../hooks/useTutor";
+import InfoItem from "../components/InfoItem";
 
 export default function ShowTutor({ tutor, onClose }) {
     if (!tutor) return null;
@@ -218,20 +219,6 @@ export default function ShowTutor({ tutor, onClose }) {
                     </button>
                 </div>
             </section>
-        </div>
-    );
-}
-
-function InfoItem({ icon, label, value }) {
-    return (
-        <div className="flex items-start gap-3 bg-gray-50 rounded-xl p-4 border border-gray-200 hover:shadow-sm transition">
-            <div className="text-red-600 mt-1">{icon}</div>
-            <div>
-                <p className="text-sm text-gray-500">{label}</p>
-                <p className="text-base font-semibold text-gray-800 break-words">
-                    {value || "N/A"}
-                </p>
-            </div>
         </div>
     );
 }

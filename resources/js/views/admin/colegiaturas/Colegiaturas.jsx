@@ -36,8 +36,7 @@ export default function Colegiaturas() {
     const totalPendiente = registros.reduce((acc, r) => acc + r.pendiente, 0);
 
     return (
-        <div className="p-8 bg-gray-100 min-h-screen">
-            {/* Resumen financiero */}
+        <div className="bg-gray-100 min-h-screen">
             <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-white p-6 rounded-xl shadow border-l-4 border-black">
                     <p className="text-gray-500 text-sm">Recaudado del mes</p>

@@ -26,7 +26,6 @@ class EstudianteResource extends JsonResource
             "estado" => $this->estado,
             "tipo_sangre" => $this->tipo_sangre,
             "entidad_nacimiento" => $this->entidad_nacimiento,
-            "tipo_sangre" => $this->tipo_sangre,
             "grado" => $this->grado->grado,
             "grupo" => $this->grupo->grupo,
             

@@ -33,7 +33,7 @@ export default function Header({ setPage, page }) {
                 </div>
                 <div className="hidden md:flex gap-5">
                     {socialLinks.map((link, i) => (
-                        <a href={link.url} id={i}>
+                        <a href={link.url} key={i}>
                             {link.icon}
                         </a>
                     ))}
