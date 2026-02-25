@@ -12,7 +12,7 @@ class UsersSeeder extends Seeder
     {
         // Administrador único
         DB::table('users')->insert([
-            'name' => 'Administrador',
+            'name' => 'Admin',
             'apellido_paterno' => 'Sistema',
             'apellido_materno' => 'Escolar',
             'email' => 'admin@escuela.com',

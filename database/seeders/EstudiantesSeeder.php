@@ -21,6 +21,7 @@ class EstudiantesSeeder extends Seeder
                 'apellido_materno' => 'Lopez',
                 'fecha_nacimiento' => now()->subYears(rand(6, 10))->format('Y-m-d'),
                 'matricula' => $matricula,
+                'estado' => 'Activo',
                 'curp' => "CURP" . str_pad($i, 3, '0', STR_PAD_LEFT),
                 'genero' => $i % 2 === 0 ? 'Masculino' : 'Femenino',
                 'entidad_nacimiento' => 'Estado',

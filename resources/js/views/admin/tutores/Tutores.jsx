@@ -2,7 +2,7 @@ import { useState, useMemo, useEffect } from "react";
 import useTutor from "../../../hooks/useTutor";
 import Loader from "../../components/Loader";
 import Modal from "../components/Modal";
-import { CirclePlus, Eye } from "lucide-react";
+import { CirclePlus, Eye, Search } from "lucide-react";
 import ShowTutor from "./ShowTutor";
 import CrearTutor from "./CrearTutor";
 
@@ -25,7 +25,6 @@ export default function Tutores() {
     const filteredTutores = useMemo(() => {
         let data = [...tutores];
 
-        // 🔎 Filtro por búsqueda
         if (search.trim()) {
             const term = search.toLowerCase();
 
@@ -44,7 +43,6 @@ export default function Tutores() {
             });
         }
 
-        // 📅 Ordenamiento por fecha
         data.sort((a, b) => {
             const dateA = new Date(a.created_at);
             const dateB = new Date(b.created_at);
@@ -102,13 +100,19 @@ export default function Tutores() {
                 </div>
                 <div className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200 flex gap-5">
                     <div className="flex gap-4 flex-wrap w-full">
-                        <input
-                            type="text"
-                            placeholder="Buscar por nombre, teléfono o correo electrónico..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                        />
+                        <div className="relative flex-1">
+                            <Search
+                                size={18}
+                                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Buscar Tutor por nombre, teléfono o correo electrónico..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="w-full flex-1 border border-gray-300 rounded-lg pl-10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                            />
+                        </div>
                     </div>
                     <div>
                         <select
