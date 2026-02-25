@@ -1,19 +1,11 @@
+import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import SubmitButton from "../components/SubmitButton";
 import { Link } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { useState } from "react";
-import {
-    Facebook,
-    Instagram,
-    Mail,
-    Twitter,
-    Youtube,
-    Lock,
-    Eye,
-    EyeOff,
-} from "lucide-react";
+import socialLinks from "../../helpers/socialLinks";
 
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
@@ -41,7 +33,7 @@ export default function Login() {
                         <img
                             src="/img/logo.png"
                             alt="imagen-logo"
-                            className="w-20"
+                            className="w-36 md:w-20"
                         />
                     </Link>
                     <h1 className="hidden md:block text-xl font-bold text-white">
@@ -61,10 +53,11 @@ export default function Login() {
                             magnam ipsam neque amet.
                         </p>
                         <div className="hidden md:flex gap-5 mt-5">
-                            <Facebook className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer text-white" />
-                            <Instagram className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer text-white" />
-                            <Twitter className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer text-white" />
-                            <Youtube className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer text-white" />
+                            {socialLinks.map((link, i) => (
+                                <a href={link.url} id={i}>
+                                    {link.icon}
+                                </a>
+                            ))}
                         </div>
                         <div className="flex justify-center mt-8">
                             <div className="flex gap-5">
@@ -157,27 +150,14 @@ export default function Login() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="flex items-center gap-1 mt-7 md:mt-5">
-                                <input
-                                    id="remember"
-                                    type="checkbox"
-                                    className="w-4 h-4 accent-blue-600 focus:ring-2 focus:ring-blue-500"
-                                />
-                                <label
-                                    htmlFor="remember"
-                                    className="text-white cursor-pointer select-none"
-                                >
-                                    Mantener mi sesión abierta
-                                </label>
-                            </div>
                             <SubmitButton cargando={cargando}>
                                 Iniciar Sesión
                             </SubmitButton>
                         </form>
                     </div>
                 </div>
-                <p className="text-sm text-center text-white mt-10">
-                    Instituto Real de México 2025. Todos los Derechos Reservados
+                <p className="text-sm text-center text-white mt-5 md:mt-15">
+                    Instituto Real de México 2026. Todos los Derechos Reservados
                 </p>
             </div>
             <ToastContainer />

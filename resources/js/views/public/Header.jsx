@@ -32,8 +32,10 @@ export default function Header({ setPage, page }) {
                     </div>
                 </div>
                 <div className="hidden md:flex gap-5">
-                    {socialLinks.map((link) => (
-                        <a href={link.url}>{link.icon}</a>
+                    {socialLinks.map((link, i) => (
+                        <a href={link.url} id={i}>
+                            {link.icon}
+                        </a>
                     ))}
                 </div>
                 <button

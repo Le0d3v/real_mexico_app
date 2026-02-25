@@ -1,7 +1,8 @@
 import { Link } from "react-router-dom";
 import MobileNavLink from "./MobileNavLink";
-import { X, Facebook, Instagram, Twitter, Youtube } from "lucide-react";
+import { X } from "lucide-react";
 import { useEffect } from "react";
+import socialLinks from "../../helpers/socialLinks";
 
 export default function MobileMenu({ open, setOpen, page, setPage }) {
     useEffect(() => {
@@ -18,7 +19,6 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
 
     return (
         <>
-            {/* Overlay */}
             <div
                 className={`fixed inset-0 bg-black/70 backdrop-blur-sm z-40 transition-opacity duration-300 ${
                     open ? "opacity-100 visible" : "opacity-0 invisible"
@@ -26,7 +26,6 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
                 onClick={() => setOpen(false)}
             />
 
-            {/* Drawer */}
             <aside
                 className={`fixed top-0 right-0 h-screen w-full max-w-md
                 bg-gradient-to-b from-[#0f0f0f] to-[#1a1a1a]
@@ -35,7 +34,6 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
                 flex flex-col
                 ${open ? "translate-x-0" : "translate-x-full"}`}
             >
-                {/* Header */}
                 <div className="flex justify-between items-center p-3 border-b border-yellow-400/40">
                     <div>
                         <h2 className="text-3xl font-bold text-yellow-400">
@@ -54,8 +52,6 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
                         <X size={26} />
                     </button>
                 </div>
-
-                {/* Navigation */}
                 <nav className="flex-1 overflow-y-auto mt-6 px-6 pb-8">
                     <ul className="flex flex-col gap-2 text-[17px]">
                         <li>
@@ -129,7 +125,6 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
                             </MobileNavLink>
                         </li>
 
-                        {/* CTA Login */}
                         <li className="mt-4">
                             <Link
                                 to="/login"
@@ -142,37 +137,17 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
                     </ul>
                 </nav>
 
-                {/* Footer Social */}
                 <div className="mt-auto p-6 border-t border-white/10">
                     <p className="text-sm text-gray-400 mb-4">
                         Síguenos en redes sociales
                     </p>
 
                     <div className="flex justify-between text-gray-300">
-                        <a
-                            href="#"
-                            className="hover:text-yellow-400 transition"
-                        >
-                            <Facebook size={22} />
-                        </a>
-                        <a
-                            href="#"
-                            className="hover:text-yellow-400 transition"
-                        >
-                            <Instagram size={22} />
-                        </a>
-                        <a
-                            href="#"
-                            className="hover:text-yellow-400 transition"
-                        >
-                            <Twitter size={22} />
-                        </a>
-                        <a
-                            href="#"
-                            className="hover:text-yellow-400 transition"
-                        >
-                            <Youtube size={22} />
-                        </a>
+                        {socialLinks.map((link, i) => (
+                            <a href={link.url} id="i">
+                                {link.icon}
+                            </a>
+                        ))}
                     </div>
                 </div>
             </aside>
