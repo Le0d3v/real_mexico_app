@@ -4,6 +4,8 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
+use function Laravel\Prompts\table;
+
 return new class extends Migration
 {
     /**
@@ -18,6 +20,7 @@ return new class extends Migration
             $table->string('apellido_materno', 45);
             $table->date('fecha_nacimiento');
             $table->char('curp', 18)->unique();
+            $table->char('matricula', 10)->unique();
             $table->enum('genero', ['Masculino', 'Femenino']);
             $table->string('entidad_nacimiento', 45);
             $table->enum('tipo_sangre', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
