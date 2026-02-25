@@ -1,15 +1,16 @@
 import { useState } from "react";
 import NavLink from "./NavLink";
 import MobileMenu from "./MobileMenu";
-import { Facebook, Instagram, Twitter, Youtube, Menu } from "lucide-react";
+import { Menu } from "lucide-react";
+import socialLinks from "../../helpers/socialLinks";
 import { Link } from "react-router-dom";
+import TikTok from "./TikTok";
 
 export default function Header({ setPage, page }) {
     const [open, setOpen] = useState(false);
 
     return (
         <header className="sticky top-0 z-50 group">
-            {/* Header institucional */}
             <div className="bg-gray-100 border-b-4 border-yellow-400 px-4 md:px-5 py-2 flex justify-between items-center">
                 <div className="flex items-center gap-3 md:gap-4">
                     <img
@@ -31,10 +32,9 @@ export default function Header({ setPage, page }) {
                     </div>
                 </div>
                 <div className="hidden md:flex gap-5">
-                    <Facebook className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer" />
-                    <Instagram className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer" />
-                    <Twitter className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer" />
-                    <Youtube className="hover:text-yellow-400 transition hover:-translate-y-1 cursor-pointer" />
+                    {socialLinks.map((link) => (
+                        <a href={link.url}>{link.icon}</a>
+                    ))}
                 </div>
                 <button
                     onClick={() => setOpen(true)}

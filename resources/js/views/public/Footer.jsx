@@ -8,13 +8,13 @@ import {
     Youtube,
 } from "lucide-react";
 
+import socialLinks from "../../helpers/socialLinks";
+
 export default function Footer() {
     return (
         <footer className="w-full bg-gradient-to-br from-red-700 via-red-600 to-red-800 text-white">
-            {/* Contenido Principal */}
             <div className="max-w-7xl mx-auto px-6 md:px-20 py-16">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-12">
-                    {/* Marca */}
                     <div>
                         <div className="flex items-center gap-4">
                             <img
@@ -50,33 +50,16 @@ export default function Footer() {
                             </h3>
 
                             <div className="space-y-4">
-                                <a
-                                    href="#"
-                                    className="flex items-center gap-3 text-red-100 hover:text-yellow-400 transition hover:font-bold hover:-translate-y-1"
-                                >
-                                    <Facebook size={18} /> Facebook
-                                </a>
-
-                                <a
-                                    href="#"
-                                    className="flex items-center gap-3 text-red-100 hover:text-yellow-400 transition hover:font-bold hover:-translate-y-1"
-                                >
-                                    <Instagram size={18} /> Instagram
-                                </a>
-
-                                <a
-                                    href="#"
-                                    className="flex items-center gap-3 text-red-100 hover:text-yellow-400 transition hover:font-bold hover:-translate-y-1"
-                                >
-                                    <Twitter size={18} /> Twitter
-                                </a>
-
-                                <a
-                                    href="#"
-                                    className="flex items-center gap-3 text-red-100 hover:text-yellow-400 transition hover:font-bold hover:-translate-y-1"
-                                >
-                                    <Youtube size={18} /> YouTube
-                                </a>
+                                {socialLinks.map((link, i) => (
+                                    <a
+                                        href={link.url}
+                                        id={i}
+                                        className="flex items-center gap-3 text-red-100 hover:text-yellow-400 transition hover:font-bold hover:-translate-y-1"
+                                    >
+                                        {link.icon}
+                                        <p>{link.name}</p>
+                                    </a>
+                                ))}
                             </div>
                         </div>
                     </div>

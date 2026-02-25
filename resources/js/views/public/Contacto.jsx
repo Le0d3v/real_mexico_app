@@ -1,19 +1,17 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import TituloDark from "./TituloDark";
 import {
     Clock,
-    Facebook,
-    Instagram,
     Mail,
     MapPin,
     PhoneCall,
-    Twitter,
-    Youtube,
     HelpCircle,
     Send,
     ChevronDown,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import preguntas from "../../helpers/preguntas";
+import socialLinks from "../../helpers/socialLinks";
 
 export default function Contacto() {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -22,32 +20,8 @@ export default function Contacto() {
         setActiveIndex(activeIndex === index ? null : index);
     };
 
-    const preguntas = [
-        {
-            pregunta: "¿Cuál es el proceso de inscripción?",
-            respuesta:
-                "El proceso incluye solicitud, entrega de documentos, evaluación diagnóstica y confirmación de inscripción.",
-        },
-        {
-            pregunta: "¿Qué documentos necesito?",
-            respuesta:
-                "Acta de nacimiento, CURP, comprobante de domicilio y boleta anterior.",
-        },
-        {
-            pregunta: "¿Ofrecen programa bilingüe?",
-            respuesta:
-                "Sí, contamos con programa bilingüe progresivo desde nivel preescolar.",
-        },
-        {
-            pregunta: "¿Cuáles son las formas de pago?",
-            respuesta:
-                "Aceptamos transferencia bancaria, tarjeta y pagos en ventanilla.",
-        },
-    ];
-
     return (
         <>
-            {/* HERO OSCURO */}
             <section className="bg-slate-900 text-white py-10 px-6 md:px-20">
                 <motion.div
                     initial={{ opacity: 0, y: 30 }}
@@ -64,10 +38,8 @@ export default function Contacto() {
                 </motion.div>
             </section>
 
-            {/* CONTENIDO CLARO SUAVIZADO */}
             <section className="bg-gray-100 py-20 px-6 md:px-20">
                 <div className="max-w-7xl mx-auto grid md:grid-cols-2 gap-16">
-                    {/* FORMULARIO */}
                     <motion.div
                         initial={{ opacity: 0, x: -40 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -100,7 +72,6 @@ export default function Contacto() {
                         </form>
                     </motion.div>
 
-                    {/* INFORMACIÓN */}
                     <motion.div
                         initial={{ opacity: 0, x: 40 }}
                         whileInView={{ opacity: 1, x: 0 }}
@@ -168,17 +139,15 @@ export default function Contacto() {
                     </h2>
 
                     <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
-                        {[Facebook, Instagram, Youtube, Twitter].map(
-                            (Icon, i) => (
-                                <a
-                                    key={i}
-                                    href="#"
-                                    className="flex flex-col items-center justify-center bg-slate-800 hover:bg-red-500 transition p-6 rounded-2xl duration-300 shadow-lg"
-                                >
-                                    <Icon size={28} />
-                                </a>
-                            ),
-                        )}
+                        {socialLinks.map((link, i) => (
+                            <a
+                                key={i}
+                                href={link.url}
+                                className="flex flex-col items-center justify-center bg-slate-800 hover:bg-red-500 transition p-6 rounded-2xl duration-300 shadow-lg"
+                            >
+                                {link.icon}
+                            </a>
+                        ))}
                     </div>
                 </motion.div>
             </section>

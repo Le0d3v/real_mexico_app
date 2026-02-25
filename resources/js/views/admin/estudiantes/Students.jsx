@@ -9,15 +9,17 @@ export default function Students() {
     if (error) return <p>Error al cargar tutores</p>;
 
     return (
-        <div className="p-8 bg-gray-100 min-h-screen">
-            {/* Encabezado administrativo */}
+        <div className=" bg-gray-100 min-h-screen">
             <div className="flex justify-between items-center mb-6">
                 <div>
                     <h2 className="text-2xl font-bold text-gray-800">
                         Administración de Estudiantes
                     </h2>
                     <p className="text-gray-500">
-                        Registro académico y vinculación con tutores
+                        Estudiantes Totales:{" "}
+                        <span className="font-bold text-gray-700">
+                            {estudiantes.length}
+                        </span>
                     </p>
                 </div>
 
@@ -25,8 +27,6 @@ export default function Students() {
                     + Nuevo Estudiante
                 </button>
             </div>
-
-            {/* Filtros */}
             <div className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200">
                 <div className="flex gap-4 flex-wrap">
                     <input
@@ -53,8 +53,6 @@ export default function Students() {
                     </select>
                 </div>
             </div>
-
-            {/* Tabla */}
             <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                 <table className="w-full text-left">
                     <thead className="bg-black text-yellow-400">
