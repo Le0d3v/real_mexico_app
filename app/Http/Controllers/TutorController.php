@@ -69,8 +69,12 @@ class TutorController extends Controller
 
                 foreach ($request->estudiantes as $estudiante) {
 
+                    $parentescoFinal = $estudiante['parentesco'] === 'Otro'
+                        ? ($estudiante['parentesco_otro'] ?? null)
+                        : $estudiante['parentesco'];
+
                     $syncData[$estudiante['id']] = [
-                        'parentesco' => $estudiante['parentesco'],
+                        'parentesco' => $parentescoFinal,
                         'responsable_pagos' => $estudiante['responsable_pagos'],
                         'contacto_principal' => $estudiante['contacto_principal'],
                     ];

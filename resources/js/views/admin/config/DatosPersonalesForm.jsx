@@ -135,7 +135,7 @@ export default function DatosPersonalesForm({ user, mutate }) {
                 <SelectField
                     icon={<VenusAndMars size={18} />}
                     label="Género"
-                    options={["M", "F"]}
+                    options={["Masculino", "Femenino"]}
                     value={genero}
                     onChange={(e) => setGenero(e.target.value)}
                 />

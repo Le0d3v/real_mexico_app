@@ -14,7 +14,11 @@ export default function SelectField({ icon, label, options, value, onChange }) {
                 >
                     <option value="">Seleccione una opción</option>
                     {options.map((opt, index) => (
-                        <option key={index} value={opt} className="p-1 rounded">
+                        <option
+                            key={index}
+                            value={opt}
+                            className="p-1 rounded flex gap-2"
+                        >
                             {opt}
                         </option>
                     ))}

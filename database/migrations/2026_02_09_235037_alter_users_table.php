@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('apellido_materno', 45)->after('apellido_paterno');
             $table->date('fecha_nacimiento')->nullable();
             $table->char('curp', 18)->unique();
-            $table->enum('genero', ['M', 'F']);
+            $table->enum('genero', ['Masculino', 'Femenino']);
             $table->string('telefono', 15)->nullable();
             $table->enum('rol', ['admin', 'tutor'])->default('tutor');
             $table->foreignId('domicilio_id')->nullable()

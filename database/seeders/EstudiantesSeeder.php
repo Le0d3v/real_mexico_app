@@ -18,7 +18,7 @@ class EstudiantesSeeder extends Seeder
                 'apellido_materno' => 'Lopez',
                 'fecha_nacimiento' => '2016-01-01',
                 'curp' => "CURP" . str_pad($i, 3, '0', STR_PAD_LEFT),
-                'genero' => $i % 2 === 0 ? 'M' : 'F',
+                'genero' => $i % 2 === 0 ? 'Masculino' : 'Femenino',
                 'entidad_nacimiento' => 'Estado',
                 'tipo_sangre' => 'O+',
                 'domicilio_id' => $domicilios[array_rand($domicilios)],

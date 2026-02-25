@@ -27,7 +27,7 @@ class ColegiaturasSeeder extends Seeder
             12 => 'diciembre',
         ];
 
-        $anio = 2027;
+        $anio = 2026;
 
         foreach ($estudiantes as $estudianteId) {
 
@@ -41,6 +41,7 @@ class ColegiaturasSeeder extends Seeder
                     'mes' => $nombreMes,
                     'anio' => $anio,
                     'monto' => 1500,
+                    'pagado' => rand(100, 1500),
                     'estado' => 'pendiente',
                     'fecha_limite_pago' => $fechaLimite,
                     'created_at' => now(),

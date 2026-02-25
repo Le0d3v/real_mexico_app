@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('mes', 45);
             $table->string('anio', 4);
             $table->integer('monto');
+            $table->integer('pagado')->nullable();
             $table->string('estado', 45);
             $table->date('fecha_limite_pago');
             $table->timestamps();

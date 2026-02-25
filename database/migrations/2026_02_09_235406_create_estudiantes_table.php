@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('apellido_materno', 45);
             $table->date('fecha_nacimiento');
             $table->char('curp', 18)->unique();
-            $table->enum('genero', ['M', 'F']);
+            $table->enum('genero', ['Masculino', 'Femenino']);
             $table->string('entidad_nacimiento', 45);
             $table->enum('tipo_sangre', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
             $table->string('lengua_materna', 45)->nullable();

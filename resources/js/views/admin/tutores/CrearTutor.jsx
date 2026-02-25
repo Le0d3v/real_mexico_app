@@ -135,6 +135,7 @@ export default function CrearTutor({ onClose }) {
             estudiantes: selectedStudents.map((s) => ({
                 id: s.id,
                 parentesco: s.relacion.parentesco,
+                parentesco_otro: s.relacion.parentesco_otro || null,
                 responsable_pagos: s.relacion.responsable_pagos,
                 contacto_principal: s.relacion.contacto_principal,
             })),
@@ -207,7 +208,7 @@ export default function CrearTutor({ onClose }) {
                     <SelectField
                         icon={<VenusAndMars size={18} />}
                         label="Género"
-                        options={["M", "F"]}
+                        options={["Masculino", "Femenino"]}
                         value={genero}
                         onChange={(e) => setGenero(e.target.value)}
                     />
@@ -322,7 +323,6 @@ export default function CrearTutor({ onClose }) {
                 </div>
 
                 <div className="flex gap-6 w-full items-stretch">
-                    {/* BUSCAR ESTUDIANTES */}
                     <div className="w-full flex flex-col">
                         <h1 className="text-center mb-3 text-xl font-semibold text-red-500">
                             Buscar Estudiantes
@@ -364,11 +364,16 @@ export default function CrearTutor({ onClose }) {
                         </h1>
 
                         <div className="rounded-2xl border border-gray-200 p-4 bg-white shadow-sm flex flex-col h-full">
-                            <div className="flex-1 max-h-86 overflow-y-scroll pr-1">
+                            <div
+                                className={`flex-1 max-h-86 overflow-y-scroll pr-1 
+                                    ${selectedStudents.length === 0 ? "hover:cursor-not-allowed" : ""}`}
+                            >
                                 {selectedStudents.length === 0 ? (
-                                    <p className="text-gray-400">
-                                        Sin Estudiantes Asignados
-                                    </p>
+                                    <div className="hover:cursor-not-allowed">
+                                        <p className="text-gray-400">
+                                            Sin Estudiantes Asignados
+                                        </p>
+                                    </div>
                                 ) : (
                                     selectedStudents.map((student) => (
                                         <AssignedStudentCard
