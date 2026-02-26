@@ -1,8 +1,9 @@
 import React from "react";
 import Tittle from "../components/Tittle";
 import { CheckCircle, FileText, Calendar, Users } from "lucide-react";
-import TituloDark from "./TituloDark";
+import TituloDark from "./components/TituloDark";
 import { motion } from "framer-motion";
+import AnimationSection from "./components/AnimationSection";
 
 export default function Inscripciones() {
     return (
@@ -11,12 +12,7 @@ export default function Inscripciones() {
                 <div className="absolute -top-40 -left-40 w-96 h-96 bg-yellow-400/10 rounded-full blur-3xl"></div>
                 <div className="absolute -bottom-40 -right-40 w-96 h-96 bg-yellow-400/5 rounded-full blur-3xl"></div>
 
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                >
+                <AnimationSection>
                     <div className="relative max-w-6xl mx-auto px-6 text-center text-white">
                         <TituloDark
                             titulo={"Forma Parte de Nosotros"}
@@ -44,16 +40,11 @@ export default function Inscripciones() {
                             </button>
                         </div>
                     </div>
-                </motion.div>
+                </AnimationSection>
             </section>
 
             <section className="py-24 bg-white">
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                >
+                <AnimationSection>
                     <div className="max-w-7xl mx-auto px-6">
                         <h2 className="text-3xl font-bold text-center text-gray-900">
                             Proceso de Inscripción
@@ -86,16 +77,11 @@ export default function Inscripciones() {
                             />
                         </div>
                     </div>
-                </motion.div>
+                </AnimationSection>
             </section>
 
             <section className="py-24 bg-gray-50">
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                >
+                <AnimationSection>
                     <div className="max-w-6xl mx-auto px-6">
                         <h2 className="text-3xl font-bold text-center text-gray-900">
                             Requisitos Generales
@@ -120,16 +106,11 @@ export default function Inscripciones() {
                             </ul>
                         </div>
                     </div>
-                </motion.div>
+                </AnimationSection>
             </section>
 
             <section className="py-24 bg-gradient-to-b from-black to-[#111111] text-white">
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                >
+                <AnimationSection>
                     <div className="max-w-6xl mx-auto px-6 text-center">
                         <h2 className="text-3xl font-bold">
                             Información de Colegiaturas
@@ -152,16 +133,11 @@ export default function Inscripciones() {
                             </button>
                         </div>
                     </div>
-                </motion.div>
+                </AnimationSection>
             </section>
 
             <section className="py-20 bg-white">
-                <motion.div
-                    initial={{ opacity: 0, y: 40 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    viewport={{ once: true }}
-                >
+                <AnimationSection>
                     <div className="max-w-4xl mx-auto px-6 text-center">
                         <h2 className="text-3xl font-bold text-gray-900">
                             ¿Tiene alguna duda?
@@ -182,7 +158,7 @@ export default function Inscripciones() {
                             </button>
                         </div>
                     </div>
-                </motion.div>
+                </AnimationSection>
             </section>
         </div>
     );

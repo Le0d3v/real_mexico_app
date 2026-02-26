@@ -274,7 +274,7 @@ export default function CrearTutor({ onClose }) {
                     />
                     <InputField
                         icon={<Hash size={18} />}
-                        label="Número Interior"
+                        label="Número Interior (Opcional)"
                         value={numeroInterior}
                         onChange={(e) => setNumeroInterior(e.target.value)}
                     />
@@ -408,7 +408,7 @@ export default function CrearTutor({ onClose }) {
 
                     <button
                         type="submit"
-                        className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm cursor-pointer"
+                        className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm cursor-pointer w-44"
                     >
                         {cargando ? (
                             <ClipLoader size={20} color="white" />

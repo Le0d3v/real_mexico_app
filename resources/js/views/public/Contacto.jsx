@@ -1,5 +1,5 @@
 import { useState } from "react";
-import TituloDark from "./TituloDark";
+import TituloDark from "./components/TituloDark";
 import {
     Clock,
     Mail,
@@ -13,6 +13,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import preguntas from "../../helpers/preguntas";
 import socialLinks from "../../helpers/socialLinks";
 import Map from "./components/Map";
+import AnimationSection from "./components/AnimationSection";
 
 export default function Contacto() {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -24,19 +25,14 @@ export default function Contacto() {
     return (
         <>
             <section className="bg-slate-900 text-white py-10 px-6 md:px-20">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="max-w-4xl mx-auto text-center"
-                >
+                <AnimationSection>
                     <TituloDark
                         titulo={"Contáctanos"}
                         subtitulo={
                             "Estamos listos para acompañarte en cada etapa del proceso académico."
                         }
                     />
-                </motion.div>
+                </AnimationSection>
             </section>
 
             <section className="bg-gray-100 py-20 px-6 md:px-20">
@@ -129,12 +125,7 @@ export default function Contacto() {
             </section>
 
             <section className="bg-slate-900 text-white py-20 px-6 md:px-20">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="max-w-6xl mx-auto"
-                >
+                <AnimationSection>
                     <h2 className="text-3xl font-bold text-center text-white mb-12">
                         Síguenos en Redes Sociales
                     </h2>
@@ -150,18 +141,13 @@ export default function Contacto() {
                             </a>
                         ))}
                     </div>
-                </motion.div>
+                </AnimationSection>
             </section>
 
             <section className="bg-gray-100 py-20 px-6 md:px-20">
-                <motion.div
-                    initial={{ opacity: 0, y: 30 }}
-                    whileInView={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6 }}
-                    className="max-w-6xl mx-auto"
-                >
+                <AnimationSection>
                     <Map />
-                </motion.div>
+                </AnimationSection>
             </section>
 
             {/* FAQ ACORDEÓN */}

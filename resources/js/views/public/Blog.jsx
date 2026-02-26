@@ -4,6 +4,7 @@ import Post from "./Post";
 import api from "../../config/axios";
 import useSWR from "swr";
 import Loader from "../components/Loader";
+import AnimatedSection from "./components/AnimationSection";
 
 export default function Blog() {
     const fetcher = () => api("/api/posts").then((res) => res.data);
@@ -27,13 +28,15 @@ export default function Blog() {
             ) : (
                 <div className="p-3 md:px-44">
                     {posts.map((post) => (
-                        <Post
-                            imagen={`${api.defaults.baseURL}/storage/${post.multimedia}`}
-                            titulo={post.titulo}
-                            fecha={post.fecha}
-                        >
-                            {post.descripcion}
-                        </Post>
+                        <AnimatedSection>
+                            <Post
+                                imagen={`${api.defaults.baseURL}/storage/${post.multimedia}`}
+                                titulo={post.titulo}
+                                fecha={post.fecha}
+                            >
+                                {post.descripcion}
+                            </Post>
+                        </AnimatedSection>
                     ))}
                 </div>
             )}

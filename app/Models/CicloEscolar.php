@@ -20,7 +20,6 @@ class CicloEscolar extends Model
     ];
 
     // Relaciones
-
       public function colegiaturas()
     {
         return $this->hasMany(Colegiatura::class);

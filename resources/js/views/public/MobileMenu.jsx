@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import MobileNavLink from "./MobileNavLink";
+import MobileNavLink from "./components/MobileNavLink";
 import { X } from "lucide-react";
 import { useEffect } from "react";
 import socialLinks from "../../helpers/socialLinks";

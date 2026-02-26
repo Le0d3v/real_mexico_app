@@ -1,5 +1,5 @@
 import { useState } from "react";
-import NavLink from "./NavLink";
+import NavLink from "./components/NavLink";
 import MobileMenu from "./MobileMenu";
 import { Menu } from "lucide-react";
 import socialLinks from "../../helpers/socialLinks";

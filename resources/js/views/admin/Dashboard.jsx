@@ -1,83 +1,140 @@
-import React from "react";
 import Tittle from "../components/Tittle";
+import useStudent from "../../hooks/useStudent";
+import useTutor from "../../hooks/useTutor";
+import Loader from "../components/Loader";
+import { useState } from "react";
+import Modal from "./components/Modal";
+import CrearTutor from "./tutores/CrearTutor";
+import PostForm from "./noticias/PostForm";
+
+import {
+    CirclePlus,
+    Users,
+    UserCheck,
+    AlertTriangle,
+    DollarSign,
+    TrendingUp,
+    GraduationCap,
+    BellRing,
+    CreditCard,
+    UserPlus,
+    Newspaper,
+} from "lucide-react";
 
 export default function Dashboard() {
+    const { estudiantes, isLoading } = useStudent();
+    const { tutores } = useTutor();
+
+    const [noticiaModal, setNoticiaModal] = useState(false);
+    const [tutorModal, setTutorModal] = useState(false);
+
+    if (isLoading) return <Loader />;
+
     return (
         <>
-            <div className="bg-gray-100 min-h-screen">
+            <div className="bg-slate-100 min-h-screen">
                 <Tittle>Panel de Administración</Tittle>
 
-                {/* KPIs principales */}
-                <div className="grid md:grid-cols-4 gap-6 mb-8 mt-10">
-                    <div className="bg-white p-6 rounded-2xl shadow border-l-4 border-black">
-                        <p className="text-gray-500 text-sm">
-                            Estudiantes Activos
-                        </p>
-                        <h2 className="text-3xl font-bold text-gray-800">
-                            248
-                        </h2>
+                {/* KPIs */}
+                <div className="grid md:grid-cols-4 gap-6 mt-10 mb-10">
+                    <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <p className="text-sm text-gray-500">
+                                    Estudiantes Activos
+                                </p>
+                                <h2 className="text-3xl font-bold text-slate-800 mt-2">
+                                    {estudiantes.length}
+                                </h2>
+                            </div>
+                            <Users className="w-10 h-10 text-slate-400" />
+                        </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl shadow border-l-4 border-yellow-500">
-                        <p className="text-gray-500 text-sm">
-                            Tutores Registrados
-                        </p>
-                        <h2 className="text-3xl font-bold text-gray-800">
-                            312
-                        </h2>
+                    <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <p className="text-sm text-gray-500">
+                                    Tutores Registrados
+                                </p>
+                                <h2 className="text-3xl font-bold text-slate-800 mt-2">
+                                    {tutores.length}
+                                </h2>
+                            </div>
+                            <UserCheck className="w-10 h-10 text-yellow-500" />
+                        </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl shadow border-l-4 border-red-600">
-                        <p className="text-gray-500 text-sm">Pagos Vencidos</p>
-                        <h2 className="text-3xl font-bold text-red-600">17</h2>
+                    <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <p className="text-sm text-gray-500">
+                                    Pagos Vencidos
+                                </p>
+                                <h2 className="text-3xl font-bold text-red-600 mt-2">
+                                    17
+                                </h2>
+                            </div>
+                            <AlertTriangle className="w-10 h-10 text-red-500" />
+                        </div>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl shadow border-l-4 border-yellow-600">
-                        <p className="text-gray-500 text-sm">
-                            Pendientes del Mes
-                        </p>
-                        <h2 className="text-3xl font-bold text-yellow-600">
-                            $32,400
-                        </h2>
+                    <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
+                        <div className="flex justify-between items-center">
+                            <div>
+                                <p className="text-sm text-gray-500">
+                                    Pendientes del Mes
+                                </p>
+                                <h2 className="text-3xl font-bold text-emerald-600 mt-2">
+                                    $32,400
+                                </h2>
+                            </div>
+                            <DollarSign className="w-10 h-10 text-emerald-500" />
+                        </div>
                     </div>
                 </div>
 
-                {/* Estado financiero visual */}
-                <div className="bg-white p-8 rounded-2xl shadow mb-8">
-                    <h3 className="text-xl font-bold text-gray-800 mb-6">
-                        Estado Financiero del Mes
-                    </h3>
+                {/* Estado financiero */}
+                <div className="bg-white p-8 rounded-2xl shadow-sm mb-10">
+                    <div className="flex items-center gap-3 mb-6">
+                        <TrendingUp className="w-6 h-6 text-emerald-600" />
+                        <h3 className="text-xl font-semibold text-slate-800">
+                            Estado Financiero del Mes
+                        </h3>
+                    </div>
 
-                    <div className="w-full bg-gray-200 rounded-full h-6 overflow-hidden">
+                    <div className="w-full bg-slate-200 rounded-full h-6 overflow-hidden">
                         <div
-                            className="bg-green-500 h-6 text-xs font-bold text-white flex items-center justify-center"
+                            className="bg-emerald-500 h-6 text-xs font-semibold text-white flex items-center justify-center transition-all"
                             style={{ width: "68%" }}
                         >
                             68% Recaudado
                         </div>
                     </div>
 
-                    <div className="flex justify-between mt-4 text-sm text-gray-600">
+                    <div className="flex justify-between mt-4 text-sm text-slate-600">
                         <span>Recaudado: $72,000</span>
                         <span>Meta mensual: $105,000</span>
                     </div>
                 </div>
 
-                {/* Indicadores académicos y alertas */}
-                <div className="grid md:grid-cols-2 gap-6 mb-8">
-                    {/* Distribución académica */}
-                    <div className="bg-white p-6 rounded-2xl shadow">
-                        <h3 className="text-lg font-bold text-gray-800 mb-4">
-                            Distribución por Nivel
-                        </h3>
+                {/* Indicadores y alertas */}
+                <div className="grid md:grid-cols-2 gap-6 mb-10">
+                    <div className="bg-white p-6 rounded-2xl shadow-sm">
+                        <div className="flex items-center gap-3 mb-5">
+                            <GraduationCap className="w-6 h-6 text-slate-600" />
+                            <h3 className="text-lg font-semibold text-slate-800">
+                                Distribución por Nivel
+                            </h3>
+                        </div>
 
-                        <div className="space-y-3">
+                        <div className="space-y-4">
                             <div>
                                 <div className="flex justify-between text-sm mb-1">
                                     <span>1° a 3°</span>
                                     <span>120 alumnos</span>
                                 </div>
-                                <div className="bg-gray-200 h-3 rounded-full">
+                                <div className="bg-slate-200 h-3 rounded-full">
                                     <div className="bg-yellow-500 h-3 rounded-full w-3/4"></div>
                                 </div>
                             </div>
@@ -87,37 +144,39 @@ export default function Dashboard() {
                                     <span>4° a 6°</span>
                                     <span>128 alumnos</span>
                                 </div>
-                                <div className="bg-gray-200 h-3 rounded-full">
-                                    <div className="bg-black h-3 rounded-full w-4/5"></div>
+                                <div className="bg-slate-200 h-3 rounded-full">
+                                    <div className="bg-slate-800 h-3 rounded-full w-4/5"></div>
                                 </div>
                             </div>
                         </div>
                     </div>
 
-                    {/* Alertas */}
-                    <div className="bg-white p-6 rounded-2xl shadow border-l-4 border-red-600">
-                        <h3 className="text-lg font-bold text-gray-800 mb-4">
-                            Alertas Importantes
-                        </h3>
+                    <div className="bg-white p-6 rounded-2xl shadow-sm">
+                        <div className="flex items-center gap-3 mb-5">
+                            <BellRing className="w-6 h-6 text-red-600" />
+                            <h3 className="text-lg font-semibold text-slate-800">
+                                Alertas Importantes
+                            </h3>
+                        </div>
 
-                        <ul className="space-y-3 text-sm">
+                        <ul className="space-y-4 text-sm">
                             <li className="flex justify-between">
                                 <span>Pagos con más de 30 días de atraso</span>
-                                <span className="font-bold text-red-600">
+                                <span className="font-semibold text-red-600">
                                     5 casos
                                 </span>
                             </li>
 
                             <li className="flex justify-between">
                                 <span>Documentación incompleta</span>
-                                <span className="font-bold text-yellow-600">
+                                <span className="font-semibold text-yellow-600">
                                     8 alumnos
                                 </span>
                             </li>
 
                             <li className="flex justify-between">
                                 <span>Tutores sin correo registrado</span>
-                                <span className="font-bold text-gray-800">
+                                <span className="font-semibold text-slate-800">
                                     3 registros
                                 </span>
                             </li>
@@ -127,29 +186,68 @@ export default function Dashboard() {
 
                 {/* Accesos rápidos */}
                 <div>
-                    <h3 className="text-xl font-bold text-gray-800 mb-4">
+                    <h3 className="text-xl font-semibold text-slate-800 mb-5">
                         Accesos Rápidos
                     </h3>
 
                     <div className="grid md:grid-cols-4 gap-4">
-                        <button className="bg-black text-yellow-400 py-4 rounded-xl shadow hover:opacity-90 transition font-semibold">
+                        <button className="flex items-center justify-center gap-2 bg-slate-900 text-white py-4 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer">
+                            <CreditCard size={18} />
                             Registrar Pago
                         </button>
 
-                        <button className="bg-yellow-500 text-black py-4 rounded-xl shadow hover:opacity-90 transition font-semibold">
+                        <button className="flex items-center justify-center gap-2 bg-yellow-500 text-black py-4 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer">
+                            <UserPlus size={18} />
                             Nuevo Estudiante
                         </button>
 
-                        <button className="bg-red-600 text-white py-4 rounded-xl shadow hover:opacity-90 transition font-semibold">
+                        <button
+                            onClick={() => setTutorModal(true)}
+                            className="flex items-center justify-center gap-2 bg-red-600 text-white py-4 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer"
+                        >
+                            <UserPlus size={18} />
                             Nuevo Tutor
                         </button>
 
-                        <button className="bg-gray-200 text-gray-800 py-4 rounded-xl shadow hover:bg-gray-300 transition font-semibold">
+                        <button
+                            onClick={() => setNoticiaModal(true)}
+                            className="flex items-center justify-center gap-2 bg-slate-200 text-slate-800 py-4 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer"
+                        >
+                            <Newspaper size={18} />
                             Nueva Noticia
                         </button>
                     </div>
                 </div>
             </div>
+            <Modal
+                isOpen={noticiaModal}
+                icon={<CirclePlus className="w-12 h-12" />}
+                onClose={() => {
+                    setNoticiaModal(false);
+                }}
+                size="lg"
+                title={"Crear Nueva Publicación"}
+            >
+                {" "}
+                <PostForm
+                    post={null}
+                    onSuccess={() => {
+                        setNoticiaModal(false);
+                    }}
+                />{" "}
+            </Modal>{" "}
+            <Modal
+                isOpen={tutorModal}
+                icon={<CirclePlus className="w-12 h-12" />}
+                onClose={() => {
+                    setTutorModal(false);
+                }}
+                size="full"
+                title="Registrar un Nuevo Tutor"
+            >
+                {" "}
+                <CrearTutor onClose={() => setTutorModal(false)} />{" "}
+            </Modal>
         </>
     );
 }

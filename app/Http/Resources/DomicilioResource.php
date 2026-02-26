@@ -22,6 +22,7 @@ class DomicilioResource extends JsonResource
             "localidad" => $this->localidad,
             "municipio" => $this->municipio,
             "entidad" => $this->entidad,
+            "cp" => $this->cp,
         ];
     }
 }

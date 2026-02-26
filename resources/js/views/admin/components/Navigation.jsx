@@ -11,6 +11,7 @@ import useIRM from "../../../hooks/useIRM";
 
 export default function Navigation({ index, closeMenu, setPage, page }) {
     const { setTitulo } = useIRM();
+
     return (
         <nav className="md:mt-12 px-2" id="navegacion">
             <div className="hidden lg:block mt-1 mb-3">

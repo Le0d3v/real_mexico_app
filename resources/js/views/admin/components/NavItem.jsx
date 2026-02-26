@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+
 export default function NavItem({
     index,
     icon: Icon,
@@ -7,6 +9,13 @@ export default function NavItem({
     fn,
 }) {
     const isActive = page === index;
+
+    useEffect(() => {
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+        });
+    }, [page]);
 
     return (
         <button
