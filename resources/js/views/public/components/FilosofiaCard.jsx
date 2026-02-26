@@ -1,5 +1,3 @@
-import React from "react";
-
 export default function FilosofiaCard({ children, label, icon: Icon }) {
     return (
         <div className="bg-white p-6 rounded shadow w-full border-b-4 border-yellow-600">

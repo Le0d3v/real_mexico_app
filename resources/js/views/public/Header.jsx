@@ -66,7 +66,7 @@ export default function Header({ setPage, page }) {
                         Inscripciones
                     </NavLink>
                     <NavLink index={2} page={page} setPage={setPage}>
-                        Acerca de
+                        Identidad
                     </NavLink>
                     <NavLink index={3} page={page} setPage={setPage}>
                         Alumnos

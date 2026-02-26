@@ -1,6 +1,4 @@
-import React from "react";
-import { motion } from "framer-motion";
-import Tittle from "../components/Tittle";
+import AnimationSection from "./components/AnimationSection";
 import {
     Lightbulb,
     Medal,
@@ -9,9 +7,9 @@ import {
     HeartHandshake,
     ShieldCheck,
 } from "lucide-react";
-import FilosofiaCard from "./FilosofiaCard";
-import PersonalCard from "./PersonalCard";
-import TituloDark from "./TituloDark";
+import FilosofiaCard from "./components/FilosofiaCard";
+import PersonalCard from "./components/PersonalCard";
+import TituloDark from "./components/TituloDark";
 
 export default function About() {
     return (
@@ -24,12 +22,7 @@ export default function About() {
                             "Formando generaciones con excelencia académica y valores sólidos."
                         }
                     />
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                    >
+                    <AnimationSection>
                         <div className="flex flex-col md:flex-row items-center gap-12">
                             <div className="relative w-full md:w-1/2 group">
                                 <img
@@ -74,13 +67,8 @@ export default function About() {
                                 </button>
                             </div>
                         </div>
-                    </motion.div>
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                    >
+                    </AnimationSection>
+                    <AnimationSection>
                         <div className="grid md:grid-cols-3 gap-8 mt-20">
                             <div className="bg-zinc-900 p-8 rounded-2xl shadow-xl hover:shadow-red-600/30 transition">
                                 <GraduationCap
@@ -125,7 +113,7 @@ export default function About() {
                                 </p>
                             </div>
                         </div>
-                    </motion.div>
+                    </AnimationSection>
                 </div>
             </section>
             <section className="w-full bg-gradient-to-b from-black via-zinc-900 to-black text-white py-20 px-6 md:px-20">
@@ -137,12 +125,7 @@ export default function About() {
                         }
                     />
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                    >
+                    <AnimationSection>
                         <div className="grid md:grid-cols-3 gap-10">
                             <div className="bg-zinc-900/80 backdrop-blur-sm p-10 rounded-3xl border border-zinc-800 shadow-xl hover:shadow-red-600/30 transition duration-500 hover:-translate-y-2">
                                 <div className="flex justify-center mb-6">
@@ -218,7 +201,7 @@ export default function About() {
                                 <div className="w-full h-1 bg-red-600 mt-8 rounded-full"></div>
                             </div>
                         </div>
-                    </motion.div>
+                    </AnimationSection>
                 </div>
             </section>
             <section className="w-full bg-black text-white py-20 px-6 md:px-20">
@@ -230,12 +213,7 @@ export default function About() {
                         }
                     />
 
-                    <motion.div
-                        initial={{ opacity: 0, y: 40 }}
-                        whileInView={{ opacity: 1, y: 0 }}
-                        transition={{ duration: 0.6 }}
-                        viewport={{ once: true }}
-                    >
+                    <AnimationSection>
                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
                             <PersonalCard
                                 nombre="Juan Torres"
@@ -261,7 +239,7 @@ export default function About() {
                                 img="/img/director.jpg"
                             />
                         </div>
-                    </motion.div>
+                    </AnimationSection>
                 </div>
             </section>
         </div>

@@ -12,6 +12,7 @@ import {
 import { motion, AnimatePresence } from "framer-motion";
 import preguntas from "../../helpers/preguntas";
 import socialLinks from "../../helpers/socialLinks";
+import Map from "./components/Map";
 
 export default function Contacto() {
     const [activeIndex, setActiveIndex] = useState(null);
@@ -159,20 +160,7 @@ export default function Contacto() {
                     transition={{ duration: 0.6 }}
                     className="max-w-6xl mx-auto"
                 >
-                    <h2 className="text-3xl font-bold text-center text-slate-800 mb-12">
-                        Visita nuestras Instalaciones
-                    </h2>
-
-                    <div className="w-full h-96 shadow-xl rounded-3xl overflow-hidden border border-gray-200">
-                        <iframe
-                            className="w-full h-full"
-                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3767.647517292828!2d-98.38368012606392!3d19.21059184773598!2m3!1f0!3f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85cfd19345a98fa7%3A0x47e247268f913e02!2sINSTITUTO%20REAL%20DE%20MEXICO%20A.C!5e0!3m2!1ses-419!2smx!4v1770147793233!5m2!1ses-419!2smx"
-                            style={{ border: 0 }}
-                            allowFullScreen
-                            loading="lazy"
-                            referrerPolicy="no-referrer-when-downgrade"
-                        />
-                    </div>
+                    <Map />
                 </motion.div>
             </section>
 
