@@ -26,6 +26,7 @@ class EstudiantesSeeder extends Seeder
                 'genero' => $i % 2 === 0 ? 'Masculino' : 'Femenino',
                 'entidad_nacimiento' => 'Estado',
                 'tipo_sangre' => collect(['O+', 'A+', 'B+', 'AB+'])->random(),
+                'discapacidad' => "Ninguna",
                 'domicilio_id' => $domicilios[array_rand($domicilios)],
                 'grado_id' => rand(1, 6),
                 'grupo_id' => 1,

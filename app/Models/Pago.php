@@ -30,4 +30,9 @@ class Pago extends Model
     {
         return $this->belongsTo(Colegiatura::class);
     }
+
+    public function estudiante()
+    {
+        return $this->belongsTo(Estudiante::class);
+    }
 }

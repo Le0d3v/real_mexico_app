@@ -2,16 +2,24 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\PagoCollection;
+use App\Models\Pago;
 use Illuminate\Http\Request;
 
-class ColegiaturaController extends Controller
+class PagoController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        return new PagoCollection(
+            Pago::with([
+                'colegiatura',
+                'estudiante',
+                'tutor', // ← usuario + perfil tutor
+            ])->get()
+        );
     }
 
     /**
