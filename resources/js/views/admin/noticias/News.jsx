@@ -6,6 +6,7 @@ import PostForm from "./PostForm";
 import Swal from "sweetalert2";
 import usePosts from "../../../hooks/usePost";
 import api from "../../../config/axios";
+import Alerta from "../components/Alerta";
 
 export default function News() {
     const [open, setOpen] = useState(false);
@@ -132,55 +133,63 @@ export default function News() {
             </button>
 
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6 gap-6">
-                {filteredPosts.map((post) => (
-                    <div
-                        key={post.id}
-                        className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
-                    >
-                        <img
-                            src={`${api.defaults.baseURL}/storage/${post.multimedia}`}
-                            alt="imagen-post"
-                            className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
-                        />
+                {filteredPosts.length === 0 ? (
+                    <Alerta>
+                        <p>No hay publicaciones</p>
+                    </Alerta>
+                ) : (
+                    filteredPosts.map((post) => (
+                        <div
+                            key={post.id}
+                            className="group bg-white rounded-2xl shadow-md hover:shadow-xl transition-all duration-300 overflow-hidden"
+                        >
+                            <img
+                                src={`${api.defaults.baseURL}/storage/${post.multimedia}`}
+                                alt="imagen-post"
+                                className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-500"
+                            />
 
-                        <div className="p-4">
-                            <h1 className="font-bold text-xl text-gray-800 group-hover:text-blue-600 transition">
-                                {post.titulo}
-                            </h1>
+                            <div className="p-4">
+                                <h1 className="font-bold text-xl text-gray-800 group-hover:text-blue-600 transition">
+                                    {post.titulo}
+                                </h1>
 
-                            <p className="text-sm text-gray-500 mt-1">
-                                {post.fecha}
-                            </p>
+                                <p className="text-sm text-gray-500 mt-1">
+                                    {post.fecha}
+                                </p>
 
-                            <p className="text-sm text-gray-600 mt-3 line-clamp-3">
-                                {post.descripcion}
-                            </p>
+                                <p className="text-sm text-gray-600 mt-3 line-clamp-3">
+                                    {post.descripcion}
+                                </p>
 
-                            <div className="flex justify-center w-full">
-                                <div className="flex gap-3 mt-5">
-                                    <button
-                                        onClick={() => {
-                                            setEditingPost(post);
-                                            setOpen(true);
-                                        }}
-                                        className="bg-blue-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded"
-                                    >
-                                        <Pen />
-                                        <p>Editar</p>
-                                    </button>
+                                <div className="flex justify-center w-full">
+                                    <div className="flex gap-3 mt-5">
+                                        <button
+                                            onClick={() => {
+                                                setEditingPost(post);
+                                                setOpen(true);
+                                            }}
+                                            className="bg-blue-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded"
+                                        >
+                                            <Pen />
+                                            <p>Editar</p>
+                                        </button>
 
-                                    <button
-                                        onClick={() => handleDelete(post.id)}
-                                        className="bg-red-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded"
-                                    >
-                                        <Trash />
-                                        <p>Eliminar</p>
-                                    </button>
+                                        <button
+                                            onClick={() =>
+                                                handleDelete(post.id)
+                                            }
+                                            className="bg-red-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded"
+                                        >
+                                            <Trash />
+                                            <p>Eliminar</p>
+                                        </button>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                ))}
+                    ))
+                )}
             </div>
 
             <Modal

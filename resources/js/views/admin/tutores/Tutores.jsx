@@ -77,7 +77,7 @@ export default function Tutores() {
 
     return (
         <>
-            <div className="p-1 min-h-screen">
+            <div className="min-h-screen">
                 <div className="flex justify-between items-center mb-6">
                     <div>
                         <h1 className="text-3xl font-bold text-gray-800">
@@ -98,21 +98,29 @@ export default function Tutores() {
                         + Nuevo Tutor
                     </button>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200 flex gap-5">
-                    <div className="flex gap-4 flex-wrap w-full">
-                        <div className="relative flex-1">
-                            <Search
-                                size={18}
-                                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                            />
-                            <input
-                                type="text"
-                                placeholder="Buscar Tutor por nombre, teléfono o correo electrónico..."
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                className="w-full flex-1 border border-gray-300 rounded-lg pl-10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                            />
+                <div className="bg-white p-4 rounded-xl shadow-sm mb-5 border border-gray-200 flex gap-5">
+                    <div className="w-full">
+                        <div className="flex gap-4 flex-wrap w-full">
+                            <div className="relative flex-1">
+                                <Search
+                                    size={18}
+                                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                                />
+                                <input
+                                    type="text"
+                                    placeholder="Buscar Tutor por nombre, teléfono o correo electrónico..."
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    className="w-full flex-1 border border-gray-300 rounded-lg pl-10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                                />
+                            </div>
                         </div>
+                        <p className="mt-1 text-gray-400">
+                            Resultados:
+                            <span className="font-semibold text-gray-700">
+                                {" " + filteredTutores.length}
+                            </span>
+                        </p>
                     </div>
                     <div>
                         <select
@@ -176,7 +184,6 @@ export default function Tutores() {
                                             {tutor?.tutor?.estudiantes
                                                 ?.length || 0}
                                         </td>
-
 
                                         <td className="px-6 py-4 text-center">
                                             <div className="flex justify-center gap-2">

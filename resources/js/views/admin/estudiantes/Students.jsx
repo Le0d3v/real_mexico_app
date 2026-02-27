@@ -85,7 +85,7 @@ export default function Students() {
                     </button>
                 </div>
 
-                <div className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200">
+                <div className="bg-white p-4 rounded-xl shadow-sm mb-5 border border-gray-200">
                     <div className="flex gap-4 flex-wrap">
                         <div className="relative flex-1">
                             <Search

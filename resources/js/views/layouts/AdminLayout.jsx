@@ -9,6 +9,7 @@ import Settings from "../admin/config/Settings";
 import News from "../admin/noticias/News";
 import Students from "../admin/estudiantes/Students";
 import Colegiaturas from "../admin/colegiaturas/Colegiaturas";
+import Pagos from "../admin/pagos/Pagos";
 import Tutores from "../admin/tutores/Tutores";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../components/Loader";
@@ -23,6 +24,7 @@ export default function AdminLayout() {
     const pages = [
         <Dashboard />,
         <Colegiaturas />,
+        <Pagos />,
         <Students />,
         <Tutores />,
         <News />,

@@ -5,6 +5,7 @@ import {
     User,
     Users,
     CircleDollarSign,
+    Calendar,
 } from "lucide-react";
 import NavItem from "./NavItem";
 import useIRM from "../../../hooks/useIRM";
@@ -13,8 +14,8 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
     const { setTitulo } = useIRM();
 
     return (
-        <nav className="md:mt-12 px-2" id="navegacion">
-            <div className="hidden lg:block mt-1 mb-3">
+        <nav className="px-2" id="navegacion">
+            <div className="hidden lg:block mt-1 mb-1">
                 <p className="text-sm text-white text-center transition-colors mt-3">
                     Navegación
                 </p>
@@ -35,7 +36,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                         page={page}
                         setPage={setPage}
                         index={1}
-                        icon={CircleDollarSign}
+                        icon={Calendar}
                         fn={() => setTitulo("Colegiaturas")}
                     >
                         Colegiaturas
@@ -44,6 +45,15 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                         page={page}
                         setPage={setPage}
                         index={2}
+                        icon={CircleDollarSign}
+                        fn={() => setTitulo("Colegiaturas")}
+                    >
+                        Pagos
+                    </NavItem>
+                    <NavItem
+                        page={page}
+                        setPage={setPage}
+                        index={3}
                         icon={Users}
                         fn={() => setTitulo("Estudiantes")}
                     >
@@ -52,7 +62,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                     <NavItem
                         page={page}
                         setPage={setPage}
-                        index={3}
+                        index={4}
                         icon={User}
                         fn={() => setTitulo("Tutores")}
                     >
@@ -61,7 +71,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                     <NavItem
                         page={page}
                         setPage={setPage}
-                        index={4}
+                        index={5}
                         icon={Globe}
                         fn={() => setTitulo("Publicaciones")}
                     >
@@ -70,7 +80,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                     <NavItem
                         page={page}
                         setPage={setPage}
-                        index={5}
+                        index={6}
                         icon={Settings}
                         fn={() => setTitulo("Configuración")}
                     >
