@@ -31,7 +31,7 @@ class Colegiatura extends Model
 
     public function ciclo() 
     {
-        return $this->belongsTo(CicloEscolar::class);
+        return $this->belongsTo(CicloEscolar::class, "ciclo_escolar_id", "id");
     }
 
     public function pagos() 
