@@ -1,63 +1,97 @@
-import React from "react";
-import Tittle from "../../components/Tittle";
+import { useState, useMemo, useEffect } from "react";
+import useColegiatura from "../../../hooks/useColegiatura";
+import Loader from "../../components/Loader";
+import meses from "../../../helpers/meses";
 
 export default function Colegiaturas() {
-    const registros = [
-        {
-            id: 1,
-            alumno: "Juan Pérez",
-            grado: "3° A",
-            mensualidad: 1800,
-            pagado: 1800,
-            pendiente: 0,
-            estado: "Pagado",
-        },
-        {
-            id: 2,
-            alumno: "Sofía Ramírez",
-            grado: "5° B",
-            mensualidad: 1800,
-            pagado: 1000,
-            pendiente: 800,
-            estado: "Pendiente",
-        },
-        {
-            id: 3,
-            alumno: "Luis Hernández",
-            grado: "2° C",
-            mensualidad: 1800,
-            pagado: 0,
-            pendiente: 1800,
-            estado: "Vencido",
-        },
-    ];
+    const { colegiaturas, isLoading } = useColegiatura();
 
-    const totalRecaudado = registros.reduce((acc, r) => acc + r.pagado, 0);
-    const totalPendiente = registros.reduce((acc, r) => acc + r.pendiente, 0);
+    const mesActual = meses[new Date().getMonth()];
+
+    const [search, setSearch] = useState("");
+    const [estadoFiltro, setEstadoFiltro] = useState("Todos");
+    const [mesFiltro, setMesFiltro] = useState(mesActual);
+    const [currentPage, setCurrentPage] = useState(1);
+
+    const itemsPerPage = 8;
+
+    // 🔎 Filtrado
+    const colegiaturasFiltradas = useMemo(() => {
+        return colegiaturas.filter((r) => {
+            const coincideNombre = r.estudiante.nombre
+                .toLowerCase()
+                .includes(search.toLowerCase());
+
+            const coincideEstado =
+                estadoFiltro === "Todos" ||
+                r.estado.toLowerCase() === estadoFiltro.toLowerCase();
+
+            const coincideMes = mesFiltro === "Todos" || r.mes === mesFiltro;
+
+            return coincideNombre && coincideEstado && coincideMes;
+        });
+    }, [colegiaturas, search, estadoFiltro, mesFiltro]);
+
+    // Reset página cuando cambian filtros
+    useEffect(() => {
+        setCurrentPage(1);
+    }, [search, estadoFiltro, mesFiltro]);
+
+    // 📄 Paginación
+    const totalPages = Math.ceil(colegiaturasFiltradas.length / itemsPerPage);
+
+    const registrosPaginados = colegiaturasFiltradas.slice(
+        (currentPage - 1) * itemsPerPage,
+        currentPage * itemsPerPage,
+    );
+
+    // 💰 Formateador moneda
+    const formatCurrency = (value) =>
+        new Intl.NumberFormat("es-MX", {
+            style: "currency",
+            currency: "MXN",
+            minimumFractionDigits: 2,
+        }).format(value);
+
+    // 📊 Totales (solo del mes filtrado)
+    const totalRecaudado = colegiaturasFiltradas.reduce(
+        (acc, r) => acc + r.pagado,
+        0,
+    );
+
+    const totalPendiente = colegiaturasFiltradas.reduce(
+        (acc, r) => acc + (r.monto - r.pagado),
+        0,
+    );
+
+    const casosVencidos = colegiaturasFiltradas.filter(
+        (r) => r.estado.toLowerCase() === "Vencido",
+    ).length;
+
+    if (isLoading) return <Loader />;
 
     return (
-        <div className="bg-gray-100 min-h-screen">
+        <div className="bg-gray-100 min-h-screen p-6">
+            {/* Resumen */}
             <div className="grid md:grid-cols-3 gap-6 mb-8">
                 <div className="bg-white p-6 rounded-xl shadow border-l-4 border-black">
-                    <p className="text-gray-500 text-sm">Recaudado del mes</p>
+                    <p className="text-gray-500 text-sm">Recaudado</p>
                     <h2 className="text-2xl font-bold text-gray-800">
-                        ${totalRecaudado.toLocaleString()}
+                        {formatCurrency(totalRecaudado)}
                     </h2>
                 </div>
 
                 <div className="bg-white p-6 rounded-xl shadow border-l-4 border-yellow-500">
-                    <p className="text-gray-500 text-sm">
-                        Pendiente por cobrar
-                    </p>
+                    <p className="text-gray-500 text-sm">Pendiente</p>
                     <h2 className="text-2xl font-bold text-yellow-600">
-                        ${totalPendiente.toLocaleString()}
+                        {formatCurrency(totalPendiente)}
                     </h2>
                 </div>
 
                 <div className="bg-white p-6 rounded-xl shadow border-l-4 border-red-600">
                     <p className="text-gray-500 text-sm">Casos vencidos</p>
                     <h2 className="text-2xl font-bold text-red-600">
-                        {registros.filter((r) => r.estado === "Vencido").length}
+                        {casosVencidos}
                     </h2>
                 </div>
             </div>
@@ -67,76 +101,91 @@ export default function Colegiaturas() {
                 <div className="flex gap-4 flex-wrap">
                     <input
                         type="text"
-                        placeholder="Buscar por alumno..."
+                        placeholder="Buscar Colegiatura por Alumno..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
                         className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                     />
 
-                    <select className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
-                        <option>Todos los estados</option>
-                        <option>Pagado</option>
-                        <option>Pendiente</option>
-                        <option>Vencido</option>
+                    <select
+                        value={estadoFiltro}
+                        onChange={(e) => setEstadoFiltro(e.target.value)}
+                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    >
+                        <option value="Todos">Todas</option>
+                        <option value="Pagado">Pagadas</option>
+                        <option value="Pendiente">Pendientes</option>
+                        <option value="Vencido">Vencidas</option>
                     </select>
 
-                    <select className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500">
-                        <option>Mes actual</option>
-                        <option>Enero</option>
-                        <option>Febrero</option>
-                        <option>Marzo</option>
+                    <select
+                        value={mesFiltro}
+                        onChange={(e) => setMesFiltro(e.target.value)}
+                        className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                    >
+                        {meses.map((mes) => (
+                            <option key={mes} value={mes}>
+                                {mes}
+                            </option>
+                        ))}
                     </select>
                 </div>
             </div>
 
-            {/* Tabla financiera */}
+            {/* Tabla */}
             <div className="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
                 <table className="w-full text-left">
                     <thead className="bg-black text-yellow-400">
                         <tr>
-                            <th className="px-6 py-3">Alumno</th>
-                            <th className="px-6 py-3">Grado</th>
-                            <th className="px-6 py-3 text-right">
-                                Mensualidad
-                            </th>
-                            <th className="px-6 py-3 text-right">Pagado</th>
-                            <th className="px-6 py-3 text-right">Pendiente</th>
+                            <th className="px-6 py-3 text-center">Alumno</th>
+                            <th className="px-6 py-3 text-center">Grado</th>
+                            <th className="px-6 py-3 text-center">Mes</th>
+                            <th className="px-6 py-3 text-center">Pagado</th>
+                            <th className="px-6 py-3 text-center">Pendiente</th>
                             <th className="px-6 py-3 text-center">Estado</th>
                             <th className="px-6 py-3 text-center">Acciones</th>
                         </tr>
                     </thead>
 
                     <tbody>
-                        {registros.map((registro) => (
+                        {registrosPaginados.map((registro) => (
                             <tr
                                 key={registro.id}
-                                className="border-t hover:bg-gray-50 transition"
+                                className="border-t hover:bg-gray-200 transition border-gray-200"
                             >
-                                <td className="px-6 py-4 font-medium text-gray-800">
-                                    {registro.alumno}
+                                <td className="px-6 py-4 font-medium">
+                                    {registro.estudiante.nombre}
                                 </td>
 
-                                <td className="px-6 py-4 text-gray-600">
-                                    {registro.grado}
+                                <td className="py-4 flex justify-center">
+                                    <span className="px-3 py-1 bg-gray-200 rounded-full text-sm font-semibold">
+                                        {registro.estudiante.grado} -{" "}
+                                        {registro.estudiante.grupo}
+                                    </span>
                                 </td>
 
-                                <td className="px-6 py-4 text-right font-semibold">
-                                    ${registro.mensualidad.toLocaleString()}
+                                <td className="px-6 py-4 text-center">
+                                    {registro.mes}
                                 </td>
 
-                                <td className="px-6 py-4 text-right text-green-600 font-semibold">
-                                    ${registro.pagado.toLocaleString()}
+                                <td className="px-6 py-4 text-center text-green-600 font-semibold">
+                                    {formatCurrency(registro.pagado)}
                                 </td>
 
-                                <td className="px-6 py-4 text-right font-bold text-red-600">
-                                    ${registro.pendiente.toLocaleString()}
+                                <td className="px-6 py-4 text-center text-red-600 font-semibold">
+                                    {formatCurrency(
+                                        registro.monto - registro.pagado,
+                                    )}
                                 </td>
 
                                 <td className="px-6 py-4 text-center">
                                     <span
                                         className={`px-3 py-1 rounded-full text-sm font-semibold ${
-                                            registro.estado === "Pagado"
+                                            registro.estado.toLowerCase() ===
+                                            "pagado"
                                                 ? "bg-green-100 text-green-700"
-                                                : registro.estado ===
-                                                    "Pendiente"
+                                                : registro.estado.toLowerCase() ===
+                                                    "pendiente"
                                                   ? "bg-yellow-100 text-yellow-800"
                                                   : "bg-red-100 text-red-700"
                                         }`}
@@ -159,6 +208,75 @@ export default function Colegiaturas() {
                         ))}
                     </tbody>
                 </table>
+
+                {/* Paginación */}
+                {totalPages > 1 && (
+                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-6 py-4 border-t bg-gray-50">
+                        <p className="text-sm text-gray-600">
+                            Página <strong>{currentPage}</strong> de{" "}
+                            <strong>{totalPages}</strong>
+                        </p>
+
+                        <div className="flex items-center gap-2">
+                            <button
+                                disabled={currentPage === 1}
+                                onClick={() =>
+                                    setCurrentPage((prev) => prev - 1)
+                                }
+                                className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 hover:bg-gray-100 transition disabled:opacity-40"
+                            >
+                                ←
+                            </button>
+
+                            {Array.from({ length: totalPages }, (_, i) => i + 1)
+                                .filter(
+                                    (page) =>
+                                        page === 1 ||
+                                        page === totalPages ||
+                                        Math.abs(page - currentPage) <= 1,
+                                )
+                                .map((page, index, array) => {
+                                    if (
+                                        index > 0 &&
+                                        page - array[index - 1] > 1
+                                    ) {
+                                        return (
+                                            <span
+                                                key={`dots-${page}`}
+                                                className="px-2"
+                                            >
+                                                ...
+                                            </span>
+                                        );
+                                    }
+
+                                    return (
+                                        <button
+                                            key={page}
+                                            onClick={() => setCurrentPage(page)}
+                                            className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
+                                                currentPage === page
+                                                    ? "bg-yellow-400 text-black shadow-md"
+                                                    : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
+                                            }`}
+                                        >
+                                            {page}
+                                        </button>
+                                    );
+                                })}
+
+                            <button
+                                disabled={currentPage === totalPages}
+                                onClick={() =>
+                                    setCurrentPage((prev) => prev + 1)
+                                }
+                                className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 hover:bg-gray-100 transition disabled:opacity-40"
+                            >
+                                →
+                            </button>
+                        </div>
+                    </div>
+                )}
             </div>
         </div>
     );

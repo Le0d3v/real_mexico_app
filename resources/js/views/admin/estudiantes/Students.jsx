@@ -1,9 +1,10 @@
-import { Eye, Search, User } from "lucide-react";
+import { CirclePlus, Eye, Search, User } from "lucide-react";
 import useStudent from "../../../hooks/useStudent";
 import Loader from "../../components/Loader";
 import { useState, useMemo, useEffect } from "react";
 import Modal from "../components/Modal";
 import ShowStudent from "./ShowStudent";
+import CreateStudent from "./CreateStudent";
 
 export default function Students() {
     const { estudiantes, isLoading, error } = useStudent();
@@ -15,6 +16,7 @@ export default function Students() {
 
     const [showStudent, setShowStudent] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState(null);
+    const [createStudent, setCreateStudent] = useState(false);
 
     const itemsPerPage = 10;
 
@@ -80,7 +82,10 @@ export default function Students() {
                         </p>
                     </div>
 
-                    <button className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition">
+                    <button
+                        className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition"
+                        onClick={() => setCreateStudent(true)}
+                    >
                         + Nuevo Estudiante
                     </button>
                 </div>
@@ -297,6 +302,15 @@ export default function Students() {
                         onClose={() => setShowStudent(false)}
                     />
                 )}
+            </Modal>
+            <Modal
+                isOpen={createStudent}
+                title={"Inscribir Estudiante"}
+                icon={<CirclePlus />}
+                size="full"
+                onClose={() => setCreateStudent(false)}
+            >
+                <CreateStudent onClose={() => setCreateStudent(false)} />
             </Modal>
         </>
     );

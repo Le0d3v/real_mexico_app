@@ -13,36 +13,39 @@ class ColegiaturasSeeder extends Seeder
         $estudiantes = DB::table('estudiantes')->pluck('id');
 
         $meses = [
-            1 => 'enero',
-            2 => 'febrero',
-            3 => 'marzo',
-            4 => 'abril',
-            5 => 'mayo',
-            6 => 'junio',
-            7 => 'julio',
-            8 => 'agosto',
-            9 => 'septiembre',
-            10 => 'octubre',
-            11 => 'noviembre',
-            12 => 'diciembre',
+            1 => 'Enero',
+            2 => 'Febrero',
+            3 => 'Marzo',
+            4 => 'Abril',
+            5 => 'Mayo',
+            6 => 'Junio',
+            7 => 'Julio',
+            8 => 'Agosto',
+            9 => 'Septiembre',
+            10 => 'Octubre',
+            11 => 'Noviembre',
+            12 => 'Diciembre',
         ];
 
         $anio = 2026;
+        $montoColegiatura = 1500;
 
         foreach ($estudiantes as $estudianteId) {
 
             foreach ($meses as $numeroMes => $nombreMes) {
 
-                $fechaLimite = Carbon::create($anio, $numeroMes, 10); // Día 10 como fecha límite
+                $fechaLimite = Carbon::create($anio, $numeroMes, 10);
+
+                $esMesPagado = in_array($numeroMes, [1, 2]);
 
                 DB::table('colegiaturas')->insert([
                     'estudiante_id' => $estudianteId,
                     'ciclo_escolar_id' => 2,
                     'mes' => $nombreMes,
                     'anio' => $anio,
-                    'monto' => 1500,
-                    'pagado' => rand(100, 1500),
-                    'estado' => 'pendiente',
+                    'monto' => $montoColegiatura,
+                    'pagado' => $esMesPagado ? $montoColegiatura : 0,
+                    'estado' => $esMesPagado ? 'Pagado' : 'Pendiente',
                     'fecha_limite_pago' => $fechaLimite,
                     'created_at' => now(),
                     'updated_at' => now(),

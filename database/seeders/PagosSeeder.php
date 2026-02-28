@@ -11,44 +11,50 @@ class PagosSeeder extends Seeder
 {
     public function run(): void
     {
-        // Obtener colegiaturas de enero y febrero 2026
+        // Obtener colegiaturas pagadas de Enero y Febrero 2026
         $colegiaturas = DB::table('colegiaturas')
-            ->whereIn('mes', ['enero', 'febrero'])
+            ->whereIn('mes', ['Enero', 'Febrero']) // Coincide con el seeder anterior
             ->where('anio', 2026)
+            ->where('estado', 'Pagado')
             ->get();
 
         foreach ($colegiaturas as $colegiatura) {
 
-            // Obtener tutor asociado al estudiante
-            $tutor = DB::table('estudiantes_tutores')
+            // Obtener tutor relacionado al estudiante
+            $tutorRelacion = DB::table('estudiantes_tutores')
                 ->where('estudiante_id', $colegiatura->estudiante_id)
                 ->first();
 
-            if (!$tutor) {
-                continue; // Evita error si no existe relación
+            if (!$tutorRelacion) {
+                continue; // Evita errores si no hay tutor asociado
             }
 
-            // Marcar colegiatura como pagada
-            DB::table('colegiaturas')
-                ->where('id', $colegiatura->id)
-                ->update([
-                    'estado' => 'pagado',
-                    'pagado' => $colegiatura->monto,
-                    'updated_at' => now()
-                ]);
+            // Determinar número del mes para fecha coherente
+            $numeroMes = $colegiatura->mes === 'Enero' ? 1 : 2;
 
-            // Insertar pago
+            // Generar fecha de pago antes o en fecha límite (día 1–10)
+            $fechaPago = Carbon::create(
+                2026,
+                $numeroMes,
+                rand(1, 10)
+            );
+
+            // Insertar registro histórico de pago
             DB::table('pagos')->insert([
                 'colegiatura_id' => $colegiatura->id,
                 'estudiante_id' => $colegiatura->estudiante_id,
-                'tutor_id' => $tutor->tutor_id,
-                'fecha_pago' => Carbon::create(2026, rand(1, 2), rand(1, 10)),
+                'tutor_id' => $tutorRelacion->tutor_id,
+                'fecha_pago' => $fechaPago,
                 'monto' => $colegiatura->monto,
-                'metodo_pago' => collect(['transferencia', 'efectivo', 'tarjeta'])->random(),
-                'referencia' => 'REF-' . strtoupper(Str::random(8)),
-                'observaciones' => 'Pago correspondiente a colegiatura ' . $colegiatura->mes,
+                'metodo_pago' => collect([
+                    'Transferencia',
+                    'Efectivo',
+                    'Tarjeta'
+                ])->random(),
+                'referencia' => 'REF-' . strtoupper(Str::random(10)),
+                'observaciones' => 'Pago correspondiente a colegiatura de ' . $colegiatura->mes . ' 2026',
                 'created_at' => now(),
-                'updated_at' => now()
+                'updated_at' => now(),
             ]);
         }
     }

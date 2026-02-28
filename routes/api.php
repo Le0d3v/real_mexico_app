@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\Auth\AuthController;
 use App\Http\Controllers\Auth\PasswordController;
+use App\Http\Controllers\CicloEscolarController;
+use App\Http\Controllers\ColegiaturaController;
 use App\Http\Controllers\DomicilioController;
 use App\Http\Controllers\EstudianteController;
 use App\Http\Controllers\PagoController;
@@ -20,8 +22,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource("/domicilio", DomicilioController::class);
     Route::apiResource("/tutores", TutorController::class);
     Route::apiResource("/estudiantes", EstudianteController::class);
+    
 });
-
+    
+Route::apiResource("/colegiaturas", ColegiaturaController::class);
+Route::get("/ciclo-actual", [CicloEscolarController::class, "get_ciclo_actual"]);
 Route::apiResource("/pagos", PagoController::class);
 Route::apiResource('/posts', PostController::class);
 Route::get('/users', [UserController::class, 'index']);

@@ -6,6 +6,7 @@ import { useState } from "react";
 import Modal from "./components/Modal";
 import CrearTutor from "./tutores/CrearTutor";
 import PostForm from "./noticias/PostForm";
+import useCicloEscolar from "../../hooks/useCicloEscolar";
 
 import {
     CirclePlus,
@@ -22,19 +23,27 @@ import {
 } from "lucide-react";
 
 export default function Dashboard() {
-    const { estudiantes, isLoading } = useStudent();
+    const { estudiantes } = useStudent();
     const { tutores } = useTutor();
+    const { cicloEscolar, error, isLoading } = useCicloEscolar();
 
     const [noticiaModal, setNoticiaModal] = useState(false);
     const [tutorModal, setTutorModal] = useState(false);
 
     if (isLoading) return <Loader />;
 
+    console.log(cicloEscolar);
+
     return (
         <>
             <div className="bg-slate-100 min-h-screen">
                 <Tittle>Panel de Administración</Tittle>
-
+                <p className="text-center mt-5 text-gray-500 text-lg">
+                    Ciclo Escolar:{" "}
+                    <span className="text-gray-700 font-semibold">
+                        {cicloEscolar[0].nombre}
+                    </span>
+                </p>
                 {/* KPIs */}
                 <div className="grid md:grid-cols-4 gap-6 mt-10 mb-10">
                     <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">

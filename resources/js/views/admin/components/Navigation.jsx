@@ -46,7 +46,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                         setPage={setPage}
                         index={2}
                         icon={CircleDollarSign}
-                        fn={() => setTitulo("Colegiaturas")}
+                        fn={() => setTitulo("Pagos")}
                     >
                         Pagos
                     </NavItem>

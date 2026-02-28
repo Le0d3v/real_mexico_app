@@ -338,7 +338,7 @@ export default function CrearTutor({ onClose }) {
                             />
 
                             <p className="text-sm text-gray-400 mt-4">
-                                Resultados:
+                                Resultados : {filteredStudents.length}
                             </p>
 
                             <div className="mt-3 flex-1 max-h-66 overflow-y-scroll pr-1">

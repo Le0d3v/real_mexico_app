@@ -237,7 +237,7 @@ export default function Pagos() {
                             {paginatedPagos.map((pago) => (
                                 <tr
                                     key={pago.id}
-                                    className="border-t hover:bg-gray-100 text-center border-gray-300"
+                                    className="border-t hover:bg-gray-200 text-center border-gray-300"
                                 >
                                     <td className="px-6 py-3">
                                         {pago.tutor?.name}{" "}
@@ -252,8 +252,8 @@ export default function Pagos() {
                                     <td className="px-6 py-3">
                                         {pago.metodo_pago}
                                     </td>
-                                    <td className="px-6 py-3 text-slate-500">
-                                        {pago.referencia}
+                                    <td className="px-6 py-3 text-slate-700 font-semibold">
+                                        {pago.referencia || "Sin Referencia"}
                                     </td>
                                     <td className="px-6 py-3">
                                         <button

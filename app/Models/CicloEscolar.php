@@ -9,6 +9,7 @@ class CicloEscolar extends Model
     protected $table = "ciclos_escolares";
 
     protected $fillable = [
+        "id",
         "nombre",
         "fecha_inicio",
         "fecha_fin",

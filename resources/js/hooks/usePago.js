@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const fetcher = (url) => api(url).then((res) => res.data);
 
-export default function useTutor() {
+export default function usePago() {
     const { data, error, isLoading, mutate } = useSWR("/api/pagos", fetcher, {
         refreshInterval: 1000,
     });

@@ -20,6 +20,7 @@ export default function EstudianteCard({ estudiante }) {
 
             {/* Datos Académicos */}
             <div className="flex justify-center gap-10">
+                <p>{estudiante.matricula}</p>
                 {/* Grado */}
                 <div className="flex flex-col items-center">
                     <div className="flex items-center gap-2 text-indigo-600 mb-2">

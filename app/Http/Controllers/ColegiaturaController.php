@@ -2,6 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Resources\ColegiaturaResource;
+use App\Models\CicloEscolar;
+use App\Models\Colegiatura;
 use Illuminate\Http\Request;
 
 class ColegiaturaController extends Controller
@@ -11,7 +14,20 @@ class ColegiaturaController extends Controller
      */
     public function index()
     {
-        //
+         $ciclo_actual = CicloEscolar::where("activo", 1)->first();
+
+        if (!$ciclo_actual) {
+            return response()->json([
+                "message" => "No existe ciclo escolar activo"
+            ], 404);
+        }
+
+        $colegiaturas = Colegiatura::where(
+            "ciclo_escolar_id",
+            $ciclo_actual->id
+        )->get();
+
+        return ColegiaturaResource::collection($colegiaturas);
     }
 
     /**
