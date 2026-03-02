@@ -6,11 +6,13 @@ import {
     ReceiptText,
     Users,
     Eye,
+    CirclePlus,
 } from "lucide-react";
 import usePago from "../../../hooks/usePago";
 import Loader from "../../components/Loader";
 import Modal from "../components/Modal";
 import ShowPago from "./ShowPago";
+import CrearPago from "./CrearPago";
 
 export default function Pagos() {
     const { pagos, isLoading, error } = usePago();
@@ -20,6 +22,7 @@ export default function Pagos() {
     const [fechaFiltro, setFechaFiltro] = useState("");
     const [currentPage, setCurrentPage] = useState(1);
 
+    const [crearPago, setCrearPago] = useState(false);
     const [showPago, setShowPago] = useState(false);
     const [pago, setPago] = useState(null);
 
@@ -136,7 +139,10 @@ export default function Pagos() {
                         </p>
                     </div>
 
-                    <button className="flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-xl shadow hover:shadow-md transition hover:opacity-90 hover:-translate-y-1 cursor-pointer">
+                    <button
+                        className="flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-xl shadow hover:shadow-md transition hover:opacity-90 hover:-translate-y-1 cursor-pointer"
+                        onClick={() => setCrearPago(true)}
+                    >
                         <PlusCircle size={18} />
                         Registrar Nuevo Pago
                     </button>
@@ -302,6 +308,15 @@ export default function Pagos() {
                     </div>
                 </div>
             </div>
+            <Modal
+                size="full"
+                title={"Registrar Nuevo Pago"}
+                icon={<CirclePlus />}
+                onClose={() => setCrearPago(false)}
+                isOpen={crearPago}
+            >
+                <CrearPago onClose={() => setCrearPago(false)} />
+            </Modal>
             <Modal
                 size="full"
                 title={"Información del Pago"}

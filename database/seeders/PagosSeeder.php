@@ -45,6 +45,7 @@ class PagosSeeder extends Seeder
                 'estudiante_id' => $colegiatura->estudiante_id,
                 'tutor_id' => $tutorRelacion->tutor_id,
                 'fecha_pago' => $fechaPago,
+                'asunto' => 'Pago por Colegiatura',
                 'monto' => $colegiatura->monto,
                 'metodo_pago' => collect([
                     'Transferencia',

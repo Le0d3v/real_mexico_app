@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignId('tutor_id')->constrained("tutores");
             $table->foreignId('estudiante_id')->constrained("estudiantes");
             $table->dateTime('fecha_pago');
+            $table->string('asunto');
             $table->integer('monto');
             $table->enum('metodo_pago', ['efectivo','transferencia','tarjeta']);
             $table->string('referencia', 45)->nullable();
