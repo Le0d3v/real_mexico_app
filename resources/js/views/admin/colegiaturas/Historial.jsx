@@ -1,4 +1,11 @@
-import { Calendar, GraduationCap, Hash, User, Users } from "lucide-react";
+import {
+    Calendar,
+    GraduationCap,
+    Hash,
+    IdCard,
+    User,
+    Users,
+} from "lucide-react";
 import InfoItem from "../components/InfoItem";
 import ColegiaturaCard from "./ColegiaturaCard";
 
@@ -14,7 +21,7 @@ export default function Historial({ colegiaturas, student, onClose }) {
                             <User className="w-8 h-8 text-red-600" />
                         </div>
                         <h2 className="text-2xl font-semibold text-gray-800">
-                            Estudiante
+                            Alumno
                         </h2>
                     </div>
 
@@ -31,9 +38,9 @@ export default function Historial({ colegiaturas, student, onClose }) {
                             }
                         />
                         <InfoItem
-                            icon={<Hash size={18} />}
-                            label="CURP"
-                            value={student.estudiante.curp}
+                            icon={<IdCard size={18} />}
+                            label="Matricula"
+                            value={student.estudiante.matricula}
                         />
                         <InfoItem
                             icon={<GraduationCap size={18} />}
@@ -42,7 +49,7 @@ export default function Historial({ colegiaturas, student, onClose }) {
                         />
                         <InfoItem
                             icon={<Users size={18} />}
-                            label="Tipo de Sangre"
+                            label="Grupo"
                             value={student.estudiante.grupo}
                         />
                     </div>

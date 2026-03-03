@@ -38,6 +38,14 @@ class EstudianteResource extends JsonResource
                     "contacto_principal" => (bool) $this->pivot->contacto_principal,
                 ];
             }),
+
+            "colegiaturas" => $this->whenLoaded("colegiaturas", function () {
+                return $this->colegiaturas->map(function ($colegiatura) {
+                    return new ColegiaturaResource($colegiatura);
+
+                });
+                
+            }),
             
             "tutores" => $this->whenLoaded('tutores', function () {
                 return $this->tutores->map(function ($tutor) {

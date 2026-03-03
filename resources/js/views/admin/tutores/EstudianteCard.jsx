@@ -17,10 +17,14 @@ export default function EstudianteCard({ estudiante }) {
                     {nombreCompleto}
                 </h2>
             </div>
-
+            <p className="text-sm text-gray-500">
+                Matricula:{" "}
+                <span className="font-semibold text-indigo-400">
+                    {estudiante.matricula}
+                </span>
+            </p>
             {/* Datos Académicos */}
             <div className="flex justify-center gap-10">
-                <p>{estudiante.matricula}</p>
                 {/* Grado */}
                 <div className="flex flex-col items-center">
                     <div className="flex items-center gap-2 text-indigo-600 mb-2">

@@ -12,6 +12,7 @@ import {
     GraduationCap,
     Users,
     Check,
+    IdCard,
 } from "lucide-react";
 
 export default function ShowPago({ pago, onClose }) {
@@ -66,7 +67,7 @@ export default function ShowPago({ pago, onClose }) {
                         <User className="w-8 h-8 text-red-600" />
                     </div>
                     <h2 className="text-2xl font-semibold text-gray-800">
-                        Datos del Remitente
+                        Datos del Responsable
                     </h2>
                 </div>
 
@@ -139,9 +140,9 @@ export default function ShowPago({ pago, onClose }) {
                         }
                     />
                     <InfoItem
-                        icon={<Hash size={18} />}
-                        label="Curp del Estudiante"
-                        value={pago.estudiante.curp}
+                        icon={<IdCard size={18} />}
+                        label="Matricula del Estudiante"
+                        value={pago.estudiante.matricula}
                     />
                     <InfoItem
                         icon={<GraduationCap size={18} />}

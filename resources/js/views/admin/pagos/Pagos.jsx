@@ -186,7 +186,7 @@ export default function Pagos() {
                             <Search size={18} className="text-slate-500" />{" "}
                             <input
                                 type="text"
-                                placeholder="Buscar por estudiante o referencia..."
+                                placeholder="Buscar por Tutor o Referencia..."
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                                 className="bg-transparent outline-none w-full text-sm-full p-1 tex-lg"

@@ -7,6 +7,7 @@ import Modal from "./components/Modal";
 import CrearTutor from "./tutores/CrearTutor";
 import PostForm from "./noticias/PostForm";
 import useCicloEscolar from "../../hooks/useCicloEscolar";
+import CrearPago from "./pagos/CrearPago";
 
 import {
     CirclePlus,
@@ -29,6 +30,7 @@ export default function Dashboard() {
 
     const [noticiaModal, setNoticiaModal] = useState(false);
     const [tutorModal, setTutorModal] = useState(false);
+    const [pagoModal, setPagoModal] = useState(false);
 
     if (isLoading) return <Loader />;
 
@@ -200,7 +202,10 @@ export default function Dashboard() {
                     </h3>
 
                     <div className="grid md:grid-cols-4 gap-4">
-                        <button className="flex items-center justify-center gap-2 bg-slate-900 text-white py-4 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer">
+                        <button
+                            className="flex items-center justify-center gap-2 bg-slate-900 text-white py-4 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer"
+                            onClick={() => setPagoModal(true)}
+                        >
                             <CreditCard size={18} />
                             Registrar Pago
                         </button>
@@ -256,6 +261,18 @@ export default function Dashboard() {
             >
                 {" "}
                 <CrearTutor onClose={() => setTutorModal(false)} />{" "}
+            </Modal>
+            <Modal
+                isOpen={pagoModal}
+                icon={<CirclePlus className="w-12 h-12" />}
+                onClose={() => {
+                    setPagoModal(false);
+                }}
+                size="full"
+                title="Registrar un Nuevo Pago"
+            >
+                {" "}
+                <CrearPago onClose={() => setPagoModal(false)} />{" "}
             </Modal>
         </>
     );
