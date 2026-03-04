@@ -28,9 +28,9 @@ class PagoRequest extends FormRequest
             "asunto" => "required|string",
             "fecha_pago" => "required|date",
             "monto" => "required|numeric",
-            "metodo_pago" => "required|string",
-            "referencia" => "string",
-            "observaciones" => "string",
+            "metodo_pago" => "required",
+            "referencia" => "string|nullable",
+            "observaciones" => "string|nullable",
         ];
 
     }
@@ -52,8 +52,7 @@ class PagoRequest extends FormRequest
             "monto.numeric" => "Asunto no válido. Intente nuevamente",
             "metodo_pago.required" => "El método de pago es requerido",
             "metodo_pago.string" => "Método de pago no válido. Intente nuevamente",
-            "referencia" => "Referencia no válida. Intente nuevamente",
-            "referencia.string" => "Método de pago no válido, Intente nuevamente",
+            "referencia.string" => "Referencia No válida. Intente nuevamente",
             "observaciones.string" => "Formato para observaciones no válido. Intente nuevamente",
         ];
     }

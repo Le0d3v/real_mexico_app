@@ -19,7 +19,7 @@ return new class extends Migration
             $table->dateTime('fecha_pago');
             $table->string('asunto');
             $table->integer('monto');
-            $table->enum('metodo_pago', ['efectivo','transferencia','tarjeta']);
+            $table->enum('metodo_pago', ['Efectivo','Transferencia','Tarjeta', 'Depósito']);
             $table->string('referencia', 45)->nullable();
             $table->text('observaciones')->nullable();
             $table->timestamps();

@@ -34,8 +34,16 @@ class PagoController extends Controller
 
         try {
             $colegiatura = Colegiatura::find($request->colegiatura_id);
+
+            $colegiatura->pagado += $request->monto;
+
+            if($colegiatura->pagado >= $colegiatura->monto) {
+                $colegiatura->estado = "Pagado";
+            }
+
+            $colegiatura->save();
         
-            $user = Pago::create([
+            $pago = Pago::create([
                 'colegiatura_id' => $request->colegiatura_id,
                 'estudiante_id' => $request->estudiante_id,
                 'tutor_id' => $request->tutor_id,
@@ -47,6 +55,8 @@ class PagoController extends Controller
                 'observaciones' => $request->observaciones,
             ]);
 
+            DB::commit();
+
             return response()->json([
                 'message' => 'Pago registrado exitosamente.',
             ], 201);
@@ -56,7 +66,7 @@ class PagoController extends Controller
             DB::rollBack();
 
             return response()->json([
-                'message' => 'Error al crear el tutor.',
+                'message' => 'Error al registrar el pago.',
                 'error' => $e->getMessage()
             ], 500);
         }

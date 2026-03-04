@@ -81,7 +81,7 @@ export default function Colegiaturas() {
 
     return (
         <>
-            <div className="bg-gray-100 min-h-screen p-6">
+            <div className="bg-gray-100 min-h-screen">
                 {/* Resumen */}
                 <div className="grid md:grid-cols-3 gap-6 mb-8">
                     <div className="bg-white p-6 rounded-xl shadow border-l-4 border-black">
@@ -173,12 +173,6 @@ export default function Colegiaturas() {
                                     key={registro.id}
                                     className="border-t hover:bg-gray-200 transition border-gray-200"
                                 >
-                                    {console.log(
-                                        registro.mes,
-                                        registro.estado,
-                                        registro.pagado,
-                                        registro.monto,
-                                    )}
                                     <td className="px-6 py-4 font-medium">
                                         {registro.estudiante.nombre}
                                     </td>
@@ -208,7 +202,9 @@ export default function Colegiaturas() {
                                         <span
                                             className={`px-3 py-1 rounded-full text-sm font-semibold ${
                                                 registro.estado.toLowerCase() ===
-                                                "pagado"
+                                                    "pagado" ||
+                                                registro.estado.toLowerCase() ===
+                                                    "Pagado"
                                                     ? "bg-green-100 text-green-700"
                                                     : registro.estado.toLowerCase() ===
                                                         "pendiente"

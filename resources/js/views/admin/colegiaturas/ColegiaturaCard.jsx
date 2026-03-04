@@ -32,12 +32,9 @@ export default function ColegiaturaCard({ colegiatura }) {
             {/* Header */}
             <div className="flex justify-between items-center mb-4">
                 <div>
-                    <h2 className="text-lg font-bold text-gray-800">
+                    <h2 className="text-xl font-bold text-gray-800">
                         {colegiatura.mes}
                     </h2>
-                    <p className="text-sm text-gray-500">
-                        Ciclo {colegiatura.anio}
-                    </p>
                 </div>
 
                 <span
