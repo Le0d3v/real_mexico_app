@@ -35,6 +35,8 @@ export default function AdminLayout() {
         return null;
     }
 
+    console.log(user);
+
     return (
         <>
             <div className="h-screen flex bg-gray-100">

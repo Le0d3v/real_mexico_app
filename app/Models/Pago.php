@@ -10,6 +10,7 @@ class Pago extends Model
         "colegiatura_id",
         "estudiante_id",
         "tutor_id",
+        "asunto",
         "fecha_pago",
         "monto",
         "metodo_pago",

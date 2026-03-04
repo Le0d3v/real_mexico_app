@@ -1,7 +1,7 @@
 import React from "react";
 import { formatCurrency } from "../../../helpers/helpers";
 
-export default function ColegiaturaPago({ colegiatura }) {
+export default function ColegiaturaPago({ colegiatura, selected }) {
     const pendiente = colegiatura.monto - colegiatura.pagado;
 
     const estado =
@@ -27,11 +27,8 @@ export default function ColegiaturaPago({ colegiatura }) {
 
     return (
         <div
-            className={`bg-white rounded-xl shadow-md border border-gray-200 border-l-4 ${borderIndicator} p-5 hover:shadow-lg transition-all ${
-                estado === "Pagado"
-                    ? "cursor-not-allowed"
-                    : "cursor-pointer hover:scale-105"
-            }`}
+            className={`bg-white rounded-xl shadow-md border border-gray-200 border-l-4 ${borderIndicator} p-5 transition-all duration-300 ${estado === "Pagado" ? "cursor-not-allowed" : "cursor-pointer hover:scale-105"} ${selected ? "ring-4 ring-red-400 scale-105 shadow-xl" : ""}
+            `}
         >
             {/* Header */}
             <div className="flex justify-between items-center mb-4">

@@ -11,20 +11,44 @@ import {
 } from "lucide-react";
 
 import useStudent from "../../../hooks/useStudent";
-import useTutor from "../../../hooks/useTutor";
 import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
 import { ClipLoader } from "react-spinners";
+import { toast } from "react-toastify";
 import { useState, useMemo } from "react";
 import EstudiantePago from "./EstudiantePago";
 import EstudianteSeleccionado from "./EstudianteSeleccionado";
+import usePago from "../../../hooks/usePago";
 
 export default function CrearPago({ onClose }) {
     const { estudiantes } = useStudent();
-    const { tutores } = useTutor();
+    const { createPago } = usePago();
 
     const [metodoPago, setMetodoPago] = useState("");
     const [cargando, setCargando] = useState(false);
+
+    const [formData, setFormData] = useState({
+        colegiatura_id: null,
+        estudiante_id: null,
+        tutor_id: null,
+        asunto: "Pago de Colegiatura",
+        fecha_pago: "",
+        monto: "",
+        metodo_pago: "",
+        referencia: "",
+        observaciones: "",
+    });
+
+    const handleMetodoPagoChange = (e) => {
+        const value = e.target.value;
+
+        setMetodoPago(value);
+
+        setFormData((prev) => ({
+            ...prev,
+            metodo_pago: value,
+        }));
+    };
 
     /* ================================
        NUEVA FUNCIONALIDAD
@@ -52,6 +76,49 @@ export default function CrearPago({ onClose }) {
     const handleSelectStudent = (student) => {
         setSelectedStudent(student);
         setSearch("");
+
+        setFormData((prev) => ({
+            ...prev,
+            estudiante_id: student.id,
+            tutor_id: null,
+            colegiatura_id: null,
+        }));
+    };
+
+    const handleSelectColegiatura = (colegiatura) => {
+        setFormData((prev) => ({
+            ...prev,
+            colegiatura_id: colegiatura.id,
+        }));
+    };
+
+    const handleSelectTutor = (tutor) => {
+        setFormData((prev) => ({
+            ...prev,
+            tutor_id: tutor.usuario.id,
+        }));
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+        setCargando(true);
+
+        try {
+            const response = await createPago(formData);
+            toast.success(response.message);
+            onClose(false);
+        } catch (error) {
+            if (error?.status === 422) {
+                Object.values(error.data.errors).forEach((messages) =>
+                    messages.forEach((message) => toast.error(message)),
+                );
+            } else {
+                toast.error("Error inesperado al registrar el tutor.");
+            }
+            console.log(error);
+        } finally {
+            setCargando(false);
+        }
     };
 
     return (
@@ -64,7 +131,12 @@ export default function CrearPago({ onClose }) {
                 </p>
             </div>
 
-            <form className="space-y-8 mt-5" autoComplete="off">
+            <form
+                className="space-y-8 mt-5"
+                autoComplete="off"
+                onSubmit={handleSubmit}
+                noValidate
+            >
                 {/* =======================================
                     INFORMACIÓN DEL PAGO
                 ======================================== */}
@@ -83,18 +155,39 @@ export default function CrearPago({ onClose }) {
                             icon={<NotepadText size={18} />}
                             label="Asunto"
                             options={["Pago por Colegiatura"]}
+                            value={formData.asunto}
+                            onChange={(e) =>
+                                setFormData((prev) => ({
+                                    ...prev,
+                                    asunto: e.target.value,
+                                }))
+                            }
                         />
 
                         <InputField
                             icon={<DollarSign size={18} />}
                             label="Monto"
                             type="number"
+                            value={formData.monto}
+                            onChange={(e) =>
+                                setFormData((prev) => ({
+                                    ...prev,
+                                    monto: e.target.value,
+                                }))
+                            }
                         />
 
                         <InputField
                             icon={<Calendar size={18} />}
                             label="Fecha de Registro"
                             type="date"
+                            value={formData.fecha_pago}
+                            onChange={(e) =>
+                                setFormData((prev) => ({
+                                    ...prev,
+                                    fecha_pago: e.target.value,
+                                }))
+                            }
                         />
 
                         <SelectField
@@ -107,7 +200,7 @@ export default function CrearPago({ onClose }) {
                                 "Deposito",
                             ]}
                             value={metodoPago}
-                            onChange={(e) => setMetodoPago(e.target.value)}
+                            onChange={handleMetodoPagoChange}
                         />
 
                         {(metodoPago === "Deposito" ||
@@ -115,12 +208,26 @@ export default function CrearPago({ onClose }) {
                             <InputField
                                 icon={<Hash size={18} />}
                                 label="Referencia"
+                                value={formData.referencia}
+                                onChange={(e) =>
+                                    setFormData((prev) => ({
+                                        ...prev,
+                                        referencia: e.target.value,
+                                    }))
+                                }
                             />
                         )}
 
                         <InputField
                             icon={<Eye size={18} />}
                             label="Observaciones (Opcional)"
+                            value={formData.observaciones}
+                            onChange={(e) =>
+                                setFormData((prev) => ({
+                                    ...prev,
+                                    observaciones: e.target.value,
+                                }))
+                            }
                         />
                     </div>
                 </section>
@@ -193,7 +300,19 @@ export default function CrearPago({ onClose }) {
 
                             <EstudianteSeleccionado
                                 estudiante={selectedStudent}
-                                onClear={() => setSelectedStudent(null)}
+                                onClear={() => {
+                                    setSelectedStudent(null);
+                                    setFormData((prev) => ({
+                                        ...prev,
+                                        estudiante_id: null,
+                                        tutor_id: null,
+                                        colegiatura_id: null,
+                                    }));
+                                }}
+                                onSelectColegiatura={handleSelectColegiatura}
+                                onSelectTutor={handleSelectTutor}
+                                selectedColegiaturaId={formData.colegiatura_id}
+                                selectedTutorId={formData.tutor_id}
                             />
                         </div>
                     )}

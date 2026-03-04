@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Resources\ColegiaturaResource;
+use App\Http\Resources\ColegiaturaEstudianteResource;
 use App\Models\CicloEscolar;
 use App\Models\Colegiatura;
 use Illuminate\Http\Request;
@@ -27,7 +27,7 @@ class ColegiaturaController extends Controller
             $ciclo_actual->id
         )->get();
 
-        return ColegiaturaResource::collection($colegiaturas);
+        return ColegiaturaEstudianteResource::collection($colegiaturas);
     }
 
     /**

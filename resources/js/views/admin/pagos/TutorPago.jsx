@@ -1,11 +1,19 @@
 import { User, Phone, Mail } from "lucide-react";
 
-export default function TutorPago({ tutor }) {
+export default function TutorPago({ tutor, selected }) {
     const nombreCompleto = `${tutor.usuario.name} ${tutor.usuario.apellido_paterno} ${tutor.usuario.apellido_materno}`;
 
     return (
         <>
-            <div className="bg-white border border-indigo-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition-all duration-200 space-y-5 cursor-pointer hover:scale-105">
+            <div
+                className={`rounded-2xl p-6 shadow-sm transition-all duration-300 space-y-5 cursor-pointer
+                    ${
+                        selected
+                            ? "bg-indigo-50 border-4 border-indigo-600 ring-2 ring-indigo-300 scale-105 shadow-xl"
+                            : "bg-white border border-indigo-200 hover:shadow-md hover:scale-105"
+                    }
+                `}
+            >
                 {/* Nombre del Estudiante */}
                 <div className="text-center border-b border-b-indigo-200 pb-4">
                     <div className="flex justify-center">

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
+use App\Http\Resources\UserResource;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\JsonResponse;
@@ -28,15 +29,23 @@ class AuthController extends Controller
         ]);
     }
 
+   
     public function me(Request $request): JsonResponse
     {
         $user = $request->user()->load([
             'domicilio',
-            'tutor'
+            'tutor.estudiantes.domicilio',
+            'tutor.estudiantes.colegiaturas',
+            'tutor.estudiantes.grado',
+            'tutor.estudiantes.grupo'
         ]);
 
-        return response()->json($user);
+        return response()->json(
+            new UserResource($user)
+        );
     }
+
+    
 
     public function logout(Request $request): JsonResponse
     {

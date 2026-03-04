@@ -11,7 +11,14 @@ import {
 import ColegiaturaPago from "./ColegiaturaPago";
 import TutorPago from "./TutorPago";
 
-export default function EstudianteSeleccionado({ estudiante, onClear }) {
+export default function EstudianteSeleccionado({
+    estudiante,
+    onClear,
+    onSelectColegiatura,
+    onSelectTutor,
+    selectedColegiaturaId,
+    selectedTutorId,
+}) {
     const nombreCompleto = `${estudiante.nombre} ${estudiante.apellido_paterno} ${estudiante.apellido_materno}`;
 
     return (
@@ -94,7 +101,17 @@ export default function EstudianteSeleccionado({ estudiante, onClear }) {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
                         {estudiante.colegiaturas.map((colegiatura) => (
-                            <ColegiaturaPago colegiatura={colegiatura} />
+                            <div
+                                key={colegiatura.id}
+                                onClick={() => onSelectColegiatura(colegiatura)}
+                            >
+                                <ColegiaturaPago
+                                    colegiatura={colegiatura}
+                                    selected={
+                                        selectedColegiaturaId === colegiatura.id
+                                    }
+                                />
+                            </div>
                         ))}
                     </div>
                 )}
@@ -121,7 +138,17 @@ export default function EstudianteSeleccionado({ estudiante, onClear }) {
                 ) : (
                     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
                         {estudiante.tutores.map((tutor) => (
-                            <TutorPago tutor={tutor} />
+                            <div
+                                key={tutor.id}
+                                onClick={() => onSelectTutor(tutor)}
+                            >
+                                <TutorPago
+                                    tutor={tutor}
+                                    selected={
+                                        selectedTutorId === tutor.usuario.id
+                                    }
+                                />
+                            </div>
                         ))}
                     </div>
                 )}

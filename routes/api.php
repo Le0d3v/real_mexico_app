@@ -16,18 +16,17 @@ Route::post('/auth-login', [AuthController::class, 'login']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('/me', [AuthController::class, 'me']);
+   
     Route::post('/logout', [AuthController::class, 'logout']);
-    Route::put("/update-password/{id}", [PasswordController::class, "update"]);
     Route::put("/user/update/{id}", [UserController::class, "update"]);
+    Route::put("/update-password/{id}", [PasswordController::class, "update"]);
     Route::apiResource("/domicilio", DomicilioController::class);
     Route::apiResource("/tutores", TutorController::class);
-    Route::apiResource("/estudiantes", EstudianteController::class);
-    
+    Route::apiResource("/estudiantes", EstudianteController::class); 
+    Route::apiResource("/colegiaturas", ColegiaturaController::class);
+    Route::apiResource("/pagos", PagoController::class);
 });
     
-Route::apiResource("/estudiantes", EstudianteController::class);
-Route::apiResource("/colegiaturas", ColegiaturaController::class);
 Route::get("/ciclo-actual", [CicloEscolarController::class, "get_ciclo_actual"]);
-Route::apiResource("/pagos", PagoController::class);
 Route::apiResource('/posts', PostController::class);
 Route::get('/users', [UserController::class, 'index']);
