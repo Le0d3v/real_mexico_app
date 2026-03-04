@@ -95,7 +95,7 @@ export default function Login() {
                                             <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black pointer-events-none" />
                                             <input
                                                 id="email"
-                                                type="tel"
+                                                type="email"
                                                 placeholder="correo@dominio.com"
                                                 onChange={(e) =>
                                                     setEmail(e.target.value)
