@@ -14,6 +14,7 @@ import {
     Check,
     IdCard,
 } from "lucide-react";
+import { formatDate } from "../../../helpers/helpers";
 
 export default function ShowPago({ pago, onClose }) {
     return (
@@ -42,7 +43,7 @@ export default function ShowPago({ pago, onClose }) {
                     <InfoItem
                         icon={<Calendar size={18} />}
                         label="Fecha de Registro"
-                        value={pago.fecha_pago}
+                        value={formatDate(pago.fecha_pago)}
                     />
                     <InfoItem
                         icon={<CreditCard size={18} />}

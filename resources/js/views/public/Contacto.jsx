@@ -10,7 +10,7 @@ import {
     ChevronDown,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import preguntas from "../../helpers/preguntas";
+import { preguntas } from "../../helpers/data";
 import socialLinks from "../../helpers/socialLinks";
 import Map from "./components/Map";
 import AnimationSection from "./components/AnimationSection";

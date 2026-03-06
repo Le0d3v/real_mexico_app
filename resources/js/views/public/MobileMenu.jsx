@@ -144,7 +144,7 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
 
                     <div className="flex justify-between text-gray-300">
                         {socialLinks.map((link, i) => (
-                            <a href={link.url} id="i">
+                            <a href={link.url} key={i}>
                                 {link.icon}
                             </a>
                         ))}

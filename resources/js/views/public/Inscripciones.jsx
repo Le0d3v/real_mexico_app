@@ -4,8 +4,11 @@ import { CheckCircle, FileText, Calendar, Users } from "lucide-react";
 import TituloDark from "./components/TituloDark";
 import { motion } from "framer-motion";
 import AnimationSection from "./components/AnimationSection";
+import useCicloEscolar from "../../hooks/useCicloEscolar";
 
 export default function Inscripciones() {
+    const { cicloEscolar } = useCicloEscolar();
+
     return (
         <div className="w-full">
             <section className="relative py-28 bg-gradient-to-br from-black via-[#0f0f0f] to-[#1a1a1a] overflow-hidden">
@@ -132,7 +135,8 @@ export default function Inscripciones() {
 
                         <div className="mt-12 bg-[#1a1a1a] p-10 rounded-2xl border border-yellow-400/10 shadow-lg">
                             <p className="text-2xl font-semibold text-yellow-400">
-                                Inscripciones Abiertas Ciclo Escolar 2026 - 2027
+                                Inscripciones Abiertas Ciclo Escolar{" "}
+                                {cicloEscolar.nombre}
                             </p>
                             <div className="mt-8">
                                 <a

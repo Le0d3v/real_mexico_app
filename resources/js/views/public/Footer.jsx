@@ -10,6 +10,7 @@ import {
 
 import socialLinks from "../../helpers/socialLinks";
 import useIRM from "../../hooks/useIRM";
+import { actualYear } from "../../helpers/helpers";
 
 export default function Footer() {
     const { page, setPage } = useIRM();
@@ -122,8 +123,8 @@ export default function Footer() {
                     </div>
 
                     <p className="text-sm text-gray-500 text-center">
-                        © 2026 Instituto Real de México. Todos los derechos
-                        reservados.
+                        © {actualYear} Instituto Real de México. Todos los
+                        derechos reservados.
                     </p>
                 </div>
             </div>

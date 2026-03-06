@@ -1,4 +1,4 @@
-// 💰 Formateador moneda
+// Formateador Dinero
 const formatCurrency = (value) =>
     new Intl.NumberFormat("es-MX", {
         style: "currency",
@@ -6,4 +6,16 @@ const formatCurrency = (value) =>
         minimumFractionDigits: 2,
     }).format(value);
 
-export { formatCurrency };
+const actualYear = new Date().getFullYear();
+
+const formatDate = (date) => {
+    const formateada = new Date(date).toLocaleDateString("es-MX", {
+        day: "2-digit",
+        month: "long",
+        year: "numeric",
+    });
+
+    return formateada;
+};
+
+export { formatCurrency, actualYear, formatDate };

@@ -13,6 +13,7 @@ import EstudianteCard from "./EstudianteCard";
 import Swal from "sweetalert2";
 import useTutor from "../../../hooks/useTutor";
 import InfoItem from "../components/InfoItem";
+import { formatDate } from "../../../helpers/helpers";
 
 export default function ShowTutor({ tutor, onClose }) {
     if (!tutor) return null;
@@ -77,7 +78,7 @@ export default function ShowTutor({ tutor, onClose }) {
                     <InfoItem
                         icon={<Calendar size={18} />}
                         label="Fecha de Nacimiento"
-                        value={tutor.fecha_nacimiento}
+                        value={formatDate(tutor.fecha_nacimiento)}
                     />
 
                     <InfoItem

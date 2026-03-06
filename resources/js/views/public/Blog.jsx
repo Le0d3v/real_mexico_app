@@ -20,7 +20,9 @@ export default function Blog() {
 
     return (
         <div>
-            <Tittle>¡Conoce Nuestras Últimas Novedades!</Tittle>
+            <div className="py-8">
+                <Tittle>¡Conoce Nuestras Últimas Novedades!</Tittle>
+            </div>
             {posts.length == 0 ? (
                 <p className="text-center font-semibold my-5 uppercase text-3xl">
                     Sin Noticias

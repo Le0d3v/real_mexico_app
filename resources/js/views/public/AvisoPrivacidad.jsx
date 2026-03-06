@@ -1,37 +1,6 @@
-import React from "react";
+import { avisosPrivacidad } from "../../helpers/data";
 
 export default function AvisoPrivacidad() {
-    const sections = [
-        {
-            title: "1. Identidad y Domicilio del Responsable",
-            content: `La institución educativa es responsable del tratamiento de los datos personales recabados de alumnos, padres de familia y tutores. Esta información es utilizada exclusivamente para fines académicos, administrativos y de comunicación institucional.`,
-        },
-        {
-            title: "2. Datos Personales Recabados",
-            content: `Para la prestación del servicio educativo se podrán recabar datos personales como nombre completo, domicilio, teléfonos de contacto, correo electrónico, información académica del alumno y documentación oficial requerida por autoridades educativas.`,
-        },
-        {
-            title: "3. Finalidad del Tratamiento de Datos",
-            content: `Los datos personales se utilizan para gestionar procesos de inscripción, control escolar, comunicación institucional, emisión de documentación académica y cumplimiento de obligaciones legales ante autoridades educativas.`,
-        },
-        {
-            title: "4. Protección de la Información",
-            content: `La institución implementa medidas administrativas, técnicas y organizativas para proteger los datos personales contra daño, pérdida, alteración, destrucción o acceso no autorizado.`,
-        },
-        {
-            title: "5. Transferencia de Datos",
-            content: `Los datos personales podrán ser compartidos con autoridades educativas o instituciones gubernamentales cuando sea requerido para cumplir con obligaciones legales o administrativas relacionadas con el sistema educativo.`,
-        },
-        {
-            title: "6. Derechos ARCO",
-            content: `Los titulares de los datos personales tienen derecho a Acceder, Rectificar, Cancelar u Oponerse al tratamiento de sus datos personales. Para ejercer estos derechos deberán presentar una solicitud formal ante la administración escolar.`,
-        },
-        {
-            title: "7. Modificaciones al Aviso de Privacidad",
-            content: `La institución podrá actualizar o modificar este aviso de privacidad cuando sea necesario para cumplir con cambios normativos o mejoras en sus políticas institucionales.`,
-        },
-    ];
-
     return (
         <div className="min-h-screen bg-white">
             {/* HERO */}
@@ -59,11 +28,13 @@ export default function AvisoPrivacidad() {
                 {/* TABLA DE CONTENIDO */}
 
                 <aside className="md:col-span-1">
-                    <div className="sticky top-35 bg-gray-50 border border-gray-200 rounded-xl p-5 shadow-sm">
-                        <h3 className="font-bold text-black mb-4">Contenido</h3>
+                    <div className="sticky top-35 bg-gray-50 border border-gray-200 rounded-xl p-5 shadow-sm hover:border-red-300">
+                        <h3 className="font-bold text-black mb-4 text-lg">
+                            Contenido
+                        </h3>
 
                         <ul className="space-y-3 text-sm">
-                            {sections.map((s, i) => (
+                            {avisosPrivacidad.map((s, i) => (
                                 <li key={i}>
                                     <a
                                         href={`#section${i}`}
@@ -80,11 +51,11 @@ export default function AvisoPrivacidad() {
                 {/* SECCIONES */}
 
                 <main className="md:col-span-3 space-y-12">
-                    {sections.map((s, i) => (
+                    {avisosPrivacidad.map((s, i) => (
                         <section
                             key={i}
                             id={`section${i}`}
-                            className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition"
+                            className="bg-white border border-gray-200 rounded-xl p-8 shadow-sm hover:shadow-md transition hover:border-red-300"
                         >
                             <h2 className="text-2xl font-semibold text-black mb-4 flex items-center">
                                 <span className="w-3 h-3 bg-red-600 rounded-full mr-3"></span>
@@ -98,9 +69,9 @@ export default function AvisoPrivacidad() {
                         </section>
                     ))}
 
-                    <div className="flex w-full justify-end">
+                    <div className="flex w-full md:justify-end">
                         <a
-                            className="bg-red-600 hover:bg-red-700 transition px-6 py-3 rounded-xl font-semibold shadow-lg text-white cursor-pointer hover:-translate-y-1"
+                            className="bg-red-600 hover:bg-red-700 transition px-6 py-3 rounded-xl font-semibold shadow-lg text-white cursor-pointer hover:-translate-y-1 text-center w-full md:w-auto"
                             href="/docs/Aviso_de_Privacidad.pdf"
                             download
                         >

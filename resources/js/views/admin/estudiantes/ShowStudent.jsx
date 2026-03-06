@@ -13,6 +13,7 @@ import {
 } from "lucide-react";
 import InfoItem from "../components/InfoItem";
 import TutorCard from "./TutorCard";
+import { formatDate } from "../../../helpers/helpers";
 
 export default function ShowStudent({ student, onClose }) {
     const domicilio = student.domicilio;
@@ -49,7 +50,7 @@ export default function ShowStudent({ student, onClose }) {
                         <InfoItem
                             icon={<Calendar size={18} />}
                             label="Fecha de Nacimiento"
-                            value={student.fecha_nacimiento}
+                            value={formatDate(student.fecha_nacimiento)}
                         />
                         <InfoItem
                             icon={<Hash size={18} />}
