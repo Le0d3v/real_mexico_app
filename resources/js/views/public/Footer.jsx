@@ -9,8 +9,11 @@ import {
 } from "lucide-react";
 
 import socialLinks from "../../helpers/socialLinks";
+import useIRM from "../../hooks/useIRM";
 
 export default function Footer() {
+    const { page, setPage } = useIRM();
+
     return (
         <footer className="w-full bg-gradient-to-br from-red-700 via-red-600 to-red-800 text-white">
             <div className="max-w-7xl mx-auto px-6 md:px-20 py-16">
@@ -104,18 +107,18 @@ export default function Footer() {
             <div className="bg-black/95 py-6">
                 <div className="max-w-7xl mx-auto px-6 md:px-20 flex flex-col md:flex-row justify-between items-center gap-4">
                     <div className="flex gap-8 text-sm text-gray-400">
-                        <a
-                            href="#"
-                            className="hover:text-yellow-400 transition"
+                        <button
+                            className="hover:text-yellow-400 transition cursor-pointer"
+                            onClick={() => setPage(8)}
                         >
                             Aviso de Privacidad
-                        </a>
-                        <a
-                            href="#"
-                            className="hover:text-yellow-400 transition"
+                        </button>
+                        <button
+                            className="hover:text-yellow-400 transition cursor-pointer"
+                            onClick={() => setPage(7)}
                         >
                             Términos y Condiciones
-                        </a>
+                        </button>
                     </div>
 
                     <p className="text-sm text-gray-500 text-center">

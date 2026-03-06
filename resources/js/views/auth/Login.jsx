@@ -156,7 +156,7 @@ export default function Login() {
                         </form>
                     </div>
                 </div>
-                <p className="text-sm text-center text-white mt-5 md:mt-15">
+                <p className="text-sm text-center text-white mt-10 md:mt-15">
                     Instituto Real de México 2026. Todos los Derechos Reservados
                 </p>
             </div>

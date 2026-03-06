@@ -9,9 +9,12 @@ import Inscripciones from "../public/Inscripciones";
 import Estudiantes from "../public/Estudiantes";
 import Tutores from "../public/Tutores";
 import { PhoneCall } from "lucide-react";
+import TerminosCondiciones from "../public/TerminosCondiciones";
+import useIRM from "../../hooks/useIRM";
+import AvisoPrivacidad from "../public/AvisoPrivacidad";
 
 export default function PublicLayout() {
-    const [page, setPage] = useState(0);
+    const { page, setPage } = useIRM();
 
     const pages = [
         <Home />,
@@ -21,6 +24,8 @@ export default function PublicLayout() {
         <Tutores />,
         <Blog />,
         <Contacto />,
+        <TerminosCondiciones />,
+        <AvisoPrivacidad />,
     ];
 
     return (

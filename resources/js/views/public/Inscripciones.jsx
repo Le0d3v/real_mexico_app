@@ -38,7 +38,7 @@ export default function Inscripciones() {
                                    px-10 py-4 rounded-2xl font-semibold
                                    hover:bg-yellow-400 hover:text-black
                                    transition-all duration-300"
-                                href="https://wa.me/522212228893?text=Quiero%20agendar%20una%20visita"
+                                href="https://wa.me/522212228893?text=Quiero%20agendar%20una%20visita%20al%20Instituto"
                                 target="_blank"
                                 rel="noopener noreferrer"
                             >
