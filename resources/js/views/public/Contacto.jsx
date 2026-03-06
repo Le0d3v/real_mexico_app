@@ -91,7 +91,7 @@ export default function Contacto() {
                                 </div>
                                 <div className="flex gap-4">
                                     <Mail className="text-red-500" />
-                                    <p>informes@irm.com</p>
+                                    <p>contacto@realdemexicoac.com</p>
                                 </div>
                             </div>
                         </div>
@@ -130,11 +130,13 @@ export default function Contacto() {
                         Síguenos en Redes Sociales
                     </h2>
 
-                    <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <div className="grid grid-cols-2 md:grid-cols-3 gap-6">
                         {socialLinks.map((link, i) => (
                             <a
                                 key={i}
                                 href={link.url}
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="flex flex-col items-center justify-center bg-slate-800 hover:bg-red-500 transition p-6 rounded-2xl duration-300 shadow-lg"
                             >
                                 {link.icon}

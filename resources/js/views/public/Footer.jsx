@@ -55,6 +55,8 @@ export default function Footer() {
                                         href={link.url}
                                         key={i}
                                         className="flex items-center gap-3 text-red-100 hover:text-yellow-400 transition hover:font-bold hover:-translate-y-1"
+                                        target="_blank"
+                                        rel="noopener noreferrer"
                                     >
                                         {link.icon}
                                         <p>{link.name}</p>

@@ -53,7 +53,9 @@ export default function Home() {
 
                             <div className="mt-10 flex justify-center">
                                 <a
-                                    href="#"
+                                    href="https://wa.me/522212228893?text=Quiero%20solicitar%20informes%20sobre%20el%20Instituto%20Real%20de%20M%C3%A9xico"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
                                     className="
                                         px-4 py-2 rounded bg-blue-500 text-white font-bold text-2xl
                                         transition-all duration-300 ease-out
@@ -82,7 +84,7 @@ export default function Home() {
                             seguro y profesional.
                         </p>
                     </div>
-                    
+
                     <AnimationSection>
                         <div className="mt-16 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
                             <IconContainer

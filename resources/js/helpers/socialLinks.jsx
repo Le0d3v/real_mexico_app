@@ -8,7 +8,7 @@ const socialLinks = [
     {
         name: "Facebook",
         icon: <Facebook className={styles} />,
-        url: "https://www.facebook.com/realdemexico",
+        url: "https://www.facebook.com/RealdeMexicoSAX",
     },
     {
         name: "Instagram",
@@ -19,11 +19,6 @@ const socialLinks = [
         name: "TikTok",
         icon: <TikTok className={styles} />,
         url: "https://www.tiktok.com/@realdemexico_",
-    },
-    {
-        name: "YouTube",
-        icon: <Youtube className={styles} />,
-        url: "https://www.youtube.com/@realdemexico",
     },
 ];
 

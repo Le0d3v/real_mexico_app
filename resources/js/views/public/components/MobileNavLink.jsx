@@ -17,7 +17,7 @@ export default function MobileNavLink({
     useEffect(() => {
         window.scrollTo({
             top: 0,
-            behavior: "smooth", // opcional: "auto" si no quieres animación
+            behavior: "auto",
         });
     }, [page]);
 

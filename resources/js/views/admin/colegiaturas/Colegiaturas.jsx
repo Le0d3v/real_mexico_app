@@ -4,8 +4,9 @@ import Loader from "../../components/Loader";
 import meses from "../../../helpers/meses";
 import { formatCurrency } from "../../../helpers/helpers";
 import Modal from "../components/Modal";
-import { Eye } from "lucide-react";
+import { CirclePlus, Eye } from "lucide-react";
 import Historial from "./Historial";
+import RegistrarPago from "./RegistrarPago";
 
 export default function Colegiaturas() {
     const { colegiaturas, isLoading } = useColegiatura();
@@ -15,6 +16,7 @@ export default function Colegiaturas() {
     const [historialModal, setHistoialModal] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState(null);
     const [colegiaturasHistorial, setColegiaturasHistorial] = useState([]);
+    const [registroModal, setRegistroModal] = useState(false);
 
     const [search, setSearch] = useState("");
     const [estadoFiltro, setEstadoFiltro] = useState("Todos");
@@ -75,6 +77,16 @@ export default function Colegiaturas() {
         setSelectedStudent(student);
         setColegiaturasHistorial(studentColegiaturas);
         setHistoialModal(true);
+    };
+
+    const registrarPago = (student) => {
+        const studentColegiaturas = colegiaturas.filter(
+            (h) => h.estudiante_id === student.estudiante.id,
+        );
+
+        setSelectedStudent(student);
+        setColegiaturasHistorial(studentColegiaturas);
+        setRegistroModal(true);
     };
 
     if (isLoading) return <Loader />;
@@ -218,7 +230,12 @@ export default function Colegiaturas() {
 
                                     <td className="px-6 py-4 text-center">
                                         <div className="flex justify-center gap-2">
-                                            <button className="px-3 py-1 text-sm rounded-md bg-yellow-500 text-black hover:bg-yellow-600 transition">
+                                            <button
+                                                className="px-3 py-1 text-sm rounded-md bg-yellow-500 text-black hover:bg-yellow-600 transition cursor-pointer"
+                                                onClick={() =>
+                                                    registrarPago(registro)
+                                                }
+                                            >
                                                 Registrar pago
                                             </button>
                                             <button
@@ -319,6 +336,19 @@ export default function Colegiaturas() {
                 size={"full"}
             >
                 <Historial
+                    colegiaturas={colegiaturasHistorial}
+                    student={selectedStudent}
+                    onClose={setHistoialModal}
+                />
+            </Modal>
+            <Modal
+                isOpen={registroModal}
+                onClose={() => setRegistroModal(false)}
+                icon={<CirclePlus />}
+                title={"Registro de Pago por Colegiatura"}
+                size={"full"}
+            >
+                <RegistrarPago
                     colegiaturas={colegiaturasHistorial}
                     student={selectedStudent}
                     onClose={setHistoialModal}

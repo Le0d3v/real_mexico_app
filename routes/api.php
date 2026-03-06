@@ -27,6 +27,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::apiResource("/pagos", PagoController::class);
 });
     
+Route::apiResource("/colegiaturas", ColegiaturaController::class);
 Route::get("/ciclo-actual", [CicloEscolarController::class, "get_ciclo_actual"]);
 Route::apiResource('/posts', PostController::class);
 Route::get('/users', [UserController::class, 'index']);

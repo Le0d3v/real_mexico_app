@@ -22,22 +22,28 @@ export default function Inscripciones() {
                         />
 
                         <div className="mt-10 flex justify-center gap-6 flex-wrap">
-                            <button
+                            <a
+                                href="https://wa.me/522212228893?text=Quiero%20solicitar%20informes%20sobre%20el%20proceso%20de%20inscripci%C3%B3n"
+                                target="_blank"
+                                rel="noopener noreferrer"
                                 className="bg-yellow-400 text-black font-semibold px-10 py-4 rounded-2xl 
                                    shadow-lg hover:bg-yellow-300 
                                    transition-all duration-300 hover:scale-105"
                             >
                                 Solicitar Información
-                            </button>
+                            </a>
 
-                            <button
+                            <a
                                 className="border border-yellow-400 text-yellow-400 
                                    px-10 py-4 rounded-2xl font-semibold
                                    hover:bg-yellow-400 hover:text-black
                                    transition-all duration-300"
+                                href="https://wa.me/522212228893?text=Quiero%20agendar%20una%20visita"
+                                target="_blank"
+                                rel="noopener noreferrer"
                             >
                                 Agendar Visita
-                            </button>
+                            </a>
                         </div>
                     </div>
                 </AnimationSection>
@@ -128,9 +134,16 @@ export default function Inscripciones() {
                             <p className="text-2xl font-semibold text-yellow-400">
                                 Inscripciones Abiertas Ciclo Escolar 2026 - 2027
                             </p>
-                            <button className="mt-8 bg-yellow-400 text-black font-semibold px-8 py-4 rounded-xl hover:bg-yellow-300 transition-all duration-300">
-                                Agendar Cita
-                            </button>
+                            <div className="mt-8">
+                                <a
+                                    className="bg-yellow-400 text-black font-semibold px-8 py-4 rounded-xl hover:bg-yellow-300 transition-all duration-300"
+                                    href="https://wa.me/522212228893?text=Quiero%20agendar%20una%20visita"
+                                    target="_blank"
+                                    rel="noopener noreferrer"
+                                >
+                                    Agendar Cita
+                                </a>
+                            </div>
                         </div>
                     </div>
                 </AnimationSection>
@@ -149,9 +162,14 @@ export default function Inscripciones() {
                         </p>
 
                         <div className="mt-8 flex flex-col sm:flex-row justify-center gap-6">
-                            <button className="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition">
-                                Contactar por Teléfono
-                            </button>
+                            <a
+                                className="bg-yellow-400 text-black font-semibold px-6 py-3 rounded-lg hover:bg-yellow-300 transition"
+                                href="https://wa.me/522212228893"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                            >
+                                Contactar por Whatsapp
+                            </a>
 
                             <button className="border border-yellow-400 text-yellow-500 font-semibold px-6 py-3 rounded-lg hover:bg-yellow-400 hover:text-black transition">
                                 Enviar Correo
