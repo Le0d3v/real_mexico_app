@@ -85,4 +85,86 @@ const preguntas = [
     },
 ];
 
-export { terminosCondiciones, avisosPrivacidad, preguntas };
+const tiposDeSangre = ["O-", "O+", "A-", "A+", "B-", "B+", "AB-", "AB+"];
+
+const estados = [
+    "Aguascalientes",
+    "Baja California",
+    "Baja California Sur",
+    "Campeche",
+    "Chiapas",
+    "Chihuahua",
+    "Ciudad de México",
+    "Coahuila",
+    "Colima",
+    "Durango",
+    "Estado de México",
+    "Guanajuato",
+    "Guerrero",
+    "Hidalgo",
+    "Jalisco",
+    "Michoacán",
+    "Morelos",
+    "Nayarit",
+    "Nuevo León",
+    "Oaxaca",
+    "Puebla",
+    "Querétaro",
+    "Quintana Roo",
+    "San Luis Potosí",
+    "Sinaloa",
+    "Sonora",
+    "Tabasco",
+    "Tamaulipas",
+    "Tlaxcala",
+    "Veracruz",
+    "Yucatán",
+    "Zacatecas",
+];
+
+const discapacidades = [
+    "Ninguna",
+    "Visual",
+    "Auditiva",
+    "Motriz",
+    "Intelectual",
+    "Del habla o lenguaje",
+    "Trastorno del espectro autista",
+    "Déficit de atención e hiperactividad (TDAH)",
+    "Dificultades de aprendizaje",
+];
+
+const lenguasMaternas = [
+    "Español",
+    "Náhuatl",
+    "Maya",
+    "Mixteco",
+    "Zapoteco",
+    "Otomí",
+    "Totonaco",
+    "Mazateco",
+    "Chol",
+    "Tzeltal",
+    "Tzotzil",
+    "Huasteco",
+    "Purépecha",
+    "Tarahumara",
+    "Chinanteco",
+    "Inglés",
+    "Francés",
+    "Alemán",
+    "Italiano",
+    "Portugués",
+    "Otra",
+    "No especificado",
+];
+
+export {
+    terminosCondiciones,
+    avisosPrivacidad,
+    preguntas,
+    tiposDeSangre,
+    estados,
+    discapacidades,
+    lenguasMaternas,
+};

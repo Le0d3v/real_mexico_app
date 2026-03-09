@@ -83,7 +83,7 @@ export default function Students() {
                     </div>
 
                     <button
-                        className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition"
+                        className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition cursor-pointer"
                         onClick={() => setCreateStudent(true)}
                     >
                         + Nuevo Estudiante
