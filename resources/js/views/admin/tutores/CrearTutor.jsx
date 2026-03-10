@@ -349,8 +349,9 @@ export default function CrearTutor({ onClose }) {
                                         </p>
                                     )}
 
-                                {filteredStudents.map((student) => (
+                                {filteredStudents.map((student, i) => (
                                     <FindStudent
+                                        key={i}
                                         student={student}
                                         handleAddStudent={handleAddStudent}
                                     />

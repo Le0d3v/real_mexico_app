@@ -27,6 +27,7 @@ class EstudianteResource extends JsonResource
             "tipo_sangre" => $this->tipo_sangre,
             "entidad_nacimiento" => $this->entidad_nacimiento,
             "grado" => $this->grado->grado,
+            "grado_id" => $this->grado_id,
             "grupo" => $this->grupo->grupo,
             
             "domicilio" => new DomicilioResource($this->domicilio),

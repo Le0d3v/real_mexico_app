@@ -8,6 +8,7 @@ import CrearTutor from "./tutores/CrearTutor";
 import PostForm from "./noticias/PostForm";
 import useCicloEscolar from "../../hooks/useCicloEscolar";
 import CrearPago from "./pagos/CrearPago";
+import { formatCurrency } from "../../helpers/helpers";
 
 import {
     CirclePlus,
@@ -22,16 +23,36 @@ import {
     UserPlus,
     Newspaper,
 } from "lucide-react";
+import CreateStudent from "./estudiantes/CreateStudent";
+import useColegiatura from "../../hooks/useColegiatura";
+import GraficoGrados from "./components/GraficoGrados";
 
 export default function Dashboard() {
     const { estudiantes } = useStudent();
     const { tutores } = useTutor();
-    const { cicloEscolar, error, isLoading } = useCicloEscolar();
+    const { cicloEscolar, isLoading } = useCicloEscolar();
+    const { colegiaturasMesActual } = useColegiatura();
 
     const [noticiaModal, setNoticiaModal] = useState(false);
     const [tutorModal, setTutorModal] = useState(false);
     const [pagoModal, setPagoModal] = useState(false);
     const [estudianteModal, setEstudianteModal] = useState(false);
+
+    const totalMetaMes = colegiaturasMesActual.reduce(
+        (acc, c) => acc + Number(c.monto),
+        0,
+    );
+
+    const totalRecaudadoMes = colegiaturasMesActual
+        .filter((c) => c.estado === "pagado")
+        .reduce((acc, c) => acc + Number(c.monto), 0);
+
+    const porcentajeRecaudado =
+        totalMetaMes > 0
+            ? Math.round((totalRecaudadoMes / totalMetaMes) * 100)
+            : 0;
+
+    const totalEstudiantes = estudiantes.length;
 
     if (isLoading) return <Loader />;
 
@@ -96,7 +117,9 @@ export default function Dashboard() {
                                     Pendientes del Mes
                                 </p>
                                 <h2 className="text-3xl font-bold text-emerald-600 mt-2">
-                                    $32,400
+                                    {formatCurrency(
+                                        totalMetaMes - totalRecaudadoMes,
+                                    )}
                                 </h2>
                             </div>
                             <DollarSign className="w-10 h-10 text-emerald-500" />
@@ -113,84 +136,39 @@ export default function Dashboard() {
                         </h3>
                     </div>
 
-                    <div className="w-full bg-slate-200 rounded-full h-6 overflow-hidden">
+                    <div className="w-full bg-slate-200 rounded-full h-8 overflow-hidden relative">
                         <div
-                            className="bg-emerald-500 h-6 text-xs font-semibold text-white flex items-center justify-center transition-all"
-                            style={{ width: "68%" }}
-                        >
-                            68% Recaudado
+                            className="bg-emerald-500 h-8 transition-all"
+                            style={{ width: `${porcentajeRecaudado}%` }}
+                        />
+
+                        <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-slate-700">
+                            {porcentajeRecaudado}% Recaudado
                         </div>
                     </div>
 
                     <div className="flex justify-between mt-4 text-sm text-slate-600">
-                        <span>Recaudado: $72,000</span>
-                        <span>Meta mensual: $105,000</span>
+                        <span>
+                            Recaudado: {formatCurrency(totalRecaudadoMes)}
+                        </span>
+                        <span>
+                            Meta mensual: {formatCurrency(totalMetaMes)}
+                        </span>
                     </div>
                 </div>
 
-                {/* Indicadores y alertas */}
-                <div className="grid md:grid-cols-2 gap-6 mb-10">
+                <div className="mb-10">
                     <div className="bg-white p-6 rounded-2xl shadow-sm">
                         <div className="flex items-center gap-3 mb-5">
                             <GraduationCap className="w-6 h-6 text-slate-600" />
                             <h3 className="text-lg font-semibold text-slate-800">
-                                Distribución por Nivel
+                                Distribución de Alumnos por Grado
                             </h3>
                         </div>
 
-                        <div className="space-y-4">
-                            <div>
-                                <div className="flex justify-between text-sm mb-1">
-                                    <span>1° a 3°</span>
-                                    <span>120 alumnos</span>
-                                </div>
-                                <div className="bg-slate-200 h-3 rounded-full">
-                                    <div className="bg-yellow-500 h-3 rounded-full w-3/4"></div>
-                                </div>
-                            </div>
-
-                            <div>
-                                <div className="flex justify-between text-sm mb-1">
-                                    <span>4° a 6°</span>
-                                    <span>128 alumnos</span>
-                                </div>
-                                <div className="bg-slate-200 h-3 rounded-full">
-                                    <div className="bg-slate-800 h-3 rounded-full w-4/5"></div>
-                                </div>
-                            </div>
+                        <div className="h-72">
+                            <GraficoGrados />
                         </div>
-                    </div>
-
-                    <div className="bg-white p-6 rounded-2xl shadow-sm">
-                        <div className="flex items-center gap-3 mb-5">
-                            <BellRing className="w-6 h-6 text-red-600" />
-                            <h3 className="text-lg font-semibold text-slate-800">
-                                Alertas Importantes
-                            </h3>
-                        </div>
-
-                        <ul className="space-y-4 text-sm">
-                            <li className="flex justify-between">
-                                <span>Pagos con más de 30 días de atraso</span>
-                                <span className="font-semibold text-red-600">
-                                    5 casos
-                                </span>
-                            </li>
-
-                            <li className="flex justify-between">
-                                <span>Documentación incompleta</span>
-                                <span className="font-semibold text-yellow-600">
-                                    8 alumnos
-                                </span>
-                            </li>
-
-                            <li className="flex justify-between">
-                                <span>Tutores sin correo registrado</span>
-                                <span className="font-semibold text-slate-800">
-                                    3 registros
-                                </span>
-                            </li>
-                        </ul>
                     </div>
                 </div>
 
@@ -209,7 +187,10 @@ export default function Dashboard() {
                             Registrar Pago
                         </button>
 
-                        <button className="flex items-center justify-center gap-2 bg-yellow-500 text-black py-4 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer">
+                        <button
+                            className="flex items-center justify-center gap-2 bg-yellow-500 text-black py-4 rounded-xl shadow-sm hover:shadow-md transition hover:-translate-y-1 cursor-pointer"
+                            onClick={() => setEstudianteModal(true)}
+                        >
                             <UserPlus size={18} />
                             Nuevo Estudiante
                         </button>
@@ -272,6 +253,17 @@ export default function Dashboard() {
             >
                 {" "}
                 <CrearPago onClose={() => setPagoModal(false)} />{" "}
+            </Modal>
+            <Modal
+                isOpen={estudianteModal}
+                icon={<CirclePlus className="w-12 h-12" />}
+                onClose={() => {
+                    setEstudianteModal(false);
+                }}
+                size="full"
+                title="Registrar un Nuevo Estudiante"
+            >
+                <CreateStudent onClose={() => setPagoModal(false)} />
             </Modal>
         </>
     );

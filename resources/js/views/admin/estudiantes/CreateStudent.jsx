@@ -146,7 +146,7 @@ export default function CreateStudent({ onClose }) {
                             <button
                                 type="button"
                                 className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer"
-                                onClick={() => onClose(false)}
+                                onClick={() => onClose()}
                             >
                                 Cerrar
                             </button>

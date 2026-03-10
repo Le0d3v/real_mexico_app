@@ -29,8 +29,8 @@ export default function Blog() {
                 </p>
             ) : (
                 <div className="p-3 md:px-44">
-                    {posts.map((post) => (
-                        <AnimatedSection>
+                    {posts.map((post, i) => (
+                        <AnimatedSection key={i}>
                             <Post
                                 imagen={`${api.defaults.baseURL}/storage/${post.multimedia}`}
                                 titulo={post.titulo}

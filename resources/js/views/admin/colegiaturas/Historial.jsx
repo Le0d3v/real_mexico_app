@@ -10,7 +10,6 @@ import InfoItem from "../components/InfoItem";
 import ColegiaturaCard from "./ColegiaturaCard";
 
 export default function Historial({ colegiaturas, student, onClose }) {
-    console.log(colegiaturas);
 
     return (
         <>
