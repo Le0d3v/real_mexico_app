@@ -35,8 +35,6 @@ export default function Dashboard() {
 
     if (isLoading) return <Loader />;
 
-    console.log(cicloEscolar);
-
     return (
         <>
             <div className="bg-slate-100 min-h-screen">

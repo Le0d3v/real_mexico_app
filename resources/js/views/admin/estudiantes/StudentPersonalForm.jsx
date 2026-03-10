@@ -20,6 +20,7 @@ import {
     discapacidades,
     lenguasMaternas,
     grados,
+    grupos,
 } from "../../../helpers/data";
 
 export default function StudentPersonalForm({ form, onChange }) {
@@ -91,15 +92,15 @@ export default function StudentPersonalForm({ form, onChange }) {
                     label="Grado"
                     options={grados}
                     value={form.grado}
-                    onChange={(e) => onChange("grado", e.target.value)}
+                    onChange={(e) => onChange("grado", Number(e.target.value))}
                 />
 
                 <SelectField
                     icon={<Users size={18} />}
                     label="Grupo"
-                    options={["A"]}
+                    options={grupos}
                     value={form.grupo}
-                    onChange={(e) => onChange("grupo", e.target.value)}
+                    onChange={(e) => onChange("grupo", Number(e.target.value))}
                 />
 
                 <SelectField

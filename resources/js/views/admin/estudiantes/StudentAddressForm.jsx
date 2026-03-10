@@ -69,8 +69,8 @@ export default function StudentAddressForm({ form, onChange }) {
                     icon={<MapPin size={18} />}
                     label="Estado"
                     options={estados}
-                    value={form.estado}
-                    onChange={(e) => onChange("estado", e.target.value)}
+                    value={form.entidad}
+                    onChange={(e) => onChange("entidad", e.target.value)}
                 />
 
                 <InputField

@@ -5,9 +5,12 @@ import StudentAddressForm from "./StudentAddressForm";
 import TutorSectionForm from "./TutorSectionForm";
 import { Info } from "lucide-react";
 import { ClipLoader } from "react-spinners";
+import useStudent from "../../../hooks/useStudent";
+import { toast } from "react-toastify";
 
 export default function CreateStudent({ onClose }) {
     const { tutores } = useTutor();
+    const { createStudent } = useStudent();
 
     const [cargando, setCargando] = useState(false);
 
@@ -79,7 +82,25 @@ export default function CreateStudent({ onClose }) {
 
     const handleSubmitForm = async (e) => {
         e.preventDefault();
+        setCargando(true);
         console.log(formData);
+
+        try {
+            const response = await createStudent(formData);
+            toast.success(response.message);
+            onClose(false);
+        } catch (error) {
+            if (error?.status === 422) {
+                Object.values(error.data.errors).forEach((messages) =>
+                    messages.forEach((message) => toast.error(message)),
+                );
+            } else {
+                toast.error("Error inesperado al registrar el tutor.");
+            }
+            console.log(error);
+        } finally {
+            setCargando(false);
+        }
     };
 
     return (

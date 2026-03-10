@@ -57,4 +57,20 @@ class Estudiante extends Model
     {
         return $this->hasMany(Colegiatura::class);
     }
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($estudiante) {
+
+            $ultimo = Estudiante::orderBy('id','desc')->first();
+
+            $consecutivo = $ultimo
+                ? intval(substr($ultimo->matricula,4)) + 1
+                : 1;
+
+            $estudiante->matricula = '3526' . str_pad($consecutivo,6,'0',STR_PAD_LEFT);
+        });
+    }
 }
