@@ -12,7 +12,7 @@ import {
 } from "lucide-react";
 import useTutor from "../../../hooks/useTutor";
 import { toast } from "react-toastify";
-import estados from "../../../helpers/estados";
+import { estados } from "../../../helpers/data";
 import { useState, useEffect, useMemo } from "react";
 import { ClipLoader } from "react-spinners";
 import useStudent from "../../../hooks/useStudent";

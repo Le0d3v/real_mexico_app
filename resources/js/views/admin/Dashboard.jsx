@@ -31,6 +31,7 @@ export default function Dashboard() {
     const [noticiaModal, setNoticiaModal] = useState(false);
     const [tutorModal, setTutorModal] = useState(false);
     const [pagoModal, setPagoModal] = useState(false);
+    const [estudianteModal, setEstudianteModal] = useState(false);
 
     if (isLoading) return <Loader />;
 

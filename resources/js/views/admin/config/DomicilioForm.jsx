@@ -6,7 +6,7 @@ import { toast } from "react-toastify";
 import { ClipLoader } from "react-spinners";
 import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
-import estados from "../../../helpers/estados";
+import { estados } from "../../../helpers/data";
 
 export default function DomicilioForm({ user }) {
     const [loading, setLoading] = useState(false);

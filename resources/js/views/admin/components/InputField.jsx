@@ -19,8 +19,7 @@ export default function InputField({
                     className="w-full bg-transparent outline-none text-gray-800 font-medium"
                     placeholder={`Ingrese ${label.toLowerCase()}`}
                     value={value}
-                    onChange={onChange}
-                    required
+                    onChange={onChange} 
                 />
             </div>
         </div>
