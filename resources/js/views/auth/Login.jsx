@@ -46,11 +46,12 @@ export default function Login() {
                             Bienvenido de Vuelta
                         </h1>
                         <p className="mt-5">
-                            Lorem ipsum dolor sit amet consectetur, adipisicing
-                            elit. Labore consectetur nobis veniam beatae?
-                            Corrupti veritatis, soluta eveniet commodi maxime
-                            voluptatum, libero sed fugit velit nihil suscipit
-                            magnam ipsam neque amet.
+                            En el Instituto Real de México A.C. creemos en la
+                            innovación como herramienta para fortalecer la
+                            educación. Nuestra plataforma institucional integra
+                            tecnología y administración académica para optimizar
+                            los procesos escolares y mejorar la experiencia
+                            educativa.
                         </p>
                         <div className="hidden md:flex gap-5 mt-5">
                             {socialLinks.map((link, i) => (

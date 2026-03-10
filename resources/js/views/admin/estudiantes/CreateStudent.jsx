@@ -14,6 +14,11 @@ export default function CreateStudent({ onClose }) {
     const [formData, setFormData] = useState({
         student: {},
         address: {},
+        tutor: {
+            tutor_id: null,
+            new_tutor: {},
+            relacion: {},
+        },
     });
 
     const handleStudentChange = (field, value) => {
@@ -32,6 +37,42 @@ export default function CreateStudent({ onClose }) {
             address: {
                 ...prev.address,
                 [field]: value,
+            },
+        }));
+    };
+
+    const handleTutorChange = (field, value) => {
+        setFormData((prev) => ({
+            ...prev,
+            tutor: {
+                ...prev.tutor,
+                [field]: value,
+            },
+        }));
+    };
+
+    const handleNewTutorChange = (field, value) => {
+        setFormData((prev) => ({
+            ...prev,
+            tutor: {
+                ...prev.tutor,
+                new_tutor: {
+                    ...prev.tutor.new_tutor,
+                    [field]: value,
+                },
+            },
+        }));
+    };
+
+    const handleTutorRelationChange = (field, value) => {
+        setFormData((prev) => ({
+            ...prev,
+            tutor: {
+                ...prev.tutor,
+                relacion: {
+                    ...prev.tutor.relacion,
+                    [field]: value,
+                },
             },
         }));
     };
@@ -66,7 +107,14 @@ export default function CreateStudent({ onClose }) {
                         onChange={handleAddressChange}
                     />
 
-                    <TutorSectionForm tutores={tutores} />
+                    <TutorSectionForm
+                        tutores={tutores}
+                        onTutorSelect={(id) =>
+                            handleTutorChange("tutor_id", id)
+                        }
+                        onNewTutorChange={handleNewTutorChange}
+                        onRelationChange={handleTutorRelationChange}
+                    />
 
                     <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-between gap-4 items-center">
                         <h1 className="text-3xl font-semibold text-red-400">

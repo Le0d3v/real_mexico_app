@@ -3,7 +3,7 @@
 .login-fondo {
     width: 100%;
     background-image:
-        linear-gradient(rgba(0, 0, 0, 0.45), rgba(0, 0, 0, 0.45)),
+        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
         url("/img/login_fondo.jpg");
     background-size: cover;
     background-position: center;

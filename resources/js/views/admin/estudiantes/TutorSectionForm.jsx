@@ -15,7 +15,12 @@ import SelectField from "../components/SelectField";
 import TutorRelationForm from "./TutorRelationForm";
 import SearchTutor from "./SearchTutor";
 
-export default function TutorSectionForm({ tutores }) {
+export default function TutorSectionForm({
+    tutores,
+    onTutorSelect,
+    onNewTutorChange,
+    onRelationChange,
+}) {
     const [relacionTutor, setRelacionTutor] = useState({
         parentesco: "",
         parentesco_otro: "",
@@ -48,6 +53,8 @@ export default function TutorSectionForm({ tutores }) {
             if (field === "parentesco" && value !== "Otro") {
                 updated.parentesco_otro = "";
             }
+
+            onRelationChange(field, value);
 
             return updated;
         });
@@ -118,7 +125,10 @@ export default function TutorSectionForm({ tutores }) {
                                 key={tutor.id}
                                 tutor={tutor}
                                 selected={selectedTutor?.id === tutor.id}
-                                onSelect={setSelectedTutor}
+                                onSelect={(tutor) => {
+                                    setSelectedTutor(tutor);
+                                    onTutorSelect(tutor.id);
+                                }}
                             />
                         ))}
                     </div>
@@ -152,57 +162,115 @@ export default function TutorSectionForm({ tutores }) {
             =============================== */}
 
             {crearTutor && (
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <InputField icon={<User size={18} />} label="Nombre(s)" />
+                <div>
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <InputField
+                            icon={<User size={18} />}
+                            label="Nombre(s)"
+                            onChange={(e) =>
+                                onNewTutorChange("name", e.target.value)
+                            }
+                        />
 
-                    <InputField
-                        icon={<User size={18} />}
-                        label="Apellido Paterno"
-                    />
+                        <InputField
+                            icon={<User size={18} />}
+                            label="Apellido Paterno"
+                            onChange={(e) =>
+                                onNewTutorChange(
+                                    "apellido_paterno",
+                                    e.target.value,
+                                )
+                            }
+                        />
 
-                    <InputField
-                        icon={<User size={18} />}
-                        label="Apellido Materno"
-                    />
+                        <InputField
+                            icon={<User size={18} />}
+                            label="Apellido Materno"
+                            onChange={(e) =>
+                                onNewTutorChange(
+                                    "apellido_materno",
+                                    e.target.value,
+                                )
+                            }
+                        />
 
-                    <InputField
-                        icon={<Calendar size={18} />}
-                        label="Fecha de Nacimiento"
-                        type="date"
-                    />
+                        <InputField
+                            icon={<Calendar size={18} />}
+                            label="Fecha de Nacimiento"
+                            type="date"
+                            onChange={(e) =>
+                                onNewTutorChange(
+                                    "fecha_nacimiento",
+                                    e.target.value,
+                                )
+                            }
+                        />
 
-                    <InputField icon={<Hash size={18} />} label="CURP" />
+                        <InputField
+                            icon={<Hash size={18} />}
+                            label="CURP"
+                            onChange={(e) =>
+                                onNewTutorChange("curp", e.target.value)
+                            }
+                        />
 
-                    <SelectField
-                        icon={<VenusAndMars size={18} />}
-                        label="Género"
-                        options={["Masculino", "Femenino"]}
-                    />
+                        <SelectField
+                            icon={<VenusAndMars size={18} />}
+                            label="Género"
+                            options={["Masculino", "Femenino"]}
+                            onChange={(e) =>
+                                onNewTutorChange("genero", e.target.value)
+                            }
+                        />
 
-                    <InputField icon={<Hash size={18} />} label="Ocupación" />
+                        <InputField
+                            icon={<Hash size={18} />}
+                            label="Ocupación"
+                            onChange={(e) =>
+                                onNewTutorChange("ocupacion", e.target.value)
+                            }
+                        />
 
-                    <SelectField
-                        icon={<Hash size={18} />}
-                        label="Nivel de Estudios"
-                        options={[
-                            "Primaria",
-                            "Secundaria",
-                            "Preparatoria",
-                            "Licenciatura",
-                            "Postgrado",
-                        ]}
-                    />
+                        <SelectField
+                            icon={<Hash size={18} />}
+                            label="Nivel de Estudios"
+                            options={[
+                                "Primaria",
+                                "Secundaria",
+                                "Preparatoria",
+                                "Licenciatura",
+                                "Postgrado",
+                            ]}
+                            onChange={(e) =>
+                                onNewTutorChange(
+                                    "nivel_estudios",
+                                    e.target.value,
+                                )
+                            }
+                        />
 
-                    <InputField
-                        icon={<Phone size={18} />}
-                        label="Teléfono"
-                        type="tel"
-                    />
+                        <InputField
+                            icon={<Phone size={18} />}
+                            label="Teléfono"
+                            type="tel"
+                            onChange={(e) =>
+                                onNewTutorChange("telefono", e.target.value)
+                            }
+                        />
 
-                    <InputField
-                        icon={<Mail size={18} />}
-                        label="Correo Electrónico"
-                        type="email"
+                        <InputField
+                            icon={<Mail size={18} />}
+                            label="Correo Electrónico"
+                            type="email"
+                            onChange={(e) =>
+                                onNewTutorChange("email", e.target.value)
+                            }
+                        />
+                    </div>
+                    <TutorRelationForm
+                        className="col-span-2"
+                        relacion={relacionTutor}
+                        onChange={handleRelationChange}
                     />
                 </div>
             )}
