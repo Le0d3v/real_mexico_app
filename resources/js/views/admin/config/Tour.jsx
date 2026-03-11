@@ -14,24 +14,34 @@ export default function Tour() {
                     Tour por la Aplicación
                 </h1>
             </div>
-            <div className="mb-5">
-                <p className="text-black text-sm text-justify">
-                    Este recorrido interactivo le guiará paso a paso por las
-                    principales secciones de la plataforma. Durante el tour se
-                    resaltarán los elementos más importantes de la interfaz,
-                    explicando la función de cada módulo y cómo utilizar las
-                    herramientas disponibles para gestionar estudiantes, pagos y
-                    contenido dentro del sistema. Este proceso le permitirá
-                    familiarizarse rápidamente con la estructura y el flujo de
-                    trabajo de la aplicación.
-                </p>
+            <div className="mb-6 p-6 bg-blue-50 border border-blue-200 rounded-xl shadow-sm">
+                <div className="flex items-start gap-4">
+                    <div className="flex-1">
+                        <p className="text-gray-600 text-sm leading-relaxed">
+                            Inicie un recorrido interactivo que le mostrará las
+                            principales secciones del sistema. Durante el tour
+                            se resaltarán los elementos clave de la interfaz y
+                            se explicará la función de cada módulo,
+                            permitiéndole comprender rápidamente cómo gestionar
+                            estudiantes, pagos y contenido dentro de la
+                            plataforma.
+                        </p>
+
+                        <div className="mt-4 flex items-center gap-5">
+                            <button
+                                onClick={startTour}
+                                className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition transform hover:-translate-y-1 cursor-pointer"
+                            >
+                                Iniciar Tour
+                            </button>
+
+                            <span className="text-xs text-gray-500">
+                                Duración aproximada: 1–2 minutos
+                            </span>
+                        </div>
+                    </div>
+                </div>
             </div>
-            <button
-                className="p-2 rounded bg-blue-600 text-white font-semibold cursor-pointer hover:bg-blue-700 text-center text-lg hover:-translate-y-1 transition"
-                onClick={startTour}
-            >
-                Iniciar Tour
-            </button>
         </div>
     );
 }

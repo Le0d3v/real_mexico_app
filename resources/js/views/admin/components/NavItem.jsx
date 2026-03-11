@@ -1,4 +1,5 @@
 import { useEffect } from "react";
+import useIRM from "../../../hooks/useIRM";
 
 export default function NavItem({
     index,
@@ -10,8 +11,10 @@ export default function NavItem({
 }) {
     const isActive = page === index;
 
+    const { adminContentScroll } = useIRM();
+
     useEffect(() => {
-        window.scrollTo({
+        adminContentScroll.current.scrollTo({
             top: 0,
             behavior: "auto",
         });

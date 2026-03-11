@@ -18,7 +18,7 @@ import useIRM from "../../hooks/useIRM";
 
 export default function AdminLayout() {
     const { loading, user } = useAuth({ middleware: "auth" });
-    const { adminPage, setAdminPage } = useIRM();
+    const { adminPage, setAdminPage, adminContentScroll } = useIRM();
 
     const initial = user?.name ? user.name.trim().charAt(0).toUpperCase() : "";
 
@@ -78,7 +78,10 @@ export default function AdminLayout() {
                 <div className="flex-1 flex flex-col">
                     <Header index="1" />
 
-                    <main className="flex-1 p-3 overflow-auto bg-white">
+                    <main
+                        className="flex-1 p-3 overflow-auto bg-white"
+                        ref={adminContentScroll}
+                    >
                         <div
                             className="bg-gray-100 rounded-2xl shadow-md p-6 min-h-full"
                             id="driver_main"

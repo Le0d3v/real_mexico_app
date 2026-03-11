@@ -4,7 +4,7 @@ export default function TerminosCondiciones() {
     return (
         <div className="min-h-screen bg-white">
             {/* HERO */}
-            <div className="bg-black text-white py-16 px-6">
+            <div className="bg-black/90 text-white py-16 px-6">
                 <div className="max-w-6xl mx-auto">
                     <h1 className="text-4xl md:text-5xl font-bold mb-4">
                         Términos y Condiciones

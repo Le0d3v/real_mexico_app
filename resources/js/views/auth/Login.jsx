@@ -1,15 +1,21 @@
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import SubmitButton from "../components/SubmitButton";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { useState } from "react";
 import socialLinks from "../../helpers/socialLinks";
+import useIRM from "../../hooks/useIRM";
+import { actualYear } from "../../helpers/helpers";
 
 export default function Login() {
     const [showPassword, setShowPassword] = useState(false);
     const [cargando, setCargando] = useState(false);
+
+    const { setPage } = useIRM();
+
+    const navigate = useNavigate();
 
     const { login, errors } = useAuth({
         middleware: "guest",
@@ -23,6 +29,11 @@ export default function Login() {
         e.preventDefault();
         setCargando(true);
         login({ email, password, setCargando });
+    };
+
+    const handleClickNavigate = (page) => {
+        navigate("/");
+        setPage(page);
     };
 
     return (
@@ -40,12 +51,12 @@ export default function Login() {
                         Instituto Real de México A.C.
                     </h1>
                 </div>
-                <div className="mt-7 flex justify-center md:justify-start md:gap-15 md:items-center">
+                <div className="mt-7 flex justify-center md:justify-start md:gap-20 md:items-center">
                     <div className="hidden md:block w-1/2 text-white">
                         <h1 className="text-7xl font-bold">
                             Bienvenido de Vuelta
                         </h1>
-                        <p className="mt-5">
+                        <p className="mt-5 text-justify">
                             En el Instituto Real de México A.C. creemos en la
                             innovación como herramienta para fortalecer la
                             educación. Nuestra plataforma institucional integra
@@ -53,21 +64,23 @@ export default function Login() {
                             los procesos escolares y mejorar la experiencia
                             educativa.
                         </p>
-                        <div className="hidden md:flex gap-5 mt-5">
-                            {socialLinks.map((link, i) => (
-                                <a href={link.url} key={i}>
-                                    {link.icon}
-                                </a>
-                            ))}
-                        </div>
-                        <div className="flex justify-center mt-8">
-                            <div className="flex gap-5">
-                                <a className="text-white text-sm hover:text-blue-400 cursor-pointer hover:-translate-y-1 transition">
-                                    Aviso de Privacidad
-                                </a>
-                                <a className="text-white text-sm hover:text-blue-400 cursor-pointer hover:-translate-y-1 transition">
-                                    Politicas de uso
-                                </a>
+                        <p className="mt-3">
+                            Visite la sección{" "}
+                            <span className="font-bold">
+                                Tour por la Aplicación
+                            </span>{" "}
+                            en la sección{" "}
+                            <span className="font-bold">Ajustes</span> para
+                            conocer el uso del sistema tras haber iniciado
+                            sesión.
+                        </p>
+                        <div className="flex justify-between items-center mt-5">
+                            <div className="hidden md:flex gap-5 ">
+                                {socialLinks.map((link, i) => (
+                                    <a href={link.url} key={i}>
+                                        {link.icon}
+                                    </a>
+                                ))}
                             </div>
                         </div>
                     </div>
@@ -157,8 +170,25 @@ export default function Login() {
                         </form>
                     </div>
                 </div>
-                <p className="text-sm text-center text-white mt-10 md:mt-15">
-                    Instituto Real de México 2026. Todos los Derechos Reservados
+                <div className="flex justify-center mt-12">
+                    <div className="flex gap-5">
+                        <button
+                            className="text-white text-sm hover:text-yellow-400 cursor-pointer hover:-translate-y-1 transition"
+                            onClick={() => handleClickNavigate(8)}
+                        >
+                            Aviso de Privacidad
+                        </button>
+                        <button
+                            className="text-white text-sm hover:text-yellow-400 cursor-pointer hover:-translate-y-1 transition"
+                            onClick={() => handleClickNavigate(7)}
+                        >
+                            Terminos y Condiciones
+                        </button>
+                    </div>
+                </div>
+                <p className="text-sm text-center text-white mt-5 md:mt-3">
+                    © {actualYear} Instituto Real de México. Todos los derechos
+                    reservados.
                 </p>
             </div>
             <ToastContainer />

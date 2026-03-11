@@ -1,4 +1,4 @@
-import { createContext, useState, useEffect } from "react";
+import { createContext, useState, useEffect, useRef } from "react";
 
 const IRMContext = createContext();
 
@@ -6,6 +6,7 @@ const IRMProvider = ({ children }) => {
     const [titulo, setTitulo] = useState("Instituto Real de México A.C.");
     const [page, setPage] = useState(0);
     const [adminPage, setAdminPage] = useState(0);
+    const adminContentScroll = useRef();
 
     return (
         <IRMContext.Provider
@@ -16,6 +17,7 @@ const IRMProvider = ({ children }) => {
                 setPage,
                 adminPage,
                 setAdminPage,
+                adminContentScroll,
             }}
         >
             {children}
