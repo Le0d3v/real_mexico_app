@@ -67,7 +67,7 @@ export default function Dashboard() {
                     </span>
                 </p>
                 {/* KPIs */}
-                <div className="grid md:grid-cols-4 gap-6 mt-10 mb-10">
+                <div className="grid md:grid-cols-4 gap-6 mt-10 mb-10" id="driver_kpis">
                     <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
                         <div className="flex justify-between items-center">
                             <div>
@@ -128,7 +128,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Estado financiero */}
-                <div className="bg-white p-8 rounded-2xl shadow-sm mb-10">
+                <div className="bg-white p-8 rounded-2xl shadow-sm mb-10" id="driver_estado-financiero">
                     <div className="flex items-center gap-3 mb-6">
                         <TrendingUp className="w-6 h-6 text-emerald-600" />
                         <h3 className="text-xl font-semibold text-slate-800">
@@ -157,7 +157,7 @@ export default function Dashboard() {
                     </div>
                 </div>
 
-                <div className="mb-10">
+                <div className="mb-10" id="driver_grafico-alumnos">
                     <div className="bg-white p-6 rounded-2xl shadow-sm">
                         <div className="flex items-center gap-3 mb-5">
                             <GraduationCap className="w-6 h-6 text-slate-600" />
@@ -173,7 +173,7 @@ export default function Dashboard() {
                 </div>
 
                 {/* Accesos rápidos */}
-                <div>
+                <div id="driver_accesos-rapidos">
                     <h3 className="text-xl font-semibold text-slate-800 mb-5">
                         Accesos Rápidos
                     </h3>

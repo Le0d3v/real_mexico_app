@@ -14,10 +14,11 @@ import Tutores from "../admin/tutores/Tutores";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../components/Loader";
 import { ClipLoader } from "react-spinners";
+import useIRM from "../../hooks/useIRM";
 
 export default function AdminLayout() {
     const { loading, user } = useAuth({ middleware: "auth" });
-    const [page, setPage] = useState(0);
+    const { adminPage, setAdminPage } = useIRM();
 
     const initial = user?.name ? user.name.trim().charAt(0).toUpperCase() : "";
 
@@ -37,7 +38,7 @@ export default function AdminLayout() {
 
     return (
         <>
-            <div className="h-screen flex bg-gray-100">
+            <div className="h-screen flex bg-gray-100" id="driver_welcome">
                 {/* SIDEBAR */}
                 <aside className="hidden md:flex flex-col w-20 lg:w-52 bg-red-800 text-white shadow-xl">
                     {/* Logo */}
@@ -48,8 +49,12 @@ export default function AdminLayout() {
                             alt="logo"
                         />
                     </div>
-                    <div className="flex-1 px-3 py-3">
-                        <Navigation index="1" setPage={setPage} page={page} />
+                    <div className="flex-1 px-3 py-3" id="driver_navegacion">
+                        <Navigation
+                            index="1"
+                            setPage={setAdminPage}
+                            page={adminPage}
+                        />
                     </div>
                     <div className="p-4 border-t border-yellow-500/20">
                         <div className="flex items-center gap-3 bg-red-700/60 p-3 rounded-lg hover:bg-red-700 transition">
@@ -74,8 +79,11 @@ export default function AdminLayout() {
                     <Header index="1" />
 
                     <main className="flex-1 p-3 overflow-auto bg-white">
-                        <div className="bg-gray-100 rounded-2xl shadow-md p-6 min-h-full">
-                            {loading ? <Loader /> : pages[page]}
+                        <div
+                            className="bg-gray-100 rounded-2xl shadow-md p-6 min-h-full"
+                            id="driver_main"
+                        >
+                            {loading ? <Loader /> : pages[adminPage]}
                         </div>
                     </main>
                 </div>

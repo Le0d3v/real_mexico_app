@@ -23,15 +23,19 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
 
             {index == 1 ? (
                 <div className="flex flex-col">
-                    <NavItem
-                        page={page}
-                        setPage={setPage}
-                        index={0}
-                        icon={Home}
-                        fn={() => setTitulo("Instituto Real De México A.C.")}
-                    >
-                        Inicio
-                    </NavItem>
+                    <div id="driver_enlace">
+                        <NavItem
+                            page={page}
+                            setPage={setPage}
+                            index={0}
+                            icon={Home}
+                            fn={() =>
+                                setTitulo("Instituto Real De México A.C.")
+                            }
+                        >
+                            Inicio
+                        </NavItem>
+                    </div>
                     <NavItem
                         page={page}
                         setPage={setPage}

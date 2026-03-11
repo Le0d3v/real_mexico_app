@@ -93,7 +93,7 @@ export default function Colegiaturas() {
 
     return (
         <>
-            <div className="bg-gray-100 min-h-screen">
+            <div className="bg-gray-100 min-h-screen" id="driver_colegiaturas">
                 {/* Resumen */}
                 <div className="grid md:grid-cols-3 gap-6 mb-8">
                     <div className="bg-white p-6 rounded-xl shadow border-l-4 border-black">

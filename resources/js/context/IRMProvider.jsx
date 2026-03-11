@@ -5,6 +5,7 @@ const IRMContext = createContext();
 const IRMProvider = ({ children }) => {
     const [titulo, setTitulo] = useState("Instituto Real de México A.C.");
     const [page, setPage] = useState(0);
+    const [adminPage, setAdminPage] = useState(0);
 
     return (
         <IRMContext.Provider
@@ -13,6 +14,8 @@ const IRMProvider = ({ children }) => {
                 setTitulo,
                 page,
                 setPage,
+                adminPage,
+                setAdminPage,
             }}
         >
             {children}

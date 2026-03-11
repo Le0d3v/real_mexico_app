@@ -44,8 +44,8 @@ export default function GraficoGrados() {
                         "#ef4444", // red
                         "#06b6d4", // cyan
                     ],
-                    borderRadius: 8,
-                    barThickness: 40,
+                    borderRadius: 5,
+                    barThickness: 60,
                 },
             ],
         };

@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Colegiatura extends Model
@@ -37,5 +38,18 @@ class Colegiatura extends Model
     public function pagos() 
     {
         return $this->hasMany(Pago::class);
+    }
+
+    public function getEstadoCalculadoAttribute()
+    {
+        if ($this->estado === 'pagado') {
+            return 'Pagado';
+        }
+
+        if (Carbon::today()->gt(Carbon::parse($this->fecha_limite_pago))) {
+            return 'Vencida';
+        }
+
+        return 'Pendiente';
     }
 }

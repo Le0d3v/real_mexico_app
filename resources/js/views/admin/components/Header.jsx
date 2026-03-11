@@ -43,6 +43,7 @@ export default function Header({ index }) {
                     className="flex items-center gap-2 bg-yellow-500 hover:bg-yellow-600 px-5 py-2 rounded-lg font-semibold transition duration-200 disabled:opacity-70 cursor-pointer w-40 justify-center"
                     disabled={cargando}
                     onClick={hanldeClicLogout}
+                    id="driver_cerrar-sesion"
                 >
                     {cargando ? (
                         <ClipLoader size={19} color="white" />

@@ -20,7 +20,7 @@ class ColegiaturaResource extends JsonResource
             "anio" => $this->anio,
             "monto" => $this->monto,
             "pagado" => $this->pagado,
-            "estado" => $this->estado,
+            "estado" => $this->getEstadoCalculadoAttribute(),
             "estudiante_id" => $this->estudiante_id,
             "fecha_limite_pago" => $this->fecha_limite_pago,
             "ciclo_escolar" => new CicloEscolarResource($this->ciclo),
