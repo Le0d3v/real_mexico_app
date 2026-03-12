@@ -22,7 +22,7 @@ class PagoResource extends JsonResource
             "monto" => $this->monto,
             "metodo_pago" => $this->metodo_pago,
             "referencia" => $this->referencia,
-            "obsevaciones" => $this->obsevaciones,
+            "observaciones" => $this->observaciones,
             "colegiatura" => new ColegiaturaResource($this->colegiatura),
             "estudiante" => new EstudianteResource($this->estudiante),
 

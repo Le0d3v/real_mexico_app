@@ -83,7 +83,7 @@ export default function Tutores() {
                         <h1 className="text-3xl font-bold text-gray-800">
                             Administración de Tutores
                         </h1>
-                        <p className="text-gray-500">
+                        <p className="text-gray-500" id="driver_tutores-total">
                             Tutores totales:{" "}
                             <span className="text-gray-700 font-bold">
                                 {tutores.length}
@@ -94,13 +94,17 @@ export default function Tutores() {
                     <button
                         className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow transition cursor-pointer"
                         onClick={() => setCreateTutorModal(true)}
+                        id="driver_tutores-crear"
                     >
                         + Nuevo Tutor
                     </button>
                 </div>
                 <div className="bg-white p-4 rounded-xl shadow-sm mb-5 border border-gray-200 flex gap-5">
                     <div className="w-full">
-                        <div className="flex gap-4 flex-wrap w-full">
+                        <div
+                            className="flex gap-4 flex-wrap w-full"
+                            id="driver_tutores-buscar"
+                        >
                             <div className="relative flex-1">
                                 <Search
                                     size={18}
@@ -127,6 +131,7 @@ export default function Tutores() {
                             value={sortOrder}
                             onChange={(e) => setSortOrder(e.target.value)}
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                            id="driver_tutores-filtro"
                         >
                             <option value="desc">Más recientes</option>
                             <option value="asc">Más antiguos</option>
@@ -134,7 +139,10 @@ export default function Tutores() {
                     </div>
                 </div>
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <table className="w-full text-left">
+                    <table
+                        className="w-full text-left"
+                        id="driver_tutores-tabla"
+                    >
                         <thead className="bg-black text-yellow-400">
                             <tr>
                                 <th className="px-6 py-3">Nombre</th>
@@ -151,7 +159,7 @@ export default function Tutores() {
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="driver_tutores-registros">
                             {paginatedTutores.length === 0 ? (
                                 <tr>
                                     <td
@@ -186,7 +194,7 @@ export default function Tutores() {
                                         </td>
 
                                         <td className="px-6 py-4 text-center">
-                                            <div className="flex justify-center gap-2">
+                                            <div className="flex justify-center gap-2 show-tutor">
                                                 <button
                                                     className="px-3 py-1 text-sm rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black cursor-pointer font-semibold"
                                                     onClick={() => {
@@ -203,7 +211,10 @@ export default function Tutores() {
                             )}
                         </tbody>
                     </table>
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-6 py-4 border-t bg-gray-50 rounded-b-2xl">
+                    <div
+                        className="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-6 py-4 border-t bg-gray-50 rounded-b-2xl"
+                        id="driver_tutores-paginacion"
+                    >
                         <p className="text-sm text-gray-500 font-medium">
                             Página{" "}
                             <span className="font-semibold text-gray-800">

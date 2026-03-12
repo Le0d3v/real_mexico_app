@@ -83,7 +83,7 @@ export default function News() {
         <>
             <div className="bg-white shadow-sm rounded-xl p-5 border border-gray-200">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                    <div>
+                    <div id="driver_posts-total">
                         <p className="text-gray-600 text-sm">
                             Publicaciones Totales
                         </p>
@@ -92,7 +92,10 @@ export default function News() {
                         </p>
                     </div>
 
-                    <div className="relative w-full md:w-96">
+                    <div
+                        className="relative w-full md:w-96"
+                        id="driver_posts-buscador"
+                    >
                         <Search className="absolute left-4 top-1/2 -translate-y-1/2 w-5 h-5 text-gray-400" />
                         <input
                             type="text"
@@ -105,7 +108,7 @@ export default function News() {
                         />
                     </div>
 
-                    <div className="flex flex-col">
+                    <div className="flex flex-col" id="driver_posts-filtro">
                         <label className="text-sm text-gray-600 mb-1">
                             Ordenar por
                         </label>
@@ -127,12 +130,16 @@ export default function News() {
                 onClick={() => setOpen(true)}
                 className="p-3 rounded bg-red-500 flex gap-1 items-center text-white font-bold
                 cursor-pointer hover:bg-red-600 hover:-translate-y-1 transition mt-4"
+                id="driver_posts-crear"
             >
                 <CirclePlus />
                 <p>Nueva Publicación</p>
             </button>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6 gap-6">
+            <div
+                className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 mt-6 gap-6"
+                id="driver_posts-listado"
+            >
                 {filteredPosts.length === 0 ? (
                     <Alerta>
                         <p>No hay publicaciones</p>
@@ -169,9 +176,8 @@ export default function News() {
                                                 setEditingPost(post);
                                                 setOpen(true);
                                             }}
-                                            className="bg-blue-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded"
+                                            className="bg-blue-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded post-edit"
                                         >
-                                            <Pen />
                                             <p>Editar</p>
                                         </button>
 
@@ -179,9 +185,8 @@ export default function News() {
                                             onClick={() =>
                                                 handleDelete(post.id)
                                             }
-                                            className="bg-red-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded"
+                                            className="bg-red-600 text-white p-2 cursor-pointer flex gap-1 items-center hover:scale-110 transition rounded post-delete"
                                         >
-                                            <Trash />
                                             <p>Eliminar</p>
                                         </button>
                                     </div>

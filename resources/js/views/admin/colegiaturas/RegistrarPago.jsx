@@ -7,19 +7,16 @@ import {
     Eye,
     Info,
     UserCheck,
-    User,
-    GraduationCap,
-    IdCard,
-    Users,
 } from "lucide-react";
 import { ClipLoader } from "react-spinners";
 import { toast } from "react-toastify";
 import usePago from "../../../hooks/usePago";
 import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
+import StudentCard from "./StudentCard";
 
 export default function RegistrarPago({ student, colegiaturas, onClose }) {
-    const { createPago } = usePago();
+    const { createPago, mutate } = usePago();
 
     const [cargando, setCargando] = useState(false);
     const [metodoPago, setMetodoPago] = useState("");
@@ -75,6 +72,9 @@ export default function RegistrarPago({ student, colegiaturas, onClose }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        console.log(formData);
+
         setCargando(true);
 
         try {
@@ -82,7 +82,10 @@ export default function RegistrarPago({ student, colegiaturas, onClose }) {
                 ...formData,
                 monto: Number(formData.monto),
                 colegiatura_id: Number(formData.colegiatura_id),
+                tutor_id: Number(formData.tutor_id),
             });
+
+            await mutate();
 
             toast.success(response.message);
             onClose(false);
@@ -126,54 +129,7 @@ export default function RegistrarPago({ student, colegiaturas, onClose }) {
                             Estudiante
                         </h2>
                     </div>
-
-                    <div className="bg-gradient-to-br from-red-50 to-white border border-red-100 p-6 rounded-2xl shadow-sm space-y-4">
-                        <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-full bg-red-200">
-                                <User className="w-5 h-5 text-red-700" />
-                            </div>
-                            <div>
-                                <p className="text-sm text-gray-500 uppercase tracking-wide">
-                                    Estudiante
-                                </p>
-                                <p className="text-lg font-bold text-gray-800">
-                                    {student.estudiante.nombre}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Matrícula */}
-                        <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-full bg-yellow-200">
-                                <Hash className="w-5 h-5 text-yellow-700" />
-                            </div>
-                            <div>
-                                <p className="text-sm text-gray-500 uppercase tracking-wide">
-                                    Matrícula
-                                </p>
-                                <p className="text-base font-semibold text-gray-700">
-                                    {student.estudiante.matricula}
-                                </p>
-                            </div>
-                        </div>
-
-                        {/* Grado y Grupo */}
-                        <div className="flex items-center gap-3">
-                            <div className="p-2 rounded-full bg-blue-200">
-                                <GraduationCap className="w-5 h-5 text-blue-700" />
-                            </div>
-                            <div className="flex gap-2 items-center">
-                                <span className="px-3 py-1 rounded-full bg-blue-100 text-blue-800 text-sm font-semibold flex items-center gap-1">
-                                    <Users size={14} />
-                                    {student.estudiante.grado}
-                                </span>
-
-                                <span className="px-3 py-1 rounded-full bg-gray-200 text-gray-700 text-sm font-semibold">
-                                    Grupo {student.estudiante.grupo}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
+                    <StudentCard student={student.estudiante} />
                 </section>
 
                 {/* ===============================
@@ -194,22 +150,45 @@ export default function RegistrarPago({ student, colegiaturas, onClose }) {
                         <SelectField
                             icon={<Calendar size={18} />}
                             label="Colegiatura"
-                            options={colegiaturasPendientes.map((c) => ({
-                                value: c.id,
-                                label: `${c.mes} - Pendiente: $${(
-                                    c.monto - c.pagado
-                                ).toFixed(2)}`,
-                            }))}
+                            options={[...colegiaturas]
+                                .sort((a, b) => {
+                                    const pagadaA =
+                                        a.estado?.toLowerCase() === "pagado";
+                                    const pagadaB =
+                                        b.estado?.toLowerCase() === "pagado";
+                                    return pagadaA - pagadaB;
+                                })
+                                .map((c) => {
+                                    const pendiente = c.monto - c.pagado;
+                                    const pagada =
+                                        c.estado?.toLowerCase() === "pagado";
+
+                                    return {
+                                        value: c.id,
+                                        label: pagada
+                                            ? `${c.mes} — PAGADO`
+                                            : `${c.mes} — Pendiente: $${pendiente.toFixed(2)}`,
+                                        disabled: pagada,
+                                        className: pagada
+                                            ? "bg-gray-100 text-gray-400 cursor-not-allowed"
+                                            : "",
+                                    };
+                                })}
                             value={formData.colegiatura_id ?? ""}
                             onChange={(e) => {
                                 const colegiaturaId = Number(e.target.value);
 
-                                const seleccionada =
-                                    colegiaturasPendientes.find(
-                                        (c) => c.id === colegiaturaId,
-                                    );
+                                const seleccionada = colegiaturas.find(
+                                    (c) => c.id === colegiaturaId,
+                                );
 
                                 if (!seleccionada) return;
+
+                                if (
+                                    seleccionada.estado?.toLowerCase() ===
+                                    "pagado"
+                                )
+                                    return;
 
                                 const pendiente =
                                     seleccionada.monto - seleccionada.pagado;
@@ -322,8 +301,8 @@ export default function RegistrarPago({ student, colegiaturas, onClose }) {
                     <div className="flex gap-5">
                         <button
                             type="button"
-                            onClick={() => onClose(false)}
-                            className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition"
+                            onClick={() => onClose()}
+                            className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer"
                             disabled={cargando}
                         >
                             Cancelar
@@ -332,7 +311,7 @@ export default function RegistrarPago({ student, colegiaturas, onClose }) {
                         <button
                             type="submit"
                             disabled={cargando}
-                            className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm w-44 disabled:opacity-60"
+                            className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm w-44 disabled:opacity-60 hover:cursor-pointer"
                         >
                             {cargando ? (
                                 <ClipLoader size={20} color="white" />

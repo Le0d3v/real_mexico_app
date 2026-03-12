@@ -66,7 +66,7 @@ export default function Colegiaturas() {
     );
 
     const casosVencidos = colegiaturasFiltradas.filter(
-        (r) => r.estado.toLowerCase() === "Vencido",
+        (r) => r.estado.toLowerCase() === "Vencida",
     ).length;
 
     const showHistorial = (student) => {
@@ -137,7 +137,7 @@ export default function Colegiaturas() {
                             <option value="Todos">Todas</option>
                             <option value="Pagado">Pagadas</option>
                             <option value="Pendiente">Pendientes</option>
-                            <option value="Vencido">Vencidas</option>
+                            <option value="Vencida">Vencidas</option>
                         </select>
 
                         <select
@@ -162,7 +162,9 @@ export default function Colegiaturas() {
                                 <th className="px-6 py-3 text-center">
                                     Alumno
                                 </th>
-                                <th className="px-6 py-3 text-center">Grado</th>
+                                <th className="px-6 py-3 text-center">
+                                    Grado / Grupo
+                                </th>
                                 <th className="px-6 py-3 text-center">Mes</th>
                                 <th className="px-6 py-3 text-center">
                                     Pagado
@@ -183,10 +185,13 @@ export default function Colegiaturas() {
                             {registrosPaginados.map((registro) => (
                                 <tr
                                     key={registro.id}
-                                    className="border-t hover:bg-gray-200 transition border-gray-200"
+                                    className="border-t hover:bg-gray-100 transition border-gray-200"
                                 >
                                     <td className="px-6 py-4 font-medium">
-                                        {registro.estudiante.nombre}
+                                        {registro.estudiante.nombre +
+                                            " " +
+                                            registro.estudiante
+                                                .apellido_paterno}
                                     </td>
 
                                     <td className="py-4 flex justify-center">
@@ -351,7 +356,7 @@ export default function Colegiaturas() {
                 <RegistrarPago
                     colegiaturas={colegiaturasHistorial}
                     student={selectedStudent}
-                    onClose={setHistoialModal}
+                    onClose={() => setRegistroModal(false)}
                 />
             </Modal>
         </>

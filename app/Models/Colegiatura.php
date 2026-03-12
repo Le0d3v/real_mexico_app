@@ -42,7 +42,7 @@ class Colegiatura extends Model
 
     public function getEstadoCalculadoAttribute()
     {
-        if ($this->estado === 'pagado') {
+        if ($this->estado === 'Pagado' || $this->estado === 'pagado') {
             return 'Pagado';
         }
 
@@ -51,5 +51,16 @@ class Colegiatura extends Model
         }
 
         return 'Pendiente';
+    }
+
+    public function getMonto()
+    {
+        $estado = $this->getEstadoCalculadoAttribute();
+
+        if($estado === "Vencida") {
+            return 1800;
+        }
+
+        return $this->monto;
     }
 }

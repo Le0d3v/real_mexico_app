@@ -15,16 +15,16 @@ export default function Settings() {
     
     return (
         <div className="max-w-7xl mx-auto">
-            <div className="">
+            <div className="" id="driver_settings-personal">
                 <DatosPersonalesForm user={user} />
             </div>
-            <div className="my-7">
+            <div className="my-7" id="driver_settings-domicilio">
                 <DomicilioForm user={user} />
             </div>
-            <div className="my-7">
+            <div className="my-7" id="driver_settings-password">
                 <PasswordForm user={user} />
             </div>
-            <div className="my-7">
+            <div className="my-7" id="driver_settings-tour">
                 <Tour user={user} />
             </div>
         </div>

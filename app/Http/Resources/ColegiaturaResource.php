@@ -18,7 +18,7 @@ class ColegiaturaResource extends JsonResource
             "id" => $this->id,
             "mes" => $this->mes,
             "anio" => $this->anio,
-            "monto" => $this->monto,
+            "monto" => $this->getMonto(),
             "pagado" => $this->pagado,
             "estado" => $this->getEstadoCalculadoAttribute(),
             "estudiante_id" => $this->estudiante_id,

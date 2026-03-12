@@ -44,8 +44,8 @@ export default function Dashboard() {
     );
 
     const totalRecaudadoMes = colegiaturasMesActual
-        .filter((c) => c.estado === "pagado")
-        .reduce((acc, c) => acc + Number(c.monto), 0);
+        .filter((c) => c.estado === "Pagado")
+        .reduce((acc, c) => acc + Number(c.pagado), 0);
 
     const porcentajeRecaudado =
         totalMetaMes > 0
@@ -67,7 +67,10 @@ export default function Dashboard() {
                     </span>
                 </p>
                 {/* KPIs */}
-                <div className="grid md:grid-cols-4 gap-6 mt-10 mb-10" id="driver_kpis">
+                <div
+                    className="grid md:grid-cols-4 gap-6 mt-10 mb-10"
+                    id="driver_kpis"
+                >
                     <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition">
                         <div className="flex justify-between items-center">
                             <div>
@@ -128,7 +131,10 @@ export default function Dashboard() {
                 </div>
 
                 {/* Estado financiero */}
-                <div className="bg-white p-8 rounded-2xl shadow-sm mb-10" id="driver_estado-financiero">
+                <div
+                    className="bg-white p-8 rounded-2xl shadow-sm mb-10"
+                    id="driver_estado-financiero"
+                >
                     <div className="flex items-center gap-3 mb-6">
                         <TrendingUp className="w-6 h-6 text-emerald-600" />
                         <h3 className="text-xl font-semibold text-slate-800">
@@ -143,8 +149,6 @@ export default function Dashboard() {
                         />
 
                         <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-slate-700">
-
-                        
                             {porcentajeRecaudado}% Recaudado
                         </div>
                     </div>

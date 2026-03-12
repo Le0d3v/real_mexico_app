@@ -140,7 +140,10 @@ export default function DomicilioForm({ user }) {
                     icon={<Hash size={18} />}
                 />
 
-                <div className="flex justify-end md:col-span-2">
+                <div
+                    className="flex justify-end md:col-span-2"
+                    id="driver_settings-domicilio-save"
+                >
                     <SubmitButton>
                         {loading ? (
                             <ClipLoader size={20} color="white" />

@@ -30,6 +30,7 @@ export default function SelectField({
                                 <option
                                     key={opt.value ?? index}
                                     value={opt.value}
+                                    className={opt.className}
                                 >
                                     {opt.label}
                                 </option>

@@ -31,12 +31,13 @@ export default function Tour() {
                             <button
                                 onClick={startTour}
                                 className="flex items-center gap-2 px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold rounded-lg shadow-sm transition transform hover:-translate-y-1 cursor-pointer"
+                                id="driver_settings-tour-start"
                             >
                                 Iniciar Tour
                             </button>
 
                             <span className="text-xs text-gray-500">
-                                Duración aproximada: 1–2 minutos
+                                Duración aproximada: 3 – 5 minutos
                             </span>
                         </div>
                     </div>

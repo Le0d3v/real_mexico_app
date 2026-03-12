@@ -27,6 +27,8 @@ class ColegiaturaController extends Controller
             $ciclo_actual->id
         )->get();
 
+        
+
         return ColegiaturaEstudianteResource::collection($colegiaturas);
     }
 

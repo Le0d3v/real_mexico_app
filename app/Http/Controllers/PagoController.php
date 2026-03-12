@@ -35,6 +35,8 @@ class PagoController extends Controller
         try {
             $colegiatura = Colegiatura::find($request->colegiatura_id);
 
+            $colegiatura->monto = $colegiatura->getMonto();
+
             $colegiatura->pagado += $request->monto;
 
             if($colegiatura->pagado >= $colegiatura->monto) {

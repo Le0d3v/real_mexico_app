@@ -89,7 +89,10 @@ export default function PasswordForm({ user }) {
                 onSubmit={handleSubmit}
             >
                 {/* CONTRASEÑA ACTUAL */}
-                <div className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-200 focus-within:ring-2 focus-within:ring-red-500 transition">
+                <div
+                    className="flex items-start gap-3 bg-white rounded-xl p-4 border border-gray-200 focus-within:ring-2 focus-within:ring-red-500 transition"
+                    id="driver_settings-password-campo"
+                >
                     <div className="text-red-600 mt-1">
                         <Lock size={18} />
                     </div>
@@ -113,7 +116,7 @@ export default function PasswordForm({ user }) {
                             <button
                                 type="button"
                                 onClick={() => toggleVisibility("current")}
-                                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-600 transition"
+                                className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-500 hover:text-red-600 transition show-password"
                             >
                                 {showPassword.current ? (
                                     <EyeOff size={18} />
@@ -198,7 +201,7 @@ export default function PasswordForm({ user }) {
                 </div>
 
                 {/* BOTÓN */}
-                <div className="w-full">
+                <div className="w-full" id="driver_settings-password-save">
                     <SubmitButton>
                         {loading ? (
                             <ClipLoader size={20} color="white" />
