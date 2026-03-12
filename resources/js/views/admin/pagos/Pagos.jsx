@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useEffect } from "react";
+import { useState, useMemo, useEffect } from "react";
 import {
     DollarSign,
     Search,
@@ -13,6 +13,7 @@ import Loader from "../../components/Loader";
 import Modal from "../components/Modal";
 import ShowPago from "./ShowPago";
 import CrearPago from "./CrearPago";
+import { formatDate } from "../../../helpers/helpers";
 
 export default function Pagos() {
     const { pagos, isLoading, error } = usePago();
@@ -250,7 +251,7 @@ export default function Pagos() {
                                         {pago.tutor?.apellido_paterno}
                                     </td>
                                     <td className="px-6 py-3">
-                                        {pago.fecha_pago}
+                                        {formatDate(pago.fecha_pago)}
                                     </td>
                                     <td className="px-6 py-3 font-semibold text-emerald-600">
                                         ${Number(pago.monto).toLocaleString()}

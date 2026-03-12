@@ -66,8 +66,10 @@ export default function Colegiaturas() {
     );
 
     const casosVencidos = colegiaturasFiltradas.filter(
-        (r) => r.estado.toLowerCase() === "Vencida",
+        (r) => r.estado === "Vencida",
     ).length;
+
+    console.log(colegiaturasFiltradas);
 
     const showHistorial = (student) => {
         const studentColegiaturas = colegiaturas.filter(

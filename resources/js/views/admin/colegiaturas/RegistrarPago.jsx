@@ -14,9 +14,11 @@ import usePago from "../../../hooks/usePago";
 import InputField from "../components/InputField";
 import SelectField from "../components/SelectField";
 import StudentCard from "./StudentCard";
+import useColegiatura from "../../../hooks/useColegiatura";
 
 export default function RegistrarPago({ student, colegiaturas, onClose }) {
-    const { createPago, mutate } = usePago();
+    const { createPago } = usePago();
+    const { mutate } = useColegiatura();
 
     const [cargando, setCargando] = useState(false);
     const [metodoPago, setMetodoPago] = useState("");

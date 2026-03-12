@@ -7,9 +7,9 @@ export default function ColegiaturaPago({ colegiatura, selected }) {
     const estado =
         pendiente <= 0
             ? "Pagado"
-            : colegiatura.estado?.toLowerCase() === "Pendiente"
-              ? "Vencido"
-              : "Pendiente";
+            : colegiatura.estado === "Pendiente"
+              ? "Pendiente"
+              : "Vencida";
 
     const estadoStyles =
         estado === "Pagado"

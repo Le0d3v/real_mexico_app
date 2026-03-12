@@ -5,7 +5,7 @@ import {
     User,
     Users,
     CircleDollarSign,
-    Calendar,
+    CalendarDays,
 } from "lucide-react";
 import NavItem from "./NavItem";
 import useIRM from "../../../hooks/useIRM";
@@ -36,7 +36,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                         page={page}
                         setPage={setPage}
                         index={1}
-                        icon={Calendar}
+                        icon={CalendarDays}
                         fn={() => setTitulo("Colegiaturas")}
                     >
                         Colegiaturas

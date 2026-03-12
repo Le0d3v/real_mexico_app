@@ -2,10 +2,11 @@ import { driver } from "driver.js";
 import useIRM from "./useIRM";
 
 export default function useAdminTour() {
-    const { setAdminPage } = useIRM();
+    const { setAdminPage, setTitulo } = useIRM();
 
     const startTour = () => {
         setAdminPage(0);
+        setTitulo("Instituto Real de México A.C.");
         const driverObj = driver({
             showProgress: true,
             allowClose: true,
@@ -84,7 +85,7 @@ export default function useAdminTour() {
                             "Los accesos rápidos permiten ejecutar las acciones más comunes del sistema sin necesidad de navegar entre diferentes secciones. Desde aquí puede registrar nuevos estudiantes, tutores, pagos o publicaciones de forma directa.",
                         onNextClick: () => {
                             setAdminPage(4);
-
+                            setTitulo("Tutores");
                             setTimeout(() => {
                                 driverObj.moveNext();
                             }, 500);
@@ -164,7 +165,7 @@ export default function useAdminTour() {
                             "Cuando el número de registros es elevado, el sistema divide los datos en varias páginas. Utilice estos controles para navegar entre ellas y visualizar más resultados.",
                         onNextClick: () => {
                             setAdminPage(5);
-
+                            setTitulo("Publicaciones");
                             setTimeout(() => {
                                 driverObj.moveNext();
                             }, 500);

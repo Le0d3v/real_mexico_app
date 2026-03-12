@@ -31,7 +31,11 @@ export default function Dashboard() {
     const { estudiantes } = useStudent();
     const { tutores } = useTutor();
     const { cicloEscolar, isLoading } = useCicloEscolar();
-    const { colegiaturasMesActual } = useColegiatura();
+    const { colegiaturasMesActual, colegiaturas } = useColegiatura();
+
+    const colegiaturasVencidas = colegiaturas.filter((e) => {
+        return e.estado === "Vencida";
+    });
 
     const [noticiaModal, setNoticiaModal] = useState(false);
     const [tutorModal, setTutorModal] = useState(false);
@@ -103,10 +107,10 @@ export default function Dashboard() {
                         <div className="flex justify-between items-center">
                             <div>
                                 <p className="text-sm text-gray-500">
-                                    Pagos Vencidos
+                                    Colegiaturas Vencidas
                                 </p>
                                 <h2 className="text-3xl font-bold text-red-600 mt-2">
-                                    17
+                                    {colegiaturasVencidas.length}
                                 </h2>
                             </div>
                             <AlertTriangle className="w-10 h-10 text-red-500" />
