@@ -84,12 +84,245 @@ export default function useAdminTour() {
                         description:
                             "Los accesos rápidos permiten ejecutar las acciones más comunes del sistema sin necesidad de navegar entre diferentes secciones. Desde aquí puede registrar nuevos estudiantes, tutores, pagos o publicaciones de forma directa.",
                         onNextClick: () => {
-                            setAdminPage(4);
-                            setTitulo("Tutores");
+                            setAdminPage(1);
+                            setTitulo("Colegiaturas");
                             setTimeout(() => {
                                 driverObj.moveNext();
                             }, 500);
                         },
+                    },
+                },
+                {
+                    element: "#driver_main",
+                    popover: {
+                        title: "Colegiaturas",
+                        description:
+                            "En esta sección podrá administrar todas las colegiaturas registradas en el sistema. Aquí encontrará las herramientas necesarias para consultar, filtrar y gestionar los pagos correspondientes a cada alumno.",
+                    },
+                },
+                {
+                    element: "#driver_colegiaturas-resumen",
+                    popover: {
+                        title: "Resumen",
+                        description:
+                            "Este panel muestra un resumen general de las colegiaturas en tiempo real. Aquí podrá visualizar el total recaudado, los montos pendientes de pago y las colegiaturas que se encuentran vencidas.",
+                    },
+                },
+                {
+                    element: "#driver_colegiaturas-filtros",
+                    popover: {
+                        title: "Filtrado de datos",
+                        description:
+                            "Utilice estos filtros para localizar información de forma más precisa. Al aplicar un filtro, los datos mostrados en los indicadores y en la tabla se actualizarán automáticamente según los criterios seleccionados.",
+                    },
+                },
+                {
+                    element: "#driver_colegiaturas-buscador",
+                    popover: {
+                        title: "Buscar una Colegiatura",
+                        description:
+                            "Utilice este buscador para localizar una colegiatura específica mediante los datos del alumno, como nombre, apellidos o matrícula.",
+                    },
+                },
+                {
+                    element: "#driver_colegiaturas-estados",
+                    popover: {
+                        title: "Filtrar por Estado",
+                        description:
+                            "Permite filtrar las colegiaturas según su estado actual. Puede visualizar únicamente las colegiaturas pendientes, pagadas o vencidas para obtener un análisis más preciso.",
+                    },
+                },
+                {
+                    element: "#driver_colegiaturas-mes",
+                    popover: {
+                        title: "Filtrar por Mes",
+                        description:
+                            "Utilice este filtro para visualizar las colegiaturas correspondientes a un mes específico. De forma predeterminada, el sistema mostrará los registros del mes actual.",
+                    },
+                },
+                {
+                    element: "#driver_colegiaturas-tabla",
+                    popover: {
+                        title: "Registros",
+                        description:
+                            "En esta tabla se muestran todos los registros de colegiaturas disponibles en la base de datos. La información se actualizará automáticamente cuando se utilicen los filtros o el buscador.",
+                    },
+                },
+                {
+                    element: "#driver_colegiaturas-registros > :nth-child(1)",
+                    popover: {
+                        title: "Colegiatura",
+                        description:
+                            "Cada fila representa una colegiatura registrada en el sistema. Aquí podrá visualizar de forma rápida los datos principales relacionados con el pago correspondiente.",
+                    },
+                },
+                {
+                    element:
+                        "#driver_colegiaturas-registros > :nth-child(1) .registrar-pago",
+                    popover: {
+                        title: "Registrar Pago",
+                        description:
+                            "Utilice este botón para registrar el pago de la colegiatura seleccionada. El sistema asociará automáticamente el pago con el alumno correspondiente.",
+                    },
+                },
+                {
+                    element:
+                        "#driver_colegiaturas-registros > :nth-child(1) .historial",
+                    popover: {
+                        title: "Historial",
+                        description:
+                            "Este botón le permitirá acceder al historial completo de colegiaturas del alumno, donde podrá consultar el estado y registro de cada pago realizado.",
+                    },
+                },
+                {
+                    element: "#driver_colegiaturas-paginacion",
+                    popover: {
+                        title: "Paginación",
+                        description:
+                            "Cuando la cantidad de registros es elevada, el sistema divide la información en varias páginas para facilitar su visualización. Utilice estos controles para navegar entre ellas.",
+                    },
+                },
+                {
+                    element: "#driver_paginacion-numero",
+                    popover: {
+                        title: "Número de Página",
+                        description:
+                            "Indica el número de la página de registros que está visualizando actualmente.",
+                    },
+                },
+                {
+                    element: "#driver_paginacion-anterior",
+                    popover: {
+                        title: "Página Anterior",
+                        description:
+                            "Utilice este botón para regresar a la página anterior de registros. Si se encuentra en la primera página, el botón aparecerá deshabilitado.",
+                    },
+                },
+                {
+                    element: "#driver_paginacion-siguiente",
+                    popover: {
+                        title: "Página Siguiente",
+                        description:
+                            "Utilice este botón para avanzar a la siguiente página de registros. Si se encuentra en la última página, el botón aparecerá deshabilitado.",
+                    },
+                },
+                {
+                    element: "#driver_paginacion-botones .boton-paginacion",
+                    popover: {
+                        title: "Página Específica",
+                        description:
+                            "También puede acceder directamente a una página específica seleccionando su número. El botón correspondiente se resaltará cuando represente la página actual.",
+                        onNextClick: () => {
+                            setAdminPage(2);
+                            setTitulo("Pagos");
+                            setTimeout(() => {
+                                driverObj.moveNext();
+                            }, 500);
+                        },
+                    },
+                },
+                {
+                    element: "#driver_main",
+                    popover: {
+                        title: "Pagos",
+                        description:
+                            "En esta sección podrá consultar y administrar todos los movimientos monetarios registrados en el sistema. Aquí se concentran los registros de pagos realizados por los alumnos.",
+                    },
+                },
+                {
+                    element: "#driver_pagos-crear",
+                    popover: {
+                        title: "Registrar un Nuevo Pago",
+                        description:
+                            "Utilice este botón para registrar un nuevo pago manualmente. A diferencia del registro desde la sección de colegiaturas, aquí deberá seleccionar explícitamente al alumno y la colegiatura correspondiente antes de confirmar el pago.",
+                    },
+                },
+                {
+                    element: "#driver_pagos-indicadores",
+                    popover: {
+                        title: "Indicadores",
+                        description:
+                            "Este panel muestra indicadores generales sobre los pagos registrados en el sistema. Aquí podrá visualizar el monto total recaudado, el número total de pagos registrados y el promedio de ingresos por pago.",
+                    },
+                },
+                {
+                    element: "#driver_pagos-filtros",
+                    popover: {
+                        title: "Filtros",
+                        description:
+                            "Utilice estos filtros para localizar registros de pagos de forma más precisa según diferentes criterios disponibles en el sistema.",
+                    },
+                },
+                {
+                    element: "#driver_pagos-buscador",
+                    popover: {
+                        title: "Buscar un Pago",
+                        description:
+                            "El buscador permite localizar pagos específicos utilizando el nombre del tutor asociado al pago o la referencia del pago, en caso de que exista.",
+                    },
+                },
+                {
+                    element: "#driver_pagos-metodos",
+                    popover: {
+                        title: "Filtrar por Método de Pago",
+                        description:
+                            "Este filtro permite mostrar únicamente los pagos registrados con un método de pago específico, facilitando la consulta y el análisis de los registros.",
+                    },
+                },
+                {
+                    element: "#driver_pagos-fecha",
+                    popover: {
+                        title: "Filtrar por Fecha de Registro",
+                        description:
+                            "También puede filtrar los pagos según la fecha en que fueron registrados. El campo abrirá un calendario interactivo que le permitirá seleccionar la fecha deseada.",
+                    },
+                },
+                {
+                    element: "#driver_pagos-tabla",
+                    popover: {
+                        title: "Registros",
+                        description:
+                            "En esta tabla se muestran todos los pagos registrados en la base de datos junto con su información general. Los resultados se actualizarán automáticamente al utilizar el buscador o aplicar filtros.",
+                    },
+                },
+                {
+                    element: "#driver_pagos-registros > :nth-child(1)",
+                    popover: {
+                        title: "Pago",
+                        description:
+                            "Cada fila representa un pago registrado en el sistema, mostrando su información principal junto con las acciones disponibles para consultarlo.",
+                    },
+                },
+                {
+                    element:
+                        "#driver_pagos-registros > :nth-child(1) .show-pago",
+                    popover: {
+                        title: "Ver Más",
+                        description:
+                            "Este botón permite acceder al detalle completo del pago, incluyendo la información del responsable, el servicio asociado y los datos del alumno relacionado.",
+                    },
+                },
+                {
+                    element: "#driver_pagos-paginación",
+                    popover: {
+                        title: "Paginación",
+                        description:
+                            "Cuando el número de registros es elevado, el sistema divide los resultados en varias páginas para facilitar su visualización. Puede utilizar estos controles para navegar entre los diferentes grupos de registros.",
+                        onNextClick: () => {
+                            setAdminPage(3);
+                            setTitulo("Estudiantes");
+                            setTimeout(() => {
+                                driverObj.moveNext();
+                            }, 500);
+                        },
+                    },
+                },
+                {
+                    element: "#driver_main",
+                    popover: {
+                        title: "Estudiantes",
+                        description:
+                            "En esta sección podrá administrar toda la información relacionada con los tutores registrados en el sistema, así como las relaciones que mantienen con los alumnos.",
                     },
                 },
                 {

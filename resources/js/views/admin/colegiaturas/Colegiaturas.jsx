@@ -97,7 +97,10 @@ export default function Colegiaturas() {
         <>
             <div className="bg-gray-100 min-h-screen" id="driver_colegiaturas">
                 {/* Resumen */}
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div
+                    className="grid md:grid-cols-3 gap-6 mb-8"
+                    id="driver_colegiaturas-resumen"
+                >
                     <div className="bg-white p-6 rounded-xl shadow border-l-4 border-black">
                         <p className="text-gray-500 text-sm">Recaudado</p>
                         <h2 className="text-2xl font-bold text-gray-800">
@@ -121,7 +124,10 @@ export default function Colegiaturas() {
                 </div>
 
                 {/* Filtros */}
-                <div className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200">
+                <div
+                    className="bg-white p-4 rounded-xl shadow-sm mb-6 border border-gray-200"
+                    id="driver_colegiaturas-filtros"
+                >
                     <div className="flex gap-4 flex-wrap">
                         <input
                             type="text"
@@ -129,12 +135,14 @@ export default function Colegiaturas() {
                             value={search}
                             onChange={(e) => setSearch(e.target.value)}
                             className="flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                            id="driver_colegiaturas-buscador"
                         />
 
                         <select
                             value={estadoFiltro}
                             onChange={(e) => setEstadoFiltro(e.target.value)}
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                            id="driver_colegiaturas-estados"
                         >
                             <option value="Todos">Todas</option>
                             <option value="Pagado">Pagadas</option>
@@ -146,6 +154,7 @@ export default function Colegiaturas() {
                             value={mesFiltro}
                             onChange={(e) => setMesFiltro(e.target.value)}
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                            id="driver_colegiaturas-mes"
                         >
                             {meses.map((mes) => (
                                 <option key={mes} value={mes}>
@@ -157,7 +166,10 @@ export default function Colegiaturas() {
                 </div>
 
                 {/* Tabla */}
-                <div className="bg-white rounded-xl shadow border border-gray-200 overflow-hidden">
+                <div
+                    className="bg-white rounded-xl shadow border border-gray-200 overflow-hidden"
+                    id="driver_colegiaturas-tabla"
+                >
                     <table className="w-full text-left">
                         <thead className="bg-black text-yellow-400">
                             <tr>
@@ -183,7 +195,7 @@ export default function Colegiaturas() {
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="driver_colegiaturas-registros">
                             {registrosPaginados.map((registro) => (
                                 <tr
                                     key={registro.id}
@@ -238,7 +250,7 @@ export default function Colegiaturas() {
                                     <td className="px-6 py-4 text-center">
                                         <div className="flex justify-center gap-2">
                                             <button
-                                                className="px-3 py-1 text-sm rounded-md bg-yellow-500 text-black hover:bg-yellow-600 transition cursor-pointer"
+                                                className="px-3 py-1 text-sm rounded-md bg-yellow-500 text-black hover:bg-yellow-600 transition cursor-pointer registrar-pago"
                                                 onClick={() =>
                                                     registrarPago(registro)
                                                 }
@@ -246,7 +258,7 @@ export default function Colegiaturas() {
                                                 Registrar pago
                                             </button>
                                             <button
-                                                className="px-3 py-1 text-sm rounded-md bg-gray-200 hover:bg-gray-300 transition cursor-pointer"
+                                                className="px-3 py-1 text-sm rounded-md bg-gray-200 hover:bg-gray-300 transition cursor-pointer historial"
                                                 onClick={() =>
                                                     showHistorial(registro)
                                                 }
@@ -262,8 +274,14 @@ export default function Colegiaturas() {
 
                     {/* Paginación */}
                     {totalPages > 1 && (
-                        <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-6 py-4 border-t bg-gray-50">
-                            <p className="text-sm text-gray-600">
+                        <div
+                            className="flex flex-col md:flex-row justify-between items-center gap-4 px-6 py-4 border-t bg-gray-50"
+                            id="driver_colegiaturas-paginacion"
+                        >
+                            <p
+                                className="text-sm text-gray-600"
+                                id="driver_paginacion-numero"
+                            >
                                 Página <strong>{currentPage}</strong> de{" "}
                                 <strong>{totalPages}</strong>
                             </p>
@@ -275,58 +293,66 @@ export default function Colegiaturas() {
                                         setCurrentPage((prev) => prev - 1)
                                     }
                                     className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 hover:bg-gray-100 transition disabled:opacity-40"
+                                    id="driver_paginacion-anterior"
                                 >
                                     ←
                                 </button>
 
-                                {Array.from(
-                                    { length: totalPages },
-                                    (_, i) => i + 1,
-                                )
-                                    .filter(
-                                        (page) =>
-                                            page === 1 ||
-                                            page === totalPages ||
-                                            Math.abs(page - currentPage) <= 1,
+                                <div
+                                    id="driver_paginacion-botones"
+                                    className="gap-1"
+                                >
+                                    {Array.from(
+                                        { length: totalPages },
+                                        (_, i) => i + 1,
                                     )
-                                    .map((page, index, array) => {
-                                        if (
-                                            index > 0 &&
-                                            page - array[index - 1] > 1
-                                        ) {
-                                            return (
-                                                <span
-                                                    key={`dots-${page}`}
-                                                    className="px-2"
-                                                >
-                                                    ...
-                                                </span>
-                                            );
-                                        }
+                                        .filter(
+                                            (page) =>
+                                                page === 1 ||
+                                                page === totalPages ||
+                                                Math.abs(page - currentPage) <=
+                                                    1,
+                                        )
+                                        .map((page, index, array) => {
+                                            if (
+                                                index > 0 &&
+                                                page - array[index - 1] > 1
+                                            ) {
+                                                return (
+                                                    <span
+                                                        key={`dots-${page}`}
+                                                        className="px-2 cursor-pointer"
+                                                    >
+                                                        ...
+                                                    </span>
+                                                );
+                                            }
 
-                                        return (
-                                            <button
-                                                key={page}
-                                                onClick={() =>
-                                                    setCurrentPage(page)
-                                                }
-                                                className={`px-4 py-2 rounded-lg text-sm font-semibold transition ${
-                                                    currentPage === page
-                                                        ? "bg-yellow-400 text-black shadow-md"
-                                                        : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
-                                                }`}
-                                            >
-                                                {page}
-                                            </button>
-                                        );
-                                    })}
+                                            return (
+                                                <button
+                                                    key={page}
+                                                    onClick={() =>
+                                                        setCurrentPage(page)
+                                                    }
+                                                    className={`px-4 py-2 rounded-lg text-sm font-semibold transition boton-paginacion mx-1 cursor-pointer ${
+                                                        currentPage === page
+                                                            ? "bg-yellow-400 text-black shadow-md"
+                                                            : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
+                                                    }`}
+                                                >
+                                                    {page}
+                                                </button>
+                                            );
+                                        })}
+                                </div>
 
                                 <button
                                     disabled={currentPage === totalPages}
                                     onClick={() =>
                                         setCurrentPage((prev) => prev + 1)
                                     }
-                                    className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 hover:bg-gray-100 transition disabled:opacity-40"
+                                    className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 hover:bg-gray-100 transition disabled:opacity-40 cursor-pointer"
+                                    id="driver_paginacion-siguiente"
                                 >
                                     →
                                 </button>

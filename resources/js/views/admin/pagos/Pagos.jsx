@@ -142,6 +142,7 @@ export default function Pagos() {
 
                     <button
                         className="flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-xl shadow hover:shadow-md transition hover:opacity-90 hover:-translate-y-1 cursor-pointer"
+                        id="driver_pagos-crear"
                         onClick={() => setCrearPago(true)}
                     >
                         <PlusCircle size={18} />
@@ -149,7 +150,10 @@ export default function Pagos() {
                     </button>
                 </div>
                 {/* Indicadores */}
-                <div className="grid md:grid-cols-3 gap-6 mb-8">
+                <div
+                    className="grid md:grid-cols-3 gap-6 mb-8"
+                    id="driver_pagos-indicadores"
+                >
                     <div className="bg-white p-6 rounded-2xl shadow-sm">
                         <p className="text-sm text-slate-500">
                             Total Recaudado (Vista Actual)
@@ -178,11 +182,17 @@ export default function Pagos() {
                     </div>
                 </div>
                 {/* Filtros */}{" "}
-                <div className="bg-white p-6 rounded-2xl shadow-sm mb-6">
+                <div
+                    className="bg-white p-6 rounded-2xl shadow-sm mb-6"
+                    id="driver_pagos-filtros"
+                >
                     {" "}
                     <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between">
                         {" "}
-                        <div className="flex items-center gap-3 bg-slate-100 px-4 py-2 rounded-xl w-full md:w-2/3">
+                        <div
+                            className="flex items-center gap-3 bg-slate-100 px-4 py-2 rounded-xl w-full md:w-2/3"
+                            id="driver_pagos-buscador"
+                        >
                             {" "}
                             <Search size={18} className="text-slate-500" />{" "}
                             <input
@@ -201,6 +211,7 @@ export default function Pagos() {
                                     setMetodoFiltro(e.target.value)
                                 }
                                 className="bg-slate-200 px-4 py-2 rounded-xl text-sm cursor-pointer"
+                                id="driver_pagos-metodos"
                             >
                                 {" "}
                                 <option value="">Todos los métodos</option>{" "}
@@ -211,6 +222,7 @@ export default function Pagos() {
                                 <option value="tarjeta">Tarjeta</option>{" "}
                             </select>{" "}
                             <input
+                                id="driver_pagos-fecha"
                                 type="date"
                                 value={fechaFiltro}
                                 onChange={(e) => setFechaFiltro(e.target.value)}
@@ -220,7 +232,10 @@ export default function Pagos() {
                     </div>{" "}
                 </div>
                 {/* Tabla */}
-                <div className="bg-white rounded-2xl shadow-sm overflow-hidden">
+                <div
+                    className="bg-white rounded-2xl shadow-sm overflow-hidden"
+                    id="driver_pagos-tabla"
+                >
                     <table className="w-full text-sm">
                         <thead className="bg-black text-white font-semibold text-lg">
                             <tr>
@@ -240,7 +255,7 @@ export default function Pagos() {
                                 </th>
                             </tr>
                         </thead>
-                        <tbody>
+                        <tbody id="driver_pagos-registros">
                             {paginatedPagos.map((pago) => (
                                 <tr
                                     key={pago.id}
@@ -264,7 +279,7 @@ export default function Pagos() {
                                     </td>
                                     <td className="px-6 py-3">
                                         <button
-                                            className="px-3 py-1 bg-yellow-400 rounded hover:bg-yellow-500 transition font-semibold cursor-pointer"
+                                            className="px-3 py-1 bg-yellow-400 rounded hover:bg-yellow-500 transition font-semibold cursor-pointer show-pago"
                                             onClick={() => {
                                                 setShowPago(true);
                                                 setPago(pago);
@@ -279,7 +294,10 @@ export default function Pagos() {
                     </table>
 
                     {/* Paginación */}
-                    <div className="flex justify-center items-center gap-2 py-6 border-t bg-gray-50">
+                    <div
+                        className="flex justify-center items-center gap-2 py-6 border-t bg-gray-50"
+                        id="driver_pagos-paginación"
+                    >
                         {getPaginationRange().map((item, index) => {
                             if (item === "...") {
                                 return (
