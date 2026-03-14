@@ -88,7 +88,7 @@ export default function useAdminTour() {
                             setTitulo("Colegiaturas");
                             setTimeout(() => {
                                 driverObj.moveNext();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -103,7 +103,7 @@ export default function useAdminTour() {
                             setTitulo("Instituto Real de México A.C.");
                             setTimeout(() => {
                                 driverObj.movePrevious();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -232,7 +232,7 @@ export default function useAdminTour() {
                             setTitulo("Pagos");
                             setTimeout(() => {
                                 driverObj.moveNext();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -247,7 +247,7 @@ export default function useAdminTour() {
                             setTitulo("Colegiaturas");
                             setTimeout(() => {
                                 driverObj.movePrevious();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -343,7 +343,7 @@ export default function useAdminTour() {
                             setTitulo("Estudiantes");
                             setTimeout(() => {
                                 driverObj.moveNext();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -358,7 +358,7 @@ export default function useAdminTour() {
                             setTitulo("Pagos");
                             setTimeout(() => {
                                 driverObj.movePrevious();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -455,7 +455,7 @@ export default function useAdminTour() {
                             setTitulo("Tutores");
                             setTimeout(() => {
                                 driverObj.moveNext();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -470,7 +470,7 @@ export default function useAdminTour() {
                             setTitulo("Estudiantes");
                             setTimeout(() => {
                                 driverObj.movePrevious();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -550,7 +550,7 @@ export default function useAdminTour() {
                             setTitulo("Publicaciones");
                             setTimeout(() => {
                                 driverObj.moveNext();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -565,7 +565,7 @@ export default function useAdminTour() {
                             setTitulo("Tutores");
                             setTimeout(() => {
                                 driverObj.movePrevious();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -637,7 +637,7 @@ export default function useAdminTour() {
 
                             setTimeout(() => {
                                 driverObj.moveNext();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
@@ -652,7 +652,7 @@ export default function useAdminTour() {
                             setTitulo("Publicaciones");
                             setTimeout(() => {
                                 driverObj.movePrevious();
-                            }, 500);
+                            }, 300);
                         },
                     },
                 },
