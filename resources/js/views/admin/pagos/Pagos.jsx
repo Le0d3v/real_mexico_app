@@ -13,7 +13,8 @@ import Loader from "../../components/Loader";
 import Modal from "../components/Modal";
 import ShowPago from "./ShowPago";
 import CrearPago from "./CrearPago";
-import { formatDate } from "../../../helpers/helpers";
+import { formatCurrency, formatDate } from "../../../helpers/helpers";
+import ExportExcel from "../components/ExportExcel";
 
 export default function Pagos() {
     const { pagos, isLoading, error } = usePago();
@@ -123,6 +124,40 @@ export default function Pagos() {
         return rangeWithDots;
     };
 
+    const columnasExcel = [
+        { label: "Responsable", key: "responsable" },
+        { label: "Monto", key: "monto" },
+        { label: "Fecha", key: "fecha" },
+        { label: "Método de Pago", key: "metodo_pago" },
+        { label: "Referencia", key: "referencia" },
+        { label: "Observaciones", key: "observaciones" },
+        { label: "Colegiatura", key: "colegiatura" },
+        { label: "Ciclo Escolar", key: "ciclo_escolar" },
+    ];
+
+    const datosExcel = filteredPagos.map((registro) => ({
+        responsable:
+            registro.tutor.name +
+            " " +
+            registro.tutor.apellido_paterno +
+            " " +
+            registro.tutor.apellido_materno,
+
+        monto: formatCurrency(registro.monto),
+
+        fecha: formatDate(registro.fecha_pago),
+
+        metodo_pago: registro.metodo_pago,
+
+        referencia: registro.referencia,
+
+        observaciones: registro.observaciones,
+
+        colegiatura: registro.colegiatura.mes,
+
+        ciclo_escolar: registro.colegiatura.ciclo_escolar.nombre,
+    }));
+
     if (isLoading) return <Loader />;
     if (error) return <p>Error al cargar pagos</p>;
 
@@ -215,11 +250,11 @@ export default function Pagos() {
                             >
                                 {" "}
                                 <option value="">Todos los métodos</option>{" "}
-                                <option value="efectivo">Efectivo</option>{" "}
-                                <option value="transferencia">
+                                <option value="Efectivo">Efectivo</option>{" "}
+                                <option value="Transferencia">
                                     Transferencia
                                 </option>{" "}
-                                <option value="tarjeta">Tarjeta</option>{" "}
+                                <option value="Tarjeta">Tarjeta</option>{" "}
                             </select>{" "}
                             <input
                                 id="driver_pagos-fecha"
@@ -229,6 +264,24 @@ export default function Pagos() {
                                 className="bg-slate-200 px-4 py-2 rounded-xl text-sm"
                             />{" "}
                         </div>{" "}
+                        <ExportExcel
+                            data={datosExcel}
+                            columns={columnasExcel}
+                            fileName="reporte_pagos"
+                            sheetName="Pagos"
+                        >
+                            <div
+                                className="p-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 hover:-translate-y-1 transition"
+                                title="Exportar a Excel"
+                                id="driver_export-excel"
+                            >
+                                <img
+                                    src="/img/xls.png"
+                                    alt="Excel"
+                                    className="w-8"
+                                />
+                            </div>
+                        </ExportExcel>
                     </div>{" "}
                 </div>
                 {/* Tabla */}

@@ -7,11 +7,23 @@ import Modal from "../components/Modal";
 import { CirclePlus, Eye } from "lucide-react";
 import Historial from "./Historial";
 import RegistrarPago from "./RegistrarPago";
+import ExportExcel from "../components/ExportExcel";
 
 export default function Colegiaturas() {
     const { colegiaturas, isLoading } = useColegiatura();
 
     const mesActual = meses[new Date().getMonth()];
+
+    const columnasExcel = [
+        { label: "Alumno", key: "alumno" },
+        { label: "Matricula", key: "matricula" },
+        { label: "Grado / Grupo", key: "grado" },
+        { label: "Mes", key: "mes" },
+        { label: "Monto", key: "monto" },
+        { label: "Pagado", key: "pagado" },
+        { label: "Pendiente", key: "pendiente" },
+        { label: "Estado", key: "estado" },
+    ];
 
     const [historialModal, setHistoialModal] = useState(false);
     const [selectedStudent, setSelectedStudent] = useState(null);
@@ -91,6 +103,27 @@ export default function Colegiaturas() {
         setRegistroModal(true);
     };
 
+    const datosExcel = colegiaturasFiltradas.map((registro) => ({
+        alumno:
+            registro.estudiante.nombre +
+            " " +
+            registro.estudiante.apellido_paterno,
+
+        matricula: registro.estudiante.matricula,
+
+        grado: registro.estudiante.grado + " - " + registro.estudiante.grupo,
+
+        mes: registro.mes,
+
+        monto: formatCurrency(registro.monto),
+
+        pagado: formatCurrency(registro.pagado),
+
+        pendiente: formatCurrency(registro.monto - registro.pagado),
+
+        estado: registro.estado,
+    }));
+
     if (isLoading) return <Loader />;
 
     return (
@@ -156,18 +189,31 @@ export default function Colegiaturas() {
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
                             id="driver_colegiaturas-mes"
                         >
+                            <option value="Todos">Todos los meses</option>
                             {meses.map((mes) => (
                                 <option key={mes} value={mes}>
                                     {mes}
                                 </option>
                             ))}
                         </select>
-                        <button
-                            className="p-1 rounded cursor-pointer border border-gray-300 hover:bg-gray-100 hover:shadow hover:-translate-y-1 transition"
-                            title="Exportar a Excel"
+                        <ExportExcel
+                            data={datosExcel}
+                            columns={columnasExcel}
+                            fileName="reporte_colegiaturas"
+                            sheetName="Colegiaturas"
                         >
-                            <img src="/img/xls.png" alt="" className="w-8" />
-                        </button>
+                            <div
+                                className="p-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 hover:-translate-y-1 transition"
+                                title="Exportar a Excel"
+                                id="driver_export-excel"
+                            >
+                                <img
+                                    src="/img/xls.png"
+                                    alt="Excel"
+                                    className="w-8"
+                                />
+                            </div>
+                        </ExportExcel>
                     </div>
                 </div>
 

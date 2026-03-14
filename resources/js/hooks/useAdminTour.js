@@ -118,9 +118,9 @@ export default function useAdminTour() {
                 {
                     element: "#driver_colegiaturas-filtros",
                     popover: {
-                        title: "Filtrado de datos",
+                        title: "Acciones para Regitros",
                         description:
-                            "Utilice estos filtros para localizar información de forma más precisa. Al aplicar un filtro, los datos mostrados en los indicadores y en la tabla se actualizarán automáticamente según los criterios seleccionados.",
+                            "Utilice los filtros para localizar información de forma más precisa. Al aplicar un filtro, los datos mostrados en los indicadores y en la tabla se actualizarán automáticamente según los criterios seleccionados. o exporte datos a archivos Excel para la creación de reportes.",
                     },
                 },
                 {
@@ -145,6 +145,14 @@ export default function useAdminTour() {
                         title: "Filtrar por Mes",
                         description:
                             "Utilice este filtro para visualizar las colegiaturas correspondientes a un mes específico. De forma predeterminada, el sistema mostrará los registros del mes actual.",
+                    },
+                },
+                {
+                    element: "#driver_export-excel",
+                    popover: {
+                        title: "Exportar a Excel",
+                        description:
+                            "Utilice este botón para generar un archivo de Excel con los registros actualmente mostrados en la tabla. El archivo incluirá únicamente la información visible en pantalla en el momento de la exportación. Si aplica filtros por alumno, estado o mes, el reporte se generará respetando dichos criterios, permitiendo obtener reportes específicos y organizados para su análisis o resguardo.",
                     },
                 },
                 {
@@ -292,6 +300,14 @@ export default function useAdminTour() {
                     },
                 },
                 {
+                    element: "#driver_export-excel",
+                    popover: {
+                        title: "Exportar a Excel",
+                        description:
+                            "Utilice este botón para generar un archivo de Excel con los registros actualmente mostrados en la tabla. El archivo incluirá únicamente la información visible en pantalla en el momento de la exportación. Si aplica filtros por alumno, estado o mes, el reporte se generará respetando dichos criterios, permitiendo obtener reportes específicos y organizados para su análisis o resguardo.",
+                    },
+                },
+                {
                     element: "#driver_pagos-tabla",
                     popover: {
                         title: "Registros",
@@ -384,6 +400,14 @@ export default function useAdminTour() {
                         title: "Filtrar por Estado",
                         description:
                             "Filtre los estudiantes según su estado académico dentro de la institución, como activo, baja temporal o egresado.",
+                    },
+                },
+                {
+                    element: "#driver_export-excel",
+                    popover: {
+                        title: "Exportar a Excel",
+                        description:
+                            "Utilice este botón para generar un archivo de Excel con los registros actualmente mostrados en la tabla. El archivo incluirá únicamente la información visible en pantalla en el momento de la exportación. Si aplica filtros por alumno, estado o mes, el reporte se generará respetando dichos criterios, permitiendo obtener reportes específicos y organizados para su análisis o resguardo.",
                     },
                 },
                 {
@@ -480,6 +504,14 @@ export default function useAdminTour() {
                         title: "Filtro",
                         description:
                             "El sistema permite ordenar los registros utilizando este filtro. Puede visualizar los datos de forma ascendente o descendente según el criterio seleccionado.",
+                    },
+                },
+                {
+                    element: "#driver_export-excel",
+                    popover: {
+                        title: "Exportar a Excel",
+                        description:
+                            "Utilice este botón para generar un archivo de Excel con los registros actualmente mostrados en la tabla. El archivo incluirá únicamente la información visible en pantalla en el momento de la exportación. Si aplica filtros por alumno, estado o mes, el reporte se generará respetando dichos criterios, permitiendo obtener reportes específicos y organizados para su análisis o resguardo.",
                     },
                 },
                 {

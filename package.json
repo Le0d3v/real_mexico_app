@@ -20,6 +20,7 @@
         "axios": "^1.13.2",
         "chart.js": "^4.5.1",
         "driver.js": "^1.4.0",
+        "file-saver": "^2.0.5",
         "framer-motion": "^12.34.0",
         "laravel-vite-plugin": "^2.1.0",
         "lucide-react": "^0.563.0",
@@ -33,7 +34,8 @@
         "sweetalert2": "^11.26.18",
         "swr": "^2.4.0",
         "tailwindcss": "^4.1.18",
-        "vite": "^7.3.1"
+        "vite": "^7.3.1",
+        "xlsx": "^0.18.5"
     },
     "devDependencies": {
         "@vitejs/plugin-react": "^5.1.2"

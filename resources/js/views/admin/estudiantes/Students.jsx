@@ -5,6 +5,8 @@ import { useState, useMemo, useEffect } from "react";
 import Modal from "../components/Modal";
 import ShowStudent from "./ShowStudent";
 import CreateStudent from "./CreateStudent";
+import ExportExcel from "../components/ExportExcel";
+import { formatDate } from "../../../helpers/helpers";
 
 export default function Students() {
     const { estudiantes, isLoading, error } = useStudent();
@@ -62,6 +64,44 @@ export default function Students() {
             setCurrentPage(totalPages);
         }
     }, [currentPage, totalPages]);
+
+    const columnasExcel = [
+        { label: "Alumno", key: "alumno" },
+        { label: "Fecha de Nacimiento", key: "fecha_nacimiento" },
+        { label: "CURP", key: "curp" },
+        { label: "Genero", key: "genero" },
+        { label: "Tipo de Sangre", key: "tipo_sangre" },
+        { label: "Entidad de Nacimiento", key: "entidad_nacimiento" },
+        { label: "Matricula", key: "matricula" },
+        { label: "Grado", key: "grado" },
+        { label: "Grupo", key: "grupo" },
+        { label: "Estado", key: "estado" },
+        { label: "Tutor", key: "tutor" },
+    ];
+
+    const datosExcel = filteredStudents.map((registro) => ({
+        alumno:
+            registro.nombre +
+            " " +
+            registro.apellido_paterno +
+            " " +
+            registro.apellido_materno,
+        fecha_nacimiento: formatDate(registro.fecha_nacimiento),
+        curp: registro.curp,
+        genero: registro.genero,
+        tipo_sangre: registro.tipo_sangre,
+        entidad_nacimiento: registro.entidad_nacimiento,
+        matricula: registro.matricula,
+        grado: registro.grado,
+        grupo: registro.grupo,
+        estado: registro.estado,
+        tutor:
+            registro.tutores[0].usuario.name +
+            " " +
+            registro.tutores[0].usuario.apellido_paterno +
+            " " +
+            registro.tutores[0].usuario.apellido_materno,
+    }));
 
     if (isLoading) return <Loader />;
     if (error) return <p>Error al cargar tutores</p>;
@@ -139,6 +179,24 @@ export default function Students() {
                             <option value="Baja temporal">Baja temporal</option>
                             <option value="Egresado">Egresado</option>
                         </select>
+                        <ExportExcel
+                            data={datosExcel}
+                            columns={columnasExcel}
+                            fileName="reporte_alumnos"
+                            sheetName="Alumnos"
+                        >
+                            <div
+                                className="p-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 hover:-translate-y-1 transition"
+                                title="Exportar a Excel"
+                                id="driver_export-excel"
+                            >
+                                <img
+                                    src="/img/xls.png"
+                                    alt="Excel"
+                                    className="w-8"
+                                />
+                            </div>
+                        </ExportExcel>
                     </div>
                 </div>
 

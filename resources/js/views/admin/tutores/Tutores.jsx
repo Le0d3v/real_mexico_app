@@ -5,6 +5,8 @@ import Modal from "../components/Modal";
 import { CirclePlus, Eye, Search } from "lucide-react";
 import ShowTutor from "./ShowTutor";
 import CrearTutor from "./CrearTutor";
+import ExportExcel from "../components/ExportExcel";
+import { formatDate } from "../../../helpers/helpers";
 
 export default function Tutores() {
     const [open, setOpen] = useState(false);
@@ -72,6 +74,35 @@ export default function Tutores() {
         }
     }, [currentPage, totalPages]);
 
+    const columnasExcel = [
+        { label: "Tutor", key: "tutor" },
+        { label: "Fecha de Nacimiento", key: "fecha_nacimiento" },
+        { label: "CURP", key: "curp" },
+        { label: "Genero", key: "genero" },
+        { label: "Ocupacion", key: "ocupacion" },
+        { label: "Nivel de Estudios", key: "nivel_estudios" },
+        { label: "Número de Teléfono", key: "telefono" },
+        { label: "Correo Electrónico", key: "email" },
+        { label: "Alumnos", key: "alumnos" },
+    ];
+
+    const datosExcel = filteredTutores.map((registro) => ({
+        tutor:
+            registro.name +
+            " " +
+            registro.apellido_paterno +
+            " " +
+            registro.apellido_materno,
+        fecha_nacimiento: formatDate(registro.fecha_nacimiento),
+        curp: registro.curp,
+        genero: registro.genero,
+        ocupacion: registro.tutor.ocupacion,
+        nivel_estudios: registro.tutor.nivel_estudios,
+        telefono: registro.telefono,
+        email: registro.email,
+        alumnos: registro.tutor.estudiantes.length,
+    }));
+
     if (isLoading) return <Loader />;
     if (error) return <p>Error al cargar tutores</p>;
 
@@ -119,12 +150,6 @@ export default function Tutores() {
                                 />
                             </div>
                         </div>
-                        <p className="mt-1 text-gray-400">
-                            Resultados:
-                            <span className="font-semibold text-gray-700">
-                                {" " + filteredTutores.length}
-                            </span>
-                        </p>
                     </div>
                     <div>
                         <select
@@ -137,6 +162,24 @@ export default function Tutores() {
                             <option value="asc">Más antiguos</option>
                         </select>
                     </div>
+                    <ExportExcel
+                        data={datosExcel}
+                        columns={columnasExcel}
+                        fileName="reporte_tutores"
+                        sheetName="Tutores"
+                    >
+                        <div
+                            className="p-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 hover:-translate-y-1 transition"
+                            title="Exportar a Excel"
+                            id="driver_export-excel"
+                        >
+                            <img
+                                src="/img/xls.png"
+                                alt="Excel"
+                                className="w-8"
+                            />
+                        </div>
+                    </ExportExcel>
                 </div>
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
                     <table
