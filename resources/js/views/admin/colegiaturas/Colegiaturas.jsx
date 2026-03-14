@@ -162,6 +162,12 @@ export default function Colegiaturas() {
                                 </option>
                             ))}
                         </select>
+                        <button
+                            className="p-1 rounded cursor-pointer border border-gray-300 hover:bg-gray-100 hover:shadow hover:-translate-y-1 transition"
+                            title="Exportar a Excel"
+                        >
+                            <img src="/img/xls.png" alt="" className="w-8" />
+                        </button>
                     </div>
                 </div>
 

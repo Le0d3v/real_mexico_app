@@ -98,6 +98,13 @@ export default function useAdminTour() {
                         title: "Colegiaturas",
                         description:
                             "En esta sección podrá administrar todas las colegiaturas registradas en el sistema. Aquí encontrará las herramientas necesarias para consultar, filtrar y gestionar los pagos correspondientes a cada alumno.",
+                        onPrevClick: () => {
+                            setAdminPage(0);
+                            setTitulo("Instituto Real de México A.C.");
+                            setTimeout(() => {
+                                driverObj.movePrevious();
+                            }, 500);
+                        },
                     },
                 },
                 {
@@ -227,6 +234,13 @@ export default function useAdminTour() {
                         title: "Pagos",
                         description:
                             "En esta sección podrá consultar y administrar todos los movimientos monetarios registrados en el sistema. Aquí se concentran los registros de pagos realizados por los alumnos.",
+                        onPrevClick: () => {
+                            setAdminPage(1);
+                            setTitulo("Colegiaturas");
+                            setTimeout(() => {
+                                driverObj.movePrevious();
+                            }, 500);
+                        },
                     },
                 },
                 {
@@ -322,7 +336,103 @@ export default function useAdminTour() {
                     popover: {
                         title: "Estudiantes",
                         description:
-                            "En esta sección podrá administrar toda la información relacionada con los tutores registrados en el sistema, así como las relaciones que mantienen con los alumnos.",
+                            "En esta sección podrá administrar toda la información relacionada con los estudiantes registrados en el sistema, incluyendo sus datos generales y su relación con los tutores correspondientes.",
+                        onPrevClick: () => {
+                            setAdminPage(2);
+                            setTitulo("Pagos");
+                            setTimeout(() => {
+                                driverObj.movePrevious();
+                            }, 500);
+                        },
+                    },
+                },
+                {
+                    element: "#driver_estudiantes-total",
+                    popover: {
+                        title: "Estudiantes Totales",
+                        description:
+                            "Aquí se muestra en tiempo real el número total de estudiantes registrados actualmente en el sistema.",
+                    },
+                },
+                {
+                    element: "#driver_estudiantes-crear",
+                    popover: {
+                        title: "Nuevo Estudiante",
+                        description:
+                            "Utilice este botón para registrar un nuevo estudiante en la plataforma, ingresando la información necesaria para su identificación y gestión académica.",
+                    },
+                },
+                {
+                    element: "#driver_estudiantes-buscador",
+                    popover: {
+                        title: "Buscar Estudiante",
+                        description:
+                            "Localice rápidamente un estudiante utilizando su nombre, apellidos o matrícula dentro del sistema.",
+                    },
+                },
+                {
+                    element: "#driver_estudiantes-grado",
+                    popover: {
+                        title: "Filtrar por Grado",
+                        description:
+                            "Este filtro permite visualizar únicamente a los estudiantes que pertenecen a un grado académico específico.",
+                    },
+                },
+                {
+                    element: "#driver_estudiantes-estado",
+                    popover: {
+                        title: "Filtrar por Estado",
+                        description:
+                            "Filtre los estudiantes según su estado académico dentro de la institución, como activo, baja temporal o egresado.",
+                    },
+                },
+                {
+                    element: "#driver_estudiantes-tabla",
+                    popover: {
+                        title: "Alumnos",
+                        description:
+                            "En esta tabla se muestran todos los estudiantes registrados en el sistema junto con su información general.",
+                    },
+                },
+                {
+                    element: "#driver_estudiantes-registros > :nth-child(1)",
+                    popover: {
+                        title: "Alumno",
+                        description:
+                            "Cada fila representa a un estudiante y muestra su información principal para facilitar la consulta rápida de sus datos.",
+                    },
+                },
+                {
+                    element:
+                        "#driver_estudiantes-registros > :nth-child(1) .perfil",
+                    popover: {
+                        title: "Perfil del Alumno",
+                        description:
+                            "Al acceder al perfil del estudiante podrá consultar toda la información detallada relacionada con él, incluyendo información sobre su tutor.",
+                    },
+                },
+                {
+                    element:
+                        "#driver_estudiantes-registros > :nth-child(1) .editar",
+                    popover: {
+                        title: "Editar Información del Alumno",
+                        description:
+                            "Si necesita corregir o actualizar algún dato del estudiante, utilice este botón para modificar su información registrada en el sistema.",
+                    },
+                },
+                {
+                    element: "#driver_estudiantes-paginacion",
+                    popover: {
+                        title: "Paginación",
+                        description:
+                            "Cuando el número de estudiantes es elevado, el sistema divide los registros en varias páginas para facilitar su visualización. Utilice estos controles para navegar entre las diferentes páginas de resultados.",
+                        onNextClick: () => {
+                            setAdminPage(4);
+                            setTitulo("Tutores");
+                            setTimeout(() => {
+                                driverObj.moveNext();
+                            }, 500);
+                        },
                     },
                 },
                 {
@@ -331,6 +441,13 @@ export default function useAdminTour() {
                         title: "Tutores",
                         description:
                             "En esta sección podrá administrar toda la información relacionada con los tutores registrados en el sistema, así como las relaciones que mantienen con los alumnos.",
+                        onPrevClick: () => {
+                            setAdminPage(3);
+                            setTitulo("Estudiantes");
+                            setTimeout(() => {
+                                driverObj.movePrevious();
+                            }, 500);
+                        },
                     },
                 },
                 {
@@ -411,6 +528,13 @@ export default function useAdminTour() {
                         title: "Publicaciones",
                         description:
                             "En esta sección se gestionan todas las publicaciones que aparecerán en el apartado público de eventos y noticias del sistema.",
+                        onPrevClick: () => {
+                            setAdminPage(4);
+                            setTitulo("Tutores");
+                            setTimeout(() => {
+                                driverObj.movePrevious();
+                            }, 500);
+                        },
                     },
                 },
                 {
@@ -491,6 +615,13 @@ export default function useAdminTour() {
                         title: "Configuración",
                         description:
                             "En esta sección podrá administrar la configuración de su cuenta, actualizar sus datos personales y ejecutar nuevamente el tour de la aplicación cuando lo necesite.",
+                        onPrevClick: () => {
+                            setAdminPage(5);
+                            setTitulo("Publicaciones");
+                            setTimeout(() => {
+                                driverObj.movePrevious();
+                            }, 500);
+                        },
                     },
                 },
                 {

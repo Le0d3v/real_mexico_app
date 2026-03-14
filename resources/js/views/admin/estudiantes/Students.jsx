@@ -74,7 +74,10 @@ export default function Students() {
                         <h2 className="text-2xl font-bold text-gray-800">
                             Administración de Estudiantes
                         </h2>
-                        <p className="text-gray-500">
+                        <p
+                            className="text-gray-500"
+                            id="driver_estudiantes-total"
+                        >
                             Estudiantes Totales:{" "}
                             <span className="font-bold text-gray-700">
                                 {estudiantes.length}
@@ -85,6 +88,7 @@ export default function Students() {
                     <button
                         className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition cursor-pointer"
                         onClick={() => setCreateStudent(true)}
+                        id="driver_estudiantes-crear"
                     >
                         + Nuevo Estudiante
                     </button>
@@ -92,7 +96,10 @@ export default function Students() {
 
                 <div className="bg-white p-4 rounded-xl shadow-sm mb-5 border border-gray-200">
                     <div className="flex gap-4 flex-wrap">
-                        <div className="relative flex-1">
+                        <div
+                            className="relative flex-1"
+                            id="driver_estudiantes-buscador"
+                        >
                             <Search
                                 size={18}
                                 className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
@@ -110,6 +117,7 @@ export default function Students() {
                             value={gradoFilter}
                             onChange={(e) => setGradoFilter(e.target.value)}
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            id="driver_estudiantes-grado"
                         >
                             <option value="Todos">Todos</option>
                             <option value="1">1°</option>
@@ -124,6 +132,7 @@ export default function Students() {
                             value={estadoFilter}
                             onChange={(e) => setEstadoFilter(e.target.value)}
                             className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            id="driver_estudiantes-estado"
                         >
                             <option value="Todos">Todos</option>
                             <option value="Activo">Activo</option>
@@ -134,7 +143,10 @@ export default function Students() {
                 </div>
 
                 <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
-                    <table className="w-full text-left">
+                    <table
+                        className="w-full text-left"
+                        id="driver_estudiantes-tabla"
+                    >
                         <thead className="bg-black text-yellow-400">
                             <tr>
                                 <th className="px-6 py-3">Alumno</th>
@@ -150,7 +162,7 @@ export default function Students() {
                             </tr>
                         </thead>
 
-                        <tbody>
+                        <tbody id="driver_estudiantes-registros">
                             {paginatedStudents.length === 0 ? (
                                 <tr>
                                     <td
@@ -217,7 +229,7 @@ export default function Students() {
                                         <td className="px-6 py-4 text-center">
                                             <div className="flex justify-center gap-2">
                                                 <button
-                                                    className="px-3 py-1 font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 transition cursor-pointer text-black hover:-translate-y-1"
+                                                    className="px-3 py-1 font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 transition cursor-pointer text-black hover:-translate-y-1 perfil"
                                                     onClick={() => {
                                                         setSelectedStudent(
                                                             alumno,
@@ -227,7 +239,7 @@ export default function Students() {
                                                 >
                                                     Perfil
                                                 </button>
-                                                <button className="px-3 py-1 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 transition hover:-translate-y-1 cursor-pointer">
+                                                <button className="px-3 py-1 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 transition hover:-translate-y-1 cursor-pointer editar">
                                                     Editar
                                                 </button>
                                             </div>
@@ -238,7 +250,10 @@ export default function Students() {
                         </tbody>
                     </table>
 
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-6 py-4 border-t bg-gray-50">
+                    <div
+                        className="flex flex-col md:flex-row justify-between items-center gap-4 px-6 py-4 border-t bg-gray-50"
+                        id="driver_estudiantes-paginacion"
+                    >
                         <p className="text-sm text-gray-600">
                             Página <strong>{currentPage}</strong> de{" "}
                             <strong>{totalPages}</strong>
