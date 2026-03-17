@@ -156,7 +156,7 @@ export default function Dashboard() {
                         </div>
                     </div>
 
-                    <div className="flex justify-between mt-4 text-sm text-slate-600">
+                    <div className="flex justify-between mt-4 text-sm text-slate-600 w-full">
                         <span>
                             Recaudado: {formatCurrency(totalRecaudadoMes)}
                         </span>

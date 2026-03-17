@@ -170,7 +170,7 @@ export default function Login() {
                         </form>
                     </div>
                 </div>
-                <div className="flex justify-center mt-12">
+                <div className="flex justify-center md:mt-12 mt-6">
                     <div className="flex gap-5">
                         <button
                             className="text-white text-sm hover:text-yellow-400 cursor-pointer hover:-translate-y-1 transition"

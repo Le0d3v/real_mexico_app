@@ -109,13 +109,14 @@ export default function Students() {
     return (
         <>
             <div className="bg-gray-100 min-h-screen">
-                <div className="flex justify-between items-center mb-6">
+                {/* Header */}
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                     <div>
-                        <h2 className="text-2xl font-bold text-gray-800">
+                        <h2 className="text-xl md:text-2xl font-bold text-gray-800">
                             Administración de Estudiantes
                         </h2>
                         <p
-                            className="text-gray-500"
+                            className="text-gray-500 text-sm md:text-base"
                             id="driver_estudiantes-total"
                         >
                             Estudiantes Totales:{" "}
@@ -126,7 +127,7 @@ export default function Students() {
                     </div>
 
                     <button
-                        className="bg-red-600 hover:bg-red-700 text-white font-semibold px-6 py-2 rounded-lg shadow transition cursor-pointer"
+                        className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-semibold px-4 md:px-6 py-2 rounded-lg shadow transition"
                         onClick={() => setCreateStudent(true)}
                         id="driver_estudiantes-crear"
                     >
@@ -134,10 +135,11 @@ export default function Students() {
                     </button>
                 </div>
 
+                {/* Filtros */}
                 <div className="bg-white p-4 rounded-xl shadow-sm mb-5 border border-gray-200">
-                    <div className="flex gap-4 flex-wrap">
+                    <div className="flex flex-col md:flex-row gap-3 md:gap-4">
                         <div
-                            className="relative flex-1"
+                            className="relative w-full"
                             id="driver_estudiantes-buscador"
                         >
                             <Search
@@ -147,7 +149,7 @@ export default function Students() {
                             <input
                                 type="text"
                                 placeholder="Buscar Estudiante por Nombre o Matrícula..."
-                                className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500 transition"
+                                className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-yellow-500"
                                 value={search}
                                 onChange={(e) => setSearch(e.target.value)}
                             />
@@ -156,7 +158,7 @@ export default function Students() {
                         <select
                             value={gradoFilter}
                             onChange={(e) => setGradoFilter(e.target.value)}
-                            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            className="w-full md:w-auto border border-gray-300 rounded-lg px-4 py-2 text-sm"
                             id="driver_estudiantes-grado"
                         >
                             <option value="Todos">Todos</option>
@@ -171,7 +173,7 @@ export default function Students() {
                         <select
                             value={estadoFilter}
                             onChange={(e) => setEstadoFilter(e.target.value)}
-                            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
+                            className="w-full md:w-auto border border-gray-300 rounded-lg px-4 py-2 text-sm"
                             id="driver_estudiantes-estado"
                         >
                             <option value="Todos">Todos</option>
@@ -179,42 +181,50 @@ export default function Students() {
                             <option value="Baja temporal">Baja temporal</option>
                             <option value="Egresado">Egresado</option>
                         </select>
+
                         <ExportExcel
                             data={datosExcel}
                             columns={columnasExcel}
                             fileName="reporte_alumnos"
                             sheetName="Alumnos"
                         >
-                            <div
-                                className="p-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 hover:-translate-y-1 transition"
-                                title="Exportar a Excel"
-                                id="driver_export-excel"
-                            >
-                                <img
-                                    src="/img/xls.png"
-                                    alt="Excel"
-                                    className="w-8"
-                                />
+                            <div className="flex justify-center md:block">
+                                <div
+                                    className="p-2 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 transition"
+                                    title="Exportar a Excel"
+                                    id="driver_export-excel"
+                                >
+                                    <img
+                                        src="/img/xls.png"
+                                        alt="Excel"
+                                        className="w-8"
+                                    />
+                                </div>
                             </div>
                         </ExportExcel>
                     </div>
                 </div>
 
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+                {/* Tabla */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-x-auto">
                     <table
-                        className="w-full text-left"
+                        className="min-w-[900px] w-full text-xs md:text-sm"
                         id="driver_estudiantes-tabla"
                     >
                         <thead className="bg-black text-yellow-400">
                             <tr>
-                                <th className="px-6 py-3">Alumno</th>
-                                <th className="px-6 py-3">Matrícula</th>
-                                <th className="px-6 py-3">Grado / Grupo</th>
-                                <th className="px-6 py-3">Tutor principal</th>
-                                <th className="px-6 py-3 text-center">
+                                <th className="px-3 md:px-6 py-3">Alumno</th>
+                                <th className="px-3 md:px-6 py-3">Matrícula</th>
+                                <th className="px-3 md:px-6 py-3">
+                                    Grado / Grupo
+                                </th>
+                                <th className="px-3 md:px-6 py-3">
+                                    Tutor principal
+                                </th>
+                                <th className="px-3 md:px-6 py-3 text-center">
                                     Estado
                                 </th>
-                                <th className="px-6 py-3 text-center">
+                                <th className="px-3 md:px-6 py-3 text-center">
                                     Acciones
                                 </th>
                             </tr>
@@ -236,10 +246,10 @@ export default function Students() {
                                         key={alumno.id}
                                         className="border-t border-gray-300 hover:bg-gray-200 transition"
                                     >
-                                        <td className="px-6 py-4">
+                                        <td className="px-3 md:px-6 py-3 md:py-4">
                                             <div className="flex items-center gap-3">
-                                                <div className="w-10 h-10 bg-yellow-400 text-black rounded-full flex items-center justify-center font-bold">
-                                                    <User />
+                                                <div className="w-8 h-8 md:w-10 md:h-10 bg-yellow-400 text-black rounded-full flex items-center justify-center font-bold">
+                                                    <User size={16} />
                                                 </div>
                                                 <span className="font-medium text-gray-800">
                                                     {alumno.nombre +
@@ -249,19 +259,19 @@ export default function Students() {
                                             </div>
                                         </td>
 
-                                        <td className="px-6 py-4 text-gray-600 font-mono">
+                                        <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600 font-mono">
                                             <span className="font-semibold text-gray-700">
                                                 {alumno.matricula}
                                             </span>
                                         </td>
 
-                                        <td className="py-4 flex justify-center">
-                                            <span className="px-3 py-1 bg-gray-200 rounded-full text-sm font-semibold">
+                                        <td className="py-3 md:py-4 flex justify-center">
+                                            <span className="px-3 py-1 bg-gray-200 rounded-full text-xs md:text-sm font-semibold">
                                                 {alumno.grado} - {alumno.grupo}
                                             </span>
                                         </td>
 
-                                        <td className="px-6 py-4 text-gray-600">
+                                        <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600">
                                             <span className="font-medium text-gray-800">
                                                 {alumno.tutores?.[0]?.usuario
                                                     ?.name +
@@ -272,9 +282,9 @@ export default function Students() {
                                             </span>
                                         </td>
 
-                                        <td className="px-6 py-4 text-center">
+                                        <td className="px-3 md:px-6 py-3 md:py-4 text-center">
                                             <span
-                                                className={`px-3 py-1 rounded-full text-sm font-semibold ${
+                                                className={`px-3 py-1 rounded-full text-xs md:text-sm font-semibold ${
                                                     alumno.estado === "Activo"
                                                         ? "bg-green-100 text-green-700"
                                                         : "bg-yellow-100 text-yellow-800"
@@ -284,10 +294,10 @@ export default function Students() {
                                             </span>
                                         </td>
 
-                                        <td className="px-6 py-4 text-center">
-                                            <div className="flex justify-center gap-2">
+                                        <td className="px-3 md:px-6 py-3 md:py-4 text-center">
+                                            <div className="flex flex-col md:flex-row justify-center gap-2">
                                                 <button
-                                                    className="px-3 py-1 font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 transition cursor-pointer text-black hover:-translate-y-1 perfil"
+                                                    className="px-3 py-1 text-xs md:text-sm font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black"
                                                     onClick={() => {
                                                         setSelectedStudent(
                                                             alumno,
@@ -297,7 +307,7 @@ export default function Students() {
                                                 >
                                                     Perfil
                                                 </button>
-                                                <button className="px-3 py-1 text-sm rounded-md bg-red-600 text-white hover:bg-red-700 transition hover:-translate-y-1 cursor-pointer editar">
+                                                <button className="px-3 py-1 text-xs md:text-sm rounded-md bg-red-600 text-white hover:bg-red-700 transition">
                                                     Editar
                                                 </button>
                                             </div>
@@ -307,61 +317,56 @@ export default function Students() {
                             )}
                         </tbody>
                     </table>
+                </div>
+                {/* Paginación */}
+                <div
+                    className="flex flex-col md:flex-row justify-between items-center gap-4 px-4 md:px-6 py-4 border-t bg-gray-50 text-center md:text-left"
+                    id="driver_estudiantes-paginacion"
+                >
+                    <p className="text-xs md:text-sm text-gray-600">
+                        Página <strong>{currentPage}</strong> de{" "}
+                        <strong>{totalPages}</strong>
+                    </p>
 
-                    <div
-                        className="flex flex-col md:flex-row justify-between items-center gap-4 px-6 py-4 border-t bg-gray-50"
-                        id="driver_estudiantes-paginacion"
-                    >
-                        <p className="text-sm text-gray-600">
-                            Página <strong>{currentPage}</strong> de{" "}
-                            <strong>{totalPages}</strong>
-                        </p>
+                    <div className="flex items-center gap-2 flex-wrap justify-center">
+                        <button
+                            disabled={currentPage === 1}
+                            onClick={() => setCurrentPage((prev) => prev - 1)}
+                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40"
+                        >
+                            ←
+                        </button>
 
-                        <div className="flex items-center gap-2">
-                            <button
-                                disabled={currentPage === 1}
-                                onClick={() =>
-                                    setCurrentPage((prev) => prev - 1)
-                                }
-                                className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer hover:-translate-y-1"
-                            >
-                                ←
-                            </button>
+                        {Array.from({ length: totalPages }, (_, i) => {
+                            const pageNumber = i + 1;
+                            const isActive = currentPage === pageNumber;
 
-                            {Array.from({ length: totalPages }, (_, i) => {
-                                const pageNumber = i + 1;
-                                const isActive = currentPage === pageNumber;
+                            return (
+                                <button
+                                    key={pageNumber}
+                                    onClick={() => setCurrentPage(pageNumber)}
+                                    className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm ${
+                                        isActive
+                                            ? "bg-yellow-400 text-black"
+                                            : "bg-white border hover:bg-gray-100"
+                                    }`}
+                                >
+                                    {pageNumber}
+                                </button>
+                            );
+                        })}
 
-                                return (
-                                    <button
-                                        key={pageNumber}
-                                        onClick={() =>
-                                            setCurrentPage(pageNumber)
-                                        }
-                                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition cursor-pointer hover:-translate-y-1 ${
-                                            isActive
-                                                ? "bg-yellow-400 text-black shadow-md"
-                                                : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
-                                        }`}
-                                    >
-                                        {pageNumber}
-                                    </button>
-                                );
-                            })}
-
-                            <button
-                                disabled={currentPage === totalPages}
-                                onClick={() =>
-                                    setCurrentPage((prev) => prev + 1)
-                                }
-                                className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 hover:bg-gray-100 transition disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer hover:-translate-y-1"
-                            >
-                                →
-                            </button>
-                        </div>
+                        <button
+                            disabled={currentPage === totalPages}
+                            onClick={() => setCurrentPage((prev) => prev + 1)}
+                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40"
+                        >
+                            →
+                        </button>
                     </div>
                 </div>
             </div>
+
             <Modal
                 isOpen={showStudent}
                 title={"Ver Estudiante"}
@@ -376,6 +381,7 @@ export default function Students() {
                     />
                 )}
             </Modal>
+
             <Modal
                 isOpen={createStudent}
                 title={"Inscribir Estudiante"}

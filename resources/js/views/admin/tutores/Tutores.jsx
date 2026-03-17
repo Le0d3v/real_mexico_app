@@ -109,12 +109,16 @@ export default function Tutores() {
     return (
         <>
             <div className="min-h-screen">
-                <div className="flex justify-between items-center mb-6">
+                {/* Header */}
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6">
                     <div>
-                        <h1 className="text-3xl font-bold text-gray-800">
+                        <h1 className="text-2xl md:text-3xl font-bold text-gray-800">
                             Administración de Tutores
                         </h1>
-                        <p className="text-gray-500" id="driver_tutores-total">
+                        <p
+                            className="text-gray-500 text-sm md:text-base"
+                            id="driver_tutores-total"
+                        >
                             Tutores totales:{" "}
                             <span className="text-gray-700 font-bold">
                                 {tutores.length}
@@ -123,80 +127,84 @@ export default function Tutores() {
                     </div>
 
                     <button
-                        className="bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-6 py-2 rounded-lg shadow transition cursor-pointer"
+                        className="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 md:px-6 py-2 rounded-lg shadow transition"
                         onClick={() => setCreateTutorModal(true)}
                         id="driver_tutores-crear"
                     >
                         + Nuevo Tutor
                     </button>
                 </div>
-                <div className="bg-white p-4 rounded-xl shadow-sm mb-5 border border-gray-200 flex gap-5">
-                    <div className="w-full">
+
+                {/* Filtros */}
+                <div className="bg-white p-4 rounded-xl shadow-sm mb-5 border border-gray-200">
+                    <div className="flex flex-col md:flex-row gap-3 md:gap-4 items-stretch md:items-center">
                         <div
-                            className="flex gap-4 flex-wrap w-full"
+                            className="relative w-full"
                             id="driver_tutores-buscar"
                         >
-                            <div className="relative flex-1">
-                                <Search
-                                    size={18}
-                                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
-                                />
-                                <input
-                                    type="text"
-                                    placeholder="Buscar Tutor por nombre, teléfono o correo electrónico..."
-                                    value={search}
-                                    onChange={(e) => setSearch(e.target.value)}
-                                    className="w-full flex-1 border border-gray-300 rounded-lg pl-10 px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                                />
-                            </div>
+                            <Search
+                                size={18}
+                                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400"
+                            />
+                            <input
+                                type="text"
+                                placeholder="Buscar Tutor por nombre, teléfono o correo electrónico..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="w-full border border-gray-300 rounded-lg pl-10 pr-4 py-2 text-sm md:text-base focus:outline-none focus:ring-2 focus:ring-red-500"
+                            />
                         </div>
-                    </div>
-                    <div>
+
                         <select
                             value={sortOrder}
                             onChange={(e) => setSortOrder(e.target.value)}
-                            className="border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
+                            className="w-full md:w-auto border border-gray-300 rounded-lg px-4 py-2 text-sm"
                             id="driver_tutores-filtro"
                         >
                             <option value="desc">Más recientes</option>
                             <option value="asc">Más antiguos</option>
                         </select>
-                    </div>
-                    <ExportExcel
-                        data={datosExcel}
-                        columns={columnasExcel}
-                        fileName="reporte_tutores"
-                        sheetName="Tutores"
-                    >
-                        <div
-                            className="p-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 hover:-translate-y-1 transition"
-                            title="Exportar a Excel"
-                            id="driver_export-excel"
+
+                        <ExportExcel
+                            data={datosExcel}
+                            columns={columnasExcel}
+                            fileName="reporte_tutores"
+                            sheetName="Tutores"
                         >
-                            <img
-                                src="/img/xls.png"
-                                alt="Excel"
-                                className="w-8"
-                            />
-                        </div>
-                    </ExportExcel>
+                            <div className="flex justify-center md:block">
+                                <div
+                                    className="p-2 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 transition"
+                                    title="Exportar a Excel"
+                                    id="driver_export-excel"
+                                >
+                                    <img
+                                        src="/img/xls.png"
+                                        alt="Excel"
+                                        className="w-8"
+                                    />
+                                </div>
+                            </div>
+                        </ExportExcel>
+                    </div>
                 </div>
-                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+
+                {/* Tabla */}
+                <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-x-auto">
                     <table
-                        className="w-full text-left"
+                        className="min-w-[800px] w-full text-xs md:text-sm"
                         id="driver_tutores-tabla"
                     >
                         <thead className="bg-black text-yellow-400">
                             <tr>
-                                <th className="px-6 py-3">Nombre</th>
-                                <th className="px-6 py-3">Teléfono</th>
-                                <th className="px-6 py-3">
+                                <th className="px-3 md:px-6 py-3">Nombre</th>
+                                <th className="px-3 md:px-6 py-3">Teléfono</th>
+                                <th className="px-3 md:px-6 py-3">
                                     Correo Electrónico
                                 </th>
-                                <th className="px-6 py-3 text-center">
+                                <th className="px-3 md:px-6 py-3 text-center">
                                     Alumnos
                                 </th>
-                                <th className="px-6 py-3 text-center">
+                                <th className="px-3 md:px-6 py-3 text-center">
                                     Acciones
                                 </th>
                             </tr>
@@ -206,7 +214,7 @@ export default function Tutores() {
                             {paginatedTutores.length === 0 ? (
                                 <tr>
                                     <td
-                                        colSpan="6"
+                                        colSpan="5"
                                         className="text-center py-6 text-gray-500"
                                     >
                                         No se encontraron registros
@@ -216,30 +224,30 @@ export default function Tutores() {
                                 paginatedTutores.map((tutor) => (
                                     <tr
                                         key={tutor.id}
-                                        className="border-t border-t-gray-200 hover:bg-gray-200 transition"
+                                        className="border-t border-gray-200 hover:bg-gray-200 transition"
                                     >
-                                        <td className="px-6 py-4 font-medium text-gray-800">
+                                        <td className="px-3 md:px-6 py-3 md:py-4 font-medium text-gray-800">
                                             {tutor.name}{" "}
                                             {tutor.apellido_paterno}
                                         </td>
 
-                                        <td className="px-6 py-4 text-gray-600">
+                                        <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600">
                                             {tutor.telefono}
                                         </td>
 
-                                        <td className="px-6 py-4 text-gray-600">
+                                        <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600">
                                             {tutor.email}
                                         </td>
 
-                                        <td className="px-6 py-4 text-center font-semibold">
+                                        <td className="px-3 md:px-6 py-3 md:py-4 text-center font-semibold">
                                             {tutor?.tutor?.estudiantes
                                                 ?.length || 0}
                                         </td>
 
-                                        <td className="px-6 py-4 text-center">
-                                            <div className="flex justify-center gap-2 show-tutor">
+                                        <td className="px-3 md:px-6 py-3 md:py-4 text-center">
+                                            <div className="flex justify-center">
                                                 <button
-                                                    className="px-3 py-1 text-sm rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black cursor-pointer font-semibold"
+                                                    className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black font-semibold"
                                                     onClick={() => {
                                                         setSelectedTutor(tutor);
                                                         setOpen(true);
@@ -254,73 +262,62 @@ export default function Tutores() {
                             )}
                         </tbody>
                     </table>
-                    <div
-                        className="flex flex-col md:flex-row justify-between items-center gap-4 mt-8 px-6 py-4 border-t bg-gray-50 rounded-b-2xl"
-                        id="driver_tutores-paginacion"
-                    >
-                        <p className="text-sm text-gray-500 font-medium">
-                            Página{" "}
-                            <span className="font-semibold text-gray-800">
-                                {currentPage}
-                            </span>{" "}
-                            de{" "}
-                            <span className="font-semibold text-gray-800">
-                                {totalPages}
-                            </span>
-                        </p>
+                </div>
+                {/* Paginación */}
+                <div
+                    className="flex flex-col md:flex-row justify-between items-center gap-4 px-4 md:px-6 py-4 border-t bg-gray-50 text-center md:text-left"
+                    id="driver_tutores-paginacion"
+                >
+                    <p className="text-xs md:text-sm text-gray-500 font-medium">
+                        Página{" "}
+                        <span className="font-semibold text-gray-800">
+                            {currentPage}
+                        </span>{" "}
+                        de{" "}
+                        <span className="font-semibold text-gray-800">
+                            {totalPages}
+                        </span>
+                    </p>
 
-                        <div className="flex items-center gap-2">
-                            {/* Botón Anterior */}
-                            <button
-                                disabled={currentPage === 1}
-                                onClick={() =>
-                                    setCurrentPage((prev) => prev - 1)
-                                }
-                                className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 shadow-sm 
-                           hover:bg-gray-100 hover:shadow transition-all duration-200
-                           disabled:opacity-40 disabled:cursor-not-allowed"
-                            >
-                                ←
-                            </button>
+                    <div className="flex items-center gap-2 flex-wrap justify-center">
+                        <button
+                            disabled={currentPage === 1}
+                            onClick={() => setCurrentPage((prev) => prev - 1)}
+                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40"
+                        >
+                            ←
+                        </button>
 
-                            {/* Números dinámicos */}
-                            {Array.from({ length: totalPages }, (_, i) => {
-                                const pageNumber = i + 1;
-                                const isActive = currentPage === pageNumber;
+                        {Array.from({ length: totalPages }, (_, i) => {
+                            const pageNumber = i + 1;
+                            const isActive = currentPage === pageNumber;
 
-                                return (
-                                    <button
-                                        key={pageNumber}
-                                        onClick={() =>
-                                            setCurrentPage(pageNumber)
-                                        }
-                                        className={`px-4 py-2 rounded-lg text-sm font-semibold transition-all duration-200 shadow-sm cursor-pointer
-                            ${
-                                isActive
-                                    ? "bg-yellow-400 text-black shadow-md scale-105"
-                                    : "bg-white border border-gray-300 text-gray-700 hover:bg-gray-100"
-                            }`}
-                                    >
-                                        {pageNumber}
-                                    </button>
-                                );
-                            })}
+                            return (
+                                <button
+                                    key={pageNumber}
+                                    onClick={() => setCurrentPage(pageNumber)}
+                                    className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm ${
+                                        isActive
+                                            ? "bg-yellow-400 text-black"
+                                            : "bg-white border hover:bg-gray-100"
+                                    }`}
+                                >
+                                    {pageNumber}
+                                </button>
+                            );
+                        })}
 
-                            {/* Botón Siguiente */}
-                            <button
-                                disabled={currentPage === totalPages}
-                                onClick={() =>
-                                    setCurrentPage((prev) => prev + 1)
-                                }
-                                className="px-3 py-2 rounded-lg text-sm font-medium bg-white border border-gray-300 shadow-sm 
-                                hover:bg-gray-100 hover:shadow transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed cursor-pointer"
-                            >
-                                →
-                            </button>
-                        </div>
+                        <button
+                            disabled={currentPage === totalPages}
+                            onClick={() => setCurrentPage((prev) => prev + 1)}
+                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40"
+                        >
+                            →
+                        </button>
                     </div>
                 </div>
             </div>
+
             <Modal
                 isOpen={open}
                 icon={<Eye className="w-12 h-12" />}
@@ -339,9 +336,7 @@ export default function Tutores() {
             <Modal
                 isOpen={createTutorModal}
                 icon={<CirclePlus className="w-12 h-12" />}
-                onClose={() => {
-                    setCreateTutorModal(false);
-                }}
+                onClose={() => setCreateTutorModal(false)}
                 size="full"
                 title="Registrar un Nuevo Tutor"
             >

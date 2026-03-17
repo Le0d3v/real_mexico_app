@@ -157,18 +157,18 @@ export default function Pagos() {
         <>
             <div className="bg-slate-100 min-h-screen">
                 {/* Header */}
-                <div className="flex justify-between items-center mb-8">
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-6 md:mb-8">
                     <div>
-                        <h1 className="text-3xl font-bold text-slate-800">
+                        <h1 className="text-2xl md:text-3xl font-bold text-slate-800">
                             Historial de Pagos
                         </h1>
-                        <p className="text-slate-500 mt-1">
+                        <p className="text-slate-500 mt-1 text-sm md:text-base">
                             Registro consolidado de pagos efectuados
                         </p>
                     </div>
 
                     <button
-                        className="flex items-center gap-2 bg-slate-900 text-white px-5 py-3 rounded-xl shadow hover:shadow-md transition hover:opacity-90 hover:-translate-y-1 cursor-pointer"
+                        className="w-full md:w-auto flex justify-center items-center gap-2 bg-slate-900 text-white px-4 md:px-5 py-2 md:py-3 rounded-xl shadow hover:shadow-md transition hover:opacity-90 md:hover:-translate-y-1"
                         id="driver_pagos-crear"
                         onClick={() => setCrearPago(true)}
                     >
@@ -176,155 +176,172 @@ export default function Pagos() {
                         Registrar Nuevo Pago
                     </button>
                 </div>
+
                 {/* Indicadores */}
                 <div
-                    className="grid md:grid-cols-3 gap-6 mb-8"
+                    className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4 md:gap-6 mb-6 md:mb-8"
                     id="driver_pagos-indicadores"
                 >
-                    <div className="bg-white p-6 rounded-2xl shadow-sm">
-                        <p className="text-sm text-slate-500">
+                    <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm">
+                        <p className="text-xs md:text-sm text-slate-500">
                             Total Recaudado (Vista Actual)
                         </p>
-                        <h2 className="text-2xl font-bold text-emerald-600 mt-2">
+                        <h2 className="text-xl md:text-2xl font-bold text-emerald-600 mt-2">
                             ${totalRecaudado.toLocaleString()}
                         </h2>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl shadow-sm">
-                        <p className="text-sm text-slate-500">
+                    <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm">
+                        <p className="text-xs md:text-sm text-slate-500">
                             Total de Registros
                         </p>
-                        <h2 className="text-2xl font-bold text-slate-800 mt-2">
+                        <h2 className="text-xl md:text-2xl font-bold text-slate-800 mt-2">
                             {filteredPagos.length}
                         </h2>
                     </div>
 
-                    <div className="bg-white p-6 rounded-2xl shadow-sm">
-                        <p className="text-sm text-slate-500">
+                    <div className="bg-white p-4 md:p-6 rounded-2xl shadow-sm">
+                        <p className="text-xs md:text-sm text-slate-500">
                             Promedio por Pago
                         </p>
-                        <h2 className="text-2xl font-bold text-slate-800 mt-2">
+                        <h2 className="text-xl md:text-2xl font-bold text-slate-800 mt-2">
                             ${promedio.toLocaleString()}
                         </h2>
                     </div>
                 </div>
-                {/* Filtros */}{" "}
+
+                {/* Filtros */}
                 <div
-                    className="bg-white p-6 rounded-2xl shadow-sm mb-6"
+                    className="bg-white p-4 md:p-6 rounded-2xl shadow-sm mb-6"
                     id="driver_pagos-filtros"
                 >
-                    {" "}
-                    <div className="flex flex-col md:flex-row gap-4 md:items-center justify-between">
-                        {" "}
-                        <div
-                            className="flex items-center gap-3 bg-slate-100 px-4 py-2 rounded-xl w-full md:w-2/3"
-                            id="driver_pagos-buscador"
-                        >
-                            {" "}
-                            <Search size={18} className="text-slate-500" />{" "}
-                            <input
-                                type="text"
-                                placeholder="Buscar por Tutor o Referencia..."
-                                value={search}
-                                onChange={(e) => setSearch(e.target.value)}
-                                className="bg-transparent outline-none w-full text-sm-full p-1 tex-lg"
-                            />{" "}
-                        </div>{" "}
-                        <div className="flex gap-4">
-                            {" "}
-                            <select
-                                value={metodoFiltro}
-                                onChange={(e) =>
-                                    setMetodoFiltro(e.target.value)
-                                }
-                                className="bg-slate-200 px-4 py-2 rounded-xl text-sm cursor-pointer"
-                                id="driver_pagos-metodos"
-                            >
-                                {" "}
-                                <option value="">Todos los métodos</option>{" "}
-                                <option value="Efectivo">Efectivo</option>{" "}
-                                <option value="Transferencia">
-                                    Transferencia
-                                </option>{" "}
-                                <option value="Tarjeta">Tarjeta</option>{" "}
-                            </select>{" "}
-                            <input
-                                id="driver_pagos-fecha"
-                                type="date"
-                                value={fechaFiltro}
-                                onChange={(e) => setFechaFiltro(e.target.value)}
-                                className="bg-slate-200 px-4 py-2 rounded-xl text-sm"
-                            />{" "}
-                        </div>{" "}
-                        <ExportExcel
-                            data={datosExcel}
-                            columns={columnasExcel}
-                            fileName="reporte_pagos"
-                            sheetName="Pagos"
-                        >
+                    <div className="flex flex-col gap-4">
+                        <div className="flex flex-col md:flex-row gap-3 md:gap-4 md:items-center justify-between">
                             <div
-                                className="p-1 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 hover:-translate-y-1 transition"
-                                title="Exportar a Excel"
-                                id="driver_export-excel"
+                                className="flex items-center gap-3 bg-slate-100 px-4 py-2 rounded-xl w-full"
+                                id="driver_pagos-buscador"
                             >
-                                <img
-                                    src="/img/xls.png"
-                                    alt="Excel"
-                                    className="w-8"
+                                <Search size={18} className="text-slate-500" />
+                                <input
+                                    type="text"
+                                    placeholder="Buscar por Tutor o Referencia..."
+                                    value={search}
+                                    onChange={(e) => setSearch(e.target.value)}
+                                    className="bg-transparent outline-none w-full text-sm p-1"
                                 />
                             </div>
-                        </ExportExcel>
-                    </div>{" "}
+
+                            <div className="flex flex-col sm:flex-row gap-3 w-full md:w-auto">
+                                <select
+                                    value={metodoFiltro}
+                                    onChange={(e) =>
+                                        setMetodoFiltro(e.target.value)
+                                    }
+                                    className="w-full sm:w-auto bg-slate-200 px-4 py-2 rounded-xl text-sm"
+                                    id="driver_pagos-metodos"
+                                >
+                                    <option value="">Todos los métodos</option>
+                                    <option value="Efectivo">Efectivo</option>
+                                    <option value="Transferencia">
+                                        Transferencia
+                                    </option>
+                                    <option value="Tarjeta">Tarjeta</option>
+                                </select>
+
+                                <input
+                                    id="driver_pagos-fecha"
+                                    type="date"
+                                    value={fechaFiltro}
+                                    onChange={(e) =>
+                                        setFechaFiltro(e.target.value)
+                                    }
+                                    className="w-full sm:w-auto bg-slate-200 px-4 py-2 rounded-xl text-sm"
+                                />
+                            </div>
+
+                            <ExportExcel
+                                data={datosExcel}
+                                columns={columnasExcel}
+                                fileName="reporte_pagos"
+                                sheetName="Pagos"
+                            >
+                                <div className="flex justify-center md:block">
+                                    <div
+                                        className="p-2 rounded border border-gray-300 cursor-pointer hover:bg-gray-100 hover:-translate-y-1 transition"
+                                        title="Exportar a Excel"
+                                        id="driver_export-excel"
+                                    >
+                                        <img
+                                            src="/img/xls.png"
+                                            alt="Excel"
+                                            className="w-8"
+                                        />
+                                    </div>
+                                </div>
+                            </ExportExcel>
+                        </div>
+                    </div>
                 </div>
+
                 {/* Tabla */}
                 <div
-                    className="bg-white rounded-2xl shadow-sm overflow-hidden"
+                    className="bg-white rounded-2xl shadow-sm overflow-x-auto"
                     id="driver_pagos-tabla"
                 >
-                    <table className="w-full text-sm">
-                        <thead className="bg-black text-white font-semibold text-lg">
+                    <table className="min-w-[700px] w-full text-xs md:text-sm">
+                        <thead className="bg-black text-white font-semibold text-sm md:text-lg">
                             <tr>
-                                <th className="px-6 py-4 text-center">
+                                <th className="px-3 md:px-6 py-3 md:py-4 text-center">
                                     Sujeto
                                 </th>
-                                <th className="px-6 py-4 text-center">Fecha</th>
-                                <th className="px-6 py-4 text-center">Monto</th>
-                                <th className="px-6 py-4 text-center">
+                                <th className="px-3 md:px-6 py-3 md:py-4 text-center">
+                                    Fecha
+                                </th>
+                                <th className="px-3 md:px-6 py-3 md:py-4 text-center">
+                                    Monto
+                                </th>
+                                <th className="px-3 md:px-6 py-3 md:py-4 text-center">
                                     Método
                                 </th>
-                                <th className="px-6 py-4 text-center">
+                                <th className="px-3 md:px-6 py-3 md:py-4 text-center">
                                     Referencia
                                 </th>
-                                <th className="px-6 py-4 text-center">
+                                <th className="px-3 md:px-6 py-3 md:py-4 text-center">
                                     Acciones
                                 </th>
                             </tr>
                         </thead>
+
                         <tbody id="driver_pagos-registros">
                             {paginatedPagos.map((pago) => (
                                 <tr
                                     key={pago.id}
                                     className="border-t hover:bg-gray-200 text-center border-gray-300"
                                 >
-                                    <td className="px-6 py-3">
+                                    <td className="px-3 md:px-6 py-2 md:py-3">
                                         {pago.tutor?.name}{" "}
                                         {pago.tutor?.apellido_paterno}
                                     </td>
-                                    <td className="px-6 py-3">
+
+                                    <td className="px-3 md:px-6 py-2 md:py-3">
                                         {formatDate(pago.fecha_pago)}
                                     </td>
-                                    <td className="px-6 py-3 font-semibold text-emerald-600">
+
+                                    <td className="px-3 md:px-6 py-2 md:py-3 font-semibold text-emerald-600">
                                         ${Number(pago.monto).toLocaleString()}
                                     </td>
-                                    <td className="px-6 py-3">
+
+                                    <td className="px-3 md:px-6 py-2 md:py-3">
                                         {pago.metodo_pago}
                                     </td>
-                                    <td className="px-6 py-3 text-slate-700 font-semibold">
+
+                                    <td className="px-3 md:px-6 py-2 md:py-3 text-slate-700 font-semibold">
                                         {pago.referencia || "Sin Referencia"}
                                     </td>
-                                    <td className="px-6 py-3">
+
+                                    <td className="px-3 md:px-6 py-2 md:py-3">
                                         <button
-                                            className="px-3 py-1 bg-yellow-400 rounded hover:bg-yellow-500 transition font-semibold cursor-pointer show-pago"
+                                            className="px-3 py-1 text-xs md:text-sm bg-yellow-400 rounded hover:bg-yellow-500 transition font-semibold"
                                             onClick={() => {
                                                 setShowPago(true);
                                                 setPago(pago);
@@ -337,41 +354,41 @@ export default function Pagos() {
                             ))}
                         </tbody>
                     </table>
-
-                    {/* Paginación */}
-                    <div
-                        className="flex justify-center items-center gap-2 py-6 border-t bg-gray-50"
-                        id="driver_pagos-paginación"
-                    >
-                        {getPaginationRange().map((item, index) => {
-                            if (item === "...") {
-                                return (
-                                    <span
-                                        key={index}
-                                        className="px-3 py-1 text-gray-500"
-                                    >
-                                        ...
-                                    </span>
-                                );
-                            }
-
+                </div>
+                {/* Paginación */}
+                <div
+                    className="flex flex-wrap justify-center items-center gap-2 py-4 md:py-6 border-t bg-gray-50"
+                    id="driver_pagos-paginación"
+                >
+                    {getPaginationRange().map((item, index) => {
+                        if (item === "...") {
                             return (
-                                <button
-                                    key={item}
-                                    onClick={() => setCurrentPage(item)}
-                                    className={`px-3 py-1 rounded cursor-pointer ${
-                                        currentPage === item
-                                            ? "bg-black text-white"
-                                            : "bg-white border hover:bg-gray-100"
-                                    }`}
+                                <span
+                                    key={index}
+                                    className="px-2 text-gray-500 text-sm"
                                 >
-                                    {item}
-                                </button>
+                                    ...
+                                </span>
                             );
-                        })}
-                    </div>
+                        }
+
+                        return (
+                            <button
+                                key={item}
+                                onClick={() => setCurrentPage(item)}
+                                className={`px-3 py-1 text-xs md:text-sm rounded ${
+                                    currentPage === item
+                                        ? "bg-black text-white"
+                                        : "bg-white border hover:bg-gray-100"
+                                }`}
+                            >
+                                {item}
+                            </button>
+                        );
+                    })}
                 </div>
             </div>
+
             <Modal
                 size="full"
                 title={"Registrar Nuevo Pago"}
@@ -381,6 +398,7 @@ export default function Pagos() {
             >
                 <CrearPago onClose={() => setCrearPago(false)} />
             </Modal>
+
             <Modal
                 size="full"
                 title={"Información del Pago"}

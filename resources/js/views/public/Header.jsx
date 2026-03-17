@@ -13,11 +13,13 @@ export default function Header({ setPage, page }) {
         <header className="sticky top-0 z-50 group">
             <div className="bg-gray-100 border-b-4 border-yellow-400 px-4 md:px-5 py-2 flex justify-between items-center">
                 <div className="flex items-center gap-3 md:gap-4">
-                    <img
-                        src="/img/logo.png"
-                        alt="Logo Instituto Real de México"
-                        className="w-16 md:w-24"
-                    />
+                    <button onClick={() => setPage(0)}>
+                        <img
+                            src="/img/logo.png"
+                            alt="Logo Instituto Real de México"
+                            className="w-16 md:w-24"
+                        />
+                    </button>
 
                     <div className="hidden sm:block">
                         <h1 className="text-black font-bold text-xl md:text-4xl leading-tight">

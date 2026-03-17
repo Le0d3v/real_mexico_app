@@ -137,7 +137,7 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
                     </ul>
                 </nav>
 
-                <div className="mt-auto p-6 border-t border-white/10">
+                <div className="mt-5 p-6 border-t border-white/10">
                     <p className="text-sm text-gray-400 mb-4">
                         Síguenos en redes sociales
                     </p>

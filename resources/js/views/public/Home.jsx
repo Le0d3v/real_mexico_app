@@ -10,6 +10,7 @@ import IconContainer from "./IconContainer";
 import Cuadros from "./components/Cuadros";
 import AnimationSection from "./components/AnimationSection";
 import Map from "./components/Map";
+import Testimonio from "./components/Testimonio";
 
 export default function Home() {
     return (
@@ -129,6 +130,44 @@ export default function Home() {
 
             <AnimationSection>
                 <Cuadros />
+            </AnimationSection>
+            <AnimationSection>
+                <div className="md:px-10">
+                    <div className="text-center max-w-3xl mx-auto mt-10">
+                        <h2 className="text-3xl md:text-4xl font-bold text-gray-900">
+                            Nuestros{" "}
+                            <span className="text-yellow-500">Testimonios</span>
+                        </h2>
+                        <p className="mt-4 text-gray-600 text-lg">
+                            Experiencias reales que reflejan nuestro compromiso
+                            educativo.
+                        </p>
+                    </div>
+                    <div className="mt-10 p-3 grid gap-8 md:grid-cols-2 lg:grid-cols-3">
+                        <Testimonio
+                            name="María González"
+                            role="Madre de familia"
+                            text="El avance académico de mi hijo ha sido notable. Además, el ambiente es seguro y muy profesional."
+                        />
+
+                        <Testimonio
+                            name="Carlos Hernández"
+                            role="Padre de familia"
+                            text="La atención personalizada y el enfoque educativo hacen una gran diferencia frente a otras instituciones."
+                        />
+
+                        <Testimonio
+                            name="Laura Martínez"
+                            role="Madre de familia"
+                            text="Me da tranquilidad saber que mi hija está en un lugar donde fomentan valores y disciplina."
+                        />
+                    </div>
+                    <div className="md:flex md:justify-end p-3 mt-5 w-full">
+                        <button className="bg-yellow-400 text-black font-semibold px-8 py-4 rounded-xl hover:bg-yellow-300 transition-all duration-300 cursor-pointer w-full md:w-auto">
+                            Ver Todas las Reseñas
+                        </button>
+                    </div>
+                </div>
             </AnimationSection>
             <div className="">
                 <AnimationSection>

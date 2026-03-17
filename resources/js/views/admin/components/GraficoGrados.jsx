@@ -13,6 +13,7 @@ import {
 ChartJS.register(CategoryScale, LinearScale, BarElement, Tooltip, Legend);
 
 export default function GraficoGrados() {
+    const isMobile = window.innerWidth < 768;
     const {
         estudiantesPrimerCiclo,
         estudiantesSegundoCiclo,
@@ -45,7 +46,9 @@ export default function GraficoGrados() {
                         "#06b6d4", // cyan
                     ],
                     borderRadius: 5,
-                    barThickness: 60,
+                    maxBarThickness: isMobile ? 35 : 50,
+                    categoryPercentage: 0.6,
+                    barPercentage: 0.7,
                 },
             ],
         };
