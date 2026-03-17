@@ -129,7 +129,6 @@ export default function Dashboard() {
                                     )}
                                 </h2>
                             </div>
-                            <DollarSign className="w-10 h-10 text-emerald-500" />
                         </div>
                     </div>
                 </div>

@@ -1,9 +1,8 @@
 import Header from "../admin/components/Header";
-import { User } from "lucide-react";
 import Navigation from "../admin/components/Navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import Dashboard from "../admin/Dashboard";
 import Settings from "../admin/config/Settings";
 import News from "../admin/noticias/News";
@@ -15,10 +14,13 @@ import useAuth from "../../hooks/useAuth";
 import Loader from "../components/Loader";
 import { ClipLoader } from "react-spinners";
 import useIRM from "../../hooks/useIRM";
+import ResponsiveMenu from "../admin/components/ResponsiveMenu";
 
 export default function AdminLayout() {
     const { loading, user } = useAuth({ middleware: "auth" });
     const { adminPage, setAdminPage, adminContentScroll } = useIRM();
+
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
 
     const initial = user?.name ? user.name.trim().charAt(0).toUpperCase() : "";
 
@@ -38,9 +40,25 @@ export default function AdminLayout() {
 
     return (
         <>
+            {/* OVERLAY */}
+            {isMenuOpen && (
+                <div
+                    className="fixed inset-0 bg-black/50 z-40 md:hidden"
+                    onClick={() => setIsMenuOpen(false)}
+                />
+            )}
+
+            {/* MENÚ RESPONSIVE */}
+            <ResponsiveMenu
+                isOpen={isMenuOpen}
+                closeMenu={() => setIsMenuOpen(false)}
+                index="1"
+                page={adminPage}
+                setPage={setAdminPage}
+            />
             <div className="h-screen flex bg-gray-100" id="driver_welcome">
                 {/* SIDEBAR */}
-                <aside className="hidden md:flex flex-col w-20 lg:w-52 bg-red-800 text-white shadow-xl">
+                <aside className="hidden md:flex flex-col w-16 lg:w-56 transition-all duration-300 bg-red-800 text-white ">
                     {/* Logo */}
                     <div className="h-20 flex items-center justify-center border-b border-yellow-500/30">
                         <img
@@ -75,15 +93,15 @@ export default function AdminLayout() {
                         </div>
                     </div>
                 </aside>
-                <div className="flex-1 flex flex-col">
-                    <Header index="1" />
+                <div className="flex-1 flex flex-col min-w-0">
+                    <Header index="1" toggleMenu={() => setIsMenuOpen(true)} />
 
                     <main
-                        className="flex-1 p-3 overflow-auto bg-white"
+                        className="flex-1 p-2 md:p-4 overflow-x-hidden overflow-y-auto bg-white min-w-0"
                         ref={adminContentScroll}
                     >
                         <div
-                            className="bg-gray-100 rounded-2xl shadow-md p-6 min-h-full"
+                            className="bg-gray-100 rounded-2xl shadow-md p-3 md:p-6 min-h-full w-full max-w-full overflow-hidden"
                             id="driver_main"
                         >
                             {loading ? <Loader /> : pages[adminPage]}
@@ -91,7 +109,6 @@ export default function AdminLayout() {
                     </main>
                 </div>
             </div>
-
             <ToastContainer />
         </>
     );

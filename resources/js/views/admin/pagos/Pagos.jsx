@@ -1,13 +1,5 @@
 import { useState, useMemo, useEffect } from "react";
-import {
-    DollarSign,
-    Search,
-    PlusCircle,
-    ReceiptText,
-    Users,
-    Eye,
-    CirclePlus,
-} from "lucide-react";
+import { Search, PlusCircle, Eye, CirclePlus } from "lucide-react";
 import usePago from "../../../hooks/usePago";
 import Loader from "../../components/Loader";
 import Modal from "../components/Modal";

@@ -83,13 +83,18 @@ export default function News() {
         <>
             <div className="bg-white shadow-sm rounded-xl p-5 border border-gray-200">
                 <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6">
-                    <div id="driver_posts-total">
-                        <p className="text-gray-600 text-sm">
-                            Publicaciones Totales
-                        </p>
-                        <p className="text-3xl font-bold text-gray-800">
-                            {posts.length}
-                        </p>
+                    <div
+                        id="driver_posts-total"
+                        className="flex justify-center md:block"
+                    >
+                        <div>
+                            <p className="text-gray-600 text-sm">
+                                Publicaciones Totales
+                            </p>
+                            <p className="text-3xl font-bold text-gray-800 text-center md:text-start">
+                                {posts.length}
+                            </p>
+                        </div>
                     </div>
 
                     <div
@@ -128,12 +133,14 @@ export default function News() {
 
             <button
                 onClick={() => setOpen(true)}
-                className="p-3 rounded bg-red-500 flex gap-1 items-center text-white font-bold
-                cursor-pointer hover:bg-red-600 hover:-translate-y-1 transition mt-4"
+                className="p-3 rounded bg-red-500 flex gap-1 items-center justify-center text-white font-bold
+                cursor-pointer hover:bg-red-600 hover:-translate-y-1 transition mt-4 w-full md:w-auto "
                 id="driver_posts-crear"
             >
-                <CirclePlus />
-                <p>Nueva Publicación</p>
+                <div className="flex gap-1">
+                    <CirclePlus />
+                    <p>Nueva Publicación</p>
+                </div>
             </button>
 
             <div

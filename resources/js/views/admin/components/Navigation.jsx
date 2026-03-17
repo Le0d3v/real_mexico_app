@@ -25,6 +25,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                 <div className="flex flex-col" id="driver_navegacion-enlaces">
                     <NavItem
                         page={page}
+                        closeMenu={closeMenu}
                         setPage={setPage}
                         index={0}
                         icon={Home}
@@ -34,6 +35,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                     </NavItem>
                     <NavItem
                         page={page}
+                        closeMenu={closeMenu}
                         setPage={setPage}
                         index={1}
                         icon={CalendarDays}
@@ -43,6 +45,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                     </NavItem>
                     <NavItem
                         page={page}
+                        closeMenu={closeMenu}
                         setPage={setPage}
                         index={2}
                         icon={CircleDollarSign}
@@ -52,6 +55,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                     </NavItem>
                     <NavItem
                         page={page}
+                        closeMenu={closeMenu}
                         setPage={setPage}
                         index={3}
                         icon={Users}
@@ -61,6 +65,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                     </NavItem>
                     <NavItem
                         page={page}
+                        closeMenu={closeMenu}
                         setPage={setPage}
                         index={4}
                         icon={User}
@@ -70,6 +75,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                     </NavItem>
                     <NavItem
                         page={page}
+                        closeMenu={closeMenu}
                         setPage={setPage}
                         index={5}
                         icon={Globe}
@@ -79,6 +85,7 @@ export default function Navigation({ index, closeMenu, setPage, page }) {
                     </NavItem>
                     <NavItem
                         page={page}
+                        closeMenu={closeMenu}
                         setPage={setPage}
                         index={6}
                         icon={Settings}
