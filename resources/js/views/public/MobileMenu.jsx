@@ -27,7 +27,7 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
             />
 
             <aside
-                className={`fixed top-0 right-0 h-screen w-full max-w-md
+                className={`fixed top-0 right-0 h-dvh w-full max-w-md
                 bg-gradient-to-b from-[#0f0f0f] to-[#1a1a1a]
                 text-white z-50 shadow-2xl
                 transform transition-transform duration-300 ease-in-out
@@ -52,7 +52,10 @@ export default function MobileMenu({ open, setOpen, page, setPage }) {
                         <X size={26} />
                     </button>
                 </div>
-                <nav className="flex-1 overflow-y-auto mt-6 px-6 pb-8">
+                <nav
+                    className="flex-1 min-h-0 overflow-y-auto mt-6 px-6 pb-8"
+                    style={{ WebkitOverflowScrolling: "touch" }}
+                >
                     <ul className="flex flex-col gap-2 text-[17px]">
                         <li>
                             <MobileNavLink
