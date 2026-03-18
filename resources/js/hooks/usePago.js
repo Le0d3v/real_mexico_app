@@ -15,14 +15,12 @@ export default function usePago() {
         try {
             const response = await api.post("/api/pagos", datos);
 
-            await mutate(undefined);
+            await mutate();
             return response.data;
         } catch (error) {
             throw error.response || error;
         }
     };
-
-    const registrarPago = (datos) => {};
 
     const deletePago = async (id) => {
         try {

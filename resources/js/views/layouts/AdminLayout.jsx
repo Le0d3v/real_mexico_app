@@ -40,22 +40,6 @@ export default function AdminLayout() {
 
     return (
         <>
-            {/* OVERLAY */}
-            {isMenuOpen && (
-                <div
-                    className="fixed inset-0 bg-black/50 z-40 md:hidden"
-                    onClick={() => setIsMenuOpen(false)}
-                />
-            )}
-
-            {/* MENÚ RESPONSIVE */}
-            <ResponsiveMenu
-                isOpen={isMenuOpen}
-                closeMenu={() => setIsMenuOpen(false)}
-                index="1"
-                page={adminPage}
-                setPage={setAdminPage}
-            />
             <div className="h-screen flex bg-gray-100" id="driver_welcome">
                 {/* SIDEBAR */}
                 <aside className="hidden md:flex flex-col w-16 lg:w-56 transition-all duration-300 bg-red-800 text-white ">
@@ -110,6 +94,22 @@ export default function AdminLayout() {
                 </div>
             </div>
             <ToastContainer />
+            {/* OVERLAY */}
+            {isMenuOpen && (
+                <div
+                    className="fixed inset-0 bg-black/50 z-40 md:hidden"
+                    onClick={() => setIsMenuOpen(false)}
+                />
+            )}
+
+            {/* MENÚ RESPONSIVE */}
+            <ResponsiveMenu
+                isOpen={isMenuOpen}
+                closeMenu={() => setIsMenuOpen(false)}
+                index="1"
+                page={adminPage}
+                setPage={setAdminPage}
+            />
         </>
     );
 }

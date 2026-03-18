@@ -7,7 +7,6 @@ import {
     Info,
     NotepadText,
     User,
-    UserCheck,
 } from "lucide-react";
 
 import useStudent from "../../../hooks/useStudent";
@@ -50,9 +49,6 @@ export default function CrearPago({ onClose }) {
         }));
     };
 
-    /* ================================
-       NUEVA FUNCIONALIDAD
-    ==================================*/
     const [search, setSearch] = useState("");
     const [selectedStudent, setSelectedStudent] = useState(null);
 
@@ -85,19 +81,18 @@ export default function CrearPago({ onClose }) {
         }));
     };
 
-    const handleSelectColegiatura = (colegiatura) => {
-        setFormData((prev) => ({
-            ...prev,
-            colegiatura_id: colegiatura.id,
-        }));
-    };
+    // 🔥 NUEVA LÓGICA CENTRALIZADA
+    const colegiaturasDisponibles = useMemo(() => {
+        if (!selectedStudent?.colegiaturas) return [];
 
-    const handleSelectTutor = (tutor) => {
-        setFormData((prev) => ({
-            ...prev,
-            tutor_id: tutor.usuario.id,
-        }));
-    };
+        return selectedStudent.colegiaturas.sort((a, b) => {
+            const pagadaA = a.estado?.toLowerCase() === "pagado";
+            const pagadaB = b.estado?.toLowerCase() === "pagado";
+            return pagadaA - pagadaB;
+        });
+    }, [selectedStudent]);
+
+    const tutoresDisponibles = selectedStudent?.tutores || [];
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -113,9 +108,8 @@ export default function CrearPago({ onClose }) {
                     messages.forEach((message) => toast.error(message)),
                 );
             } else {
-                toast.error("Error inesperado al registrar el tutor.");
+                toast.error("Error inesperado al registrar el pago.");
             }
-            console.log(error);
         } finally {
             setCargando(false);
         }
@@ -125,10 +119,7 @@ export default function CrearPago({ onClose }) {
         <>
             <div className="flex items-center gap-2">
                 <Info />
-                <p>
-                    Complete el Siguiente formulario para registrar un nuevo
-                    pago
-                </p>
+                <p>Complete el siguiente formulario para registrar un pago</p>
             </div>
 
             <form
@@ -137,28 +128,77 @@ export default function CrearPago({ onClose }) {
                 onSubmit={handleSubmit}
                 noValidate
             >
-                {/* =======================================
-                    INFORMACIÓN DEL PAGO
-                ======================================== */}
+                {/* ================= ESTUDIANTE ================= */}
                 <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
                     <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
-                        <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
-                            <DollarSign className="w-8 h-8 text-red-600" />
+                        <div className="p-2 rounded-full bg-red-200">
+                            <User className="text-red-600" />
                         </div>
-                        <h2 className="text-2xl font-semibold text-gray-800">
+                        <h2 className="text-2xl font-semibold">Estudiante</h2>
+                    </div>
+                    <input
+                        type="text"
+                        placeholder="Buscar estudiante..."
+                        value={search}
+                        onChange={(e) => setSearch(e.target.value)}
+                        className="w-full border border-gray-300 rounded-xl px-4 py-2"
+                    />
+
+                    {search && (
+                        <div className="grid md:grid-cols-2 gap-4">
+                            {filteredStudents.map((student) => (
+                                <div
+                                    key={student.id}
+                                    onClick={() => handleSelectStudent(student)}
+                                >
+                                    <EstudiantePago estudiante={student} />
+                                </div>
+                            ))}
+                        </div>
+                    )}
+
+                    {selectedStudent && (
+                        <EstudianteSeleccionado
+                            estudiante={selectedStudent}
+                            formData={formData}
+                            colegiaturasDisponibles={colegiaturasDisponibles}
+                            tutoresDisponibles={tutoresDisponibles}
+                            onClear={() => setSelectedStudent(null)}
+                            onSelectColegiatura={(id) => {
+                                setFormData((prev) => ({
+                                    ...prev,
+                                    colegiatura_id: id,
+                                }));
+                            }}
+                            onSelectTutor={(e) =>
+                                setFormData((p) => ({
+                                    ...p,
+                                    tutor_id: Number(e.target.value),
+                                }))
+                            }
+                        />
+                    )}
+                </section>
+                {/* ================= INFORMACIÓN DEL PAGO ================= */}
+                <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
+                    <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
+                        <div className="p-2 rounded-full bg-red-200">
+                            <DollarSign className="text-red-600" />
+                        </div>
+                        <h2 className="text-2xl font-semibold">
                             Información del Pago
                         </h2>
                     </div>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className="grid md:grid-cols-2 gap-6">
                         <SelectField
                             icon={<NotepadText size={18} />}
                             label="Asunto"
                             options={["Pago por Colegiatura"]}
                             value={formData.asunto}
                             onChange={(e) =>
-                                setFormData((prev) => ({
-                                    ...prev,
+                                setFormData((p) => ({
+                                    ...p,
                                     asunto: e.target.value,
                                 }))
                             }
@@ -170,8 +210,8 @@ export default function CrearPago({ onClose }) {
                             type="number"
                             value={formData.monto}
                             onChange={(e) =>
-                                setFormData((prev) => ({
-                                    ...prev,
+                                setFormData((p) => ({
+                                    ...p,
                                     monto: e.target.value,
                                 }))
                             }
@@ -179,12 +219,12 @@ export default function CrearPago({ onClose }) {
 
                         <InputField
                             icon={<Calendar size={18} />}
-                            label="Fecha de Registro"
+                            label="Fecha"
                             type="date"
-                            value={formData.fecha_pago}
+                            value={formData.colegiatura_id?.toString() ?? ""}
                             onChange={(e) =>
-                                setFormData((prev) => ({
-                                    ...prev,
+                                setFormData((p) => ({
+                                    ...p,
                                     fecha_pago: e.target.value,
                                 }))
                             }
@@ -210,8 +250,8 @@ export default function CrearPago({ onClose }) {
                                 label="Referencia"
                                 value={formData.referencia}
                                 onChange={(e) =>
-                                    setFormData((prev) => ({
-                                        ...prev,
+                                    setFormData((p) => ({
+                                        ...p,
                                         referencia: e.target.value,
                                     }))
                                 }
@@ -220,11 +260,11 @@ export default function CrearPago({ onClose }) {
 
                         <InputField
                             icon={<Eye size={18} />}
-                            label="Observaciones (Opcional)"
+                            label="Observaciones"
                             value={formData.observaciones}
                             onChange={(e) =>
-                                setFormData((prev) => ({
-                                    ...prev,
+                                setFormData((p) => ({
+                                    ...p,
                                     observaciones: e.target.value,
                                 }))
                             }
@@ -232,117 +272,30 @@ export default function CrearPago({ onClose }) {
                     </div>
                 </section>
 
-                {/* =======================================
-                    ESTUDIANTE
-                ======================================== */}
-                <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
-                    <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
-                        <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
-                            <Calendar className="w-8 h-8 text-red-600" />
-                        </div>
-                        <h2 className="text-2xl font-semibold text-gray-800">
-                            Estudiante
-                        </h2>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                        <Info />
-                        <p>
-                            Busque el estudiante relacionado a la colegiatura
-                            usando el buscador
-                        </p>
-                    </div>
-
-                    {/* BUSCADOR */}
-                    <input
-                        type="text"
-                        placeholder="Buscar por nombre o matrícula"
-                        value={search}
-                        onChange={(e) => setSearch(e.target.value)}
-                        className="w-full border border-gray-300 rounded-xl px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500 transition"
-                    />
-
-                    {/* RESULTADOS */}
-                    {search.trim() !== "" && (
-                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-4 max-h-72 overflow-y-auto">
-                            {filteredStudents.length === 0 ? (
-                                <p className="text-gray-400 text-sm">
-                                    No se encontraron coincidencias
-                                </p>
-                            ) : (
-                                filteredStudents.map((student) => (
-                                    <div
-                                        key={student.id}
-                                        onClick={() =>
-                                            handleSelectStudent(student)
-                                        }
-                                        className="cursor-pointer"
-                                    >
-                                        <EstudiantePago
-                                            estudiante={student}
-                                            seleccionado={
-                                                selectedStudent?.id ===
-                                                student.id
-                                            }
-                                        />
-                                    </div>
-                                ))
-                            )}
-                        </div>
-                    )}
-
-                    {/* ESTUDIANTE SELECCIONADO */}
-                    {selectedStudent && (
-                        <div className="mt-6">
-                            <h3 className="text-xl font-semibold text-gray-700 mb-3">
-                                Estudiante Seleccionado:
-                            </h3>
-
-                            <EstudianteSeleccionado
-                                estudiante={selectedStudent}
-                                onClear={() => {
-                                    setSelectedStudent(null);
-                                    setFormData((prev) => ({
-                                        ...prev,
-                                        estudiante_id: null,
-                                        tutor_id: null,
-                                        colegiatura_id: null,
-                                    }));
-                                }}
-                                onSelectColegiatura={handleSelectColegiatura}
-                                onSelectTutor={handleSelectTutor}
-                                selectedColegiaturaId={formData.colegiatura_id}
-                                selectedTutorId={formData.tutor_id}
-                            />
-                        </div>
-                    )}
-                </section>
-
-                {/* =======================================
-                    ACCIONES
-                ======================================== */}
-                <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-between gap-4 items-center">
-                    <h1 className="text-3xl font-semibold text-red-400">
+                <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-between items-center">
+                    <h1 className="text-2xl font-semibold text-red-400">
                         Acciones
                     </h1>
 
                     <div className="flex gap-5">
                         <button
                             type="button"
+                            onClick={onClose}
                             className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer"
-                            onClick={() => onClose()}
+                            disabled={cargando}
                         >
-                            Cerrar
+                            Cancelar
                         </button>
 
                         <button
                             type="submit"
-                            className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm cursor-pointer w-44"
+                            disabled={cargando}
+                            className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm w-44 disabled:opacity-60 hover:cursor-pointer"
                         >
                             {cargando ? (
                                 <ClipLoader size={20} color="white" />
                             ) : (
-                                <p>Registrar Pago</p>
+                                "Registrar Pago"
                             )}
                         </button>
                     </div>

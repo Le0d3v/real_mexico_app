@@ -8,150 +8,84 @@ import {
     UserCheck,
 } from "lucide-react";
 
-import ColegiaturaPago from "./ColegiaturaPago";
-import TutorPago from "./TutorPago";
+import SelectField from "../components/SelectField";
+import StudentCard from "../colegiaturas/StudentCard";
 
 export default function EstudianteSeleccionado({
     estudiante,
     onClear,
+    colegiaturasDisponibles,
+    tutoresDisponibles,
+    formData,
     onSelectColegiatura,
     onSelectTutor,
-    selectedColegiaturaId,
-    selectedTutorId,
 }) {
-    const nombreCompleto = `${estudiante.nombre} ${estudiante.apellido_paterno} ${estudiante.apellido_materno}`;
-
     return (
         <div className="space-y-6">
-            {/* ===============================
-                INFORMACIÓN DEL ESTUDIANTE
-            =============================== */}
-            <div className="w-full p-6 rounded-2xl border-2 border-red-600 bg-gradient-to-br from-red-50 to-white shadow-md flex flex-col md:flex-row gap-6">
-                {/* Identidad */}
-                <div className="flex items-center gap-4 md:w-2/3">
-                    <div className="w-16 h-16 rounded-full bg-red-600 text-white flex items-center justify-center shadow">
-                        <User size={28} />
-                    </div>
+            <StudentCard
+                student={estudiante}
+                discard={true}
+                onDiscard={onClear}
+            />
 
-                    <div>
-                        <h1 className="text-xl font-semibold text-gray-800">
-                            {nombreCompleto}
-                        </h1>
+            {/* 🔥 SELECTS INTEGRADOS */}
+            <div className="grid md:grid-cols-2 gap-6">
+                <SelectField
+                    icon={<BookOpen size={18} />}
+                    label="Colegiatura"
+                    options={[...colegiaturasDisponibles]
+                        .sort((a, b) => {
+                            const pagadaA =
+                                a.estado?.toLowerCase() === "pagado";
+                            const pagadaB =
+                                b.estado?.toLowerCase() === "pagado";
+                            return pagadaA - pagadaB;
+                        })
+                        .map((c) => {
+                            const pendiente = c.monto - c.pagado;
+                            const pagada = c.estado?.toLowerCase() === "pagado";
 
-                        <div className="flex flex-wrap gap-6 mt-3 text-sm text-gray-700">
-                            <div className="flex items-center gap-2">
-                                <IdCard size={18} className="text-red-500" />
-                                <span>
-                                    <strong>Matrícula:</strong>{" "}
-                                    {estudiante.matricula}
-                                </span>
-                            </div>
+                            return {
+                                value: c.id,
+                                label: pagada
+                                    ? `${c.mes} — PAGADO`
+                                    : `${c.mes} — Pendiente: $${pendiente.toFixed(2)}`,
+                                disabled: pagada,
+                                className: pagada
+                                    ? "bg-gray-100 text-gray-400 hover:cursor-not-allowed"
+                                    : "",
+                            };
+                        })}
+                    value={formData.colegiatura_id ?? ""}
+                    onChange={(e) => {
+                        const colegiaturaId = Number(e.target.value);
 
-                            <div className="flex items-center gap-2">
-                                <GraduationCap
-                                    size={18}
-                                    className="text-red-500"
-                                />
-                                <span>
-                                    <strong>Grado:</strong> {estudiante.grado}
-                                </span>
-                            </div>
+                        const seleccionada = colegiaturasDisponibles.find(
+                            (c) => c.id === colegiaturaId,
+                        );
 
-                            <div className="flex items-center gap-2">
-                                <Users size={18} className="text-red-500" />
-                                <span>
-                                    <strong>Grupo:</strong> {estudiante.grupo}
-                                </span>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                        if (!seleccionada) return;
 
-                {/* Acción */}
-                <div className="md:w-1/3 flex justify-end items-start">
-                    <button
-                        type="button"
-                        onClick={onClear}
-                        className="flex items-center gap-2 px-4 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-red-50 hover:text-red-600 hover:border-red-400 transition cursor-pointer"
-                    >
-                        <XCircle size={18} />
-                        Descartar
-                    </button>
-                </div>
-            </div>
+                        if (seleccionada.estado?.toLowerCase() === "pagado")
+                            return;
 
-            {/* ===============================
-                COLEGIATURAS
-            =============================== */}
-            <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
-                <div className="flex items-center gap-3 border-b border-gray-200 pb-3 mb-5">
-                    <div className="p-2 rounded-full bg-red-100">
-                        <BookOpen className="text-red-600" size={22} />
-                    </div>
-                    <h2 className="text-xl font-semibold text-gray-800">
-                        Seleccione la Colegiatura
-                    </h2>
-                </div>
-                <p>Seleccione una colegiatura dando clic</p>
+                        const pendiente =
+                            seleccionada.monto - seleccionada.pagado;
 
-                {estudiante.colegiaturas?.length === 0 ? (
-                    <p className="text-gray-400 text-sm">
-                        No hay colegiaturas registradas para este estudiante.
-                    </p>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
-                        {estudiante.colegiaturas.map((colegiatura) => (
-                            <div
-                                key={colegiatura.id}
-                                onClick={() => onSelectColegiatura(colegiatura)}
-                            >
-                                <ColegiaturaPago
-                                    colegiatura={colegiatura}
-                                    selected={
-                                        selectedColegiaturaId === colegiatura.id
-                                    }
-                                />
-                            </div>
-                        ))}
-                    </div>
-                )}
-            </div>
+                        onSelectColegiatura(colegiaturaId, pendiente);
+                    }}
+                />
 
-            <div className="bg-white border border-gray-200 rounded-2xl shadow-sm p-6">
-                <div className="flex items-center gap-3 border-b border-gray-200 pb-3 mb-5">
-                    <div className="p-2 rounded-full bg-red-100">
-                        <UserCheck className="text-red-600" size={22} />
-                    </div>
-                    <h2 className="text-xl font-semibold text-gray-800">
-                        Seleccione un Tutor
-                    </h2>
-                </div>
-                <p>
-                    El tutor seleccionado se registrará como el resonsable del
-                    pago
-                </p>
-
-                {estudiante.tutores?.length === 0 ? (
-                    <p className="text-gray-400 text-sm">
-                        No hay colegiaturas registradas para este estudiante.
-                    </p>
-                ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mt-5">
-                        {estudiante.tutores.map((tutor) => (
-                            <div
-                                key={tutor.id}
-                                onClick={() => onSelectTutor(tutor)}
-                            >
-                                <TutorPago
-                                    tutor={tutor}
-                                    selected={
-                                        selectedTutorId === tutor.usuario.id
-                                    }
-                                />
-                            </div>
-                        ))}
-                    </div>
-                )}
+                <SelectField
+                    icon={<UserCheck size={18} />}
+                    label="Tutor"
+                    options={tutoresDisponibles.map((t) => ({
+                        value: t.usuario.id,
+                        label: t.usuario.name,
+                    }))}
+                    value={formData.tutor_id ?? ""}
+                    onChange={onSelectTutor}
+                />
             </div>
         </div>
     );
