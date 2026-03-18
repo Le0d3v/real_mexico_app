@@ -24,7 +24,11 @@ class PostRequest extends FormRequest
         return [
             "titulo" => ["required", "string"],
             "descripcion" => ["required", "string"],
-            "contenido_multimedia" => ["required", "image"],
+            "contenido_multimedia" => [
+                $this->isMethod('post') ? 'required' : 'nullable',
+                'image',
+                'mimes:jpg,jpeg,png',
+            ],
         ];
     }
 

@@ -127,7 +127,7 @@ export default function Tutores() {
                     </div>
 
                     <button
-                        className="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 md:px-6 py-2 rounded-lg shadow transition"
+                        className="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-black font-semibold px-4 md:px-6 py-2 rounded-lg shadow transition cursor-pointer hover:-translate-y-1"
                         onClick={() => setCreateTutorModal(true)}
                         id="driver_tutores-crear"
                     >
@@ -247,7 +247,7 @@ export default function Tutores() {
                                         <td className="px-3 md:px-6 py-3 md:py-4 text-center">
                                             <div className="flex justify-center">
                                                 <button
-                                                    className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black font-semibold"
+                                                    className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black font-semibold cursor-pointer"
                                                     onClick={() => {
                                                         setSelectedTutor(tutor);
                                                         setOpen(true);
@@ -283,7 +283,7 @@ export default function Tutores() {
                         <button
                             disabled={currentPage === 1}
                             onClick={() => setCurrentPage((prev) => prev - 1)}
-                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40"
+                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
                         >
                             ←
                         </button>
@@ -296,7 +296,7 @@ export default function Tutores() {
                                 <button
                                     key={pageNumber}
                                     onClick={() => setCurrentPage(pageNumber)}
-                                    className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm ${
+                                    className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm cursor-pointer ${
                                         isActive
                                             ? "bg-yellow-400 text-black"
                                             : "bg-white border hover:bg-gray-100"
@@ -310,7 +310,7 @@ export default function Tutores() {
                         <button
                             disabled={currentPage === totalPages}
                             onClick={() => setCurrentPage((prev) => prev + 1)}
-                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40"
+                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
                         >
                             →
                         </button>

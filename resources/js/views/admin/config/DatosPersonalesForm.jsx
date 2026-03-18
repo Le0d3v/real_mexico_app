@@ -153,7 +153,10 @@ export default function DatosPersonalesForm({ user, mutate }) {
                     onChange={(e) => setEmail(e.target.value)}
                 />
 
-                <div className="w-full md:col-span-2" id="driver_settings-personal-save">
+                <div
+                    className="w-full md:col-span-2"
+                    id="driver_settings-personal-save"
+                >
                     <SubmitButton>
                         {loading ? (
                             <ClipLoader size={20} color="white" />

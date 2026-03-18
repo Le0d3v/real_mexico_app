@@ -67,7 +67,7 @@ export default function Dashboard() {
                 <p className="text-center mt-5 text-gray-500 text-lg">
                     Ciclo Escolar:{" "}
                     <span className="text-gray-700 font-semibold">
-                        {cicloEscolar[0].nombre}
+                        {cicloEscolar.nombre}
                     </span>
                 </p>
                 {/* KPIs */}

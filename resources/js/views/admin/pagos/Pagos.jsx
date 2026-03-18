@@ -168,7 +168,7 @@ export default function Pagos() {
                     </div>
 
                     <button
-                        className="w-full md:w-auto flex justify-center items-center gap-2 bg-slate-900 text-white px-4 md:px-5 py-2 md:py-3 rounded-xl shadow hover:shadow-md transition hover:opacity-90 md:hover:-translate-y-1"
+                        className="w-full md:w-auto flex justify-center items-center gap-2 bg-slate-900 text-white px-4 md:px-5 py-2 md:py-3 rounded-xl shadow hover:shadow-md transition hover:opacity-90 md:hover:-translate-y-1 cursor-pointer"
                         id="driver_pagos-crear"
                         onClick={() => setCrearPago(true)}
                     >
@@ -274,7 +274,7 @@ export default function Pagos() {
                                         <img
                                             src="/img/xls.png"
                                             alt="Excel"
-                                            className="w-8"
+                                            className="w-8 md:w-16"
                                         />
                                     </div>
                                 </div>
@@ -341,7 +341,7 @@ export default function Pagos() {
 
                                     <td className="px-3 md:px-6 py-2 md:py-3">
                                         <button
-                                            className="px-3 py-1 text-xs md:text-sm bg-yellow-400 rounded hover:bg-yellow-500 transition font-semibold"
+                                            className="px-3 py-1 text-xs md:text-sm bg-yellow-400 rounded hover:bg-yellow-500 transition font-semibold cursor-pointer"
                                             onClick={() => {
                                                 setShowPago(true);
                                                 setPago(pago);
@@ -376,7 +376,7 @@ export default function Pagos() {
                             <button
                                 key={item}
                                 onClick={() => setCurrentPage(item)}
-                                className={`px-3 py-1 text-xs md:text-sm rounded ${
+                                className={`px-3 py-1 text-xs md:text-sm rounded cursor-pointer ${
                                     currentPage === item
                                         ? "bg-black text-white"
                                         : "bg-white border hover:bg-gray-100"

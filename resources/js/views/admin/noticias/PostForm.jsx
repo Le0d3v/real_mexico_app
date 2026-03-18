@@ -97,11 +97,26 @@ export default function PostForm({ post, onSuccess }) {
                     />
 
                     {preview && (
-                        <img
-                            src={preview}
-                            alt="preview"
-                            className="mt-4 h-40 object-cover rounded-lg border"
-                        />
+                        <div className="mt-2">
+                            <p className="text-sm text-gray-500">
+                                Imagen Previa:{" "}
+                            </p>
+                            <img
+                                src={preview}
+                                alt="preview"
+                                className="h-40 object-cover rounded-lg border mt-1"
+                            />
+                            <button
+                                type="button"
+                                onClick={() => {
+                                    setPreview(null);
+                                    imagenRef.current.value = "";
+                                }}
+                                className="text-white text-sm mt-2 p-2 bg-red-500 rounded cursor-pointer hover:bg-red-600 transition"
+                            >
+                                Descartar
+                            </button>
+                        </div>
                     )}
                 </div>
 

@@ -12,7 +12,7 @@ export default function Settings() {
     if (!user) {
         return <Loader />;
     }
-    
+
     return (
         <div className="max-w-7xl mx-auto">
             <div className="" id="driver_settings-personal">

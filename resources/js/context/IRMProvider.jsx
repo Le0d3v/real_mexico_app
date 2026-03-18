@@ -7,6 +7,7 @@ const IRMProvider = ({ children }) => {
     const [page, setPage] = useState(0);
     const [adminPage, setAdminPage] = useState(0);
     const adminContentScroll = useRef();
+    const [user, setUser] = useState(null);
 
     return (
         <IRMContext.Provider
@@ -18,6 +19,8 @@ const IRMProvider = ({ children }) => {
                 adminPage,
                 setAdminPage,
                 adminContentScroll,
+                user,
+                setUser,
             }}
         >
             {children}

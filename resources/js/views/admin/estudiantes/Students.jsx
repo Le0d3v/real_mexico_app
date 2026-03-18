@@ -127,7 +127,7 @@ export default function Students() {
                     </div>
 
                     <button
-                        className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-semibold px-4 md:px-6 py-2 rounded-lg shadow transition"
+                        className="w-full md:w-auto bg-red-600 hover:bg-red-700 text-white font-semibold px-4 md:px-6 py-2 rounded-lg shadow transition cursor-pointer hover:-translate-y-1"
                         onClick={() => setCreateStudent(true)}
                         id="driver_estudiantes-crear"
                     >
@@ -197,7 +197,7 @@ export default function Students() {
                                     <img
                                         src="/img/xls.png"
                                         alt="Excel"
-                                        className="w-8"
+                                        className="w-8 md:w-10"
                                     />
                                 </div>
                             </div>
@@ -297,7 +297,7 @@ export default function Students() {
                                         <td className="px-3 md:px-6 py-3 md:py-4 text-center">
                                             <div className="flex flex-col md:flex-row justify-center gap-2">
                                                 <button
-                                                    className="px-3 py-1 text-xs md:text-sm font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black"
+                                                    className="px-3 py-1 text-xs md:text-sm font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black cursor-pointer"
                                                     onClick={() => {
                                                         setSelectedStudent(
                                                             alumno,
@@ -307,7 +307,7 @@ export default function Students() {
                                                 >
                                                     Perfil
                                                 </button>
-                                                <button className="px-3 py-1 text-xs md:text-sm rounded-md bg-red-600 text-white hover:bg-red-700 transition">
+                                                <button className="px-3 py-1 text-xs md:text-sm rounded-md bg-red-600 text-white hover:bg-red-700 transition cursor-pointer">
                                                     Editar
                                                 </button>
                                             </div>
@@ -332,7 +332,7 @@ export default function Students() {
                         <button
                             disabled={currentPage === 1}
                             onClick={() => setCurrentPage((prev) => prev - 1)}
-                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40"
+                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
                         >
                             ←
                         </button>
@@ -345,7 +345,7 @@ export default function Students() {
                                 <button
                                     key={pageNumber}
                                     onClick={() => setCurrentPage(pageNumber)}
-                                    className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm ${
+                                    className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm cursor-pointer ${
                                         isActive
                                             ? "bg-yellow-400 text-black"
                                             : "bg-white border hover:bg-gray-100"
@@ -359,7 +359,7 @@ export default function Students() {
                         <button
                             disabled={currentPage === totalPages}
                             onClick={() => setCurrentPage((prev) => prev + 1)}
-                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40"
+                            className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
                         >
                             →
                         </button>
