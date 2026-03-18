@@ -64,14 +64,16 @@ export default function Modal({
         >
             <div
                 className={`
-                    relative w-full ${sizeClasses[size]}
-                    max-h-[90vh] overflow-y-auto
-                    bg-white rounded-2xl shadow-2xl
-                    border border-gray-200
-                    ${isAnimatingOut ? "animate-modalOut" : "animate-modalIn"}
-                `}
+        relative w-full ${sizeClasses[size]}
+        max-h-[90vh]
+        bg-white rounded-2xl shadow-2xl
+        border border-gray-200
+        overflow-hidden
+        ${isAnimatingOut ? "animate-modalOut" : "animate-modalIn"}
+    `}
                 onClick={(e) => e.stopPropagation()}
             >
+                {/* HEADER */}
                 {(title || onClose) && (
                     <div className="flex items-center justify-between px-6 py-4 border-b border-b-gray-400">
                         <div className="flex gap-3 items-center">
@@ -92,7 +94,10 @@ export default function Modal({
                     </div>
                 )}
 
-                <div className="py-3 px-6">{children}</div>
+                {/* 🔥 SCROLL INTERNO */}
+                <div className="max-h-[calc(90vh-80px)] overflow-y-auto px-6 py-3 ml-3">
+                    {children}
+                </div>
             </div>
         </div>
     );

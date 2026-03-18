@@ -7,6 +7,7 @@ import {
     Info,
     NotepadText,
     User,
+    Search,
 } from "lucide-react";
 
 import useStudent from "../../../hooks/useStudent";
@@ -119,7 +120,10 @@ export default function CrearPago({ onClose }) {
         <>
             <div className="flex items-center gap-2">
                 <Info />
-                <p>Complete el siguiente formulario para registrar un pago</p>
+                <p>
+                    Complete el siguiente formulario para registrar un pago de
+                    colegiatura
+                </p>
             </div>
 
             <form
@@ -130,18 +134,21 @@ export default function CrearPago({ onClose }) {
             >
                 {/* ================= ESTUDIANTE ================= */}
                 <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
-                    <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
-                        <div className="p-2 rounded-full bg-red-200">
-                            <User className="text-red-600" />
+                    <div>
+                        <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
+                            <div className="p-2 rounded-full bg-red-200">
+                                <User className="text-red-600" />
+                            </div>
+                            <h2 className="text-2xl font-semibold">
+                                Estudiante
+                            </h2>
                         </div>
-                        <h2 className="text-2xl font-semibold">Estudiante</h2>
                     </div>
-                    <input
-                        type="text"
-                        placeholder="Buscar estudiante..."
+                    <InputField
+                        icon={<Search />}
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
-                        className="w-full border border-gray-300 rounded-xl px-4 py-2"
+                        label={"Buscar Estudiante"}
                     />
 
                     {search && (

@@ -4,7 +4,7 @@ import Loader from "../../components/Loader";
 import meses from "../../../helpers/meses";
 import { formatCurrency } from "../../../helpers/helpers";
 import Modal from "../components/Modal";
-import { CirclePlus, Eye } from "lucide-react";
+import { CirclePlus, Eye, Search } from "lucide-react";
 import Historial from "./Historial";
 import RegistrarPago from "./RegistrarPago";
 import ExportExcel from "../components/ExportExcel";
@@ -168,14 +168,17 @@ export default function Colegiaturas() {
                     id="driver_colegiaturas-filtros"
                 >
                     <div className="flex flex-col md:flex-row gap-3 md:gap-4">
-                        <input
-                            type="text"
-                            placeholder="Buscar Colegiatura por Alumno..."
-                            value={search}
-                            onChange={(e) => setSearch(e.target.value)}
-                            className="w-full md:flex-1 border border-gray-300 rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-red-500"
-                            id="driver_colegiaturas-buscador"
-                        />
+                        <div className="flex items-center gap-2 px-4 rounded-xl w-full border border-gray-300">
+                            <Search size={18} className="text-slate-500" />
+                            <input
+                                type="text"
+                                placeholder="Buscar Colegiatura por Alumno..."
+                                value={search}
+                                onChange={(e) => setSearch(e.target.value)}
+                                className="w-full md:flex-1 rounded-lg py-2 focus:outline-none "
+                                id="driver_colegiaturas-buscador"
+                            />
+                        </div>
 
                         <select
                             value={estadoFiltro}
@@ -218,7 +221,7 @@ export default function Colegiaturas() {
                                     <img
                                         src="/img/xls.png"
                                         alt="Excel"
-                                        className="w-8"
+                                        className="w-8 md:w-16"
                                     />
                                 </div>
                             </div>

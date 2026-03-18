@@ -16,7 +16,7 @@ export default function StudentCard({ student, discard = false, onDiscard }) {
             {discard ? (
                 <div className="flex justify-end">
                     <button
-                        className="bg-red-400 p-2 rounded-lg text-white font-semibold cursor-pointer hover:bg-red-600 transition flex gap-1"
+                        className="bg-red-500 p-2 rounded-lg text-white font-semibold cursor-pointer hover:bg-red-700 transition flex gap-1"
                         onClick={onDiscard}
                     >
                         <CircleX />

@@ -1,5 +1,15 @@
 @import "tailwindcss";
 
+/* Tailwind global */
+::-webkit-scrollbar {
+    width: 6px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d5db;
+    border-radius: 9999px;
+}
+
 .login-fondo {
     width: 100%;
     background-image:
