@@ -247,7 +247,7 @@ export default function Tutores() {
                                         <td className="px-3 md:px-6 py-3 md:py-4 text-center">
                                             <div className="flex justify-center">
                                                 <button
-                                                    className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black font-semibold cursor-pointer"
+                                                    className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black font-semibold cursor-pointer show-tutor"
                                                     onClick={() => {
                                                         setSelectedTutor(tutor);
                                                         setOpen(true);

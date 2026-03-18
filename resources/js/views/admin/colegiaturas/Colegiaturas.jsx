@@ -311,7 +311,7 @@ export default function Colegiaturas() {
                                     <td className="px-3 md:px-6 py-3 md:py-4 text-center">
                                         <div className="flex flex-col md:flex-row justify-center gap-2">
                                             <button
-                                                className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-500 text-black hover:bg-yellow-600 transition cursor-pointer"
+                                                className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-500 text-black hover:bg-yellow-600 transition cursor-pointer registrar-pago"
                                                 onClick={() =>
                                                     registrarPago(registro)
                                                 }
@@ -319,7 +319,7 @@ export default function Colegiaturas() {
                                                 Registrar pago
                                             </button>
                                             <button
-                                                className="px-3 py-1 text-xs md:text-sm rounded-md bg-gray-200 hover:bg-gray-300 transition cursor-pointer"
+                                                className="px-3 py-1 text-xs md:text-sm rounded-md bg-gray-200 hover:bg-gray-300 transition cursor-pointer historial"
                                                 onClick={() =>
                                                     showHistorial(registro)
                                                 }
@@ -336,8 +336,14 @@ export default function Colegiaturas() {
                     {/* Paginación */}
                 </div>
                 {totalPages > 1 && (
-                    <div className="flex flex-col md:flex-row justify-between items-center gap-4 px-4 md:px-6 py-4 border-t bg-gray-50 text-center md:text-left">
-                        <p className="text-xs md:text-sm text-gray-600">
+                    <div
+                        className="flex flex-col md:flex-row justify-between items-center gap-4 px-4 md:px-6 py-4 border-t bg-gray-50 text-center md:text-left"
+                        id="driver_colegiaturas-paginacion"
+                    >
+                        <p
+                            className="text-xs md:text-sm text-gray-600"
+                            id="driver_paginacion-numero"
+                        >
                             Página <strong>{currentPage}</strong> de{" "}
                             <strong>{totalPages}</strong>
                         </p>
@@ -349,11 +355,15 @@ export default function Colegiaturas() {
                                     setCurrentPage((prev) => prev - 1)
                                 }
                                 className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
+                                id="driver_paginacion-anterior"
                             >
                                 ←
                             </button>
 
-                            <div className="flex flex-wrap justify-center gap-1">
+                            <div
+                                className="flex flex-wrap justify-center gap-1"
+                                id="driver_paginacion-botones"
+                            >
                                 {Array.from(
                                     { length: totalPages },
                                     (_, i) => i + 1,
@@ -378,7 +388,7 @@ export default function Colegiaturas() {
                                                 onClick={() =>
                                                     setCurrentPage(page)
                                                 }
-                                                className={`px-3 py-2 rounded-lg text-xs md:text-sm cursor-pointer ${
+                                                className={`px-3 py-2 rounded-lg text-xs md:text-sm cursor-pointer boton-paginacion ${
                                                     currentPage === page
                                                         ? "bg-yellow-400 text-black"
                                                         : "bg-white border hover:bg-gray-100"
@@ -396,6 +406,7 @@ export default function Colegiaturas() {
                                     setCurrentPage((prev) => prev + 1)
                                 }
                                 className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
+                                id="driver_paginacion-siguiente"
                             >
                                 →
                             </button>

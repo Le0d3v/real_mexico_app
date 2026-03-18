@@ -13,11 +13,12 @@ export default function useCicloEscolar() {
         },
     );
 
-    const cicloEscolar = data?.data ?? [];
+    const cicloEscolar = data?.data[0] ?? [];
 
     return {
         cicloEscolar,
         isLoading,
         error,
+        cicloEscolar,
     };
 }

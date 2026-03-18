@@ -60,7 +60,7 @@ export default function AdminLayout() {
                 {/* SIDEBAR */}
                 <aside className="hidden md:flex flex-col w-16 lg:w-56 transition-all duration-300 bg-red-800 text-white ">
                     {/* Logo */}
-                    <div className="h-20 flex items-center justify-center border-b border-yellow-500/30">
+                    <div className="h-20 flex items-center justify-center border-b border-yellow-500/30 py-3">
                         <img
                             src="/img/logo.png"
                             className="w-14 lg:w-20 transition-all"

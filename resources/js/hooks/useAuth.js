@@ -2,9 +2,11 @@ import { useEffect, useState } from "react";
 import api from "@/config/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
+import useIRM from "./useIRM";
 
 export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
     const navigate = useNavigate();
+    const { setPage, setTitulo } = useIRM();
 
     const [user, setUser] = useState(null);
     const [loading, setLoading] = useState(true);
@@ -36,6 +38,7 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
             setUser(data.user);
 
             navigate("/admin");
+            (setPage(0), setTitulo("Instituto Real de México A.C."));
         } catch (error) {
             if (error.response?.status === 422) {
                 const validationErrors = error.response.data.errors;

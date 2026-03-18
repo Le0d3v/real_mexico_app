@@ -341,7 +341,7 @@ export default function Pagos() {
 
                                     <td className="px-3 md:px-6 py-2 md:py-3">
                                         <button
-                                            className="px-3 py-1 text-xs md:text-sm bg-yellow-400 rounded hover:bg-yellow-500 transition font-semibold cursor-pointer"
+                                            className="px-3 py-1 text-xs md:text-sm bg-yellow-400 rounded hover:bg-yellow-500 transition font-semibold cursor-pointer show-pago"
                                             onClick={() => {
                                                 setShowPago(true);
                                                 setPago(pago);

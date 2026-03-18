@@ -170,7 +170,7 @@ export default function Login() {
                         </form>
                     </div>
                 </div>
-                <div className="flex justify-center md:mt-12 mt-6">
+                <div className="flex justify-center md:mt-10 mt-6">
                     <div className="flex gap-5">
                         <button
                             className="text-white text-sm hover:text-yellow-400 cursor-pointer hover:-translate-y-1 transition"
@@ -186,7 +186,7 @@ export default function Login() {
                         </button>
                     </div>
                 </div>
-                <p className="text-sm text-center text-white mt-5 md:mt-3">
+                <p className="text-sm text-center text-white mt-4 md:mt-3">
                     © {actualYear} Instituto Real de México. Todos los derechos
                     reservados.
                 </p>

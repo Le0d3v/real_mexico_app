@@ -297,7 +297,7 @@ export default function Students() {
                                         <td className="px-3 md:px-6 py-3 md:py-4 text-center">
                                             <div className="flex flex-col md:flex-row justify-center gap-2">
                                                 <button
-                                                    className="px-3 py-1 text-xs md:text-sm font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black cursor-pointer"
+                                                    className="px-3 py-1 text-xs md:text-sm font-semibold rounded-md bg-yellow-400 hover:bg-yellow-500 transition text-black cursor-pointer perfil"
                                                     onClick={() => {
                                                         setSelectedStudent(
                                                             alumno,
@@ -307,7 +307,7 @@ export default function Students() {
                                                 >
                                                     Perfil
                                                 </button>
-                                                <button className="px-3 py-1 text-xs md:text-sm rounded-md bg-red-600 text-white hover:bg-red-700 transition cursor-pointer">
+                                                <button className="px-3 py-1 text-xs md:text-sm rounded-md bg-red-600 text-white hover:bg-red-700 transition cursor-pointer editar">
                                                     Editar
                                                 </button>
                                             </div>
