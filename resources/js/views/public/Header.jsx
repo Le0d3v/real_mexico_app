@@ -10,7 +10,7 @@ export default function Header({ setPage, page }) {
     const [open, setOpen] = useState(false);
 
     return (
-        <header className="sticky top-0 z-50 group">
+        <header className="sticky top-0 z-50 group overflow-hidden">
             <div className="bg-gray-100 border-b-4 border-yellow-400 px-4 md:px-5 py-2 flex justify-between items-center">
                 <div className="flex items-center gap-3 md:gap-4">
                     <button onClick={() => setPage(0)}>
