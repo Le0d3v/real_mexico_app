@@ -21,7 +21,7 @@ class EstudianteController extends Controller
     public function index()
     {
         return new EstudianteCollection(
-            Estudiante::with([
+            Estudiante::latest()->with([
                 "tutores.user",
                 'domicilio',
                 'colegiaturas'
@@ -192,7 +192,75 @@ class EstudianteController extends Controller
      */
     public function update(Request $request, string $id)
     {
-        //
+        DB::beginTransaction();
+
+        try {
+
+            $estudiante = Estudiante::with('domicilio', 'tutores')->findOrFail($id);
+
+            /* ===============================
+            UPDATE DOMICILIO
+            =============================== */
+            $estudiante->domicilio->update($request->input('address'));
+
+            /* ===============================
+            UPDATE ESTUDIANTE
+            =============================== */
+            $studentData = $request->input('student');
+
+            $estudiante->update([
+                'nombre' => $studentData['nombre'],
+                'apellido_paterno' => $studentData['apellido_paterno'],
+                'apellido_materno' => $studentData['apellido_materno'],
+                'fecha_nacimiento' => $studentData['fecha_nacimiento'],
+                'curp' => $studentData['curp'],
+                'genero' => $studentData['genero'],
+                'grado_id' => $studentData['grado'],
+                'grupo_id' => $studentData['grupo'],
+                'entidad_nacimiento' => $studentData['entidad_nacimiento'],
+                'tipo_sangre' => $studentData['tipo_sangre'],
+                'lengua_materna' => $studentData['lengua_materna'],
+                'discapacidad' => $studentData['discapacidad'],
+            ]);
+
+            /* ===============================
+            UPDATE RELACIÓN TUTOR
+            =============================== */
+            $tutorData = $request->input('tutor');
+
+            if (!empty($tutorData['tutor_id'])) {
+
+                $relacion = $tutorData['relacion'];
+
+                $parentescoFinal = $relacion['parentesco'] === 'Otro'
+                    ? ($relacion['parentesco_otro'] ?? null)
+                    : $relacion['parentesco'];
+
+                $estudiante->tutores()->sync([
+                    $tutorData['tutor_id'] => [
+                        'parentesco' => $parentescoFinal,
+                        'responsable_pagos' => $relacion['responsable_pagos'],
+                        'contacto_principal' => $relacion['contacto_principal'],
+                    ]
+                ]);
+            }
+
+            DB::commit();
+
+            return response()->json([
+                'message' => 'Estudiante actualizado correctamente.',
+                'estudiante' => $estudiante->load('domicilio', 'tutores.user')
+            ]);
+
+        } catch (\Exception $e) {
+
+            DB::rollBack();
+
+            return response()->json([
+                'message' => 'Error al actualizar el estudiante.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
     }
 
     /**

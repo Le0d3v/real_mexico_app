@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import useTutor from "../../../hooks/useTutor";
 import StudentPersonalForm from "./StudentPersonalForm";
 import StudentAddressForm from "./StudentAddressForm";
@@ -8,9 +8,13 @@ import { ClipLoader } from "react-spinners";
 import useStudent from "../../../hooks/useStudent";
 import { toast } from "react-toastify";
 
-export default function CreateStudent({ onClose }) {
+export default function CreateStudent({
+  onClose,
+  initialData = null,
+  isEdit = false,
+}) {
   const { tutores } = useTutor();
-  const { createStudent } = useStudent();
+  const { createStudent, updateStudent } = useStudent(); // 👈 se asume que ya lo agregaste
 
   const [cargando, setCargando] = useState(false);
 
@@ -24,6 +28,45 @@ export default function CreateStudent({ onClose }) {
     },
   });
 
+  // =========================
+  // 🔥 HIDRATACIÓN PARA EDICIÓN
+  // =========================
+  useEffect(() => {
+    if (initialData) {
+      setFormData({
+        student: {
+          nombre: initialData.nombre,
+          apellido_paterno: initialData.apellido_paterno,
+          apellido_materno: initialData.apellido_materno,
+          fecha_nacimiento: initialData.fecha_nacimiento,
+          curp: initialData.curp,
+          genero: initialData.genero,
+          grado: initialData.grado,
+          grupo: initialData.grupo,
+          entidad_nacimiento: initialData.entidad_nacimiento,
+          tipo_sangre: initialData.tipo_sangre,
+          lengua_materna: initialData.lengua_materna,
+          discapacidad: initialData.discapacidad,
+        },
+        address: initialData.domicilio || {},
+        tutor: {
+          tutor_id: initialData.tutores?.[0]?.id || null,
+          new_tutor: {},
+          relacion: {
+            parentesco: initialData.tutores?.[0]?.pivot?.parentesco || "",
+            responsable_pagos:
+              initialData.tutores?.[0]?.pivot?.responsable_pagos || 0,
+            contacto_principal:
+              initialData.tutores?.[0]?.pivot?.contacto_principal || 0,
+          },
+        },
+      });
+    }
+  }, [initialData]);
+
+  // =========================
+  // HANDLERS (SIN CAMBIOS)
+  // =========================
   const handleStudentChange = (field, value) => {
     setFormData((prev) => ({
       ...prev,
@@ -80,23 +123,37 @@ export default function CreateStudent({ onClose }) {
     }));
   };
 
+  // =========================
+  // 🚀 SUBMIT DINÁMICO
+  // =========================
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     setCargando(true);
-    console.log(formData);
 
     try {
-      const response = await createStudent(formData);
+      let response;
+
+      if (isEdit) {
+        response = await updateStudent(initialData.id, formData);
+      } else {
+        response = await createStudent(formData);
+      }
+
       toast.success(response.message);
-      onClose(false);
+      onClose();
     } catch (error) {
       if (error?.status === 422) {
         Object.values(error.data.errors).forEach((messages) =>
           messages.forEach((message) => toast.error(message)),
         );
       } else {
-        toast.error("Error inesperado al registrar el tutor.");
+        toast.error(
+          isEdit
+            ? "Error al actualizar el estudiante."
+            : "Error al registrar el estudiante.",
+        );
       }
+
       console.log(error);
     } finally {
       setCargando(false);
@@ -105,15 +162,19 @@ export default function CreateStudent({ onClose }) {
 
   return (
     <>
+      {/* HEADER */}
       <div className="flex gap-1 items-center mb-3">
         <Info />
-        <p className="">
-          Complete el siguiente formulario para inscribir a un Alumno
+        <p>
+          {isEdit
+            ? "Modifique la información del alumno"
+            : "Complete el siguiente formulario para inscribir a un Alumno"}
         </p>
       </div>
 
       <div>
         <form onSubmit={handleSubmitForm} noValidate className="space-y-8">
+          {/* FORMULARIOS */}
           <StudentPersonalForm
             form={formData.student}
             onChange={handleStudentChange}
@@ -124,15 +185,24 @@ export default function CreateStudent({ onClose }) {
             onChange={handleAddressChange}
           />
 
-          <TutorSectionForm
-            tutores={tutores}
-            onTutorSelect={(id) => handleTutorChange("tutor_id", id)}
-            onNewTutorChange={handleNewTutorChange}
-            onRelationChange={handleTutorRelationChange}
-          />
+          {isEdit ? (
+            <></>
+          ) : (
+            <TutorSectionForm
+              tutores={tutores}
+              selectedTutorId={formData.tutor.tutor_id} // 👈 opcional si tu componente lo soporta
+              onTutorSelect={(id) => handleTutorChange("tutor_id", id)}
+              onNewTutorChange={handleNewTutorChange}
+              onRelationChange={handleTutorRelationChange}
+              initialRelation={formData.tutor.relacion} // 👈 opcional
+            />
+          )}
 
+          {/* ACCIONES */}
           <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-between gap-4 items-center">
-            <h1 className="text-3xl font-semibold text-red-400">Acciones</h1>
+            <h1 className="text-3xl font-semibold text-red-400">
+              {isEdit ? "Editar" : "Acciones"}
+            </h1>
 
             <div className="flex gap-5">
               <button
@@ -142,6 +212,7 @@ export default function CreateStudent({ onClose }) {
               >
                 Cerrar
               </button>
+
               <button
                 type="submit"
                 className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm cursor-pointer w-44"
@@ -149,7 +220,7 @@ export default function CreateStudent({ onClose }) {
                 {cargando ? (
                   <ClipLoader size={20} color="white" />
                 ) : (
-                  <p>Inscribir Alumno</p>
+                  <p>{isEdit ? "Guardar Cambios" : "Inscribir Alumno"}</p>
                 )}
               </button>
             </div>
