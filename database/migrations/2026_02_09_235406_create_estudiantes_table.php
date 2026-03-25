@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('apellido_materno', 45);
             $table->date('fecha_nacimiento');
             $table->char('curp', 18)->unique();
-            $table->char('matricula', 10)->unique();
+            $table->string('matricula', 20)->unique();
             $table->enum('genero', ['Masculino', 'Femenino']);
             $table->string('entidad_nacimiento', 45);
             $table->enum('estado', ['Activo', 'Baja Temporal', 'Egresado']);

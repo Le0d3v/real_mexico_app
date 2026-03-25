@@ -13,6 +13,8 @@ class Estudiante extends Model
         "fecha_nacimiento",
         "curp",
         "genero",
+        "matricula",
+        "estado",
         "entidad_nacimiento",
         "tipo_sangre",
         "lengua_materna",

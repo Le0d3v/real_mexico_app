@@ -86,15 +86,12 @@ export default function AdminLayout() {
         </div>
       </div>
       <ToastContainer />
-      {/* OVERLAY */}
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
       )}
-
-      {/* MENÚ RESPONSIVE */}
       <ResponsiveMenu
         isOpen={isMenuOpen}
         closeMenu={() => setIsMenuOpen(false)}
