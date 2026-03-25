@@ -52,31 +52,7 @@ class EstudianteController extends Controller
 
                 $studentData = $request->input('student');
 
-                /* ===============================
-                GENERAR MATRÍCULA (ANTES DEL INSERT)
-                =============================== */
-
-                $year = now()->format('y');
-
-                $ultimoEstudiante = Estudiante::whereYear('created_at', now()->year)
-                    ->whereNotNull('matricula')
-                    ->lockForUpdate()
-                    ->orderBy('id', 'desc')
-                    ->first();
-
-                if ($ultimoEstudiante) {
-                    preg_match('/IRM-\d{2}-(\d{4})/', $ultimoEstudiante->matricula, $matches);
-                    $consecutivo = isset($matches[1]) ? intval($matches[1]) + 1 : 1;
-                } else {
-                    $consecutivo = 1;
-                }
-
-                $consecutivoFormateado = str_pad($consecutivo, 4, '0', STR_PAD_LEFT);
-                $matricula = "IRM{$year}{$consecutivoFormateado}";
-
-                /* ===============================
-                CREAR ESTUDIANTE (YA CON MATRÍCULA)
-                =============================== */
+                
 
                 $estudiante = Estudiante::create([
                     'nombre' => $studentData['nombre'],
@@ -93,7 +69,6 @@ class EstudianteController extends Controller
                     'lengua_materna' => $studentData['lengua_materna'],
                     'discapacidad' => $studentData['discapacidad'],
                     'domicilio_id' => $domicilio->id,
-                    'matricula' => $matricula
                 ]);
 
                 /* ===============================

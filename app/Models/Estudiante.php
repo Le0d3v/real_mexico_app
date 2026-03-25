@@ -66,13 +66,24 @@ class Estudiante extends Model
 
         static::creating(function ($estudiante) {
 
-            $ultimo = Estudiante::orderBy('id','desc')->first();
+            $year = now()->format('y');
 
-            $consecutivo = $ultimo
-                ? intval(substr($ultimo->matricula,4)) + 1
-                : 1;
+            $ultimoEstudiante = self::whereYear('created_at', now()->year)
+                ->whereNotNull('matricula')
+                ->orderBy('id', 'desc')
+                ->lockForUpdate()
+                ->first();
 
-            $estudiante->matricula = '3526' . str_pad($consecutivo,6,'0',STR_PAD_LEFT);
+            if ($ultimoEstudiante) {
+                preg_match('/IRM\d{2}(\d{4})/', $ultimoEstudiante->matricula, $matches);
+                $consecutivo = isset($matches[1]) ? intval($matches[1]) + 1 : 1;
+            } else {
+                $consecutivo = 1;
+            }
+
+            $consecutivoFormateado = str_pad($consecutivo, 4, '0', STR_PAD_LEFT);
+
+            $estudiante->matricula = "IRM{$year}{$consecutivoFormateado}";
         });
     }
 }
