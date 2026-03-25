@@ -13,7 +13,7 @@ class DomiciliosSeeder extends Seeder
      */
     public function run(): void
     {
-        for ($i = 1; $i <= 68; $i++) {
+        for ($i = 1; $i < 2; $i++) {
             DB::table('domicilios')->insert([
                 'calle' => "Calle $i",
                 'numero_exterior' => (string)$i,
