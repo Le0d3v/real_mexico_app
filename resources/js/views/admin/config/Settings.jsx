@@ -7,26 +7,26 @@ import PasswordForm from "./PasswordForm";
 import Tour from "./Tour";
 
 export default function Settings() {
-    const { user, mutate } = useAuth({ middleware: "auth" });
+  const { user, mutate } = useAuth({ middleware: "auth" });
 
-    if (!user) {
-        return <Loader />;
-    }
+  if (!user) {
+    return <Loader />;
+  }
 
-    return (
-        <div className="max-w-7xl mx-auto">
-            <div className="" id="driver_settings-personal">
-                <DatosPersonalesForm user={user} />
-            </div>
-            <div className="my-7" id="driver_settings-domicilio">
-                <DomicilioForm user={user} />
-            </div>
-            <div className="my-7" id="driver_settings-password">
-                <PasswordForm user={user} />
-            </div>
-            <div className="my-7" id="driver_settings-tour">
-                <Tour user={user} />
-            </div>
-        </div>
-    );
+  return (
+    <div className="max-w-7xl mx-auto">
+      <div className="" id="driver_settings-personal">
+        <DatosPersonalesForm user={user} />
+      </div>
+      <div className="my-7" id="driver_settings-domicilio">
+        <DomicilioForm user={user} />
+      </div>
+      <div className="my-7" id="driver_settings-password">
+        <PasswordForm user={user} />
+      </div>
+      <div className="my-7 hidden lg:block" id="driver_settings-tour">
+        <Tour user={user} />
+      </div>
+    </div>
+  );
 }

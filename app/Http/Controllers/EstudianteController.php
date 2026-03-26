@@ -9,6 +9,7 @@ use App\Models\Estudiante;
 use App\Models\Tutor;
 use App\Models\User;
 use Carbon\Carbon;
+use Carbon\CarbonPeriod;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -33,6 +34,9 @@ class EstudianteController extends Controller
     {
         $maxIntentos = 5;
         $intentos = 0;
+
+
+        Carbon::setLocale('es');
 
         do {
             try {
@@ -132,33 +136,46 @@ class EstudianteController extends Controller
                 /* ===============================
                 GENERAR COLEGIATURAS
                 =============================== */
-
-                $meses = [
-                    1 => 'Enero', 2 => 'Febrero', 3 => 'Marzo', 4 => 'Abril',
-                    5 => 'Mayo', 6 => 'Junio', 7 => 'Julio', 8 => 'Agosto',
-                    9 => 'Septiembre', 10 => 'Octubre', 11 => 'Noviembre', 12 => 'Diciembre',
-                ];
-
-                $anio = now()->year;
                 $montoColegiatura = 1200;
+
                 $cicloEscolar = CicloEscolar::where("activo", 1)->firstOrFail();
 
-                foreach ($meses as $numeroMes => $nombreMes) {
+                // Tomar fechas reales del ciclo
+                $inicio = Carbon::parse($cicloEscolar->fecha_inicio)->startOfMonth();
+                $fin = Carbon::parse($cicloEscolar->fecha_fin)->startOfMonth();
 
-                    $fechaLimite = Carbon::create($anio, $numeroMes, 10);
+                // Crear periodo mensual
+                $periodo = CarbonPeriod::create($inicio, '1 month', $fin);
 
-                    DB::table('colegiaturas')->insert([
-                        'estudiante_id' => $estudiante->id,
-                        'ciclo_escolar_id' => $cicloEscolar->id,
-                        'mes' => $nombreMes,
-                        'anio' => $anio,
-                        'monto' => $montoColegiatura,
-                        'pagado' => 0,
-                        'estado' => 'Pendiente',
-                        'fecha_limite_pago' => $fechaLimite,
-                        'created_at' => now(),
-                        'updated_at' => now(),
-                    ]);
+                foreach ($periodo as $fecha) {
+
+                    $mesNombre = $mesNombre = ucfirst($fecha->translatedFormat('F')); // Ej: Septiembre
+                    $anio = $fecha->year;
+
+                    $fechaLimite = $fecha->copy()->day(10);
+
+                    // Evitar duplicados (robustez adicional)
+                    $existe = DB::table('colegiaturas')
+                        ->where('estudiante_id', $estudiante->id)
+                        ->where('ciclo_escolar_id', $cicloEscolar->id)
+                        ->where('mes', $mesNombre)
+                        ->where('anio', $anio)
+                        ->exists();
+
+                    if (!$existe) {
+                        DB::table('colegiaturas')->insert([
+                            'estudiante_id' => $estudiante->id,
+                            'ciclo_escolar_id' => $cicloEscolar->id,
+                            'mes' => $mesNombre,
+                            'anio' => $anio,
+                            'monto' => $montoColegiatura,
+                            'pagado' => 0,
+                            'estado' => 'Pendiente',
+                            'fecha_limite_pago' => $fechaLimite,
+                            'created_at' => now(),
+                            'updated_at' => now(),
+                        ]);
+                    }
                 }
 
                 DB::commit();

@@ -15,12 +15,16 @@ import Loader from "../components/Loader";
 import { ClipLoader } from "react-spinners";
 import useIRM from "../../hooks/useIRM";
 import ResponsiveMenu from "../admin/components/ResponsiveMenu";
+import { PanelLeftClose, PanelLeftOpen } from "lucide-react";
 
 export default function AdminLayout() {
   const { loading, user } = useAuth({ middleware: "auth" });
   const { adminPage, setAdminPage, adminContentScroll } = useIRM();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+
+  /* 🔥 NUEVO: estado sidebar */
+  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
 
   const initial = user?.name ? user.name.trim().charAt(0).toUpperCase() : "";
 
@@ -42,7 +46,14 @@ export default function AdminLayout() {
     <>
       <div className="h-screen flex bg-gray-100" id="driver_welcome">
         {/* SIDEBAR */}
-        <aside className="hidden md:flex flex-col w-16 lg:w-56 transition-all duration-300 bg-red-800 text-white ">
+        <aside
+          className={`
+            hidden md:flex flex-col 
+            transition-all duration-300 
+            bg-red-800 text-white
+            ${isSidebarOpen ? "w-16 lg:w-56" : "w-0 overflow-hidden"}
+          `}
+        >
           {/* Logo */}
           <div className="h-20 flex items-center justify-center border-b border-yellow-500/30 py-3">
             <img
@@ -51,14 +62,17 @@ export default function AdminLayout() {
               alt="logo"
             />
           </div>
+
           <div className="flex-1 px-3 py-3" id="driver_navegacion">
             <Navigation index="1" setPage={setAdminPage} page={adminPage} />
           </div>
+
           <div className="p-4 border-t border-yellow-500/20">
             <div className="flex items-center gap-3 bg-red-700/60 p-3 rounded-lg hover:bg-red-700 transition">
               <div className="w-8 h-8 bg-yellow-400 rounded-full flex items-center justify-center font-bold text-black">
                 {loading ? <ClipLoader size={16} color="black" /> : initial}
               </div>
+
               <div className="hidden lg:block text-sm font-medium">
                 {loading ? (
                   <ClipLoader size={15} color="white" />
@@ -69,8 +83,15 @@ export default function AdminLayout() {
             </div>
           </div>
         </aside>
-        <div className="flex-1 flex flex-col min-w-0">
-          <Header index="1" toggleMenu={() => setIsMenuOpen(true)} />
+
+        <div className="flex-1 flex flex-col min-w-0 relative">
+          {/* HEADER (FULL WIDTH RESTAURADO) */}
+          <Header
+            index="1"
+            toggleMenu={() => setIsMenuOpen(true)}
+            isSidebarOpen={isSidebarOpen}
+            setIsSidebarOpen={setIsSidebarOpen}
+          />
 
           <main
             className="flex-1 p-2 md:p-4 overflow-x-hidden overflow-y-auto bg-white min-w-0"
@@ -85,13 +106,16 @@ export default function AdminLayout() {
           </main>
         </div>
       </div>
+
       <ToastContainer />
+
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black/50 z-40 md:hidden"
           onClick={() => setIsMenuOpen(false)}
         />
       )}
+
       <ResponsiveMenu
         isOpen={isMenuOpen}
         closeMenu={() => setIsMenuOpen(false)}

@@ -58,7 +58,7 @@ class Colegiatura extends Model
         $estado = $this->getEstadoCalculadoAttribute();
 
         if($estado === "Vencida") {
-            return 1800;
+            return 1300;
         }
 
         return $this->monto;
