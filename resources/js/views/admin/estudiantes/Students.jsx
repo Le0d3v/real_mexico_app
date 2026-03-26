@@ -79,29 +79,30 @@ export default function Students() {
     { label: "Tutor", key: "tutor" },
   ];
 
-  const datosExcel = filteredStudents.map((registro) => ({
-    alumno:
-      registro.nombre +
-      " " +
-      registro.apellido_paterno +
-      " " +
-      registro.apellido_materno,
-    fecha_nacimiento: formatDate(registro.fecha_nacimiento),
-    curp: registro.curp,
-    genero: registro.genero,
-    tipo_sangre: registro.tipo_sangre,
-    entidad_nacimiento: registro.entidad_nacimiento,
-    matricula: registro.matricula,
-    grado: registro.grado,
-    grupo: registro.grupo,
-    estado: registro.estado,
-    tutor:
-      registro.tutores[0].usuario.name +
-      " " +
-      registro.tutores[0].usuario.apellido_paterno +
-      " " +
-      registro.tutores[0].usuario.apellido_materno,
-  }));
+  const datosExcel = filteredStudents.map((registro) => {
+    const tutor = registro.tutores?.[0]?.usuario;
+
+    return {
+      alumno:
+        `${registro.nombre ?? ""} ${registro.apellido_paterno ?? ""} ${registro.apellido_materno ?? ""}`.trim(),
+
+      fecha_nacimiento: formatDate(registro.fecha_nacimiento),
+      curp: registro.curp,
+      genero: registro.genero,
+      tipo_sangre: registro.tipo_sangre,
+      entidad_nacimiento: registro.entidad_nacimiento,
+      matricula: registro.matricula,
+      grado: registro.grado,
+      grupo: registro.grupo,
+      estado: registro.estado,
+
+      tutor: tutor
+        ? [tutor.name, tutor.apellido_paterno, tutor.apellido_materno]
+            .filter(Boolean)
+            .join(" ")
+        : "Sin tutor registrado",
+    };
+  });
 
   if (isLoading) return <Loader />;
   if (error) return <p>Error al cargar tutores</p>;
@@ -252,11 +253,17 @@ export default function Students() {
                     </td>
 
                     <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600">
-                      <span className="font-medium text-gray-800">
-                        {alumno.tutores?.[0]?.usuario?.name +
-                          " " +
-                          alumno.tutores?.[0]?.usuario?.apellido_paterno ?? "—"}
-                      </span>
+                      {alumno.tutores?.length > 0 &&
+                      alumno.tutores[0]?.usuario ? (
+                        <span className="font-medium text-gray-800">
+                          {`${alumno.tutores[0].usuario.name ?? ""} ${alumno.tutores[0].usuario.apellido_paterno ?? ""}`.trim() ||
+                            "—"}
+                        </span>
+                      ) : (
+                        <p className="text-red-500 font-semibold">
+                          Sin tutor registrado
+                        </p>
+                      )}
                     </td>
 
                     <td className="px-3 md:px-6 py-3 md:py-4 text-center">

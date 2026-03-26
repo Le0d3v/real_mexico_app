@@ -5,99 +5,99 @@ import { toast } from "react-toastify";
 import useIRM from "./useIRM";
 
 export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
-    const navigate = useNavigate();
-    const { setPage, setTitulo } = useIRM();
+  const navigate = useNavigate();
+  const { setPage, setTitulo } = useIRM();
 
-    const [user, setUser] = useState(null);
-    const [loading, setLoading] = useState(true);
-    const [errors, setErrors] = useState([]);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [errors, setErrors] = useState([]);
 
-    const fetchUser = async () => {
-        try {
-            const { data } = await api.get("/api/me");
-            setUser(data);
-        } catch {
-            setUser(null);
-        } finally {
-            setLoading(false);
-        }
-    };
+  const fetchUser = async () => {
+    try {
+      const { data } = await api.get("/api/me");
+      setUser(data);
+    } catch {
+      setUser(null);
+    } finally {
+      setLoading(false);
+    }
+  };
 
-    const login = async ({ email, password, setCargando }) => {
-        setErrors([]);
+  const login = async ({ phone, password, setCargando }) => {
+    setErrors([]);
 
-        try {
-            const { data } = await api.post("/api/auth-login", {
-                email,
-                password,
-            });
+    try {
+      const { data } = await api.post("/api/auth-login", {
+        phone,
+        password,
+      });
 
-            // Guardar token
-            localStorage.setItem("token", data.token);
+      // Guardar token
+      localStorage.setItem("token", data.token);
 
-            setUser(data.user);
+      setUser(data.user);
 
-            navigate("/admin");
-            (setPage(0), setTitulo("Instituto Real de México A.C."));
-        } catch (error) {
-            if (error.response?.status === 422) {
-                const validationErrors = error.response.data.errors;
-                setErrors(validationErrors);
+      navigate("/admin");
+      (setPage(0), setTitulo("Instituto Real de México A.C."));
+    } catch (error) {
+      if (error.response?.status === 422) {
+        const validationErrors = error.response.data.errors;
+        setErrors(validationErrors);
 
-                Object.values(validationErrors)
-                    .flat()
-                    .forEach((message) => {
-                        toast.error(message);
-                    });
-            } else if (error.response?.status === 401) {
-                toast.error("Credenciales incorrectas.");
-            } else {
-                toast.error("Error inesperado.");
-            }
+        Object.values(validationErrors)
+          .flat()
+          .forEach((message) => {
+            toast.error(message);
+          });
+      } else if (error.response?.status === 401) {
+        toast.error("Credenciales incorrectas.");
+      } else {
+        toast.error("Error inesperado.");
+      }
 
-            setCargando(false);
-        }
-    };
+      setCargando(false);
+    }
+  };
 
-    const logout = async () => {
-        try {
-            await api.post("/api/logout");
-        } catch (error) {
-            console.warn("Error al cerrar sesión");
-        }
+  const logout = async () => {
+    try {
+      await api.post("/api/logout");
+    } catch (error) {
+      console.warn("Error al cerrar sesión");
+    }
 
-        localStorage.removeItem("token");
-        setUser(null);
+    localStorage.removeItem("token");
+    setUser(null);
+    navigate("/login");
+  };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+
+    if (token) {
+      fetchUser();
+    } else {
+      setLoading(false);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!loading) {
+      if (middleware === "guest" && user) {
+        navigate(redirectIfAuthenticated || "/admin");
+      }
+
+      if (middleware === "auth" && !user) {
         navigate("/login");
-    };
+      }
+    }
+  }, [user, loading]);
 
-    useEffect(() => {
-        const token = localStorage.getItem("token");
-
-        if (token) {
-            fetchUser();
-        } else {
-            setLoading(false);
-        }
-    }, []);
-
-    useEffect(() => {
-        if (!loading) {
-            if (middleware === "guest" && user) {
-                navigate(redirectIfAuthenticated || "/admin");
-            }
-
-            if (middleware === "auth" && !user) {
-                navigate("/login");
-            }
-        }
-    }, [user, loading]);
-
-    return {
-        user,
-        loading,
-        errors,
-        login,
-        logout,
-    };
+  return {
+    user,
+    loading,
+    errors,
+    login,
+    logout,
+  };
 }

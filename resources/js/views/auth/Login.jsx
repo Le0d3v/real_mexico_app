@@ -1,4 +1,4 @@
-import { Mail, Lock, Eye, EyeOff } from "lucide-react";
+import { Phone, Lock, Eye, EyeOff } from "lucide-react";
 import useAuth from "../../hooks/useAuth";
 import SubmitButton from "../components/SubmitButton";
 import { Link, useNavigate } from "react-router-dom";
@@ -22,13 +22,13 @@ export default function Login() {
     redirectIfAuthenticated: "/admin",
   });
 
-  const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
   const submit = (e) => {
     e.preventDefault();
     setCargando(true);
-    login({ email, password, setCargando });
+    login({ phone, password, setCargando });
   };
 
   const handleClickNavigate = (page) => {
@@ -94,14 +94,14 @@ export default function Login() {
               <div className="mt-5">
                 <div className="my-3">
                   <div>
-                    <label htmlFor="email">Correo Electrónico</label>
+                    <label htmlFor="phone">Número Telefónico</label>
                     <div className="relative mt-1">
-                      <Mail className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black pointer-events-none" />
+                      <Phone className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-black pointer-events-none" />
                       <input
-                        id="email"
-                        type="email"
-                        placeholder="correo@dominio.com"
-                        onChange={(e) => setEmail(e.target.value)}
+                        id="phone"
+                        type="tel"
+                        placeholder="Número teléfonico proporcionado en su registro"
+                        onChange={(e) => setPhone(e.target.value)}
                         className="w-full pl-10 pr-3 py-2 bg-white text-black rounded-lg 
                                                 focus:outline-none focus:ring-2 focus:ring-blue-500"
                         required

@@ -27,7 +27,7 @@ class LoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => ['required', 'string', 'email'],
+            'phone' => ['required',],
             'password' => ['required', 'string'],
         ];
     }
@@ -35,7 +35,7 @@ class LoginRequest extends FormRequest
     public function messages()
     {
         return [
-            "email" => "El Email es Requerido",
+            "phone" => "El Número Telefónico es Requerido",
             "password" => "La contraseña es Requerida",
         ];
     }
@@ -49,11 +49,12 @@ class LoginRequest extends FormRequest
     {
         $this->ensureIsNotRateLimited();
 
-        if (! Auth::attempt($this->only('email', 'password'))) {
-            RateLimiter::hit($this->throttleKey());
-
+        if (!Auth::attempt([
+            'telefono' => $this->phone,
+            'password' => $this->password
+        ])) {
             throw ValidationException::withMessages([
-                'email' => 'Email o Contraseña Incorrectos.',
+                'phone' => ['Las credenciales son incorrectas.'],
             ]);
         }
 

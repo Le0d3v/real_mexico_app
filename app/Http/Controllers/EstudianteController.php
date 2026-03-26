@@ -52,8 +52,6 @@ class EstudianteController extends Controller
 
                 $studentData = $request->input('student');
 
-                
-
                 $estudiante = Estudiante::create([
                     'nombre' => $studentData['nombre'],
                     'apellido_paterno' => $studentData['apellido_paterno'],
@@ -85,6 +83,16 @@ class EstudianteController extends Controller
 
                     $newTutor = $tutorData['new_tutor'];
 
+                    // Normalizar teléfono (solo dígitos)
+                    $telefonoLimpio = preg_replace('/\D/', '', $newTutor['telefono']);
+
+                    // Obtener últimos 4 dígitos (con padding por seguridad)
+                    $ultimos4 = substr($telefonoLimpio, -4);
+                    $ultimos4 = str_pad($ultimos4, 4, '0', STR_PAD_LEFT);
+
+                    // Generar password: IRM-XXXX
+                    $password = 'IRM-' . $ultimos4;
+
                     $tutorUser = User::create([
                         'name' => $newTutor['name'],
                         'apellido_paterno' => $newTutor['apellido_paterno'],
@@ -93,7 +101,7 @@ class EstudianteController extends Controller
                         'curp' => $newTutor['curp'],
                         'genero' => $newTutor['genero'],
                         'email' => $newTutor['email'] ?? null,
-                        'password' => Hash::make($newTutor['curp']),
+                        'password' => Hash::make($password),
                         'telefono' => $newTutor['telefono'],
                         'rol' => 'tutor',
                         'domicilio_id' => $domicilio->id,

@@ -13,13 +13,16 @@ class AuthController extends Controller
 {
     public function login(LoginRequest $request): JsonResponse
     {
+        // Autenticación usando teléfono
         $request->authenticate();
 
+        // Buscar usuario por campo "telefono"
         $user = User::with([
             'domicilio',
             'tutor'
-        ])->where('email', $request->email)->first();
+        ])->where('telefono', $request->phone)->first();
 
+        // Generar token
         $token = $user->createToken('auth_token')->plainTextToken;
 
         return response()->json([
