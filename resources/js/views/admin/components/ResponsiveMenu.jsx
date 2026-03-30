@@ -42,7 +42,6 @@ export default function ResponsiveMenu({
           </button>
         </div>
 
-        {/* CONTENIDO SCROLLABLE */}
         <div className="flex-1 overflow-y-scroll px-4 pb-4">
           {/* LOGO */}
           <div className="mt-2 text-center">

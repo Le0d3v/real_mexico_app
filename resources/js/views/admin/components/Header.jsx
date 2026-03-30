@@ -23,7 +23,7 @@ export default function Header({
   };
 
   return (
-    <header className="bg-black text-white shadow-md border-b border-yellow-500/40">
+    <header className="bg-black/90 text-white shadow-md border-b border-yellow-500/40">
       <div className="flex items-center justify-between h-18  px-5 gap-4">
         {/* IZQUIERDA: BOTÓN + TÍTULO */}
         <div className="flex items-center gap-3 min-w-0">
