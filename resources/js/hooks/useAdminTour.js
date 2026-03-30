@@ -723,6 +723,22 @@ export default function useAdminTour() {
           },
         },
         {
+          element: "#driver_cierre-ciclo",
+          popover: {
+            title: "Cierre de Ciclo Escolar",
+            description:
+              "En esta sección se ejecuta el proceso de cierre del ciclo escolar actual. Al realizar esta acción, el sistema desactiva el ciclo vigente, crea uno nuevo, promueve automáticamente a los alumnos al siguiente grado, egresa a los de último nivel y genera las colegiaturas correspondientes al nuevo ciclo. Este procedimiento es crítico y afecta toda la operación académica y financiera.",
+          },
+        },
+        {
+          element: "#driver_cierre-ciclo-btn",
+          popover: {
+            title: "Ejecutar cierre de ciclo",
+            description:
+              "Presione este botón para iniciar el cierre del ciclo escolar. Antes de continuar, el sistema solicitará una confirmación para evitar ejecuciones accidentales. Una vez confirmado, el proceso se ejecutará de forma automática y no podrá revertirse.",
+          },
+        },
+        {
           element: "#driver_settings-tour",
           popover: {
             title: "Tour por la Aplicacion",
