@@ -17,7 +17,7 @@ class PagoController extends Controller
     public function index()
     {
         return new PagoCollection(
-            Pago::with([
+            Pago::latest()->with([
                 'colegiatura',
                 'estudiante',
                 'tutor', // ← usuario + perfil tutor

@@ -30,7 +30,7 @@ import GraficoGrados from "./components/GraficoGrados";
 export default function Dashboard() {
   const { estudiantes } = useStudent();
   const { tutores } = useTutor();
-  const { cicloEscolar, isLoading } = useCicloEscolar();
+  const { cicloEscolar, isLoading, error } = useCicloEscolar();
   const { colegiaturasMesActual, colegiaturas } = useColegiatura();
 
   const colegiaturasVencidas = colegiaturas.filter((e) => {
@@ -57,6 +57,7 @@ export default function Dashboard() {
   const totalEstudiantes = estudiantes.length;
 
   if (isLoading) return <Loader />;
+  if (error) return "Error al cagar los Datos";
 
   return (
     <>

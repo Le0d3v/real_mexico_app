@@ -223,7 +223,7 @@ export default function CierreCiclo() {
               border-top:1px solid #E5E7EB;
               padding-top:8px;
             ">
-              Los datos han sido actualizados correctamente. Puede continuar operando en el nuevo ciclo escolar.
+              Los datos han sido actualizados correctamente. A paritr de ahora puede continuar operando en el nuevo ciclo escolar.
             </div>
 
           </div>
@@ -303,7 +303,7 @@ export default function CierreCiclo() {
           </button>
 
           <span className="text-xs text-gray-500">
-            Tiempo estimado: 5 - 20 segundos
+            Tiempo estimado: 1 - 2 minutos
           </span>
         </div>
       </div>
