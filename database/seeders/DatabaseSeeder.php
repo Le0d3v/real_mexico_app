@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
             // 🔹 Datos generales
             DomiciliosSeeder::class,
             UsersSeeder::class,
-            // TutoresSeeder::class,
+            //TutoresSeeder::class,
 
             // 🔹 Núcleo académico
             // EstudiantesSeeder::class,

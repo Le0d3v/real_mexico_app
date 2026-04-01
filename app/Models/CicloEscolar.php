@@ -28,4 +28,9 @@ class CicloEscolar extends Model
     {
         return $this->hasMany(Colegiatura::class);
     }
+
+    public static function actual()
+    {
+        return self::where('activo', 1)->first();
+    }
 }

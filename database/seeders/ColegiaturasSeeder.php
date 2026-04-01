@@ -40,7 +40,7 @@ class ColegiaturasSeeder extends Seeder
 
                 DB::table('colegiaturas')->insert([
                     'estudiante_id' => $estudianteId,
-                    'ciclo_escolar_id' => 2,
+                    'ciclo_escolar_id' => 1,
                     'mes' => $nombreMes,
                     'anio' => $anio,
                     'monto' => $montoColegiatura,

@@ -25,7 +25,7 @@ class EstudianteController extends Controller
             Estudiante::latest()->with([
                 "tutores.user",
                 'domicilio',
-                'colegiaturas'
+                'colegiaturasActuales'
             ])->get()
         );
     }
@@ -35,7 +35,7 @@ class EstudianteController extends Controller
     {
         $maxIntentos = 5;
         $intentos = 0;
-        $cicloEscolarActual = CicloEscolar::where("activo", true);
+        $cicloEscolarActual = CicloEscolar::where("activo", 1)->first();
         Carbon::setLocale('es');
 
         do {

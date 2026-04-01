@@ -19,6 +19,7 @@ class CicloEscolarResource extends JsonResource
             "fecha_inicio" => $this->fecha_inicio,
             "fecha_fin" => $this->fecha_fin,
             "activo" => $this->activo,
+            "monto_colegiatura" => $this->monto_colegiatura,
         ];
     }
 }

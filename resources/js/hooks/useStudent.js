@@ -36,27 +36,39 @@ export default function useStudent() {
   };
 
   const estudiantesPrimerCiclo = useMemo(() => {
-    return estudiantes.filter((e) => [1].includes(Number(e.grado_id)));
+    return estudiantes.filter(
+      (e) => Number(e.grado_id) === 1 && e.estado === "Activo",
+    );
   }, [estudiantes]);
 
   const estudiantesSegundoCiclo = useMemo(() => {
-    return estudiantes.filter((e) => [2].includes(Number(e.grado_id)));
+    return estudiantes.filter(
+      (e) => Number(e.grado_id) === 2 && e.estado === "Activo",
+    );
   }, [estudiantes]);
 
   const estudiantesTercerCiclo = useMemo(() => {
-    return estudiantes.filter((e) => [3].includes(Number(e.grado_id)));
+    return estudiantes.filter(
+      (e) => Number(e.grado_id) === 3 && e.estado === "Activo",
+    );
   }, [estudiantes]);
 
   const estudiantesCuartoCiclo = useMemo(() => {
-    return estudiantes.filter((e) => [4].includes(Number(e.grado_id)));
+    return estudiantes.filter(
+      (e) => Number(e.grado_id) === 4 && e.estado === "Activo",
+    );
   }, [estudiantes]);
 
   const estudiantesQuintoCiclo = useMemo(() => {
-    return estudiantes.filter((e) => [5].includes(Number(e.grado_id)));
+    return estudiantes.filter(
+      (e) => Number(e.grado_id) === 5 && e.estado === "Activo",
+    );
   }, [estudiantes]);
 
   const estudiantesSextoCiclo = useMemo(() => {
-    return estudiantes.filter((e) => [6].includes(Number(e.grado_id)));
+    return estudiantes.filter(
+      (e) => Number(e.grado_id) === 6 && e.estado === "Activo",
+    );
   }, [estudiantes]);
 
   return {

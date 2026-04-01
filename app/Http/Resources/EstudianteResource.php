@@ -35,12 +35,10 @@ class EstudianteResource extends JsonResource
             
             "domicilio" => new DomicilioResource($this->domicilio),
 
-            "colegiaturas" => $this->whenLoaded("colegiaturas", function () {
-                return $this->colegiaturas->map(function ($colegiatura) {
+           "colegiaturas" => $this->whenLoaded("colegiaturasActuales", function () {
+                return $this->colegiaturasActuales->map(function ($colegiatura) {
                     return new ColegiaturaResource($colegiatura);
-
                 });
-                
             }),
             
             "tutores" => $this->whenLoaded('tutores', function () {

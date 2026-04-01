@@ -59,7 +59,7 @@ export default function Dashboard() {
   if (isLoading) return <Loader />;
   if (error) return "Error al cagar los Datos";
 
-  return (
+  return (  
     <>
       <div className="bg-slate-100 min-h-screen">
         <Tittle>Panel de Administración</Tittle>

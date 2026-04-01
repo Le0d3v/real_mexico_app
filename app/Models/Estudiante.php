@@ -60,6 +60,14 @@ class Estudiante extends Model
         return $this->hasMany(Colegiatura::class);
     }
 
+    public function colegiaturasActuales()
+    {
+        $cicloActual = \App\Models\CicloEscolar::actual();
+
+        return $this->hasMany(Colegiatura::class)
+            ->where('ciclo_escolar_id', $cicloActual->id);
+    }
+
     protected static function boot()
     {
         parent::boot();
