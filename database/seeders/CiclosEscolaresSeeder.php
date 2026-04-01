@@ -18,6 +18,7 @@ class CiclosEscolaresSeeder extends Seeder
                 'nombre' => '2025 - 2026',
                 'fecha_inicio' => '2025-09-01',
                 'fecha_fin' => '2026-07-15',
+                'monto_colegiatura' => 1200,
                 'activo' => true
             ],
         ]);

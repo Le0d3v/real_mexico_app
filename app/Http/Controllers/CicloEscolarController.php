@@ -78,6 +78,7 @@ class CicloEscolarController extends Controller
                     date('Y', strtotime($request->fecha_fin)),
                 'fecha_inicio' => $request->fecha_inicio,
                 'fecha_fin' => $request->fecha_fin,
+                'monto_colegiatura' => $request->monto,
                 'activo' => 1
             ]);
 

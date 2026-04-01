@@ -13,6 +13,7 @@ class CicloEscolar extends Model
         "nombre",
         "fecha_inicio",
         "fecha_fin",
+        "monto_colegiatura",
         "activo"
     ];
 

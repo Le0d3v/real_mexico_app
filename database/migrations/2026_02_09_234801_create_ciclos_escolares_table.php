@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre', 45);
             $table->date('fecha_inicio');
             $table->date('fecha_fin');
+            $table->integer('monto_colegiatura');
             $table->boolean('activo')->default(false);
             $table->timestamps();
         });

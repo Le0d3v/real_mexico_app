@@ -35,6 +35,7 @@ class EstudianteController extends Controller
     {
         $maxIntentos = 5;
         $intentos = 0;
+        $cicloEscolarActual = CicloEscolar::where("activo", true);
         Carbon::setLocale('es');
 
         do {
@@ -135,7 +136,7 @@ class EstudianteController extends Controller
                 /* ===============================
                 GENERAR COLEGIATURAS
                 =============================== */
-                $montoColegiatura = 1200;
+                $montoColegiatura = $cicloEscolarActual->monto_colegiatura;
 
                 $cicloEscolar = CicloEscolar::where("activo", 1)->firstOrFail();
 
