@@ -13,7 +13,7 @@ use Illuminate\Support\Str;
 class PostController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Obtener todas las publicaciones
      */
     public function index()
     {
@@ -21,7 +21,7 @@ class PostController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crear una nueva publicación
      */
     public function store(PostRequest $request)
     {
@@ -30,7 +30,8 @@ class PostController extends Controller
             DB::beginTransaction();
 
             $imagenPath = null;
-
+            
+            // Guardar la imágen
             if ($request->hasFile('contenido_multimedia')) {
 
                 $file = $request->file('contenido_multimedia');
@@ -46,23 +47,27 @@ class PostController extends Controller
                 );
             }
 
+            // Crear el post
             $post = Post::create([
                 'titulo' => $request->titulo,
                 'descripcion' => $request->descripcion,
                 'contenido_multimedia' => $imagenPath,
             ]);
 
+            // Guardar en BD
             DB::commit();
 
+            // Mensajes al usuario
             return response()->json([
                 'message' => 'Publicación creada correctamente.',
                 'data' => $post
             ], 201);
 
-        } catch (\Exception $e) {
-
+        } catch (\Exception $e) { // Caso de error
+            // Cancelar proceso
             DB::rollBack();
 
+            // Mensajes al usuario
             return response()->json([
                 'message' => 'Error al crear la publicación.',
                 'error' => $e->getMessage()

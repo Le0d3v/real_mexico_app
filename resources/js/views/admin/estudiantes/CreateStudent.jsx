@@ -14,7 +14,7 @@ export default function CreateStudent({
   isEdit = false,
 }) {
   const { tutores } = useTutor();
-  const { createStudent, updateStudent } = useStudent(); // 👈 se asume que ya lo agregaste
+  const { createStudent, updateStudent } = useStudent(); 
 
   const [cargando, setCargando] = useState(false);
 
@@ -28,9 +28,7 @@ export default function CreateStudent({
     },
   });
 
-  // =========================
   // 🔥 HIDRATACIÓN PARA EDICIÓN
-  // =========================
   useEffect(() => {
     if (initialData) {
       setFormData({
@@ -123,9 +121,7 @@ export default function CreateStudent({
     }));
   };
 
-  // =========================
-  // 🚀 SUBMIT DINÁMICO
-  // =========================
+  // SUBMIT DINÁMICO
   const handleSubmitForm = async (e) => {
     e.preventDefault();
     setCargando(true);

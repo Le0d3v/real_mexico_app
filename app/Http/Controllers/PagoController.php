@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\DB;
 class PagoController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Obtener todos los pagos
      */
     public function index()
     {
@@ -26,25 +26,26 @@ class PagoController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Crear nuevo pago en BD
      */
     public function store(PagoRequest $request)
     {
         DB::beginTransaction();
 
         try {
+            // Obtener la colegiatura
             $colegiatura = Colegiatura::find($request->colegiatura_id);
-
             $colegiatura->monto = $colegiatura->getMonto();
-
             $colegiatura->pagado += $request->monto;
 
             if($colegiatura->pagado >= $colegiatura->monto) {
                 $colegiatura->estado = "Pagado";
             }
 
+            // Guardar cambios a la colegiatura
             $colegiatura->save();
         
+            // Crear el pago
             $pago = Pago::create([
                 'colegiatura_id' => $request->colegiatura_id,
                 'estudiante_id' => $request->estudiante_id,
@@ -57,44 +58,23 @@ class PagoController extends Controller
                 'observaciones' => $request->observaciones,
             ]);
 
+            // Guardar Cambios
             DB::commit();
 
+            // Respuesta al cliente
             return response()->json([
                 'message' => 'Pago registrado exitosamente.',
             ], 201);
 
         } catch (\Exception $e) {
-
+            // Cancelar transacción
             DB::rollBack();
 
+            // Menesajes al cliente
             return response()->json([
                 'message' => 'Error al registrar el pago.',
                 'error' => $e->getMessage()
             ], 500);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

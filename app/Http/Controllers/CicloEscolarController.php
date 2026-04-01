@@ -13,12 +13,13 @@ use Carbon\Carbon;
 
 class CicloEscolarController extends Controller
 {
+    // Obtener el ciclo escolar actual y enviarlo al cliente en formato json
     public function get_ciclo_actual() {
         $ciclos = CicloEscolar::where("activo", 1)->get();
         return new CicloEscolarCollection($ciclos);
     }
 
-
+    // Método para cerrar un ciclo escolar
     public function cerrar(Request $request)
     {
         try {
@@ -140,8 +141,10 @@ class CicloEscolarController extends Controller
                 'monto' => $request->monto
             ]);
 
+            // Guardar cambios en BD
             DB::commit();
 
+            // Retornar respuesta json al usuario en caso de éxito
             return response()->json([
                 'success' => true,
                 'message' => 'Ciclo cerrado correctamente',
@@ -156,9 +159,10 @@ class CicloEscolarController extends Controller
             ]);
 
         } catch (\Throwable $e) {
-
+            // Cancelar transacción en BD
             DB::rollBack();
 
+            // Mensajes de error al usuario (en caso de fallo)
             return response()->json([
                 'success' => false,
                 'message' => 'Error al cerrar ciclo',

@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Hash;
 class EstudianteController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Obtener Estudiantes
      */
     public function index()
     {
@@ -30,12 +30,11 @@ class EstudianteController extends Controller
         );
     }
 
+    // Crear un nuevo estudinte
     public function store(Request $request)
     {
         $maxIntentos = 5;
         $intentos = 0;
-
-
         Carbon::setLocale('es');
 
         do {
@@ -179,7 +178,8 @@ class EstudianteController extends Controller
                 }
 
                 DB::commit();
-
+                
+                // Mensaje de éxito al usuario
                 return response()->json([
                     'message' => 'Registro Exitoso.',
                     'estudiante' => $estudiante->load('domicilio', 'tutores.user')
@@ -189,7 +189,7 @@ class EstudianteController extends Controller
 
                 DB::rollBack();
 
-                // 🔁 Reintento si es duplicado
+                // Reintento si es duplicado
                 if ($e->errorInfo[1] == 1062) {
                     $intentos++;
                     if ($intentos >= $maxIntentos) {
@@ -205,9 +205,9 @@ class EstudianteController extends Controller
                 }
 
             } catch (\Exception $e) {
-
+                // Acciones en caso de erro
+                
                 DB::rollBack();
-
                 return response()->json([
                     'message' => 'Error al registrar el estudiante.',
                     'error' => $e->getMessage()
@@ -218,15 +218,7 @@ class EstudianteController extends Controller
     }
 
     /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Actualizar información de un estudiante
      */
     public function update(Request $request, string $id)
     {
@@ -234,15 +226,16 @@ class EstudianteController extends Controller
 
         try {
 
+            // Obtener el estudiante
             $estudiante = Estudiante::with('domicilio', 'tutores')->findOrFail($id);
 
             /* ===============================
-            UPDATE DOMICILIO
+            Actualizar Domicilio
             =============================== */
             $estudiante->domicilio->update($request->input('address'));
 
             /* ===============================
-            UPDATE ESTUDIANTE
+            Actualizar Estudiante
             =============================== */
             $studentData = $request->input('student');
 
@@ -262,7 +255,7 @@ class EstudianteController extends Controller
             ]);
 
             /* ===============================
-            UPDATE RELACIÓN TUTOR
+            Actualizar Relación con Tutor
             =============================== */
             $tutorData = $request->input('tutor');
 
@@ -283,17 +276,20 @@ class EstudianteController extends Controller
                 ]);
             }
 
+            // Guardar cambios en BD
             DB::commit();
 
+            // Mensjaes en JSON al usuario (Éxito)
             return response()->json([
                 'message' => 'Estudiante actualizado correctamente.',
                 'estudiante' => $estudiante->load('domicilio', 'tutores.user')
             ]);
 
         } catch (\Exception $e) {
-
+            // Cancelar operación en BD
             DB::rollBack();
 
+            // Mensajes en JSON al usuario (Error)
             return response()->json([
                 'message' => 'Error al actualizar el estudiante.',
                 'error' => $e->getMessage()

@@ -10,57 +10,27 @@ use Illuminate\Http\Request;
 class ColegiaturaController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Obtener todas las colegiaturas activas en BD
      */
     public function index()
     {
-         $ciclo_actual = CicloEscolar::where("activo", 1)->first();
+        // Obtener ciclo escolar actual
+        $ciclo_actual = CicloEscolar::where("activo", 1)->first();
 
         if (!$ciclo_actual) {
+            // Mensajes en caso de error
             return response()->json([
                 "message" => "No existe ciclo escolar activo"
             ], 404);
         }
 
+        // Obtener colegiaturas correspondientes al ciclo escolar
         $colegiaturas = Colegiatura::where(
             "ciclo_escolar_id",
             $ciclo_actual->id
         )->get();
 
-        
-
+        // Retornar colegiaturas formateadas en JSON
         return ColegiaturaEstudianteResource::collection($colegiaturas);
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

@@ -23,11 +23,19 @@ export default function Modal({
       const timeout = setTimeout(() => {
         setIsVisible(false);
       }, 250); // duración de salida
-
+      
       return () => clearTimeout(timeout);
     }
   }, [isOpen]);
-
+  
+  const sizeClasses = {
+    sm: "max-w-md",
+    md: "max-w-xl",
+    lg: "max-w-3xl",
+    xl: "max-w-5xl",
+    full: "max-w-[95vw]",
+  };
+  
   useEffect(() => {
     if (!isVisible) return;
 
@@ -48,13 +56,6 @@ export default function Modal({
 
   if (!isVisible) return null;
 
-  const sizeClasses = {
-    sm: "max-w-md",
-    md: "max-w-xl",
-    lg: "max-w-3xl",
-    xl: "max-w-5xl",
-    full: "max-w-[95vw]",
-  };
 
   return (
     <div

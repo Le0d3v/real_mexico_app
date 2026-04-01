@@ -9,54 +9,26 @@ use Illuminate\Http\Request;
 
 class DomicilioController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
     /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
-    {
-        //
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
+     * Actualizar un domicilio en BD
      */
     public function update(DomicilioRequest $request, string $id)
     {
+        // Obtener el usuario perteneciente al domicillio
         $user = User::with('domicilio')->findOrFail($id);
 
+        // Validaciones
         if ($user->domicilio) {
             $user->domicilio->update($request->validated());
         } else {
             $user->domicilio()->create($request->validated());
         }
 
+        // Mensajes al usuario en JSON
         return response()->json([
             "message" => "Domicilio actualizado correctamente",
             "domicilio" => $user->fresh()->domicilio
         ], 200);
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
     }
 }

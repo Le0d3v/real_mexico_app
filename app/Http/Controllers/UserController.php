@@ -9,6 +9,7 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
+    // Obtenr usuarios
     public function index()
     {
         return new UserCollection(
@@ -19,11 +20,15 @@ class UserController extends Controller
         );
     }
 
+    // Actualizar información de un usuario
     public function update(UserRequest $request, $id) {
+        // Obtener usuario
         $user = User::findOrFail($id);
 
+        // Actualizar informacion
         $user->update($request->validated());
 
+        // Mensajes al usuario
         return response()->json([
             "message" => "Usuario actualizado correctamente",
             "user" => $user

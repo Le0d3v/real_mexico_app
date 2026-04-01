@@ -29,5 +29,4 @@ const IRMProvider = ({ children }) => {
 };
 
 export { IRMProvider };
-
 export default IRMContext;

@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Hash;
 class TutorController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Obtener tutores de BD
      */
     public function index()
     {
@@ -24,14 +24,14 @@ class TutorController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Registrar un nuevo tutor en BD
      */
     public function store(TutorRequest $request)
     {
         DB::beginTransaction();
 
         try {
-
+            // Obtener datos de domicilio
             $domicilioData = $request->only([
                 'calle',
                 'numero_exterior',
@@ -43,8 +43,10 @@ class TutorController extends Controller
                 'cp'
             ]);
 
+            // Crear domicilio
             $domicilio = Domicilio::create($domicilioData);
 
+            // Crear usuario
             $user = User::create([
                 'name' => $request->name,
                 'apellido_paterno' => $request->apellido_paterno,
@@ -58,11 +60,13 @@ class TutorController extends Controller
                 'domicilio_id' => $domicilio->id,
             ]);
 
+            // Crear datos de turor
             $tutor = $user->tutor()->create([
                 'ocupacion' => $request->ocupacion,
                 'nivel_estudios' => $request->nivel_estudios,
             ]);
 
+            // Sincronizar estudiantes con el tutor
             if ($request->filled('estudiantes')) {
 
                 $syncData = [];
@@ -83,30 +87,26 @@ class TutorController extends Controller
                 $tutor->estudiantes()->sync($syncData);
             }
 
+            // Guardar en BD
             DB::commit();
 
+            // Mensajes al usuario
             return response()->json([
                 'message' => 'Tutor creado correctamente.',
                 'tutor' => $tutor->load('user.domicilio', 'estudiantes')
             ], 201);
 
-        } catch (\Exception $e) {
+        } catch (\Exception $e) { // caso de error
 
+            // Cancelar proceso
             DB::rollBack();
 
+            // Mensajes al susuario
             return response()->json([
                 'message' => 'Error al crear el tutor.',
                 'error' => $e->getMessage()
             ], 500);
         }
-    }
-
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
     }
 
     /**

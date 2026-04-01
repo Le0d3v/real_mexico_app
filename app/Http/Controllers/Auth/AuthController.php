@@ -11,12 +11,13 @@ use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
+    // Metodo para la autenticación de un usuario 
     public function login(LoginRequest $request): JsonResponse
     {
-        // Autenticación usando teléfono
+        // Autenticar usuario con datos provenientes del request
         $request->authenticate();
 
-        // Buscar usuario por campo "telefono"
+        // Obtener el usuario con sus datos relacionados a otras tablas
         $user = User::with([
             'domicilio',
             'tutor'
@@ -25,6 +26,7 @@ class AuthController extends Controller
         // Generar token
         $token = $user->createToken('auth_token')->plainTextToken;
 
+        // Retornar usuario en json para ser procesado en el front
         return response()->json([
             'user' => $user,
             'token' => $token,
@@ -32,9 +34,22 @@ class AuthController extends Controller
         ]);
     }
 
+    // Metodo para cerrar la sesión de un usuario
+    public function logout(Request $request): JsonResponse
+    {
+        // Eliminar Bearer Token
+        $request->user()->currentAccessToken()->delete();
+
+        // Respuesta json para el cliente
+        return response()->json([
+            'message' => 'Sesión cerrada correctamente'
+        ]);
+    }
    
+    // Metodopara obtener los datos del usuario autenticado
     public function me(Request $request): JsonResponse
     {
+        // Generar objeto user con todos sus datos 
         $user = $request->user()->load([
             'domicilio',
             'tutor.estudiantes.domicilio',
@@ -43,6 +58,7 @@ class AuthController extends Controller
             'tutor.estudiantes.grupo'
         ]);
 
+        // Retornar el usuario al backend
         return response()->json(
             new UserResource($user)
         );
@@ -50,12 +66,4 @@ class AuthController extends Controller
 
     
 
-    public function logout(Request $request): JsonResponse
-    {
-        $request->user()->currentAccessToken()->delete();
-
-        return response()->json([
-            'message' => 'Sesión cerrada correctamente'
-        ]);
-    }
 }
