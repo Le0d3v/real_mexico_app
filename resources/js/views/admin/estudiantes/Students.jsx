@@ -240,7 +240,7 @@ export default function Students() {
                       </div>
                     </td>
 
-                    <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600 font-mono">
+                    <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600 font-mono text-center  ">
                       <span className="font-semibold text-gray-700">
                         {alumno.matricula}
                       </span>
@@ -252,7 +252,7 @@ export default function Students() {
                       </span>
                     </td>
 
-                    <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600">
+                    <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600 text-center">
                       {alumno.tutores?.length > 0 &&
                       alumno.tutores[0]?.usuario ? (
                         <span className="font-medium text-gray-800">

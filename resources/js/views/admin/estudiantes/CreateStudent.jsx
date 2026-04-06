@@ -7,6 +7,7 @@ import { Info } from "lucide-react";
 import { ClipLoader } from "react-spinners";
 import useStudent from "../../../hooks/useStudent";
 import { toast } from "react-toastify";
+import Swal from "sweetalert2";
 
 export default function CreateStudent({
   onClose,
@@ -14,7 +15,7 @@ export default function CreateStudent({
   isEdit = false,
 }) {
   const { tutores } = useTutor();
-  const { createStudent, updateStudent } = useStudent(); 
+  const { createStudent, updateStudent } = useStudent();
 
   const [cargando, setCargando] = useState(false);
 
@@ -135,7 +136,15 @@ export default function CreateStudent({
         response = await createStudent(formData);
       }
 
-      toast.success(response.message);
+      //toast.success(response.message);
+      Swal.fire({
+        icon: "success",
+        title: isEdit
+          ? "Estudiante Actualizado Exitosamente"
+          : "Estudiante Registrado Exitosamente",
+        text: "Los cambios se han guardado en la Base de Datos.",
+        confirmButtonText: "Aceptar",
+      });
       onClose();
     } catch (error) {
       if (error?.status === 422) {

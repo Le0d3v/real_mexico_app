@@ -19,6 +19,7 @@ import { useState, useMemo } from "react";
 import EstudiantePago from "./EstudiantePago";
 import EstudianteSeleccionado from "./EstudianteSeleccionado";
 import usePago from "../../../hooks/usePago";
+import Swal from "sweetalert2";
 
 export default function CrearPago({ onClose }) {
   const { estudiantes } = useStudent();
@@ -101,7 +102,11 @@ export default function CrearPago({ onClose }) {
 
     try {
       const response = await createPago(formData);
-      toast.success(response.message);
+      Swal.fire({
+        icon: "success",
+        title: "Pago Registrado Exitosamente",
+        text: "El pago ha sido almacenado en la Base de Datos",
+      });
       onClose(false);
     } catch (error) {
       if (error?.status === 422) {
