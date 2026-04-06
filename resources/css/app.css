@@ -1,88 +1,88 @@
 @import "tailwindcss";
 
 .login-fondo {
-    width: 100%;
-    background-image:
-        linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
-        url("/img/login_fondo.jpg");
-    background-size: cover;
-    background-position: center;
-    height: 100%;
+  width: 100%;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.55), rgba(0, 0, 0, 0.55)),
+    url("/img/login_fondo.jpg");
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
 }
 
 @layer utilities {
-    @keyframes float {
-        0%,
-        100% {
-            transform: translateY(0);
-        }
-        50% {
-            transform: translateY(-10px);
-        }
+  @keyframes float {
+    0%,
+    100% {
+      transform: translateY(0);
     }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
 
-    .animate-float {
-        animation: float 3s ease-in-out infinite;
-        will-change: transform;
-    }
+  .animate-float {
+    animation: float 3s ease-in-out infinite;
+    will-change: transform;
+  }
 
-    .pause-on-hover:hover {
-        animation-play-state: paused;
-    }
+  .pause-on-hover:hover {
+    animation-play-state: paused;
+  }
 }
 
 @keyframes fadeIn {
-    from {
-        opacity: 0;
-    }
-    to {
-        opacity: 1;
-    }
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
 }
 
 @keyframes fadeOut {
-    from {
-        opacity: 1;
-    }
-    to {
-        opacity: 0;
-    }
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0;
+  }
 }
 
 @keyframes modalIn {
-    from {
-        opacity: 0;
-        transform: translateY(20px) scale(0.95);
-    }
-    to {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
 }
 
 @keyframes modalOut {
-    from {
-        opacity: 1;
-        transform: translateY(0) scale(1);
-    }
-    to {
-        opacity: 0;
-        transform: translateY(15px) scale(0.95);
-    }
+  from {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translateY(15px) scale(0.95);
+  }
 }
 
 .animate-fadeIn {
-    animation: fadeIn 0.2s ease-out forwards;
+  animation: fadeIn 0.2s ease-out forwards;
 }
 
 .animate-fadeOut {
-    animation: fadeOut 0.2s ease-in forwards;
+  animation: fadeOut 0.2s ease-in forwards;
 }
 
 .animate-modalIn {
-    animation: modalIn 0.25s ease-out forwards;
+  animation: modalIn 0.25s ease-out forwards;
 }
 
 .animate-modalOut {
-    animation: modalOut 0.25s ease-in forwards;
+  animation: modalOut 0.25s ease-in forwards;
 }
