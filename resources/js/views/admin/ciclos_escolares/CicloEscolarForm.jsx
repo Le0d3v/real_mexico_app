@@ -15,57 +15,57 @@ export default function CicloEscolarForm({ onClose }) {
 
   const handleCerrarCiclo = async (e) => {
     e.preventDefault();
+
+    /* ===============================
+  VALIDACIÓN DE CAMPOS
+  =============================== */
+
+    if (!fechaInicio || !fechaFin || !monto) {
+      await Swal.fire({
+        icon: "warning",
+        title: "Campos incompletos",
+        text: "Debe completar todos los campos antes de continuar.",
+        confirmButtonColor: "#DC2626",
+      });
+      return; // 🚫 Detiene ejecución
+    }
+
+    if (new Date(fechaInicio) >= new Date(fechaFin)) {
+      await Swal.fire({
+        icon: "warning",
+        title: "Fechas inválidas",
+        text: "La fecha de inicio debe ser menor a la fecha de fin.",
+        confirmButtonColor: "#DC2626",
+      });
+      return;
+    }
+
+    if (Number(monto) <= 0) {
+      await Swal.fire({
+        icon: "warning",
+        title: "Monto inválido",
+        text: "El monto debe ser mayor a 0.",
+        confirmButtonColor: "#DC2626",
+      });
+      return;
+    }
+
+    /* ===============================
+  CONFIRMACIÓN (SOLO SI PASA VALIDACIÓN)
+  =============================== */
+
     const result = await Swal.fire({
       icon: "warning",
       title: "¿Estás Seguro?",
       width: 600,
-      html: `
-    <div style="text-align:left; font-size:14px;">
-
-      <!-- 🔴 ALERTA -->
-      <div style="
-        background:#FEF2F2;
-        border:1px solid #FCA5A5;
-        padding:12px;
-        border-radius:8px;
-        margin-bottom:15px;
-      ">
-        <b style="color:#B91C1C;">⚠️ Esta acción no se puede rebertir</b>
-        <ul style="margin-top:8px; padding-left:18px;">
-          <li>- Se cerrará el ciclo escolar actual</li>
-          <li>- Se creará un nuevo ciclo automáticamente</li>
-          <li>- Los alumnos serán promovidos al siguiente grado</li>
-          <li>- Los alumnos de último grado serán egresados</li>
-          <li>- Se generarán nuevas colegiaturas</li>
-        </ul>
-      </div>
-
-      <!-- 🔐 CONFIRMACIÓN -->
-      <div style="
-        margin-top:16px;
-        padding-top:12px;
-        border-top:1px solid #E5E7EB;
-      ">
-        <label style="display:block; font-weight:600; margin-bottom:4px;">
-          Confirmación de seguridad
-        </label>
-        <input type="text" id="confirm" class="swal2-input"
-          placeholder="Escriba CONFIRMAR"
-          style="width:100%; margin:0;">
-        <small style="color:#9CA3AF;">
-          Esta acción no se puede revertir.
-        </small>
-      </div>
-
-    </div>
-  `,
+      html: `...`,
+      // ⬅️ tu HTML existente sin cambios
       focusConfirm: false,
       showCancelButton: true,
       confirmButtonText: "Ejecutar cierre de ciclo",
       cancelButtonText: "Cancelar",
       confirmButtonColor: "#DC2626",
       cancelButtonColor: "#6B7280",
-
       preConfirm: () => {
         const confirm = document.getElementById("confirm").value;
 
@@ -206,9 +206,12 @@ export default function CicloEscolarForm({ onClose }) {
   };
   return (
     <>
+      <div className="flex justify-center">
+        <Info size={36} className="text-gray-400" />
+      </div>
       <h1 className="text-center text-gray-400 font-semibold">
         Complete el formulario con los datos del siguiente ciclo escolar para
-        realizar el cierre de ciclo
+        realizar el cierre de ciclo escolar actual
       </h1>
       <form className="mt-3 space-y-5" onSubmit={handleCerrarCiclo}>
         <InputField
