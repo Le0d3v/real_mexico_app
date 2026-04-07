@@ -87,11 +87,61 @@ export default function CrearPago({ onClose }) {
   const colegiaturasDisponibles = useMemo(() => {
     if (!selectedStudent?.colegiaturas) return [];
 
-    return selectedStudent.colegiaturas.sort((a, b) => {
+    const options = [];
+
+    const pendientes = selectedStudent.colegiaturas.filter(
+      (c) => c.estado?.toLowerCase() !== "pagado",
+    );
+
+    const diciembre = pendientes.find((c) =>
+      c.mes?.toLowerCase().includes("diciembre"),
+    );
+
+    const julio = pendientes.find((c) =>
+      c.mes?.toLowerCase().includes("julio"),
+    );
+
+    // 🔥 Combo
+    if (diciembre && julio) {
+      const pendienteDiciembre = diciembre.monto - diciembre.pagado;
+      const pendienteJulio = julio.monto - julio.pagado;
+
+      options.push({
+        value: `combo-${diciembre.id}-${julio.id}`,
+        label: `Diciembre y Julio — $${(
+          pendienteDiciembre + pendienteJulio
+        ).toFixed(2)}`,
+      });
+    }
+
+    // 🔥 Orden UX (pendientes arriba)
+    const ordenadas = [...selectedStudent.colegiaturas].sort((a, b) => {
       const pagadaA = a.estado?.toLowerCase() === "pagado";
       const pagadaB = b.estado?.toLowerCase() === "pagado";
       return pagadaA - pagadaB;
     });
+
+    ordenadas.forEach((c) => {
+      const pendiente = c.monto - c.pagado;
+      const pagada = c.estado?.toLowerCase() === "pagado";
+
+      // evitar duplicar combo
+      if (
+        !pagada &&
+        ((diciembre && c.id === diciembre.id) || (julio && c.id === julio.id))
+      )
+        return;
+
+      options.push({
+        value: String(c.id),
+        label: pagada
+          ? `${c.mes} — PAGADO`
+          : `${c.mes} — Pendiente: $${pendiente.toFixed(2)}`,
+        disabled: pagada,
+      });
+    });
+
+    return options;
   }, [selectedStudent]);
 
   const tutoresDisponibles = selectedStudent?.tutores || [];
@@ -101,7 +151,16 @@ export default function CrearPago({ onClose }) {
     setCargando(true);
 
     try {
-      const response = await createPago(formData);
+      const payload = {
+        ...formData,
+        monto: Number(formData.monto),
+        colegiatura_id: formData.colegiatura_id?.startsWith("combo")
+          ? formData.colegiatura_id.split("-").slice(1).map(Number)
+          : [Number(formData.colegiatura_id)], // ⚠️ SIEMPRE ARRAY
+        tutor_id: Number(formData.tutor_id),
+      };
+
+      const response = await createPago(payload);
       Swal.fire({
         icon: "success",
         title: "Pago Registrado Exitosamente",
@@ -173,10 +232,53 @@ export default function CrearPago({ onClose }) {
               colegiaturasDisponibles={colegiaturasDisponibles}
               tutoresDisponibles={tutoresDisponibles}
               onClear={() => setSelectedStudent(null)}
-              onSelectColegiatura={(id) => {
+              onSelectColegiatura={(value) => {
+                const optionData = (() => {
+                  const colegiaturas = selectedStudent.colegiaturas;
+
+                  const pendientes = colegiaturas.filter(
+                    (c) => c.estado?.toLowerCase() !== "pagado",
+                  );
+
+                  const diciembre = pendientes.find((c) =>
+                    c.mes?.toLowerCase().includes("diciembre"),
+                  );
+
+                  const julio = pendientes.find((c) =>
+                    c.mes?.toLowerCase().includes("julio"),
+                  );
+
+                  // 🔥 Combo
+                  if (value.startsWith("combo") && diciembre && julio) {
+                    return {
+                      ids: [diciembre.id, julio.id],
+                      monto:
+                        diciembre.monto -
+                        diciembre.pagado +
+                        (julio.monto - julio.pagado),
+                    };
+                  }
+
+                  // 🔥 Normal
+                  const normal = colegiaturas.find(
+                    (c) => c.id === Number(value),
+                  );
+
+                  if (!normal) return null;
+                  if (normal.estado?.toLowerCase() === "pagado") return null;
+
+                  return {
+                    ids: [normal.id],
+                    monto: normal.monto - normal.pagado,
+                  };
+                })();
+
+                if (!optionData) return;
+
                 setFormData((prev) => ({
                   ...prev,
-                  colegiatura_id: id,
+                  colegiatura_id: value, // 🔥 string controlado
+                  monto: optionData.monto.toFixed(2),
                 }));
               }}
               onSelectTutor={(e) =>
@@ -228,7 +330,7 @@ export default function CrearPago({ onClose }) {
               icon={<Calendar size={18} />}
               label="Fecha"
               type="date"
-              value={formData.colegiatura_id?.toString() ?? ""}
+              value={formData.fecha_pago}
               onChange={(e) =>
                 setFormData((p) => ({
                   ...p,

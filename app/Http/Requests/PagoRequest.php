@@ -22,7 +22,8 @@ class PagoRequest extends FormRequest
     public function rules(): array
     {
         return [
-            "colegiatura_id" => "required|numeric",
+            "colegiatura_id" => "required|array|min:1",
+            "colegiatura_id.*" => "integer|exists:colegiaturas,id",
             "estudiante_id" => "required|numeric",
             "tutor_id" => "required|numeric",
             "asunto" => "required|string",
@@ -38,8 +39,10 @@ class PagoRequest extends FormRequest
     public function messages()
     {
         return [
-            "colegiatura_id.required" => "Debes seleccionar una colegiatura",
-            "colegiatura_id.numeric" => "Error al capturar la colegiatura. Intente nuevamente",
+            "colegiatura_id.required" => "Debes seleccionar al menos una colegiatura",
+            "colegiatura_id.array" => "Formato de colegiatura inválido",
+            "colegiatura_id.*.integer" => "ID de colegiatura inválido",
+            "colegiatura_id.*.exists" => "Una de las colegiaturas no existe",
             "estudiante_id.required" => "Debes seleccionar un estudiante",
             "estudiante_id.numeric" => "Error al capturar el estudiante. Intente nuevamente",
             "tutor_id.required" => "Debes seleccionar un tutor",
@@ -55,5 +58,14 @@ class PagoRequest extends FormRequest
             "referencia.string" => "Referencia No válida. Intente nuevamente",
             "observaciones.string" => "Formato para observaciones no válido. Intente nuevamente",
         ];
+    }
+
+    protected function prepareForValidation()
+    {
+        $this->merge([
+            'colegiatura_id' => is_array($this->colegiatura_id)
+                ? $this->colegiatura_id
+                : [$this->colegiatura_id],
+        ]); 
     }
 }

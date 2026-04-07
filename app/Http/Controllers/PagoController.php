@@ -33,44 +33,67 @@ class PagoController extends Controller
         DB::beginTransaction();
 
         try {
-            // Obtener la colegiatura
-            $colegiatura = Colegiatura::find($request->colegiatura_id);
-            $colegiatura->monto = $colegiatura->getMonto();
-            $colegiatura->pagado += $request->monto;
+            $colegiaturaIds = is_array($request->colegiatura_id)
+                ? $request->colegiatura_id
+                : [$request->colegiatura_id];
 
-            if($colegiatura->pagado >= $colegiatura->monto) {
-                $colegiatura->estado = "Pagado";
+            $totalMonto = $request->monto;
+            $montoRestante = $totalMonto;
+
+            foreach ($colegiaturaIds as $colegiaturaId) {
+                $colegiatura = Colegiatura::find($colegiaturaId);
+
+                if (!$colegiatura) {
+                    throw new \Exception("Colegiatura no encontrada");
+                }
+
+                $colegiatura->monto = $colegiatura->getMonto();
+
+                $pendiente = $colegiatura->monto - $colegiatura->pagado;
+
+                // 🔥 calcular cuánto se aplicará a ESTA colegiatura
+                $montoAplicado = 0;
+
+                if ($montoRestante >= $pendiente) {
+                    $montoAplicado = $pendiente;
+
+                    $colegiatura->pagado += $pendiente;
+                    $montoRestante -= $pendiente;
+                    $colegiatura->estado = "Pagado";
+                } else {
+                    $montoAplicado = $montoRestante;
+
+                    $colegiatura->pagado += $montoRestante;
+                    $montoRestante = 0;
+                }
+
+                $colegiatura->save();
+
+                // 🔥 usar montoAplicado en lugar del total
+                Pago::create([
+                    'colegiatura_id' => $colegiaturaId,
+                    'estudiante_id' => $request->estudiante_id,
+                    'tutor_id' => $request->tutor_id,
+                    'asunto' => $request->asunto,
+                    'fecha_pago' => $request->fecha_pago,
+                    'monto' => $montoAplicado, // ✅ CORREGIDO
+                    'metodo_pago' => $request->metodo_pago,
+                    'referencia' => $request->referencia,
+                    'observaciones' => $request->observaciones,
+                ]);
+
+                if ($montoRestante <= 0) break;
             }
 
-            // Guardar cambios a la colegiatura
-            $colegiatura->save();
-        
-            // Crear el pago
-            $pago = Pago::create([
-                'colegiatura_id' => $request->colegiatura_id,
-                'estudiante_id' => $request->estudiante_id,
-                'tutor_id' => $request->tutor_id,
-                'asunto' => $request->asunto,
-                'fecha_pago' => $request->fecha_pago,
-                'monto' => $request->monto,
-                'metodo_pago' => $request->metodo_pago,
-                'referencia' => $request->referencia,
-                'observaciones' => $request->observaciones,
-            ]);
-
-            // Guardar Cambios
             DB::commit();
 
-            // Respuesta al cliente
             return response()->json([
                 'message' => 'Pago registrado exitosamente.',
             ], 201);
 
         } catch (\Exception $e) {
-            // Cancelar transacción
             DB::rollBack();
 
-            // Menesajes al cliente
             return response()->json([
                 'message' => 'Error al registrar el pago.',
                 'error' => $e->getMessage()

@@ -29,43 +29,9 @@ export default function EstudianteSeleccionado({
         <SelectField
           icon={<BookOpen size={18} />}
           label="Colegiatura"
-          options={[...colegiaturasDisponibles]
-            .sort((a, b) => {
-              const pagadaA = a.estado?.toLowerCase() === "pagado";
-              const pagadaB = b.estado?.toLowerCase() === "pagado";
-              return pagadaA - pagadaB;
-            })
-            .map((c) => {
-              const pendiente = c.monto - c.pagado;
-              const pagada = c.estado?.toLowerCase() === "pagado";
-
-              return {
-                value: c.id,
-                label: pagada
-                  ? `${c.mes} — PAGADO`
-                  : `${c.mes} — Pendiente: $${pendiente.toFixed(2)}`,
-                disabled: pagada,
-                className: pagada
-                  ? "bg-gray-100 text-gray-400 hover:cursor-not-allowed"
-                  : "",
-              };
-            })}
+          options={colegiaturasDisponibles} // ✅ ya viene procesado
           value={formData.colegiatura_id ?? ""}
-          onChange={(e) => {
-            const colegiaturaId = Number(e.target.value);
-
-            const seleccionada = colegiaturasDisponibles.find(
-              (c) => c.id === colegiaturaId,
-            );
-
-            if (!seleccionada) return;
-
-            if (seleccionada.estado?.toLowerCase() === "pagado") return;
-
-            const pendiente = seleccionada.monto - seleccionada.pagado;
-
-            onSelectColegiatura(colegiaturaId, pendiente);
-          }}
+          onChange={(e) => onSelectColegiatura(e.target.value)}
         />
 
         <SelectField

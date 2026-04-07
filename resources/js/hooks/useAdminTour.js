@@ -10,6 +10,13 @@ export default function useAdminTour() {
     const driverObj = driver({
       showProgress: true,
       allowClose: true,
+      popover: {
+        nextBtnText: "Siguiente",
+        prevBtnText: "Anterior",
+        doneBtnText: "Finalizar",
+        closeBtnText: "Cerrar",
+        progressText: "{{current}} de {{total}}",
+      },
       steps: [
         {
           element: "#start",
