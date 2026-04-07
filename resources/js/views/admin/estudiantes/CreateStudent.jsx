@@ -8,6 +8,7 @@ import { ClipLoader } from "react-spinners";
 import useStudent from "../../../hooks/useStudent";
 import { toast } from "react-toastify";
 import Swal from "sweetalert2";
+import { grupos } from "../../../helpers/data";
 
 export default function CreateStudent({
   onClose,
@@ -41,7 +42,11 @@ export default function CreateStudent({
           curp: initialData.curp,
           genero: initialData.genero,
           grado: initialData.grado,
-          grupo: initialData.grupo,
+
+          // 🔥 NORMALIZACIÓN AQUÍ
+          grupo:
+            grupos.find((g) => g.label === initialData.grupo)?.value || null,
+
           entidad_nacimiento: initialData.entidad_nacimiento,
           tipo_sangre: initialData.tipo_sangre,
           lengua_materna: initialData.lengua_materna,
