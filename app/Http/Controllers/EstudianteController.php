@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\EstudianteRequest;
 use App\Http\Resources\EstudianteCollection;
 use App\Models\CicloEscolar;
 use App\Models\Domicilio;
@@ -31,7 +32,7 @@ class EstudianteController extends Controller
     }
 
     // Crear un nuevo estudinte
-    public function store(Request $request)
+    public function store(EstudianteRequest $request)
     {
         $maxIntentos = 5;
         $intentos = 0;
