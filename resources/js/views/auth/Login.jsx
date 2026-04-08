@@ -7,7 +7,7 @@ import "react-toastify/ReactToastify.css";
 import { useState } from "react";
 import socialLinks from "../../helpers/socialLinks";
 import useIRM from "../../hooks/useIRM";
-import { actualYear } from "../../helpers/helpers";
+import { actualYear, redirectByRole } from "../../helpers/helpers";
 
 export default function Login() {
   const [showPassword, setShowPassword] = useState(false);
@@ -25,10 +25,21 @@ export default function Login() {
   const [phone, setPhone] = useState("");
   const [password, setPassword] = useState("");
 
-  const submit = (e) => {
+  const submit = async (e) => {
     e.preventDefault();
     setCargando(true);
-    login({ phone, password, setCargando });
+
+    const user = await login({ phone, password });
+
+    if (user) {
+      const route = redirectByRole(user);
+
+      console.log("REDIRECT TO:", route); // 🔍 DEBUG
+
+      navigate(route, { replace: true }); // 🔥 IMPORTANTE
+    }
+
+    setCargando(false);
   };
 
   const handleClickNavigate = (page) => {

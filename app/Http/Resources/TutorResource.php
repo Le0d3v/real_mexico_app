@@ -23,6 +23,10 @@ class TutorResource extends JsonResource
             "estudiantes" => EstudianteResource::collection(
                 $this->whenLoaded('estudiantes')
             ),
+
+            "pagos" => PagoResource::collection(
+                $this->whenLoaded('pagos')
+            ),
         ];
     }
 }

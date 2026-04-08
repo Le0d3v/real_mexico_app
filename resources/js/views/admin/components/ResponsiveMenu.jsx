@@ -11,6 +11,7 @@ export default function ResponsiveMenu({
   index,
   page,
   setPage,
+  user,
 }) {
   const [cargando, setCargando] = useState(false);
   const { logout } = useAuth();
@@ -60,16 +61,13 @@ export default function ResponsiveMenu({
             Navegación
           </p>
 
-          {index == "1" ? (
-            <Navigation
-              index="1"
-              closeMenu={closeMenu}
-              setPage={setPage}
-              page={page}
-            />
-          ) : (
-            <Navigation index="0" closeMenu={closeMenu} />
-          )}
+          <Navigation
+            index="1"
+            closeMenu={closeMenu}
+            setPage={setPage}
+            page={page}
+            user={user}
+          />
         </div>
 
         {/* FOOTER (FIJO ABAJO) */}
@@ -79,7 +77,9 @@ export default function ResponsiveMenu({
             <div className="w-9 h-9 bg-yellow-500 rounded-full flex items-center justify-center">
               <User className="w-5 h-5 text-black" />
             </div>
-            <p className="text-sm font-medium">Usuario</p>
+            <p className="text-sm font-medium">
+              {user?.name} {user?.apellido_paterno}
+            </p>
           </div>
 
           {/* LOGOUT */}

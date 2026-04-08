@@ -2,11 +2,10 @@ import { useEffect, useState } from "react";
 import api from "@/config/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
-import useIRM from "./useIRM";
+import { redirectByRole } from "../helpers/helpers";
 
-export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
+export default function useAuth({ middleware } = {}) {
   const navigate = useNavigate();
-  const { setPage, setTitulo } = useIRM();
 
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -23,7 +22,7 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
     }
   };
 
-  const login = async ({ phone, password, setCargando }) => {
+  const login = async ({ phone, password }) => {
     setErrors([]);
 
     try {
@@ -32,13 +31,12 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
         password,
       });
 
-      // Guardar token
       localStorage.setItem("token", data.token);
 
       setUser(data.user);
 
-      navigate("/admin");
-      (setPage(0), setTitulo("Instituto Real de México A.C."));
+      return data.user; // 👈 SOLO retorna
+      console.log(user);
     } catch (error) {
       if (error.response?.status === 422) {
         const validationErrors = error.response.data.errors;
@@ -46,25 +44,21 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
 
         Object.values(validationErrors)
           .flat()
-          .forEach((message) => {
-            toast.error(message);
-          });
+          .forEach((message) => toast.error(message));
       } else if (error.response?.status === 401) {
         toast.error("Credenciales incorrectas.");
       } else {
         toast.error("Error inesperado.");
       }
 
-      setCargando(false);
+      return null;
     }
   };
 
   const logout = async () => {
     try {
       await api.post("/api/logout");
-    } catch (error) {
-      console.warn("Error al cerrar sesión");
-    }
+    } catch {}
 
     localStorage.removeItem("token");
     setUser(null);
@@ -82,14 +76,16 @@ export default function useAuth({ middleware, redirectIfAuthenticated } = {}) {
   }, []);
 
   useEffect(() => {
-    if (!loading) {
-      if (middleware === "guest" && user) {
-        navigate(redirectIfAuthenticated || "/admin");
-      }
+    if (loading) return;
 
-      if (middleware === "auth" && !user) {
-        navigate("/login");
-      }
+    // 🔐 Ruta protegida
+    if (middleware === "auth" && !user) {
+      navigate("/login");
+    }
+
+    // 👤 Ruta guest
+    if (middleware === "guest" && user) {
+      navigate(redirectByRole(user));
     }
   }, [user, loading]);
 

@@ -11,24 +11,18 @@ use Illuminate\Http\JsonResponse;
 
 class AuthController extends Controller
 {
-    // Metodo para la autenticación de un usuario 
     public function login(LoginRequest $request): JsonResponse
     {
-        // Autenticar usuario con datos provenientes del request
         $request->authenticate();
 
-        // Obtener el usuario con sus datos relacionados a otras tablas
-        $user = User::with([
-            'domicilio',
-            'tutor'
-        ])->where('telefono', $request->phone)->first();
+        $user = User::where('telefono', $request->phone)->first();
 
-        // Generar token
+        $user = $this->loadUserRelations($user);
+
         $token = $user->createToken('auth_token')->plainTextToken;
 
-        // Retornar usuario en json para ser procesado en el front
         return response()->json([
-            'user' => $user,
+            'user' => new UserResource($user), // 🔥 IMPORTANTE
             'token' => $token,
             'token_type' => 'Bearer'
         ]);
@@ -49,21 +43,44 @@ class AuthController extends Controller
     // Metodopara obtener los datos del usuario autenticado
     public function me(Request $request): JsonResponse
     {
-        // Generar objeto user con todos sus datos 
-        $user = $request->user()->load([
-            'domicilio',
-            'tutor.estudiantes.domicilio',
-            'tutor.estudiantes.colegiaturas',
-            'tutor.estudiantes.grado',
-            'tutor.estudiantes.grupo'
-        ]);
+        $user = $this->loadUserRelations($request->user());
 
-        // Retornar el usuario al backend
         return response()->json(
             new UserResource($user)
         );
     }
 
     
+    private function loadUserRelations($user)
+    {
+        if ($user->rol === 'tutor') {
+            return $user->load([
+                'domicilio',
 
+                // 🔥 RELACIÓN BASE
+                'tutor',
+
+                
+
+                // 🔥 ESTUDIANTES
+                'tutor.estudiantes',
+                'tutor.estudiantes.grado',
+                'tutor.estudiantes.grupo',
+                'tutor.estudiantes.domicilio',
+
+                // 🔥 COLEGIATURAS
+                'tutor.estudiantes.colegiaturasActuales',
+
+                // 🔥 RELACIÓN INVERSA
+                'tutor.estudiantes.tutores.user',
+
+                // 🔥 PAGOS DEL TUTOR
+                'tutor.pagos',
+                'tutor.pagos.colegiatura',
+                'tutor.pagos.estudiante',
+            ]);
+        }
+
+        return $user->load(['domicilio']);
+    }
 }

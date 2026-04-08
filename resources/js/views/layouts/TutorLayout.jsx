@@ -3,22 +3,20 @@ import Navigation from "../admin/components/Navigation";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/ReactToastify.css";
 import { useState } from "react";
-import Dashboard from "../admin/Dashboard";
-import Settings from "../admin/config/Settings";
-import News from "../admin/noticias/News";
-import Students from "../admin/estudiantes/Students";
-import Colegiaturas from "../admin/colegiaturas/Colegiaturas";
-import Pagos from "../admin/pagos/Pagos";
-import Tutores from "../admin/tutores/Tutores";
 import useAuth from "../../hooks/useAuth";
 import Loader from "../components/Loader";
 import { ClipLoader } from "react-spinners";
 import useIRM from "../../hooks/useIRM";
 import ResponsiveMenu from "../admin/components/ResponsiveMenu";
+import Inicio from "../tutor/Inicio";
+import MisEstudiantes from "../tutor/MisEstudiantes";
+import Colegiaturas from "../tutor/Colegiaturas";
+import Ajustes from "../tutor/Ajustes";
+import MisPagos from "../tutor/MisPagos";
 
-export default function AdminLayout() {
+export default function TutorLayout() {
   const { loading, user } = useAuth({ middleware: "auth" });
-  const { adminPage, setAdminPage, adminContentScroll } = useIRM();
+  const { tutorPage, setTutorPage, adminContentScroll } = useIRM();
 
   const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -28,20 +26,18 @@ export default function AdminLayout() {
   const initial = user?.name ? user.name.trim().charAt(0).toUpperCase() : "";
 
   const pages = [
-    <Dashboard />,
+    <Inicio />,
     <Colegiaturas />,
-    <Pagos />,
-    <Students />,
-    <Tutores />,
-    <News />,
-    <Settings />,
+    <MisEstudiantes />,
+    <MisPagos />,
+    <Ajustes />,
   ];
-
-  if (loading) return <Loader />;
 
   if (!user) {
     return null;
   }
+
+  if (loading) return <Loader />;
 
   return (
     <>
@@ -67,8 +63,8 @@ export default function AdminLayout() {
           <div className="flex-1 px-3 py-3" id="driver_navegacion">
             <Navigation
               index="1"
-              setPage={setAdminPage}
-              page={adminPage}
+              setPage={setTutorPage}
+              page={tutorPage}
               user={user}
             />
           </div>
@@ -107,7 +103,7 @@ export default function AdminLayout() {
               className="bg-gray-100 rounded-2xl shadow-md p-3 md:p-6 min-h-full w-full max-w-full overflow-hidden"
               id="driver_main"
             >
-              {loading ? <Loader /> : pages[adminPage]}
+              {loading ? <Loader /> : pages[tutorPage]}
             </div>
           </main>
         </div>
@@ -126,8 +122,8 @@ export default function AdminLayout() {
         isOpen={isMenuOpen}
         closeMenu={() => setIsMenuOpen(false)}
         index="1"
-        page={adminPage}
-        setPage={setAdminPage}
+        page={tutorPage}
+        setPage={setTutorPage}
         user={user}
       />
     </>

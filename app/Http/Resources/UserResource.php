@@ -30,7 +30,7 @@ class UserResource extends JsonResource
             "domicilio" => new DomicilioResource($this->domicilio),
 
             "tutor" => $this->when(
-                $this->esTutor() && $this->relationLoaded('tutor') && $this->tutor,
+                $this->esTutor(),
                 new TutorResource($this->tutor)
             ),
         ];
