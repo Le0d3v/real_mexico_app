@@ -15,11 +15,11 @@ export default function Tutores() {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
           viewport={{ once: true }}
-          className="bg-white rounded-3xl shadow-xl p-10 md:p-14 mt-16 grid md:grid-cols-2 gap-12 items-center border border-gray-200"
+          className="bg-white rounded-3xl shadow-xl p-10 md:p-14 mt-16 grid md:grid-cols-2 gap-12 items-start border border-gray-200"
         >
           <div>
             <img
-              src="/img/director.jpg"
+              src="/img/miss.jpeg"
               alt="Director"
               className="rounded-2xl shadow-lg w-full object-cover"
             />
