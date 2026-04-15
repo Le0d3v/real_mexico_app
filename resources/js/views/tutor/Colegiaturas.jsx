@@ -39,7 +39,7 @@ export default function Colegiaturas() {
       </div>
 
       {/* 🔹 LISTADO POR ESTUDIANTE */}
-      <div className="space-y-8">
+      <div className="space-y-8" id="driver_colegiaturas-listado">
         {estudiantes.map((alumno) => {
           const colegiaturas = alumno.colegiaturas || [];
 
@@ -89,7 +89,7 @@ export default function Colegiaturas() {
                   {/* BOTÓN */}
                   <button
                     onClick={() => toggleStudent(alumno.id)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition w-full md:w-auto
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition w-full md:w-auto show-colegiaturas
                       ${
                         openStudentId === alumno.id
                           ? "bg-red-600 text-white hover:bg-red-700"

@@ -871,7 +871,7 @@ export default function useAdminTour() {
             description:
               "Los accesos rápidos permiten ejecutar las acciones más comunes del sistema sin necesidad de navegar entre diferentes secciones.",
             onNextClick: () => {
-              setAdminPage(1);
+              setTutorPage(1);
               setTitulo("Colegiaturas");
               setTimeout(() => {
                 driverObj.moveNext();
@@ -884,9 +884,9 @@ export default function useAdminTour() {
           popover: {
             title: "Colegiaturas",
             description:
-              "En esta sección podrá administrar todas las colegiaturas registradas en el sistema. Aquí encontrará las herramientas necesarias para consultar, filtrar y gestionar los pagos correspondientes a cada alumno.",
+              "En esta sección podrá administrar todas las colegiaturas relacionadas a cada uno de sus estudiantes.",
             onPrevClick: () => {
-              setAdminPage(0);
+              setTutorPage(0);
               setTitulo("Instituto Real de México A.C.");
               setTimeout(() => {
                 driverObj.movePrevious();
@@ -895,127 +895,23 @@ export default function useAdminTour() {
           },
         },
         {
-          element: "#driver_colegiaturas-resumen",
+          element: "#driver_colegiaturas-listado > :nth-child(1)",
           popover: {
-            title: "Resumen",
+            title: "Colegiaturas de un Estudiante",
             description:
-              "Este panel muestra un resumen general de las colegiaturas en tiempo real. Aquí podrá visualizar el total recaudado, los montos pendientes de pago y las colegiaturas que se encuentran vencidas.",
-          },
-        },
-        {
-          element: "#driver_colegiaturas-filtros",
-          popover: {
-            title: "Acciones para Regitros",
-            description:
-              "Utilice los filtros para localizar información de forma más precisa. Al aplicar un filtro, los datos mostrados en los indicadores y en la tabla se actualizarán automáticamente según los criterios seleccionados. o exporte datos a archivos Excel para la creación de reportes.",
-          },
-        },
-        {
-          element: "#driver_colegiaturas-buscador",
-          popover: {
-            title: "Buscar una Colegiatura",
-            description:
-              "Utilice este buscador para localizar una colegiatura específica mediante los datos del alumno, como nombre, apellidos o matrícula.",
-          },
-        },
-        {
-          element: "#driver_colegiaturas-estados",
-          popover: {
-            title: "Filtrar por Estado",
-            description:
-              "Permite filtrar las colegiaturas según su estado actual. Puede visualizar únicamente las colegiaturas pendientes, pagadas o vencidas para obtener un análisis más preciso.",
-          },
-        },
-        {
-          element: "#driver_colegiaturas-mes",
-          popover: {
-            title: "Filtrar por Mes",
-            description:
-              "Utilice este filtro para visualizar las colegiaturas correspondientes a un mes específico. De forma predeterminada, el sistema mostrará los registros del mes actual.",
-          },
-        },
-        {
-          element: "#driver_export-excel",
-          popover: {
-            title: "Exportar a Excel",
-            description:
-              "Utilice este botón para generar un archivo de Excel con los registros actualmente mostrados en la tabla. El archivo incluirá únicamente la información visible en pantalla en el momento de la exportación. Si aplica filtros por alumno, estado o mes, el reporte se generará respetando dichos criterios, permitiendo obtener reportes específicos y organizados para su análisis o resguardo.",
-          },
-        },
-        {
-          element: "#driver_colegiaturas-tabla",
-          popover: {
-            title: "Registros",
-            description:
-              "En esta tabla se muestran todos los registros de colegiaturas disponibles en la base de datos. La información se actualizará automáticamente cuando se utilicen los filtros o el buscador.",
-          },
-        },
-        {
-          element: "#driver_colegiaturas-registros > :nth-child(1)",
-          popover: {
-            title: "Colegiatura",
-            description:
-              "Cada fila representa una colegiatura registrada en el sistema. Aquí podrá visualizar de forma rápida los datos principales relacionados con el pago correspondiente.",
+              "Cada card representa las colegiaturas asociadas a un estudiante específico.",
           },
         },
         {
           element:
-            "#driver_colegiaturas-registros > :nth-child(1) .registrar-pago",
+            "#driver_colegiaturas-listado > :nth-child(1) .show-colegiaturas",
           popover: {
-            title: "Registrar Pago",
+            title: "Desplegar Colegiaturas",
             description:
-              "Utilice este botón para registrar el pago de la colegiatura seleccionada. El sistema asociará automáticamente el pago con el alumno correspondiente.",
-          },
-        },
-        {
-          element: "#driver_colegiaturas-registros > :nth-child(1) .historial",
-          popover: {
-            title: "Historial",
-            description:
-              "Este botón le permitirá acceder al historial completo de colegiaturas del alumno, donde podrá consultar el estado y registro de cada pago realizado.",
-          },
-        },
-        {
-          element: "#driver_colegiaturas-paginacion",
-          popover: {
-            title: "Paginación",
-            description:
-              "Cuando la cantidad de registros es elevada, el sistema divide la información en varias páginas para facilitar su visualización. Utilice estos controles para navegar entre ellas.",
-          },
-        },
-        {
-          element: "#driver_paginacion-numero",
-          popover: {
-            title: "Número de Página",
-            description:
-              "Indica el número de la página de registros que está visualizando actualmente.",
-          },
-        },
-        {
-          element: "#driver_paginacion-anterior",
-          popover: {
-            title: "Página Anterior",
-            description:
-              "Utilice este botón para regresar a la página anterior de registros. Si se encuentra en la primera página, el botón aparecerá deshabilitado.",
-          },
-        },
-        {
-          element: "#driver_paginacion-siguiente",
-          popover: {
-            title: "Página Siguiente",
-            description:
-              "Utilice este botón para avanzar a la siguiente página de registros. Si se encuentra en la última página, el botón aparecerá deshabilitado.",
-          },
-        },
-        {
-          element: "#driver_paginacion-botones .boton-paginacion",
-          popover: {
-            title: "Página Específica",
-            description:
-              "También puede acceder directamente a una página específica seleccionando su número. El botón correspondiente se resaltará cuando represente la página actual.",
+              "Utilice este botón para ver las colegiaturas asociadas al estudiante seleccionado. Al desplegar la información, podrá consultar el estado de cada colegiatura.",
             onNextClick: () => {
-              setAdminPage(2);
-              setTitulo("Pagos");
+              setTutorPage(2);
+              setTitulo("Mis Estudiantes");
               setTimeout(() => {
                 driverObj.moveNext();
               }, 300);
@@ -1025,11 +921,11 @@ export default function useAdminTour() {
         {
           element: "#driver_main",
           popover: {
-            title: "Pagos",
+            title: "Estudiantes A Cargo",
             description:
               "En esta sección podrá consultar y administrar todos los movimientos monetarios registrados en el sistema. Aquí se concentran los registros de pagos realizados por los alumnos.",
             onPrevClick: () => {
-              setAdminPage(1);
+              setTutorPage(1);
               setTitulo("Colegiaturas");
               setTimeout(() => {
                 driverObj.movePrevious();
@@ -1038,384 +934,60 @@ export default function useAdminTour() {
           },
         },
         {
-          element: "#driver_pagos-crear",
+          element: "#driver_estudiantes-listado",
           popover: {
-            title: "Registrar un Nuevo Pago",
+            title: "Listado de Estudiantes",
             description:
-              "Utilice este botón para registrar un nuevo pago manualmente. A diferencia del registro desde la sección de colegiaturas, aquí deberá seleccionar explícitamente al alumno y la colegiatura correspondiente antes de confirmar el pago.",
+              "Aquí se muestra la lista completa de todos los estudiantes registrados en el sistema, permitiendo su consulta y administración.",
           },
         },
         {
-          element: "#driver_pagos-indicadores",
+          element: "#driver_estudiantes-listado > :nth-child(1)",
           popover: {
-            title: "Indicadores",
+            title: "Estudiante",
             description:
-              "Este panel muestra indicadores generales sobre los pagos registrados en el sistema. Aquí podrá visualizar el monto total recaudado, el número total de pagos registrados y el promedio de ingresos por pago.",
+              "Cada card representa un estudiante registrado a su cargo. Aquí podrá consultar su información general y acceder a sus colegiaturas y pagos asociados.",
+            onNextClick: () => {
+              setTutorPage(3);
+              setTitulo("Mis Pagos");
+              setTimeout(() => {
+                driverObj.moveNext();
+              }, 300);
+            },
           },
         },
         {
-          element: "#driver_pagos-filtros",
+          element: "#driver_main",
           popover: {
-            title: "Filtros",
+            title: "Pagos Realizados",
             description:
-              "Utilice estos filtros para localizar registros de pagos de forma más precisa según diferentes criterios disponibles en el sistema.",
+              "En esta sección podrá consultar todos los pagos realizados por los estudiantes bajo su responsabilidad.",
+            onPrevClick: () => {
+              setTutorPage(2);
+              setTitulo("Mis Estudiantes");
+              setTimeout(() => {
+                driverObj.movePrevious();
+              }, 300);
+            },
           },
         },
         {
-          element: "#driver_pagos-buscador",
+          element: "#driver_pagos-generales",
           popover: {
-            title: "Buscar un Pago",
+            title: "Información General de Pagos",
             description:
-              "El buscador permite localizar pagos específicos utilizando el nombre del tutor asociado al pago o la referencia del pago, en caso de que exista.",
-          },
-        },
-        {
-          element: "#driver_pagos-metodos",
-          popover: {
-            title: "Filtrar por Método de Pago",
-            description:
-              "Este filtro permite mostrar únicamente los pagos registrados con un método de pago específico, facilitando la consulta y el análisis de los registros.",
-          },
-        },
-        {
-          element: "#driver_pagos-fecha",
-          popover: {
-            title: "Filtrar por Fecha de Registro",
-            description:
-              "También puede filtrar los pagos según la fecha en que fueron registrados. El campo abrirá un calendario interactivo que le permitirá seleccionar la fecha deseada.",
-          },
-        },
-        {
-          element: "#driver_export-excel",
-          popover: {
-            title: "Exportar a Excel",
-            description:
-              "Utilice este botón para generar un archivo de Excel con los registros actualmente mostrados en la tabla. El archivo incluirá únicamente la información visible en pantalla en el momento de la exportación. Si aplica filtros por alumno, estado o mes, el reporte se generará respetando dichos criterios, permitiendo obtener reportes específicos y organizados para su análisis o resguardo.",
+              "Consulte información general relacionada con sus pagos.",
           },
         },
         {
           element: "#driver_pagos-tabla",
           popover: {
-            title: "Registros",
+            title: "Listado de Pagos",
             description:
-              "En esta tabla se muestran todos los pagos registrados en la base de datos junto con su información general. Los resultados se actualizarán automáticamente al utilizar el buscador o aplicar filtros.",
-          },
-        },
-        {
-          element: "#driver_pagos-registros > :nth-child(1)",
-          popover: {
-            title: "Pago",
-            description:
-              "Cada fila representa un pago registrado en el sistema, mostrando su información principal junto con las acciones disponibles para consultarlo.",
-          },
-        },
-        {
-          element: "#driver_pagos-registros > :nth-child(1) .show-pago",
-          popover: {
-            title: "Ver Más",
-            description:
-              "Este botón permite acceder al detalle completo del pago, incluyendo la información del responsable, el servicio asociado y los datos del alumno relacionado.",
-          },
-        },
-        {
-          element: "#driver_pagos-paginación",
-          popover: {
-            title: "Paginación",
-            description:
-              "Cuando el número de registros es elevado, el sistema divide los resultados en varias páginas para facilitar su visualización. Puede utilizar estos controles para navegar entre los diferentes grupos de registros.",
+              "En esta tabla se muestran todos los pagos realizados relacionados con los estudiantes bajo su responsabilidad. Cada registro de la tabla muestra detalles específicos sobre cada pago.",
             onNextClick: () => {
-              setAdminPage(3);
-              setTitulo("Estudiantes");
-              setTimeout(() => {
-                driverObj.moveNext();
-              }, 300);
-            },
-          },
-        },
-        {
-          element: "#driver_main",
-          popover: {
-            title: "Estudiantes",
-            description:
-              "En esta sección podrá administrar toda la información relacionada con los estudiantes registrados en el sistema, incluyendo sus datos generales y su relación con los tutores correspondientes.",
-            onPrevClick: () => {
-              setAdminPage(2);
-              setTitulo("Pagos");
-              setTimeout(() => {
-                driverObj.movePrevious();
-              }, 300);
-            },
-          },
-        },
-        {
-          element: "#driver_estudiantes-total",
-          popover: {
-            title: "Estudiantes Totales",
-            description:
-              "Aquí se muestra en tiempo real el número total de estudiantes registrados actualmente en el sistema.",
-          },
-        },
-        {
-          element: "#driver_estudiantes-crear",
-          popover: {
-            title: "Nuevo Estudiante",
-            description:
-              "Utilice este botón para registrar un nuevo estudiante en la plataforma, ingresando la información necesaria para su identificación y gestión académica.",
-          },
-        },
-        {
-          element: "#driver_estudiantes-buscador",
-          popover: {
-            title: "Buscar Estudiante",
-            description:
-              "Localice rápidamente un estudiante utilizando su nombre, apellidos o matrícula dentro del sistema.",
-          },
-        },
-        {
-          element: "#driver_estudiantes-grado",
-          popover: {
-            title: "Filtrar por Grado",
-            description:
-              "Este filtro permite visualizar únicamente a los estudiantes que pertenecen a un grado académico específico.",
-          },
-        },
-        {
-          element: "#driver_estudiantes-estado",
-          popover: {
-            title: "Filtrar por Estado",
-            description:
-              "Filtre los estudiantes según su estado académico dentro de la institución, como activo, baja temporal o egresado.",
-          },
-        },
-        {
-          element: "#driver_export-excel",
-          popover: {
-            title: "Exportar a Excel",
-            description:
-              "Utilice este botón para generar un archivo de Excel con los registros actualmente mostrados en la tabla. El archivo incluirá únicamente la información visible en pantalla en el momento de la exportación. Si aplica filtros por alumno, estado o mes, el reporte se generará respetando dichos criterios, permitiendo obtener reportes específicos y organizados para su análisis o resguardo.",
-          },
-        },
-        {
-          element: "#driver_estudiantes-tabla",
-          popover: {
-            title: "Alumnos",
-            description:
-              "En esta tabla se muestran todos los estudiantes registrados en el sistema junto con su información general.",
-          },
-        },
-        {
-          element: "#driver_estudiantes-registros > :nth-child(1)",
-          popover: {
-            title: "Alumno",
-            description:
-              "Cada fila representa a un estudiante y muestra su información principal para facilitar la consulta rápida de sus datos.",
-          },
-        },
-        {
-          element: "#driver_estudiantes-registros > :nth-child(1) .perfil",
-          popover: {
-            title: "Perfil del Alumno",
-            description:
-              "Al acceder al perfil del estudiante podrá consultar toda la información detallada relacionada con él, incluyendo información sobre su tutor.",
-          },
-        },
-        {
-          element: "#driver_estudiantes-registros > :nth-child(1) .editar",
-          popover: {
-            title: "Editar Información del Alumno",
-            description:
-              "Si necesita corregir o actualizar algún dato del estudiante, utilice este botón para modificar su información registrada en el sistema.",
-          },
-        },
-        {
-          element: "#driver_estudiantes-paginacion",
-          popover: {
-            title: "Paginación",
-            description:
-              "Cuando el número de estudiantes es elevado, el sistema divide los registros en varias páginas para facilitar su visualización. Utilice estos controles para navegar entre las diferentes páginas de resultados.",
-            onNextClick: () => {
-              setAdminPage(4);
-              setTitulo("Tutores");
-              setTimeout(() => {
-                driverObj.moveNext();
-              }, 300);
-            },
-          },
-        },
-        {
-          element: "#driver_main",
-          popover: {
-            title: "Tutores",
-            description:
-              "En esta sección podrá administrar toda la información relacionada con los tutores registrados en el sistema, así como las relaciones que mantienen con los alumnos.",
-            onPrevClick: () => {
-              setAdminPage(3);
-              setTitulo("Estudiantes");
-              setTimeout(() => {
-                driverObj.movePrevious();
-              }, 300);
-            },
-          },
-        },
-        {
-          element: "#driver_tutores-total",
-          popover: {
-            title: "Tutores Totales",
-            description:
-              "Este indicador muestra en tiempo real el número total de tutores registrados actualmente en la base de datos.",
-          },
-        },
-        {
-          element: "#driver_tutores-crear",
-          popover: {
-            title: "Registrar Nuevo Tutor",
-            description:
-              "Utilice este botón para abrir el formulario de registro y agregar un nuevo tutor al sistema.",
-          },
-        },
-        {
-          element: "#driver_tutores-buscar",
-          popover: {
-            title: "Buscar un Tutor",
-            description:
-              "Este campo permite localizar rápidamente un tutor específico introduciendo datos como su nombre, apellidos, correo electrónico o número de teléfono.",
-          },
-        },
-        {
-          element: "#driver_tutores-filtro",
-          popover: {
-            title: "Filtro",
-            description:
-              "El sistema permite ordenar los registros utilizando este filtro. Puede visualizar los datos de forma ascendente o descendente según el criterio seleccionado.",
-          },
-        },
-        {
-          element: "#driver_export-excel",
-          popover: {
-            title: "Exportar a Excel",
-            description:
-              "Utilice este botón para generar un archivo de Excel con los registros actualmente mostrados en la tabla. El archivo incluirá únicamente la información visible en pantalla en el momento de la exportación. Si aplica filtros por alumno, estado o mes, el reporte se generará respetando dichos criterios, permitiendo obtener reportes específicos y organizados para su análisis o resguardo.",
-          },
-        },
-        {
-          element: "#driver_tutores-tabla",
-          popover: {
-            title: "Registros",
-            description:
-              "En esta tabla se muestran todos los tutores registrados en el sistema. El contenido se actualizará dinámicamente cuando utilice el buscador, los filtros o la paginación.",
-          },
-        },
-        {
-          element: "#driver_tutores-registros > :nth-child(1)",
-          popover: {
-            title: "Tutor",
-            description:
-              "Cada fila representa un tutor registrado. Aquí se muestran sus datos principales para facilitar la consulta rápida de información.",
-          },
-        },
-        {
-          element: "#driver_tutores-registros > :nth-child(1) .show-tutor",
-          popover: {
-            title: "Ver Más Datos",
-            description:
-              "Este botón permite abrir una vista detallada con toda la información asociada al tutor seleccionado.",
-          },
-        },
-        {
-          element: "#driver_tutores-paginacion",
-          popover: {
-            title: "Paginación",
-            description:
-              "Cuando el número de registros es elevado, el sistema divide los datos en varias páginas. Utilice estos controles para navegar entre ellas y visualizar más resultados.",
-            onNextClick: () => {
-              setAdminPage(5);
-              setTitulo("Publicaciones");
-              setTimeout(() => {
-                driverObj.moveNext();
-              }, 300);
-            },
-          },
-        },
-        {
-          element: "#driver_main",
-          popover: {
-            title: "Publicaciones",
-            description:
-              "En esta sección se gestionan todas las publicaciones que aparecerán en el apartado público de eventos y noticias del sistema.",
-            onPrevClick: () => {
-              setAdminPage(4);
-              setTitulo("Tutores");
-              setTimeout(() => {
-                driverObj.movePrevious();
-              }, 300);
-            },
-          },
-        },
-        {
-          element: "#driver_posts-total",
-          popover: {
-            title: "Publicaciones Totales",
-            description:
-              "Este indicador muestra el número total de publicaciones registradas actualmente en el sistema.",
-          },
-        },
-        {
-          element: "#driver_posts-buscador",
-          popover: {
-            title: "Buscar Publicación",
-            description:
-              "Utilice este campo para localizar rápidamente una publicación introduciendo palabras clave del título o parte de su contenido.",
-          },
-        },
-        {
-          element: "#driver_posts-filtro",
-          popover: {
-            title: "Filtrar Publicaciones",
-            description:
-              "Este filtro permite ordenar las publicaciones según su fecha de creación, mostrando primero las más recientes o las más antiguas.",
-          },
-        },
-        {
-          element: "#driver_posts-crear",
-          popover: {
-            title: "Crear una Publicación",
-            description:
-              "Presione este botón para abrir el formulario que le permitirá crear y publicar una nueva noticia o evento.",
-          },
-        },
-        {
-          element: "#driver_posts-listado",
-          popover: {
-            title: "Listado de Publicaciones",
-            description:
-              "En esta área se mostrarán todas las publicaciones registradas. Si no existen registros, el sistema mostrará un mensaje indicando que no hay contenido disponible.",
-          },
-        },
-        {
-          element: "#driver_posts-listado > :nth-child(1)",
-          popover: {
-            title: "Publicación",
-            description:
-              "Cada publicación se presenta como una tarjeta informativa que incluye su imagen representativa, título, fecha de publicación, descripción y las acciones disponibles.",
-          },
-        },
-        {
-          element: "#driver_posts-listado > :nth-child(1) .post-edit",
-          popover: {
-            title: "Editar Publicación",
-            description:
-              "Utilice este botón para modificar el contenido de una publicación existente y actualizar su información.",
-          },
-        },
-        {
-          element: "#driver_posts-listado > :nth-child(1) .post-delete",
-          popover: {
-            title: "Eliminar Publicación",
-            description:
-              "Este botón permite eliminar permanentemente la publicación seleccionada. El sistema solicitará una confirmación antes de ejecutar la eliminación.",
-            onNextClick: () => {
-              setAdminPage(6);
-
+              setTutorPage(4);
+              setTitulo("Configuración");
               setTimeout(() => {
                 driverObj.moveNext();
               }, 300);
@@ -1429,8 +1001,8 @@ export default function useAdminTour() {
             description:
               "En esta sección podrá administrar la configuración de su cuenta, actualizar sus datos personales y ejecutar nuevamente el tour de la aplicación cuando lo necesite.",
             onPrevClick: () => {
-              setAdminPage(5);
-              setTitulo("Publicaciones");
+              setAdminPage(3);
+              setTitulo("Mis Pagos");
               setTimeout(() => {
                 driverObj.movePrevious();
               }, 300);
@@ -1501,22 +1073,7 @@ export default function useAdminTour() {
               "Una vez completado correctamente el formulario, presione este botón para actualizar su contraseña. A partir de ese momento deberá utilizar la nueva contraseña para iniciar sesión.",
           },
         },
-        {
-          element: "#driver_cierre-ciclo",
-          popover: {
-            title: "Cierre de Ciclo Escolar",
-            description:
-              "En esta sección se ejecuta el proceso de cierre del ciclo escolar actual. Al realizar esta acción, el sistema desactiva el ciclo vigente, crea uno nuevo, promueve automáticamente a los alumnos al siguiente grado, egresa a los de último nivel y genera las colegiaturas correspondientes al nuevo ciclo. Este procedimiento es crítico y afecta toda la operación académica y financiera.",
-          },
-        },
-        {
-          element: "#driver_cierre-ciclo-btn",
-          popover: {
-            title: "Ejecutar cierre de ciclo",
-            description:
-              "Presione este botón para iniciar el cierre del ciclo escolar. Antes de continuar, el sistema solicitará una confirmación para evitar ejecuciones accidentales. Una vez confirmado, el proceso se ejecutará de forma automática y no podrá revertirse.",
-          },
-        },
+
         {
           element: "#driver_settings-tour",
           popover: {

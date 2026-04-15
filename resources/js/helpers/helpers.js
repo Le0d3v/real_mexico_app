@@ -6,8 +6,10 @@ const formatCurrency = (value) =>
     minimumFractionDigits: 2,
   }).format(value);
 
+// Año Actual
 const actualYear = new Date().getFullYear();
 
+// Formateador de fechas
 const formatDate = (date) => {
   const formateada = new Date(date).toLocaleDateString("es-MX", {
     day: "2-digit",
@@ -18,6 +20,7 @@ const formatDate = (date) => {
   return formateada;
 };
 
+// Redirección por rol
 const redirectByRole = (user) => {
   if (!user) return "/login";
 

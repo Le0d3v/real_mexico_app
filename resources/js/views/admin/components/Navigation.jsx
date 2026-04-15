@@ -111,7 +111,7 @@ export default function Navigation({ user, closeMenu, setPage, page }) {
                 setPage={setPage}
                 index={0}
                 icon={Home}
-                fn={() => setTitulo("Inicio")}
+                fn={() => setTitulo("Instituto Real México A.C.")}
               >
                 Inicio
               </NavItem>

@@ -39,7 +39,10 @@ export default function MisPagos() {
       </div>
 
       {/* 🔹 KPIs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-10">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-10"
+        id="driver_pagos-generales"
+      >
         <div className="bg-white p-6 rounded-2xl shadow-sm border-l-4 border-emerald-500">
           <div className="flex justify-between items-center">
             <div>
@@ -87,7 +90,10 @@ export default function MisPagos() {
       </div>
 
       {/* 🔹 TABLA DESKTOP */}
-      <div className="hidden md:block bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+      <div
+        className="hidden md:block bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden"
+        id="driver_pagos-tabla"
+      >
         <div className="overflow-x-auto">
           <table className="w-full text-sm">
             <thead className="bg-slate-200 text-slate-600">

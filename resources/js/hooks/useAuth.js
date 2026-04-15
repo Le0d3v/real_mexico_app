@@ -3,8 +3,10 @@ import api from "@/config/axios";
 import { useNavigate } from "react-router-dom";
 import { toast } from "react-toastify";
 import { redirectByRole } from "../helpers/helpers";
+import useIRM from "./useIRM";
 
 export default function useAuth({ middleware } = {}) {
+  const { setAdminPage, setTutorPage, setTitulo } = useIRM();
   const navigate = useNavigate();
 
   const [user, setUser] = useState(null);
@@ -86,6 +88,14 @@ export default function useAuth({ middleware } = {}) {
     // 👤 Ruta guest
     if (middleware === "guest" && user) {
       navigate(redirectByRole(user));
+
+      if (user.rol === "admin") {
+        setAdminPage(0);
+      } else if (user.rol === "tutor") {
+        setTutorPage(0);
+      }
+
+      setTitulo("Instituto Real México A.C.");
     }
   }, [user, loading]);
 
