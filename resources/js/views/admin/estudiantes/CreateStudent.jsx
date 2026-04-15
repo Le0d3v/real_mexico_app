@@ -209,23 +209,23 @@ export default function CreateStudent({
           )}
 
           {/* ACCIONES */}
-          <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-between gap-4 items-center">
-            <h1 className="text-3xl font-semibold text-red-400">
-              {isEdit ? "Editar" : "Acciones"}
+          <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:flex md:justify-between md:items-center block gap-4">
+            <h1 className="text-3xl font-semibold text-red-400 text-center md:text-start">
+              Acciones
             </h1>
 
-            <div className="flex gap-5">
+            <div className="flex flex-col-reverse md:flex-row gap-3 md:gap-5 justify-center py-3 md:py-0 w-full md:w-auto">
               <button
                 type="button"
-                className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer"
+                className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer w-full md:w-auto disabled:opacity-60"
                 onClick={() => onClose()}
               >
-                Cerrar
+                Cancelar
               </button>
 
               <button
                 type="submit"
-                className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm cursor-pointer w-44"
+                className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm cursor-pointer w-full md:w-44"
               >
                 {cargando ? (
                   <ClipLoader size={20} color="white" />

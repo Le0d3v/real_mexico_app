@@ -120,6 +120,7 @@ export default function Contacto() {
             </div>
           </motion.div>
         </div>
+        
       </section>
 
       <section className="bg-slate-900 text-white py-20 px-6 md:px-20">

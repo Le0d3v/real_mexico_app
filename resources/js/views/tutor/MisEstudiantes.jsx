@@ -64,7 +64,7 @@ export default function MisEstudiantes() {
 
                   <p className="text-sm text-gray-500 mt-1">
                     Matrícula:{" "}
-                    <span className="font-mono text-xs text-slate-600">
+                    <span className="font-semibold text-xs text-slate-600">
                       {alumno.matricula}
                     </span>
                   </p>

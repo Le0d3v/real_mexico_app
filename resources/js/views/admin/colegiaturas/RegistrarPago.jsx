@@ -346,18 +346,16 @@ export default function RegistrarPago({ student, colegiaturas, onClose }) {
             />
           </div>
         </section>
+        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:flex md:justify-between md:items-center block">
+          <h1 className="text-2xl font-semibold text-red-400 text-center md:text-start">
+            Acciones
+          </h1>
 
-        {/* ===============================
-                    ACCIONES
-                =============================== */}
-        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 flex justify-between items-center">
-          <h1 className="text-2xl font-semibold text-red-400">Acciones</h1>
-
-          <div className="flex gap-5">
+          <div className="flex flex-col-reverse md:flex-row gap-3 md:gap-5 justify-center md:justify-end mt-4 md:mt-0 w-full md:w-auto">
             <button
               type="button"
               onClick={() => onClose()}
-              className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer"
+              className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer w-full md:w-auto disabled:opacity-60"
               disabled={cargando}
             >
               Cancelar
@@ -366,7 +364,7 @@ export default function RegistrarPago({ student, colegiaturas, onClose }) {
             <button
               type="submit"
               disabled={cargando}
-              className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm w-44 disabled:opacity-60 hover:cursor-pointer"
+              className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm w-full md:w-44 disabled:opacity-60 hover:cursor-pointer"
             >
               {cargando ? (
                 <ClipLoader size={20} color="white" />

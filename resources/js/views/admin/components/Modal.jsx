@@ -23,11 +23,11 @@ export default function Modal({
       const timeout = setTimeout(() => {
         setIsVisible(false);
       }, 250); // duración de salida
-      
+
       return () => clearTimeout(timeout);
     }
   }, [isOpen]);
-  
+
   const sizeClasses = {
     sm: "max-w-md",
     md: "max-w-xl",
@@ -35,7 +35,7 @@ export default function Modal({
     xl: "max-w-5xl",
     full: "max-w-[95vw]",
   };
-  
+
   useEffect(() => {
     if (!isVisible) return;
 
@@ -55,7 +55,6 @@ export default function Modal({
   }, [isVisible, closeOnEsc, onClose]);
 
   if (!isVisible) return null;
-
 
   return (
     <div

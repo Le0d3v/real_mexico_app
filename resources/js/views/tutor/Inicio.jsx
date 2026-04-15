@@ -13,9 +13,11 @@ import Tittle from "../components/Tittle";
 import { formatCurrency } from "../../helpers/helpers";
 import useAuth from "../../hooks/useAuth";
 import TutorAlumnoCard from "./TutorAlumnoCard";
+import useIRM from "../../hooks/useIRM";
 
 export default function Inicio() {
   const { user, loading } = useAuth({ middleware: "auth" });
+  const { setTutorPage, setTitulo } = useIRM();
 
   if (loading) return <Loader />;
 
@@ -46,7 +48,10 @@ export default function Inicio() {
       </div>
 
       {/* 🔹 KPIs */}
-      <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6">
+      <div
+        className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-4 gap-6"
+        id="driver_main-kpis"
+      >
         {/* Estudiantes */}
         <div className="bg-white p-6 rounded-2xl shadow-sm hover:shadow-md transition border-l-4 border-slate-800">
           <div className="flex justify-between items-center">
@@ -101,7 +106,7 @@ export default function Inicio() {
       </div>
 
       {/* 🔹 ESTUDIANTES */}
-      <div className="mt-10">
+      <div className="mt-10" id="driver_tutor-estudiantes">
         <h3 className="text-xl font-semibold mb-5 text-slate-800">
           Mis Estudiantes
         </h3>
@@ -113,7 +118,7 @@ export default function Inicio() {
         </div>
       </div>
 
-      <div className="mt-10">
+      <div className="mt-10" id="driver_main-pagos">
         <h3 className="text-xl font-semibold mb-5 text-slate-800">
           Últimos Pagos
         </h3>
@@ -209,21 +214,39 @@ export default function Inicio() {
       </div>
 
       {/* 🔹 ACCESOS */}
-      <div className="mt-10">
+      <div className="mt-10" id="driver_accesos-rapidos">
         <h3 className="text-xl font-semibold mb-5 text-slate-800">
           Accesos Rápidos
         </h3>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-          <button className="bg-slate-900 text-white py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition">
+          <button
+            className="bg-slate-900 text-white py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition"
+            onClick={() => {
+              setTutorPage(1);
+              setTitulo("Colegiaturas");
+            }}
+          >
             Ver Colegiaturas
           </button>
 
-          <button className="bg-yellow-500 text-black py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition">
+          <button
+            className="bg-yellow-500 text-black py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition"
+            onClick={() => {
+              setTutorPage(3);
+              setTitulo("Historial de Pagos");
+            }}
+          >
             Historial de Pagos
           </button>
 
-          <button className="bg-slate-200 py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition">
+          <button
+            className="bg-slate-200 py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition"
+            onClick={() => {
+              setTutorPage(4);
+              setTitulo("Configuración");
+            }}
+          >
             Mi Perfil
           </button>
         </div>
