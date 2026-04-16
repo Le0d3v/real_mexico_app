@@ -254,6 +254,7 @@ class EstudianteController extends Controller
                 'tipo_sangre' => $studentData['tipo_sangre'],
                 'lengua_materna' => $studentData['lengua_materna'],
                 'discapacidad' => $studentData['discapacidad'],
+                'estado' => $studentData['estado'],
             ]);
 
             /* ===============================

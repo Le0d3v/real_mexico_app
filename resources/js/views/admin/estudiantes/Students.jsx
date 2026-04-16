@@ -176,7 +176,7 @@ export default function Students() {
             >
               <option value="Todos">Todos</option>
               <option value="Activo">Activo</option>
-              <option value="Baja temporal">Baja temporal</option>
+              <option value="Baja">Baja</option>
               <option value="Egresado">Egresado</option>
             </select>
 

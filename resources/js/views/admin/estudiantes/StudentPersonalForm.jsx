@@ -9,6 +9,8 @@ import {
   Droplet,
   Speech,
   Accessibility,
+  IdCard,
+  Check,
 } from "lucide-react";
 
 import InputField from "../components/InputField";
@@ -23,7 +25,7 @@ import {
   grupos,
 } from "../../../helpers/data";
 
-export default function StudentPersonalForm({ form, onChange }) {
+export default function StudentPersonalForm({ form, onChange, isEdit }) {
   return (
     <div>
       <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
@@ -142,6 +144,26 @@ export default function StudentPersonalForm({ form, onChange }) {
             value={form.grupo}
             onChange={(e) => onChange("grupo", Number(e.target.value))}
           />
+          {isEdit ? (
+            <>
+              <InputField
+                icon={<IdCard size={18} />}
+                label="Matricula"
+                value={form.matricula}
+                onChange={(e) => onChange("matricula", e.target.value)}
+                disabled={true}
+              />
+              <SelectField
+                icon={<Check size={18} />}
+                label="Estado"
+                options={["Activo", "Egresado", "Baja"]}
+                value={form.estado}
+                onChange={(e) => onChange("estado", e.target.value)}
+              />
+            </>
+          ) : (
+            <></>
+          )}
         </div>
       </section>
     </div>

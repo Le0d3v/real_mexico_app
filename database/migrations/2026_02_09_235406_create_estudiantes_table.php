@@ -23,7 +23,7 @@ return new class extends Migration
             $table->string('matricula', 20)->unique();
             $table->enum('genero', ['Masculino', 'Femenino']);
             $table->string('entidad_nacimiento', 45);
-            $table->enum('estado', ['Activo', 'Baja Temporal', 'Egresado']);
+            $table->enum('estado', ['Activo', 'Baja', 'Egresado']);
             $table->enum('tipo_sangre', ['A+', 'A-', 'B+', 'B-', 'AB+', 'AB-', 'O+', 'O-']);
             $table->string('lengua_materna', 45)->nullable();
             $table->string('discapacidad', 45)->nullable();

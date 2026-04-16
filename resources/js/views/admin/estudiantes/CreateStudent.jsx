@@ -42,7 +42,8 @@ export default function CreateStudent({
           curp: initialData.curp,
           genero: initialData.genero,
           grado: initialData.grado,
-
+          matricula: initialData.matricula,
+          estado: initialData.estado,
           // 🔥 NORMALIZACIÓN AQUÍ
           grupo:
             grupos.find((g) => g.label === initialData.grupo)?.value || null,
@@ -188,6 +189,7 @@ export default function CreateStudent({
           <StudentPersonalForm
             form={formData.student}
             onChange={handleStudentChange}
+            isEdit={isEdit}
           />
 
           <StudentAddressForm
