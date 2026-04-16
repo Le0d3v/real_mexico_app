@@ -15,21 +15,21 @@ export default function PersonalCard({ nombre, puesto, email, tel, img }) {
 
       {/* Contenido */}
       <div className="p-6 text-center text-white">
-        {/* <h2 className="text-2xl font-bold tracking-tight">{nombre}</h2>
+        <h2 className="text-2xl font-bold tracking-tight">{nombre}</h2>
 
-                <p className="text-yellow-400 font-medium mt-1">{puesto}</p>
+        {/* <p className="text-yellow-400 font-medium mt-1">{puesto}</p>
 
-                <div className="mt-6 space-y-3 text-gray-400 text-sm">
-                    <div className="flex items-center justify-center gap-2 hover:text-white transition">
-                        <Mail size={16} className="text-red-600" />
-                        {email}
-                    </div>
+        <div className="mt-6 space-y-3 text-gray-400 text-sm">
+          <div className="flex items-center justify-center gap-2 hover:text-white transition">
+            <Mail size={16} className="text-red-600" />
+            {email}
+          </div>
 
-                    <div className="flex items-center justify-center gap-2 hover:text-white transition">
-                        <Phone size={16} className="text-red-600" />
-                        {tel}
-                    </div>
-                </div> */}
+          <div className="flex items-center justify-center gap-2 hover:text-white transition">
+            <Phone size={16} className="text-red-600" />
+            {tel}
+          </div>
+        </div> */}
       </div>
     </div>
   );

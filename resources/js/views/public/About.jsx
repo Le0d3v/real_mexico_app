@@ -186,56 +186,56 @@ export default function About() {
           <AnimationSection>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
               <PersonalCard
-                nombre="Juan Torres"
+                nombre="Guadalupe Moreno Escalante"
                 puesto="Director General"
                 email="correo@correo.com"
                 tel="221-223-3221"
                 img="/img/personal_03.jpeg"
               />
               <PersonalCard
-                nombre="Juan Torres"
+                nombre="Mary Cruz Méndez Martinez"
                 puesto="Director General"
                 email="correo@correo.com"
                 tel="221-223-3221"
                 img="/img/personal_01.jpeg"
               />
               <PersonalCard
-                nombre="Juan Torres"
+                nombre="Cesilia Hernández Rojas"
                 puesto="Director General"
                 email="correo@correo.com"
                 tel="221-223-3221"
                 img="/img/personal_02.jpeg"
               />
               <PersonalCard
-                nombre="Juan Torres"
+                nombre="Jaqueline Islas Díaz"
                 puesto="Director General"
                 email="correo@correo.com"
                 tel="221-223-3221"
                 img="/img/personal_04.jpeg"
               />
               <PersonalCard
-                nombre="Juan Torres"
+                nombre="Samuel Alberto Herrera Rojas"
                 puesto="Director General"
                 email="correo@correo.com"
                 tel="221-223-3221"
                 img="/img/personal_05.jpeg"
               />
               <PersonalCard
-                nombre="Juan Torres"
+                nombre="Jesús Altair Escobar Escobar"
                 puesto="Director General"
                 email="correo@correo.com"
                 tel="221-223-3221"
                 img="/img/personal_06.jpeg"
               />
               <PersonalCard
-                nombre="Juan Torres"
+                nombre="Jaír Romero Cozono"
                 puesto="Director General"
                 email="correo@correo.com"
                 tel="221-223-3221"
                 img="/img/personal_07.jpeg"
               />
               <PersonalCard
-                nombre="Juan Torres"
+                nombre="Nelly Vázquez Flores"
                 puesto="Director General"
                 email="correo@correo.com"
                 tel="221-223-3221"
