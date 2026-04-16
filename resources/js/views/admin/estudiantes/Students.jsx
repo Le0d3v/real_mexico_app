@@ -1,12 +1,14 @@
 import { CirclePlus, Eye, Search, User } from "lucide-react";
 import useStudent from "../../../hooks/useStudent";
 import Loader from "../../components/Loader";
-import { useState, useMemo, useEffect } from "react";
+import { useState, useMemo } from "react";
 import Modal from "../components/Modal";
 import ShowStudent from "./ShowStudent";
 import CreateStudent from "./CreateStudent";
 import ExportExcel from "../components/ExportExcel";
 import { formatDate } from "../../../helpers/helpers";
+import usePagination from "../../../hooks/usePagination";
+import Pagination from "../components/Pagination";
 
 export default function Students() {
   const { estudiantes, isLoading, error } = useStudent();
@@ -14,19 +16,15 @@ export default function Students() {
   const [search, setSearch] = useState("");
   const [gradoFilter, setGradoFilter] = useState("Todos");
   const [estadoFilter, setEstadoFilter] = useState("Todos");
-  const [currentPage, setCurrentPage] = useState(1);
 
   const [showStudent, setShowStudent] = useState(false);
   const [editStudent, setEditStudent] = useState(false);
   const [selectedStudent, setSelectedStudent] = useState(null);
   const [createStudent, setCreateStudent] = useState(false);
 
-  const itemsPerPage = 10;
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [search, gradoFilter, estadoFilter]);
-
+  /* =========================
+     🔎 FILTRADO
+  ========================= */
   const filteredStudents = useMemo(() => {
     return estudiantes.filter((alumno) => {
       const fullName =
@@ -48,23 +46,19 @@ export default function Students() {
     });
   }, [search, gradoFilter, estadoFilter, estudiantes]);
 
-  const totalPages = Math.max(
-    1,
-    Math.ceil(filteredStudents.length / itemsPerPage),
-  );
+  /* =========================
+     📄 PAGINACIÓN (HOOK)
+  ========================= */
+  const {
+    currentPage,
+    setCurrentPage,
+    totalPages,
+    paginatedData: paginatedStudents,
+  } = usePagination(filteredStudents, 10, [search, gradoFilter, estadoFilter]);
 
-  const paginatedStudents = useMemo(() => {
-    const start = (currentPage - 1) * itemsPerPage;
-    const end = start + itemsPerPage;
-    return filteredStudents.slice(start, end);
-  }, [currentPage, filteredStudents]);
-
-  useEffect(() => {
-    if (currentPage > totalPages) {
-      setCurrentPage(totalPages);
-    }
-  }, [currentPage, totalPages]);
-
+  /* =========================
+     📊 EXPORT
+  ========================= */
   const columnasExcel = [
     { label: "Alumno", key: "alumno" },
     { label: "Fecha de Nacimiento", key: "fecha_nacimiento" },
@@ -85,7 +79,6 @@ export default function Students() {
     return {
       alumno:
         `${registro.nombre ?? ""} ${registro.apellido_paterno ?? ""} ${registro.apellido_materno ?? ""}`.trim(),
-
       fecha_nacimiento: formatDate(registro.fecha_nacimiento),
       curp: registro.curp,
       genero: registro.genero,
@@ -95,7 +88,6 @@ export default function Students() {
       grado: registro.grado,
       grupo: registro.grupo,
       estado: registro.estado,
-
       tutor: tutor
         ? [tutor.name, tutor.apellido_paterno, tutor.apellido_materno]
             .filter(Boolean)
@@ -229,6 +221,7 @@ export default function Students() {
                     key={alumno.id}
                     className="border-t border-gray-300 hover:bg-gray-200 transition"
                   >
+                    {/* CONTENIDO ORIGINAL SIN CAMBIOS */}
                     <td className="px-3 md:px-6 py-3 md:py-4">
                       <div className="flex items-center gap-3">
                         <div className="w-8 h-8 md:w-10 md:h-10 bg-yellow-400 text-black rounded-full flex items-center justify-center font-bold">
@@ -240,7 +233,7 @@ export default function Students() {
                       </div>
                     </td>
 
-                    <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600 font-mono text-center  ">
+                    <td className="px-3 md:px-6 py-3 md:py-4 text-gray-600 font-mono text-center">
                       <span className="font-semibold text-gray-700">
                         {alumno.matricula}
                       </span>
@@ -306,55 +299,19 @@ export default function Students() {
             </tbody>
           </table>
         </div>
-        {/* Paginación */}
-        <div
-          className="flex flex-col md:flex-row justify-between items-center gap-4 px-4 md:px-6 py-4 border-t bg-gray-50 text-center md:text-left"
-          id="driver_estudiantes-paginacion"
-        >
-          <p className="text-xs md:text-sm text-gray-600">
-            Página <strong>{currentPage}</strong> de{" "}
-            <strong>{totalPages}</strong>
-          </p>
 
-          <div className="flex items-center gap-2 flex-wrap justify-center">
-            <button
-              disabled={currentPage === 1}
-              onClick={() => setCurrentPage((prev) => prev - 1)}
-              className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
-            >
-              ←
-            </button>
-
-            {Array.from({ length: totalPages }, (_, i) => {
-              const pageNumber = i + 1;
-              const isActive = currentPage === pageNumber;
-
-              return (
-                <button
-                  key={pageNumber}
-                  onClick={() => setCurrentPage(pageNumber)}
-                  className={`px-3 md:px-4 py-2 rounded-lg text-xs md:text-sm cursor-pointer ${
-                    isActive
-                      ? "bg-yellow-400 text-black"
-                      : "bg-white border hover:bg-gray-100"
-                  }`}
-                >
-                  {pageNumber}
-                </button>
-              );
-            })}
-
-            <button
-              disabled={currentPage === totalPages}
-              onClick={() => setCurrentPage((prev) => prev + 1)}
-              className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
-            >
-              →
-            </button>
-          </div>
+        {/* PAGINACIÓN NUEVA */}
+        <div id="driver_estudiantes-paginacion">
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+            idPrefix="driver_paginacion"
+          />
         </div>
       </div>
 
+      {/* MODALES (SIN CAMBIOS) */}
       <Modal
         isOpen={showStudent}
         title={"Ver Estudiante"}
@@ -379,6 +336,7 @@ export default function Students() {
       >
         <CreateStudent onClose={() => setCreateStudent(false)} />
       </Modal>
+
       <Modal
         isOpen={editStudent}
         title={"Editar Estudiante"}
