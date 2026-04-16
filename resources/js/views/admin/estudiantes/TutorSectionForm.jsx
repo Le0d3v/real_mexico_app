@@ -1,13 +1,13 @@
 import { useState } from "react";
 import {
-    Search,
-    User,
-    Calendar,
-    Phone,
-    Mail,
-    Hash,
-    VenusAndMars,
-    UserCheck,
+  Search,
+  User,
+  Calendar,
+  Phone,
+  Mail,
+  Hash,
+  VenusAndMars,
+  UserCheck,
 } from "lucide-react";
 
 import InputField from "../components/InputField";
@@ -16,264 +16,233 @@ import TutorRelationForm from "./TutorRelationForm";
 import SearchTutor from "./SearchTutor";
 
 export default function TutorSectionForm({
-    tutores,
-    onTutorSelect,
-    onNewTutorChange,
-    onRelationChange,
+  tutores,
+  onTutorSelect,
+  onNewTutorChange,
+  onRelationChange,
 }) {
-    const [relacionTutor, setRelacionTutor] = useState({
-        parentesco: "",
-        parentesco_otro: "",
-        responsable_pagos: false,
-        contacto_principal: false,
-    });
+  const [relacionTutor, setRelacionTutor] = useState({
+    parentesco: "",
+    parentesco_otro: "",
+    responsable_pagos: false,
+    contacto_principal: false,
+  });
 
-    const [crearTutor, setCrearTutor] = useState(false);
-    const [searchTutor, setSearchTutor] = useState("");
-    const [selectedTutor, setSelectedTutor] = useState(null);
+  const [crearTutor, setCrearTutor] = useState(false);
+  const [searchTutor, setSearchTutor] = useState("");
+  const [selectedTutor, setSelectedTutor] = useState(null);
 
-    /* ===============================
+  /* ===============================
        FILTRO DE TUTORES
     =============================== */
 
-    const filteredTutores = tutores?.filter((tutor) => {
-        const nombreCompleto =
-            `${tutor.name} ${tutor.apellido_paterno} ${tutor.apellido_materno}`.toLowerCase();
+  const filteredTutores = tutores?.filter((tutor) => {
+    const nombreCompleto =
+      `${tutor.name} ${tutor.apellido_paterno} ${tutor.apellido_materno}`.toLowerCase();
 
-        return nombreCompleto.includes(searchTutor.toLowerCase());
+    return nombreCompleto.includes(searchTutor.toLowerCase());
+  });
+
+  const handleRelationChange = (field, value) => {
+    setRelacionTutor((prev) => {
+      const updated = {
+        ...prev,
+        [field]: value,
+      };
+
+      if (field === "parentesco" && value !== "Otro") {
+        updated.parentesco_otro = "";
+      }
+
+      onRelationChange(field, value);
+
+      return updated;
     });
+  };
 
-    const handleRelationChange = (field, value) => {
-        setRelacionTutor((prev) => {
-            const updated = {
-                ...prev,
-                [field]: value,
-            };
+  return (
+    <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
+      <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
+        <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
+          <UserCheck className="w-8 h-8 text-red-600" />
+        </div>
 
-            if (field === "parentesco" && value !== "Otro") {
-                updated.parentesco_otro = "";
-            }
+        <h2 className="text-2xl font-semibold text-gray-800">Tutor</h2>
+      </div>
 
-            onRelationChange(field, value);
+      {/* Selector modo */}
 
-            return updated;
-        });
-    };
+      <div className="flex items-center justify-between bg-gray-50 border border-gray-200 p-4 rounded-xl">
+        <div>
+          <h3 className="font-semibold text-gray-700">Vinculación de Tutor</h3>
 
-    return (
-        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
-            <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
-                <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
-                    <UserCheck className="w-8 h-8 text-red-600" />
-                </div>
+          <p className="text-sm text-gray-500">
+            Busque un tutor existente o registre uno nuevo
+          </p>
+        </div>
 
-                <h2 className="text-2xl font-semibold text-gray-800">Tutor</h2>
-            </div>
+        <label className="flex items-center gap-2 cursor-pointer">
+          <input
+            type="checkbox"
+            checked={crearTutor}
+            onChange={() => {
+              setCrearTutor(!crearTutor);
+              setSelectedTutor(null);
+              setSearchTutor("");
+            }}
+          />
 
-            {/* Selector modo */}
+          <span className="text-sm font-medium">Registrar nuevo tutor</span>
+        </label>
+      </div>
 
-            <div className="flex items-center justify-between bg-gray-50 border border-gray-200 p-4 rounded-xl">
-                <div>
-                    <h3 className="font-semibold text-gray-700">
-                        Vinculación de Tutor
-                    </h3>
-
-                    <p className="text-sm text-gray-500">
-                        Busque un tutor existente o registre uno nuevo
-                    </p>
-                </div>
-
-                <label className="flex items-center gap-2 cursor-pointer">
-                    <input
-                        type="checkbox"
-                        checked={crearTutor}
-                        onChange={() => {
-                            setCrearTutor(!crearTutor);
-                            setSelectedTutor(null);
-                            setSearchTutor("");
-                        }}
-                    />
-
-                    <span className="text-sm font-medium">
-                        Registrar nuevo tutor
-                    </span>
-                </label>
-            </div>
-
-            {/* ===============================
+      {/* ===============================
                BUSCADOR
             =============================== */}
 
-            {!crearTutor && (
-                <div className="space-y-4">
-                    <InputField
-                        icon={<Search size={18} />}
-                        label="Buscar Tutor"
-                        value={searchTutor}
-                        onChange={(e) => setSearchTutor(e.target.value)}
-                    />
+      {!crearTutor && (
+        <div className="space-y-4">
+          <InputField
+            icon={<Search size={18} />}
+            label="Buscar Tutor"
+            value={searchTutor}
+            onChange={(e) => setSearchTutor(e.target.value)}
+          />
 
-                    <div className="max-h-52 overflow-y-auto border rounded-xl p-3">
-                        {filteredTutores?.length === 0 && (
-                            <p className="p-4 text-sm text-gray-500">
-                                No se encontraron tutores
-                            </p>
-                        )}
-
-                        {filteredTutores?.map((tutor) => (
-                            <SearchTutor
-                                key={tutor.id}
-                                tutor={tutor}
-                                selected={selectedTutor?.id === tutor.id}
-                                onSelect={(tutor) => {
-                                    setSelectedTutor(tutor);
-                                    onTutorSelect(tutor.id);
-                                }}
-                            />
-                        ))}
-                    </div>
-
-                    {selectedTutor && (
-                        <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-md mt-3">
-                            Tutor seleccionado:
-                            <strong>
-                                {" "}
-                                {selectedTutor.name}{" "}
-                                {selectedTutor.apellido_paterno}{" "}
-                                {selectedTutor.apellido_materno}
-                            </strong>
-                            <p className="text-gray-600 text-sm">
-                                {selectedTutor.curp}
-                            </p>
-                        </div>
-                    )}
-
-                    {(selectedTutor || crearTutor) && (
-                        <TutorRelationForm
-                            relacion={relacionTutor}
-                            onChange={handleRelationChange}
-                        />
-                    )}
-                </div>
+          <div className="max-h-52 overflow-y-auto border rounded-xl p-3">
+            {filteredTutores?.length === 0 && (
+              <p className="p-4 text-sm text-gray-500">
+                No se encontraron tutores
+              </p>
             )}
 
-            {/* ===============================
+            {filteredTutores?.map((tutor) => (
+              <SearchTutor
+                key={tutor.id}
+                tutor={tutor}
+                selected={selectedTutor?.id === tutor.id}
+                onSelect={(tutor) => {
+                  setSelectedTutor(tutor);
+                  onTutorSelect(tutor.id);
+                }}
+              />
+            ))}
+          </div>
+
+          {selectedTutor && (
+            <div className="p-3 bg-green-50 border border-green-200 rounded-lg text-md mt-3">
+              Tutor seleccionado:
+              <strong>
+                {" "}
+                {selectedTutor.name} {selectedTutor.apellido_paterno}{" "}
+                {selectedTutor.apellido_materno}
+              </strong>
+              <p className="text-gray-600 text-sm">{selectedTutor.curp}</p>
+            </div>
+          )}
+
+          {(selectedTutor || crearTutor) && (
+            <TutorRelationForm
+              relacion={relacionTutor}
+              onChange={handleRelationChange}
+            />
+          )}
+        </div>
+      )}
+
+      {/* ===============================
                NUEVO TUTOR
             =============================== */}
 
-            {crearTutor && (
-                <div>
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <InputField
-                            icon={<User size={18} />}
-                            label="Nombre(s)"
-                            onChange={(e) =>
-                                onNewTutorChange("name", e.target.value)
-                            }
-                        />
+      {crearTutor && (
+        <div>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <InputField
+              icon={<User size={18} />}
+              label="Nombre(s)"
+              onChange={(e) => onNewTutorChange("name", e.target.value)}
+            />
 
-                        <InputField
-                            icon={<User size={18} />}
-                            label="Apellido Paterno"
-                            onChange={(e) =>
-                                onNewTutorChange(
-                                    "apellido_paterno",
-                                    e.target.value,
-                                )
-                            }
-                        />
+            <InputField
+              icon={<User size={18} />}
+              label="Apellido Paterno"
+              onChange={(e) =>
+                onNewTutorChange("apellido_paterno", e.target.value)
+              }
+            />
 
-                        <InputField
-                            icon={<User size={18} />}
-                            label="Apellido Materno"
-                            onChange={(e) =>
-                                onNewTutorChange(
-                                    "apellido_materno",
-                                    e.target.value,
-                                )
-                            }
-                        />
+            <InputField
+              icon={<User size={18} />}
+              label="Apellido Materno"
+              onChange={(e) =>
+                onNewTutorChange("apellido_materno", e.target.value)
+              }
+            />
 
-                        <InputField
-                            icon={<Calendar size={18} />}
-                            label="Fecha de Nacimiento"
-                            type="date"
-                            onChange={(e) =>
-                                onNewTutorChange(
-                                    "fecha_nacimiento",
-                                    e.target.value,
-                                )
-                            }
-                        />
+            <InputField
+              icon={<Calendar size={18} />}
+              label="Fecha de Nacimiento"
+              type="date"
+              onChange={(e) =>
+                onNewTutorChange("fecha_nacimiento", e.target.value)
+              }
+            />
 
-                        <InputField
-                            icon={<Hash size={18} />}
-                            label="CURP"
-                            onChange={(e) =>
-                                onNewTutorChange("curp", e.target.value)
-                            }
-                        />
+            <InputField
+              icon={<Hash size={18} />}
+              label="CURP"
+              onChange={(e) => onNewTutorChange("curp", e.target.value)}
+            />
 
-                        <SelectField
-                            icon={<VenusAndMars size={18} />}
-                            label="Género"
-                            options={["Masculino", "Femenino"]}
-                            onChange={(e) =>
-                                onNewTutorChange("genero", e.target.value)
-                            }
-                        />
+            <SelectField
+              icon={<VenusAndMars size={18} />}
+              label="Género"
+              options={["Masculino", "Femenino"]}
+              onChange={(e) => onNewTutorChange("genero", e.target.value)}
+            />
 
-                        <InputField
-                            icon={<Hash size={18} />}
-                            label="Ocupación"
-                            onChange={(e) =>
-                                onNewTutorChange("ocupacion", e.target.value)
-                            }
-                        />
+            <InputField
+              icon={<Hash size={18} />}
+              label="Ocupación"
+              onChange={(e) => onNewTutorChange("ocupacion", e.target.value)}
+            />
 
-                        <SelectField
-                            icon={<Hash size={18} />}
-                            label="Nivel de Estudios"
-                            options={[
-                                "Primaria",
-                                "Secundaria",
-                                "Preparatoria",
-                                "Licenciatura",
-                                "Postgrado",
-                            ]}
-                            onChange={(e) =>
-                                onNewTutorChange(
-                                    "nivel_estudios",
-                                    e.target.value,
-                                )
-                            }
-                        />
+            <SelectField
+              icon={<Hash size={18} />}
+              label="Nivel de Estudios"
+              options={[
+                "Primaria",
+                "Secundaria",
+                "Preparatoria",
+                "Licenciatura",
+                "Postgrado",
+              ]}
+              onChange={(e) =>
+                onNewTutorChange("nivel_estudios", e.target.value)
+              }
+            />
 
-                        <InputField
-                            icon={<Phone size={18} />}
-                            label="Teléfono"
-                            type="tel"
-                            onChange={(e) =>
-                                onNewTutorChange("telefono", e.target.value)
-                            }
-                        />
+            <InputField
+              icon={<Phone size={18} />}
+              label="Teléfono"
+              type="tel"
+              onChange={(e) => onNewTutorChange("telefono", e.target.value)}
+            />
 
-                        <InputField
-                            icon={<Mail size={18} />}
-                            label="Correo Electrónico"
-                            type="email"
-                            onChange={(e) =>
-                                onNewTutorChange("email", e.target.value)
-                            }
-                        />
-                    </div>
-                    <TutorRelationForm
-                        className="col-span-2"
-                        relacion={relacionTutor}
-                        onChange={handleRelationChange}
-                    />
-                </div>
-            )}
-        </section>
-    );
+            <InputField
+              icon={<Mail size={18} />}
+              label="Correo Electrónico"
+              type="email"
+              onChange={(e) => onNewTutorChange("email", e.target.value)}
+            />
+          </div>
+          <TutorRelationForm
+            className="col-span-2"
+            relacion={relacionTutor}
+            onChange={handleRelationChange}
+          />
+        </div>
+      )}
+    </section>
+  );
 }

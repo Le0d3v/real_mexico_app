@@ -16,6 +16,7 @@ import {
 import InfoItem from "../components/InfoItem";
 import TutorCard from "./TutorCard";
 import { formatDate } from "../../../helpers/helpers";
+import ColegiaturaCard from "../colegiaturas/ColegiaturaCard";
 
 export default function ShowStudent({ student, onClose }) {
   const domicilio = student.domicilio;
@@ -201,6 +202,28 @@ export default function ShowStudent({ student, onClose }) {
           ) : (
             <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-gray-500">
               No hay Tutores asociados a este Estudiante.
+            </div>
+          )}
+        </section>
+        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
+          <div className="flex items-center gap-3 border-b border-b-gray-300 pb-4">
+            <div className="p-2 flex items-center justify-center rounded-full bg-red-200">
+              <Calendar className="w-6 h-6 text-red-600" />
+            </div>
+            <h2 className="text-xl font-semibold text-gray-800">
+              Colegiaturas
+            </h2>
+          </div>
+
+          {student?.colegiaturas?.length > 0 ? (
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+              {student.colegiaturas.map((colegiatura, i) => (
+                <ColegiaturaCard colegiatura={colegiatura} key={i} />
+              ))}
+            </div>
+          ) : (
+            <div className="bg-gray-50 border border-gray-200 rounded-xl p-4 text-gray-500">
+              No hay Colegiaturas asociadas a este Estudiante.
             </div>
           )}
         </section>
