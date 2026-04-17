@@ -70,11 +70,18 @@ export default function Tutores() {
               su dispositivo móvil. La comunicación directa fortalece el
               seguimiento académico.
             </p>
+            <p className="text-sm text-gray-500 mt-5">
+              Disponible para solo para dispositivos Android
+            </p>
 
-            <button className="mt-8 flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl transition shadow-lg">
+            <a
+              href="/apk/base.apk"
+              className="mt-8 flex items-center gap-2 bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-xl transition shadow-lg"
+              download
+            >
               <Smartphone size={18} />
               Descargar App
-            </button>
+            </a>
           </div>
 
           <div className="order-1 md:order-2">

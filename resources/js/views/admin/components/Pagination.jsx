@@ -20,7 +20,7 @@ export default function Pagination({
         <button
           disabled={currentPage === 1}
           onClick={() => onPageChange(currentPage - 1)}
-          className="px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-100 disabled:opacity-40 cursor-pointer"
+          className={`px-3 py-2 rounded-lg text-xs md:text-sm bg-white border hover:bg-gray-200 disabled:opacity-40 cursor-pointer transition disabled:cursor-not-allowed`}
           id={`${idPrefix}-prev`}
         >
           ←

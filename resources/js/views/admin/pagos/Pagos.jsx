@@ -236,7 +236,10 @@ export default function Pagos() {
 
             <tbody id="driver_pagos-registros">
               {paginatedPagos.map((pago) => (
-                <tr key={pago.id} className="border-t text-center">
+                <tr
+                  key={pago.id}
+                  className="border-t text-center border-gray-300 hover:bg-gray-200"
+                >
                   <td className="px-4 py-3">
                     {pago.tutor?.name} {pago.tutor?.apellido_paterno}
                   </td>
@@ -250,7 +253,7 @@ export default function Pagos() {
                   </td>
                   <td className="px-4 py-3">
                     <button
-                      className="bg-yellow-400 px-3 py-1 rounded cursor-pointer show-pago"
+                      className="bg-yellow-400 px-3 py-1 rounded cursor-pointer show-pago hover:bg-yellow-500 transition< "
                       onClick={() => {
                         setPago(pago);
                         setShowPago(true);

@@ -234,7 +234,10 @@ export default function Colegiaturas() {
 
             <tbody id="driver_colegiaturas-registros">
               {registrosPaginados.map((registro) => (
-                <tr key={registro.id} className="border-t hover:bg-gray-100">
+                <tr
+                  key={registro.id}
+                  className="border-t border-gray-300 hover:bg-gray-200"
+                >
                   <td className="px-3 md:px-6 py-3 md:py-4 font-medium">
                     {registro.estudiante.nombre}{" "}
                     {registro.estudiante.apellido_paterno}
@@ -265,14 +268,14 @@ export default function Colegiaturas() {
                   <td className="px-3 md:px-6 py-3 md:py-4 text-center">
                     <div className="flex flex-col md:flex-row justify-center gap-2">
                       <button
-                        className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-500"
+                        className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-500 cursor-pointer hover:bg-yellow-600 transition"
                         onClick={() => registrarPago(registro)}
                       >
                         Registrar pago
                       </button>
 
                       <button
-                        className="px-3 py-1 text-xs md:text-sm rounded-md bg-gray-200"
+                        className="px-3 py-1 text-xs md:text-sm rounded-md bg-gray-300 cursor-pointer hover:bg-gray-400 transition"
                         onClick={() => showHistorial(registro)}
                       >
                         Historial
