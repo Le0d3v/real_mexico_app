@@ -185,7 +185,9 @@ export default function CrearPago({ onClose }) {
       <div className="flex items-center gap-2">
         <Info />
         <p>
-          Complete el siguiente formulario para registrar un pago de colegiatura
+          Para registrar un pago por colegiatura, primero selecciona al
+          estudiante, luego elige la colegiatura correspondiente y completa la
+          información del pago.
         </p>
       </div>
 
@@ -210,6 +212,7 @@ export default function CrearPago({ onClose }) {
             value={search}
             onChange={(e) => setSearch(e.target.value)}
             label={"Buscar Estudiante"}
+            placeholder={"Busque por nombre o matriucla"}
           />
 
           {search && (
@@ -291,118 +294,122 @@ export default function CrearPago({ onClose }) {
           )}
         </section>
         {/* ================= INFORMACIÓN DEL PAGO ================= */}
-        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
-          <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
-            <div className="p-2 rounded-full bg-red-200">
-              <DollarSign className="text-red-600" />
-            </div>
-            <h2 className="text-2xl font-semibold">Información del Pago</h2>
-          </div>
+        {selectedStudent && (
+          <>
+            <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 space-y-6">
+              <div className="flex items-center gap-3 border-b border-gray-300 pb-4">
+                <div className="p-2 rounded-full bg-red-200">
+                  <DollarSign className="text-red-600" />
+                </div>
+                <h2 className="text-2xl font-semibold">Información del Pago</h2>
+              </div>
 
-          <div className="grid md:grid-cols-2 gap-6">
-            <SelectField
-              icon={<NotepadText size={18} />}
-              label="Asunto"
-              options={["Pago por Colegiatura"]}
-              value={formData.asunto}
-              onChange={(e) =>
-                setFormData((p) => ({
-                  ...p,
-                  asunto: e.target.value,
-                }))
-              }
-            />
+              <div className="grid md:grid-cols-2 gap-6">
+                <SelectField
+                  icon={<NotepadText size={18} />}
+                  label="Asunto"
+                  options={["Pago por Colegiatura"]}
+                  value={formData.asunto}
+                  onChange={(e) =>
+                    setFormData((p) => ({
+                      ...p,
+                      asunto: e.target.value,
+                    }))
+                  }
+                />
 
-            <InputField
-              icon={<DollarSign size={18} />}
-              label="Monto"
-              type="number"
-              value={formData.monto}
-              onChange={(e) =>
-                setFormData((p) => ({
-                  ...p,
-                  monto: e.target.value,
-                }))
-              }
-            />
+                <InputField
+                  icon={<DollarSign size={18} />}
+                  label="Monto"
+                  type="number"
+                  value={formData.monto}
+                  onChange={(e) =>
+                    setFormData((p) => ({
+                      ...p,
+                      monto: e.target.value,
+                    }))
+                  }
+                />
 
-            <InputField
-              icon={<Calendar size={18} />}
-              label="Fecha"
-              type="date"
-              value={formData.fecha_pago}
-              onChange={(e) =>
-                setFormData((p) => ({
-                  ...p,
-                  fecha_pago: e.target.value,
-                }))
-              }
-            />
+                <InputField
+                  icon={<Calendar size={18} />}
+                  label="Fecha"
+                  type="date"
+                  value={formData.fecha_pago}
+                  onChange={(e) =>
+                    setFormData((p) => ({
+                      ...p,
+                      fecha_pago: e.target.value,
+                    }))
+                  }
+                />
 
-            <SelectField
-              icon={<CreditCard size={18} />}
-              label="Método de Pago"
-              options={["Efectivo", "Transferencia", "Tarjeta", "Deposito"]}
-              value={metodoPago}
-              onChange={handleMetodoPagoChange}
-            />
+                <SelectField
+                  icon={<CreditCard size={18} />}
+                  label="Método de Pago"
+                  options={["Efectivo", "Transferencia", "Tarjeta", "Deposito"]}
+                  value={metodoPago}
+                  onChange={handleMetodoPagoChange}
+                />
 
-            {(metodoPago === "Deposito" || metodoPago === "Tarjeta") && (
-              <InputField
-                icon={<Hash size={18} />}
-                label="Referencia"
-                value={formData.referencia}
-                onChange={(e) =>
-                  setFormData((p) => ({
-                    ...p,
-                    referencia: e.target.value,
-                  }))
-                }
-              />
-            )}
+                {(metodoPago === "Deposito" || metodoPago === "Tarjeta") && (
+                  <InputField
+                    icon={<Hash size={18} />}
+                    label="Referencia"
+                    value={formData.referencia}
+                    onChange={(e) =>
+                      setFormData((p) => ({
+                        ...p,
+                        referencia: e.target.value,
+                      }))
+                    }
+                  />
+                )}
 
-            <InputField
-              icon={<Eye size={18} />}
-              label="Observaciones"
-              value={formData.observaciones}
-              onChange={(e) =>
-                setFormData((p) => ({
-                  ...p,
-                  observaciones: e.target.value,
-                }))
-              }
-            />
-          </div>
-        </section>
+                <InputField
+                  icon={<Eye size={18} />}
+                  label="Observaciones"
+                  value={formData.observaciones}
+                  onChange={(e) =>
+                    setFormData((p) => ({
+                      ...p,
+                      observaciones: e.target.value,
+                    }))
+                  }
+                />
+              </div>
+            </section>
 
-        <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:flex md:justify-between md:items-center block">
-          <h1 className="text-2xl font-semibold text-red-400 text-center md:text-start">
-            Acciones
-          </h1>
+            <section className="bg-white rounded-2xl shadow-sm border border-gray-100 p-6 md:flex md:justify-between md:items-center block">
+              <h1 className="text-2xl font-semibold text-red-400 text-center md:text-start">
+                Acciones
+              </h1>
 
-          <div className="flex flex-col-reverse md:flex-row gap-3 md:gap-5 justify-center py-3 md:py-0 w-full md:w-auto">
-            <button
-              type="button"
-              onClick={onClose}
-              className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer w-full md:w-auto disabled:opacity-60"
-              disabled={cargando}
-            >
-              Cancelar
-            </button>
+              <div className="flex flex-col-reverse md:flex-row gap-3 md:gap-5 justify-center py-3 md:py-0 w-full md:w-auto">
+                <button
+                  type="button"
+                  onClick={onClose}
+                  className="px-6 py-2 rounded-xl border border-gray-300 text-gray-600 hover:bg-gray-100 transition cursor-pointer w-full md:w-auto disabled:opacity-60"
+                  disabled={cargando}
+                >
+                  Cancelar
+                </button>
 
-            <button
-              type="submit"
-              disabled={cargando}
-              className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm w-full md:w-44 disabled:opacity-60 hover:cursor-pointer"
-            >
-              {cargando ? (
-                <ClipLoader size={20} color="white" />
-              ) : (
-                "Registrar Pago"
-              )}
-            </button>
-          </div>
-        </section>
+                <button
+                  type="submit"
+                  disabled={cargando}
+                  className="px-6 py-2 rounded-xl bg-red-600 text-white font-semibold hover:bg-red-700 transition shadow-sm w-full md:w-44 disabled:opacity-60 hover:cursor-pointer"
+                >
+                  {cargando ? (
+                    <ClipLoader size={20} color="white" />
+                  ) : (
+                    "Registrar Pago"
+                  )}
+                </button>
+              </div>
+            </section>
+          </>
+        )}
       </form>
     </>
   );

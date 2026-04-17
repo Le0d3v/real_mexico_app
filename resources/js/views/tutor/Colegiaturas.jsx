@@ -89,7 +89,7 @@ export default function Colegiaturas() {
                   {/* BOTÓN */}
                   <button
                     onClick={() => toggleStudent(alumno.id)}
-                    className={`px-4 py-2 rounded-lg text-sm font-medium transition w-full md:w-auto show-colegiaturas
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition w-full md:w-auto show-colegiaturas      cursor-pointer hover:-translate-y-1
                       ${
                         openStudentId === alumno.id
                           ? "bg-red-600 text-white hover:bg-red-700"

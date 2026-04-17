@@ -48,18 +48,20 @@ export default function Dashboard() {
   );
 
   const totalRecaudadoMes = colegiaturasMesActual
-    .filter((c) => c.estado === "Pagado")
+    .filter((c) => Number(c.pagado) > 0) // 🔥 clave
     .reduce((acc, c) => acc + Number(c.pagado), 0);
 
   const porcentajeRecaudado =
-    totalMetaMes > 0 ? Math.round((totalRecaudadoMes / totalMetaMes) * 100) : 0;
+    totalMetaMes > 0
+      ? Math.max(0, Math.min(100, (totalRecaudadoMes / totalMetaMes) * 100))
+      : 0;
 
   const totalEstudiantes = estudiantes.length;
 
   if (isLoading) return <Loader />;
   if (error) return "Error al cagar los Datos";
 
-  return (  
+  return (
     <>
       <div className="bg-slate-100 min-h-screen">
         <Tittle>Panel de Administración</Tittle>
@@ -138,7 +140,7 @@ export default function Dashboard() {
             />
 
             <div className="absolute inset-0 flex items-center justify-center text-xs font-semibold text-slate-700">
-              {porcentajeRecaudado}% Recaudado
+              {porcentajeRecaudado.toFixed(2)}% Recaudado
             </div>
           </div>
 
@@ -153,7 +155,7 @@ export default function Dashboard() {
             <div className="flex items-center gap-3 mb-5">
               <GraduationCap className="w-6 h-6 text-slate-600" />
               <h3 className="text-lg font-semibold text-slate-800">
-                Distribución de Alumnos por Grado
+                Distribución de Alumnos Activos por Grado
               </h3>
             </div>
 

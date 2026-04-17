@@ -52,6 +52,7 @@ export default function Pagination({
                       ? "bg-yellow-400 text-black"
                       : "bg-white border hover:bg-gray-100"
                   }`}
+                  id="driver_paginacion-numero"
                 >
                   {page}
                 </button>

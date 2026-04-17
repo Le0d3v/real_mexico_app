@@ -220,7 +220,7 @@ export default function useAdminTour() {
           },
         },
         {
-          element: "#driver_paginacion-anterior",
+          element: "#driver_paginacion-prev",
           popover: {
             title: "Página Anterior",
             description:
@@ -228,19 +228,11 @@ export default function useAdminTour() {
           },
         },
         {
-          element: "#driver_paginacion-siguiente",
+          element: "#driver_paginacion-next",
           popover: {
             title: "Página Siguiente",
             description:
               "Utilice este botón para avanzar a la siguiente página de registros. Si se encuentra en la última página, el botón aparecerá deshabilitado.",
-          },
-        },
-        {
-          element: "#driver_paginacion-botones .boton-paginacion",
-          popover: {
-            title: "Página Específica",
-            description:
-              "También puede acceder directamente a una página específica seleccionando su número. El botón correspondiente se resaltará cuando represente la página actual.",
             onNextClick: () => {
               setAdminPage(2);
               setTitulo("Pagos");
@@ -250,6 +242,7 @@ export default function useAdminTour() {
             },
           },
         },
+
         {
           element: "#driver_main",
           popover: {
@@ -346,7 +339,7 @@ export default function useAdminTour() {
           },
         },
         {
-          element: "#driver_pagos-paginación",
+          element: "#driver_pagos-paginacion",
           popover: {
             title: "Paginación",
             description:

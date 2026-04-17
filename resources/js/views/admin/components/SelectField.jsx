@@ -12,10 +12,16 @@ export default function SelectField({
       <div className="text-red-600 mt-1">{icon}</div>
 
       <div className="w-full">
-        <label className="text-sm text-gray-500 block mb-1">{label}</label>
+        <label
+          className="text-sm text-gray-500 block mb-1"
+          htmlFor={label.toLowerCase().replace(/\s+/g, "-")}
+        >
+          {label}
+        </label>
 
         <select
           className="w-full bg-transparent outline-none text-gray-800 font-medium rounded"
+          id={label.toLowerCase().replace(/\s+/g, "-")}
           value={value}
           onChange={onChange}
           required

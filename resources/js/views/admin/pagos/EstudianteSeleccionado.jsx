@@ -22,6 +22,9 @@ export default function EstudianteSeleccionado({
 }) {
   return (
     <div className="space-y-6">
+      <h1 className="font-semibold text-gray-700 text-xl">
+        Estudiante Seleccionado:
+      </h1>
       <StudentCard student={estudiante} discard={true} onDiscard={onClear} />
 
       {/* 🔥 SELECTS INTEGRADOS */}

@@ -30,7 +30,7 @@ export default function Navigation({ user, closeMenu, setPage, page }) {
 
       <div className="flex flex-col" id="driver_navegacion-enlaces">
         {user.rol === "admin" ? (
-          <div>
+          <>
             <NavItem
               page={page}
               closeMenu={closeMenu}
@@ -101,7 +101,7 @@ export default function Navigation({ user, closeMenu, setPage, page }) {
             >
               Ajustes
             </NavItem>
-          </div>
+          </>
         ) : (
           <>
             <div className="flex flex-col" id="driver_navegacion-enlaces">

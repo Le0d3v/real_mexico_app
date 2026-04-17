@@ -26,7 +26,7 @@ export default function ResponsiveMenu({
       className={`
                 fixed top-0 left-0 z-50
                 h-full w-[85%] max-w-sm
-                bg-red-600 text-white
+                bg-red-800 text-white
                 transform transition-transform duration-300 ease-in-out
                 ${isOpen ? "translate-x-0" : "-translate-x-full"}
             `}

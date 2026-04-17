@@ -48,10 +48,9 @@ export default function MisEstudiantes() {
 
           const pagadas = colegiaturas.filter((c) => c.estado === "Pagado");
 
-          const totalPendiente = pendientes.reduce(
-            (acc, c) => acc + Number(c.monto),
-            0,
-          );
+          const totalPendiente =
+            pendientes.reduce((acc, c) => acc + Number(c.monto), 0) +
+            vencidas.reduce((acc, c) => acc + Number(c.monto), 0);
 
           return (
             <div
@@ -62,7 +61,8 @@ export default function MisEstudiantes() {
               <div className="flex justify-between items-start">
                 <div>
                   <h3 className="text-lg font-semibold text-slate-800">
-                    {alumno.nombre} {alumno.apellido_paterno}
+                    {alumno.nombre} {alumno.apellido_paterno}{" "}
+                    {alumno.apellido_materno}
                   </h3>
 
                   <p className="text-sm text-gray-500 mt-1">

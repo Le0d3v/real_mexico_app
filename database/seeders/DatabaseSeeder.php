@@ -24,15 +24,15 @@ class DatabaseSeeder extends Seeder
             // 🔹 Datos generales
             DomiciliosSeeder::class,
             UsersSeeder::class,
-            TutoresSeeder::class,
+            // TutoresSeeder::class,
 
             // 🔹 Núcleo académico
-            EstudiantesSeeder::class,
-            EstudiantesTutoresSeeder::class,
+            // EstudiantesSeeder::class,
+            // EstudiantesTutoresSeeder::class,
 
             // 🔹 Núcleo financiero
-            ColegiaturasSeeder::class,
-            PagosSeeder::class,
+            // ColegiaturasSeeder::class,
+            // PagosSeeder::class,
         ]);
     }
 }

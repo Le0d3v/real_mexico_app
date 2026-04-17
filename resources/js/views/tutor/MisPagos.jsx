@@ -142,12 +142,13 @@ export default function MisPagos() {
                 <tr
                   key={pago.id}
                   className={`
-                    border-t transition hover:bg-slate-50
+                    border-t transition hover:bg-gray-100 border-gray-300 
                     ${index % 2 === 0 ? "bg-white" : "bg-slate-50/40"}
                   `}
                 >
                   <td className="p-4 font-medium text-slate-700">
-                    {pago.estudiante?.nombre}
+                    {pago.estudiante?.nombre} - {pago.estudiante?.grado}{" "}
+                    {pago.estudiante?.grupo}
                   </td>
 
                   <td className="p-4 text-gray-500 font-mono text-xs">

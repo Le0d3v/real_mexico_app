@@ -43,21 +43,21 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
           <InputField
             icon={<User size={18} />}
             label="Nombre(s)"
-            value={form.nombre}
+            value={form.nombre || ""}
             onChange={(e) => onChange("nombre", e.target.value)}
           />
 
           <InputField
             icon={<User size={18} />}
             label="Apellido Paterno"
-            value={form.apellido_paterno}
+            value={form.apellido_paterno || ""}
             onChange={(e) => onChange("apellido_paterno", e.target.value)}
           />
 
           <InputField
             icon={<User size={18} />}
             label="Apellido Materno"
-            value={form.apellido_materno}
+            value={form.apellido_materno || ""}
             onChange={(e) => onChange("apellido_materno", e.target.value)}
           />
 
@@ -65,14 +65,14 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
             icon={<Calendar size={18} />}
             label="Fecha de Nacimiento"
             type="date"
-            value={form.fecha_nacimiento}
+            value={form.fecha_nacimiento || ""}
             onChange={(e) => onChange("fecha_nacimiento", e.target.value)}
           />
 
           <InputField
             icon={<Hash size={18} />}
             label="CURP"
-            value={form.curp}
+            value={form.curp || ""}
             onChange={(e) => onChange("curp", e.target.value)}
           />
 
@@ -80,7 +80,7 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
             icon={<VenusAndMars size={18} />}
             label="Género"
             options={["Masculino", "Femenino"]}
-            value={form.genero}
+            value={form.genero || ""}
             onChange={(e) => onChange("genero", e.target.value)}
           />
 
@@ -88,7 +88,7 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
             icon={<MapPin size={18} />}
             label="Entidad de Nacimiento"
             options={estados}
-            value={form.entidad_nacimiento}
+            value={form.entidad_nacimiento || ""}
             onChange={(e) => onChange("entidad_nacimiento", e.target.value)}
           />
 
@@ -96,7 +96,7 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
             icon={<Droplet size={18} />}
             label="Tipo de Sangre"
             options={tiposDeSangre}
-            value={form.tipo_sangre}
+            value={form.tipo_sangre || ""}
             onChange={(e) => onChange("tipo_sangre", e.target.value)}
           />
 
@@ -104,7 +104,7 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
             icon={<Speech size={18} />}
             label="Lengua Materna"
             options={lenguasMaternas}
-            value={form.lengua_materna}
+            value={form.lengua_materna || ""}
             onChange={(e) => onChange("lengua_materna", e.target.value)}
           />
 
@@ -112,7 +112,7 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
             icon={<Accessibility size={18} />}
             label="Discapacidad"
             options={discapacidades}
-            value={form.discapacidad}
+            value={form.discapacidad || ""}
             onChange={(e) => onChange("discapacidad", e.target.value)}
           />
         </div>
@@ -133,7 +133,7 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
             icon={<GraduationCap size={18} />}
             label="Grado"
             options={grados}
-            value={form.grado}
+            value={form.grado || ""}
             onChange={(e) => onChange("grado", Number(e.target.value))}
           />
 
@@ -141,7 +141,7 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
             icon={<Users size={18} />}
             label="Grupo"
             options={grupos}
-            value={form.grupo}
+            value={form.grupo || ""}
             onChange={(e) => onChange("grupo", Number(e.target.value))}
           />
           {isEdit ? (
@@ -149,7 +149,7 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
               <InputField
                 icon={<IdCard size={18} />}
                 label="Matricula"
-                value={form.matricula}
+                value={form.matricula || ""}
                 onChange={(e) => onChange("matricula", e.target.value)}
                 disabled={true}
               />
@@ -157,7 +157,7 @@ export default function StudentPersonalForm({ form, onChange, isEdit }) {
                 icon={<Check size={18} />}
                 label="Estado"
                 options={["Activo", "Egresado", "Baja"]}
-                value={form.estado}
+                value={form.estado || ""}
                 onChange={(e) => onChange("estado", e.target.value)}
               />
             </>

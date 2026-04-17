@@ -268,14 +268,14 @@ export default function Colegiaturas() {
                   <td className="px-3 md:px-6 py-3 md:py-4 text-center">
                     <div className="flex flex-col md:flex-row justify-center gap-2">
                       <button
-                        className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-500 cursor-pointer hover:bg-yellow-600 transition"
+                        className="px-3 py-1 text-xs md:text-sm rounded-md bg-yellow-500 cursor-pointer hover:bg-yellow-600 transition registrar-pago"
                         onClick={() => registrarPago(registro)}
                       >
                         Registrar pago
                       </button>
 
                       <button
-                        className="px-3 py-1 text-xs md:text-sm rounded-md bg-gray-300 cursor-pointer hover:bg-gray-400 transition"
+                        className="px-3 py-1 text-xs md:text-sm rounded-md bg-gray-300 cursor-pointer hover:bg-gray-400 transition historial"
                         onClick={() => showHistorial(registro)}
                       >
                         Historial

@@ -221,7 +221,7 @@ export default function Inicio() {
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
           <button
-            className="bg-slate-900 text-white py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition"
+            className="bg-slate-900 text-white py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition cursor-pointer"
             onClick={() => {
               setTutorPage(1);
               setTitulo("Colegiaturas");
@@ -231,7 +231,7 @@ export default function Inicio() {
           </button>
 
           <button
-            className="bg-yellow-500 text-black py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition"
+            className="bg-yellow-500 text-black py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition cursor-pointer"
             onClick={() => {
               setTutorPage(3);
               setTitulo("Historial de Pagos");
@@ -241,7 +241,7 @@ export default function Inicio() {
           </button>
 
           <button
-            className="bg-slate-200 py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition"
+            className="bg-slate-200 py-4 rounded-xl hover:shadow-md hover:-translate-y-1 transition cursor-pointer"
             onClick={() => {
               setTutorPage(4);
               setTitulo("Configuración");
