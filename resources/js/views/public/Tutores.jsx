@@ -1,7 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import Tittle from "../components/Tittle";
-import { Phone, Download, Smartphone } from "lucide-react";
+import { Phone, Download, Smartphone, Info } from "lucide-react";
 
 export default function Tutores() {
   return (
@@ -33,14 +33,28 @@ export default function Tutores() {
             <div className="w-16 h-1 bg-red-500 mt-3 mb-6 rounded-full"></div>
 
             <p className="text-gray-600 leading-relaxed text-justify">
-              La formación integral de nuestros estudiantes es resultado del
-              trabajo coordinado entre institución y familia. Fomentamos
-              disciplina, valores y excelencia académica.
+              La formación integral de nuestros estudiantes es el resultado de
+              un trabajo sistemático, coordinado y profundamente comprometido
+              entre la institución y la familia. Entendemos que la educación no
+              se limita a la transmisión de conocimientos, sino que implica la
+              construcción de carácter, el fortalecimiento de valores y el
+              desarrollo de habilidades que acompañarán al alumno a lo largo de
+              toda su vida. En nuestra institución fomentamos la disciplina como
+              eje estructural del aprendizaje, no como una imposición, sino como
+              una herramienta que forma hábitos, responsabilidad y constancia.
+              Promovemos valores sólidos como el respeto, la honestidad, la
+              empatía y el compromiso, elementos indispensables para formar
+              ciudadanos íntegros y conscientes de su entorno. Todo ello se
+              complementa con un enfoque académico riguroso, orientado a la
+              excelencia y a la mejora continua.
             </p>
-
             <p className="text-gray-600 leading-relaxed text-justify mt-4">
-              Nuestro compromiso es ofrecer un entorno seguro, estructurado y
-              humano que impulse el desarrollo pleno de cada alumno.
+              Nuestro compromiso va más allá del aula. Nos enfocamos en ofrecer
+              un entorno seguro, estructurado y humano, donde cada estudiante se
+              sienta acompañado, escuchado y motivado. Creemos firmemente en el
+              potencial único de cada alumno, y trabajamos día a día para
+              impulsarlo, guiándolo en su crecimiento personal, emocional y
+              académico.
             </p>
 
             <button className="mt-6 flex items-center gap-2 text-red-500 font-semibold hover:text-red-600 transition">
@@ -66,13 +80,22 @@ export default function Tutores() {
             <div className="w-16 h-1 bg-red-500 mt-3 mb-6 rounded-full"></div>
 
             <p className="text-slate-300 leading-relaxed text-justify">
-              Consulte calificaciones, avisos y comunicados en tiempo real desde
-              su dispositivo móvil. La comunicación directa fortalece el
-              seguimiento académico.
+              Consulte de manera ágil y centralizada toda la información
+              académica de sus estudiantes, incluyendo su desempeño, datos
+              relevantes y el estado actualizado de sus colegiaturas. Acceda
+              también al historial detallado de pagos realizados, con total
+              claridad y transparencia. Todo esto disponible en tiempo real,
+              desde la comodidad de su dispositivo Android, permitiéndole
+              mantenerse informado y tomar decisiones oportunas en cualquier
+              momento y lugar.
             </p>
-            <p className="text-sm text-gray-500 mt-5">
-              Disponible para solo para dispositivos Android
-            </p>
+
+            <div className="mt-5 flex items-center gap-1">
+              <Info size={16} className="text-yellow-400" />
+              <p className="text-sm text-gray-500 ">
+                Disponible actualmente para solo para dispositivos Android
+              </p>
+            </div>
 
             <a
               href="/apk/base.apk"
