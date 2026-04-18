@@ -262,7 +262,21 @@ export default function Colegiaturas() {
                   </td>
 
                   <td className="px-3 md:px-6 py-3 md:py-4 text-center">
-                    {registro.estado}
+                    {registro.estado === "Pagado" && (
+                      <span className="py-1 px-2 rounded-lg bg-green-200 text-green-700 text-sm font-semibold">
+                        Pagado
+                      </span>
+                    )}
+                    {registro.estado === "Pendiente" && (
+                      <span className="py-1 px-2 rounded-lg bg-yellow-200 text-yellow-700 text-sm font-semibold">
+                        Pendiente
+                      </span>
+                    )}
+                    {registro.estado === "Vencida" && (
+                      <span className="py-1 px-2 rounded-lg bg-red-200 text-red-700 text-sm font-semibold">
+                        Vencida
+                      </span>
+                    )}
                   </td>
 
                   <td className="px-3 md:px-6 py-3 md:py-4 text-center">
