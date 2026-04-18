@@ -17,10 +17,14 @@ class TutorController extends Controller
      */
     public function index()
     {
-       return new UserCollection( User::where("rol", "tutor")->with([
-            "domicilio", 
-            'tutor.estudiantes'
-        ])->get());
+      return new UserCollection(
+            User::where("rol", "tutor")
+                ->with([
+                    "domicilio",
+                    "tutor.estudiantes"
+                ])
+                ->get()
+        );
     }
 
     /**

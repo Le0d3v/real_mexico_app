@@ -100,6 +100,8 @@ export default function Tutores() {
   if (isLoading) return <Loader />;
   if (error) return <p>Error al cargar tutores</p>;
 
+  console.log(tutores);
+
   return (
     <>
       <div className="min-h-screen">
